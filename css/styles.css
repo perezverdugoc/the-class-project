@@ -1,0 +1,1673 @@
+/* ============================================================
+   THE CLASS PROJECT — styles.css
+   Paleta: Red Plural (Opción C)
+   Tipografías: DM Serif Display (títulos) + DM Sans (cuerpo)
+   Estrategia: Mobile-first, CSS custom properties, sin frameworks
+   Compatibilidad: GitHub Pages, Vercel, Netlify
+   ============================================================ */
+
+
+/* ============================================================
+   1. GOOGLE FONTS
+   Carga las tipografías desde Google Fonts.
+   Si el sitio se usa sin internet, agrega las fuentes localmente
+   en /assets/fonts/ y reemplaza este @import.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap');
+
+
+/* ============================================================
+   2. VARIABLES CSS (Design Tokens)
+   Todos los valores de diseño están aquí.
+   Para cambiar la identidad visual del sitio, edita solo
+   esta sección — el resto del CSS se actualiza automáticamente.
+   ============================================================ */
+
+:root {
+
+  /* --- Colores principales --- */
+  --color-primary:      #1C1C1E;  /* Negro editorial — texto principal, nav */
+  --color-accent:       #0A7E7A;  /* Teal — enlaces, CTAs, énfasis */
+  --color-accent-dark:  #0D5C5A;  /* Teal oscuro — hover de botones y links */
+  --color-accent-light: #E6F4F3;  /* Teal muy claro — fondos de badges, highlights */
+
+  /* --- Colores de texto --- */
+  --color-text:         #1C1C1E;  /* Texto principal */
+  --color-text-muted:   #6E6E73;  /* Texto secundario, subtítulos, metadata */
+  --color-text-light:   #AEAEB2;  /* Texto muy suave, placeholders */
+  --color-text-inverse: #FFFFFF;  /* Texto sobre fondo oscuro */
+
+  /* --- Fondos y superficies --- */
+  --color-bg:           #FFFFFF;  /* Fondo principal de página */
+  --color-surface:      #F5F5F7;  /* Secciones alternadas, cards */
+  --color-surface-alt:  #EAEAEC;  /* Hover states, fondos sutiles */
+  --color-border:       #D1D1D6;  /* Bordes de elementos */
+  --color-border-light: #E5E5EA;  /* Bordes muy sutiles */
+
+
+  /* --- Paleta de datos — Information is Beautiful ─────────
+     Colores con significado semántico para visualización de datos.
+     data-a: teal (nuestro acento principal — clase baja/alta, énfasis)
+     data-b: coral   (contraste cálido — actitudes redistributivas)
+     data-c: dorado  (tercer eje — cambio social)
+     data-d: azul    (redes, conexiones)  */
+  --color-data-a:   #0A7E7A;  /* teal — igual que accent */
+  --color-data-b:   #C9524F;  /* coral — actitudes políticas */
+  --color-data-c:   #9B7B2E;  /* dorado — cambio social */
+  --color-data-d:   #3B6FA8;  /* azul — redes personales */
+  --color-data-muted: rgba(10, 126, 122, 0.18); /* teal muy suave */
+
+  /* --- Tipografías --- */
+  --font-heading: 'DM Serif Display', Georgia, 'Times New Roman', serif;
+  --font-body:    'DM Sans', system-ui, -apple-system, sans-serif;
+
+  /* --- Escala tipográfica (mobile-first) ---
+     En pantallas grandes se ajustan con media queries */
+  --text-xs:   0.75rem;   /*  12px */
+  --text-sm:   0.875rem;  /*  14px */
+  --text-base: 1rem;      /*  16px */
+  --text-md:   1.125rem;  /*  18px */
+  --text-lg:   1.25rem;   /*  20px */
+  --text-xl:   1.5rem;    /*  24px */
+  --text-2xl:  1.875rem;  /*  30px */
+  --text-3xl:  2.25rem;   /*  36px */
+  --text-4xl:  3rem;      /*  48px */
+  --text-5xl:  3.75rem;   /*  60px */
+
+  /* --- Espaciado --- */
+  --space-xs:  0.25rem;   /*  4px */
+  --space-sm:  0.5rem;    /*  8px */
+  --space-md:  1rem;      /* 16px */
+  --space-lg:  1.5rem;    /* 24px */
+  --space-xl:  2rem;      /* 32px */
+  --space-2xl: 3rem;      /* 48px */
+  --space-3xl: 4rem;      /* 64px */
+  --space-4xl: 6rem;      /* 96px */
+
+  /* --- Radios de borde --- */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-pill: 100px;
+
+  /* --- Sombras --- */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* --- Transiciones --- */
+  --transition:       0.2s ease;
+  --transition-slow:  0.35s ease;
+
+  /* --- Contenedor máximo --- */
+  --container-max:    1200px;
+  --container-pad:    var(--space-md);  /* padding lateral en mobile */
+
+  /* --- Altura del nav (para offset de scroll) --- */
+  --nav-height: 76px;
+}
+
+
+/* ============================================================
+   3. RESET Y BASE
+   Elimina inconsistencias entre navegadores.
+   Si ya usas un reset externo (normalize.css), puedes omitir
+   esta sección o combinarla.
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;  /* El padding y border se incluyen en el ancho total */
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;              /* Base para cálculos en rem */
+  scroll-behavior: smooth;      /* Scroll suave al usar anclas (#seccion) */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;       /* Evita que iOS ajuste automáticamente el tamaño */
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.65;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;   /* Suaviza el texto en macOS/iOS */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Imágenes y medios responsivos por defecto */
+img,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Heredar la fuente en formularios (los navegadores no lo hacen por defecto) */
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Listas sin estilo cuando se usan en nav o componentes */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Tabla básica sin colapso raro */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+
+/* ============================================================
+   4. TIPOGRAFÍA
+   ============================================================ */
+
+/* --- Encabezados --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 400;          /* DM Serif Display se usa en weight normal */
+  line-height: 1.2;
+  color: var(--color-primary);
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: var(--text-3xl); }
+h2 { font-size: var(--text-2xl); }
+h3 { font-size: var(--text-xl);  }
+h4 { font-size: var(--text-lg);  }
+h5 { font-size: var(--text-md);  font-family: var(--font-body); font-weight: 600; }
+h6 { font-size: var(--text-base); font-family: var(--font-body); font-weight: 600; }
+
+/* --- Párrafos --- */
+p {
+  margin-bottom: var(--space-md);
+  max-width: 68ch;  /* ~680px — longitud óptima de línea para lectura */
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Enlace --- */
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--color-accent-dark);
+  text-decoration: underline;
+}
+
+/* --- Foco accesible (teclado) ---
+   Solo visible cuando el usuario navega con teclado */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* --- Texto fuerte y énfasis --- */
+strong { font-weight: 600; }
+em     { font-style: italic; }
+
+/* --- Cita --- */
+blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding: var(--space-md) var(--space-lg);
+  margin: var(--space-xl) 0;
+  background-color: var(--color-accent-light);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+blockquote p {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  color: var(--color-primary);
+  font-style: italic;
+  margin: 0;
+}
+
+blockquote cite {
+  display: block;
+  margin-top: var(--space-sm);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-style: normal;
+  color: var(--color-text-muted);
+}
+
+/* --- Código inline --- */
+code {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9em;
+  background: var(--color-surface);
+  padding: 0.1em 0.4em;
+  border-radius: var(--radius-sm);
+  color: var(--color-accent-dark);
+}
+
+/* --- Listas de contenido (dentro de artículos/prosa) --- */
+.prose ul,
+.prose ol {
+  list-style: revert;      /* Restaura los bullets/números */
+  padding-left: var(--space-xl);
+  margin-bottom: var(--space-md);
+}
+
+.prose li {
+  margin-bottom: var(--space-xs);
+}
+
+/* --- Separador horizontal --- */
+hr {
+  border: none;
+  border-top: 1px solid var(--color-border-light);
+  margin: var(--space-2xl) 0;
+}
+
+/* --- Tamaños de fuente en pantallas grandes --- */
+@media (min-width: 1024px) {
+  h1 { font-size: var(--text-4xl); }
+  h2 { font-size: var(--text-3xl); }
+  h3 { font-size: var(--text-2xl); }
+  h4 { font-size: var(--text-xl);  }
+}
+
+
+/* ============================================================
+   5. LAYOUT — CONTENEDOR Y GRILLA
+   ============================================================ */
+
+/* Contenedor centrado con padding lateral */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-pad);
+  padding-right: var(--container-pad);
+}
+
+/* Sección genérica — espaciado vertical estándar */
+.section {
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+/* Sección con fondo alternado (para romper monotonía visual) */
+.section--alt {
+  background-color: var(--color-surface);
+}
+
+/* --- Grilla flexible de columnas ---
+   Uso: <div class="grid grid--2"> ... </div>
+   En mobile siempre es 1 columna. */
+.grid {
+  display: grid;
+  gap: var(--space-xl);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .grid--2 { grid-template-columns: repeat(2, 1fr); }
+  .grid--3 { grid-template-columns: repeat(3, 1fr); }
+  .grid--4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .grid--4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Grilla con columna angosta + columna ancha (para páginas de contenido) */
+@media (min-width: 1024px) {
+  .grid--sidebar {
+    grid-template-columns: 280px 1fr;
+  }
+}
+
+/* Texto de sección centrado (para introducción de páginas) */
+.section__intro {
+  text-align: center;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--space-2xl);
+}
+
+.section__eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-sm);
+}
+
+.section__title {
+  margin-bottom: var(--space-md);
+}
+
+.section__desc {
+  color: var(--color-text-muted);
+  font-size: var(--text-md);
+  max-width: 55ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* ============================================================
+   6. NAVEGACIÓN
+   Sticky en la parte superior. En mobile: hamburger.
+   ============================================================ */
+
+.nav {
+  position: fixed;          /* Siempre visible al hacer scroll */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--nav-height);
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+/* Compensar el espacio que ocupa el nav fijo */
+body {
+  padding-top: var(--nav-height);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* Logo / nombre del proyecto */
+.nav__logo {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);   /* 24px — más presencia */
+  color: var(--color-primary);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  transition: color var(--transition);
+  padding: var(--space-xs) 0; /* aire vertical extra */
+}
+
+.nav__logo:hover {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.nav__logo span {
+  color: var(--color-accent);  /* Palabra destacada en teal */
+}
+
+/* Links de navegación — ocultos en mobile */
+.nav__links {
+  display: none;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+.nav__link {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.nav__link:hover,
+.nav__link:focus-visible {
+  color: var(--color-primary);
+  text-decoration: none;
+  border-bottom-color: var(--color-accent);
+}
+
+.nav__link--active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-accent);
+}
+
+/* Botón hamburger — visible solo en mobile */
+.nav__toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-xs);
+  border-radius: var(--radius-sm);
+  transition: background var(--transition);
+}
+
+.nav__toggle:hover {
+  background: var(--color-surface);
+}
+
+.nav__toggle-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+/* Menú mobile expandido */
+.nav__mobile {
+  position: fixed;
+  top: var(--nav-height);
+  left: 0;
+  right: 0;
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border-light);
+  padding: var(--space-lg) var(--container-pad);
+  display: none;             /* Controlado por JS con clase .is-open */
+  flex-direction: column;
+  gap: var(--space-sm);
+  z-index: 99;
+  box-shadow: var(--shadow-md);
+}
+
+.nav__mobile.is-open {
+  display: flex;
+}
+
+.nav__mobile-link {
+  font-size: var(--text-md);
+  font-weight: 500;
+  color: var(--color-primary);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--color-border-light);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.nav__mobile-link:last-child {
+  border-bottom: none;
+}
+
+.nav__mobile-link:hover {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+/* En pantallas grandes: mostrar links, ocultar hamburger */
+@media (min-width: 768px) {
+  .nav__links  { display: flex; }
+  .nav__toggle { display: none; }
+}
+
+
+/* ============================================================
+   7. HERO / CABECERA DE PÁGINA
+   ============================================================ */
+
+.hero {
+  min-height: calc(100dvh - var(--nav-height));
+  display: flex;
+  align-items: center;
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-2xl);
+  background-color: var(--color-surface);
+}
+
+/* Grid 2 columnas: video | texto */
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3xl);
+  align-items: center;
+  width: 100%;
+}
+
+/* Wrapper 16:9 para el iframe de YouTube */
+.hero__video-wrap {
+  position: relative;
+  padding-bottom: 56.25%;  /* ratio 16:9 */
+  height: 0;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-primary); /* placeholder antes de cargar */
+  box-shadow: var(--shadow-lg);
+}
+
+.hero__video-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Mobile: texto arriba, video abajo; 1 columna */
+@media (max-width: 768px) {
+  .hero__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+  .hero__media { order: 2; }
+  .hero__content { order: 1; }
+}
+
+.hero__label {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background-color: var(--color-accent-light);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-pill);
+  margin-bottom: var(--space-md);
+}
+
+.hero__title {
+  font-size: var(--text-3xl);
+  margin-bottom: var(--space-md);
+  max-width: 14ch;
+}
+
+.hero__subtitle {
+  font-size: var(--text-md);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-xl);
+  max-width: 52ch;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+@media (min-width: 768px) {
+  .hero {
+    padding-top: var(--space-4xl);
+    padding-bottom: var(--space-4xl);
+  }
+  .hero__title {
+    font-size: var(--text-4xl);
+  }
+}
+
+
+/* ============================================================
+   8. BOTONES
+   Uso: <button class="btn btn--primary">Texto</button>
+        <a href="#" class="btn btn--outline">Ver más</a>
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 0.625rem var(--space-lg);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1;
+  border-radius: var(--radius-md);
+  border: 2px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--transition), color var(--transition),
+              border-color var(--transition), box-shadow var(--transition);
+}
+
+/* Botón primario — teal sólido */
+.btn--primary {
+  background-color: var(--color-accent);
+  color: var(--color-text-inverse);
+  border-color: var(--color-accent);
+}
+
+.btn--primary:hover,
+.btn--primary:focus-visible {
+  background-color: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+  color: var(--color-text-inverse);
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Botón outline — borde teal, fondo transparente */
+.btn--outline {
+  background-color: transparent;
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.btn--outline:hover,
+.btn--outline:focus-visible {
+  background-color: var(--color-accent-light);
+  color: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+  text-decoration: none;
+}
+
+/* Botón ghost — sin borde visible */
+.btn--ghost {
+  background-color: transparent;
+  color: var(--color-text-muted);
+  border-color: transparent;
+}
+
+.btn--ghost:hover {
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+/* Tamaño grande */
+.btn--lg {
+  padding: 0.875rem var(--space-xl);
+  font-size: var(--text-base);
+}
+
+
+/* ============================================================
+   9. CARDS
+   Uso: <article class="card"> ... </article>
+   ============================================================ */
+
+.card {
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.card__tag {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background-color: var(--color-accent-light);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  margin-bottom: var(--space-sm);
+}
+
+.card__title {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-sm);
+}
+
+.card__body {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.card__meta {
+  font-size: var(--text-xs);
+  color: var(--color-text-light);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* Card de perfil de persona (para /equipo) */
+.card--person {
+  text-align: center;
+}
+
+.card__avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto var(--space-md);
+  border: 2px solid var(--color-border-light);
+}
+
+.card__name {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-xs);
+}
+
+.card__role {
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+  font-weight: 500;
+  margin-bottom: var(--space-sm);
+}
+
+.card__bio {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+
+/* ============================================================
+   10. BADGES / ETIQUETAS
+   Uso: <span class="badge">Sociología</span>
+   ============================================================ */
+
+.badge {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border-light);
+}
+
+.badge--accent {
+  background-color: var(--color-accent-light);
+  color: var(--color-accent-dark);
+  border-color: transparent;
+}
+
+
+/* ============================================================
+   11. FOOTER
+   ============================================================ */
+
+.footer {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-xl);
+  margin-top: auto;
+}
+
+.footer__grid {
+  display: grid;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-2xl);
+}
+
+@media (min-width: 768px) {
+  .footer__grid {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+}
+
+.footer__logo {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  color: var(--color-text-inverse);
+  margin-bottom: var(--space-sm);
+}
+
+.footer__logo span {
+  color: var(--color-accent);
+}
+
+.footer__desc {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 34ch;
+  margin-bottom: 0;
+}
+
+.footer__heading {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: var(--space-md);
+}
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.footer__link {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.footer__link:hover {
+  color: var(--color-text-inverse);
+  text-decoration: none;
+}
+
+.footer__bottom {
+  padding-top: var(--space-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer__copy {
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+}
+
+.footer__funders {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.4);
+}
+
+
+/* ============================================================
+   12. UTILIDADES
+   Clases de apoyo rápido — úsalas directamente en el HTML.
+   ============================================================ */
+
+/* Texto */
+.text-center  { text-align: center; }
+.text-right   { text-align: right; }
+.text-muted   { color: var(--color-text-muted); }
+.text-accent  { color: var(--color-accent); }
+.text-sm      { font-size: var(--text-sm); }
+.text-lg      { font-size: var(--text-lg); }
+
+/* Visualización */
+.visually-hidden {
+  /* Accesibilidad: oculta visualmente pero legible por lectores de pantalla */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Espaciado rápido */
+.mt-sm  { margin-top: var(--space-sm);  }
+.mt-md  { margin-top: var(--space-md);  }
+.mt-lg  { margin-top: var(--space-lg);  }
+.mt-xl  { margin-top: var(--space-xl);  }
+.mb-sm  { margin-bottom: var(--space-sm);  }
+.mb-md  { margin-bottom: var(--space-md);  }
+.mb-lg  { margin-bottom: var(--space-lg);  }
+.mb-xl  { margin-bottom: var(--space-xl);  }
+
+/* Divider decorativo */
+.divider {
+  width: 40px;
+  height: 3px;
+  background-color: var(--color-accent);
+  border-radius: var(--radius-pill);
+  margin: var(--space-md) 0;
+}
+
+.divider--center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* ============================================================
+   ANIMACIONES — fade-in con IntersectionObserver (script.js)
+   ============================================================ */
+
+/* Estado inicial: invisible y desplazado hacia abajo
+   Solo aplica a .logo-item y a .fade-in explícito.
+   Las .card no se ocultan — son contenido visible siempre. */
+.fade-in,
+.logo-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Estado final: JS añade .is-visible al entrar al viewport */
+.fade-in.is-visible,
+.logo-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delay escalonado para logos (entrada en cascada) */
+.logo-item:nth-child(1) { transition-delay: 0s; }
+.logo-item:nth-child(2) { transition-delay: 0.08s; }
+.logo-item:nth-child(3) { transition-delay: 0.16s; }
+.logo-item:nth-child(4) { transition-delay: 0.24s; }
+.logo-item:nth-child(5) { transition-delay: 0.32s; }
+.logo-item:nth-child(6) { transition-delay: 0.40s; }
+
+/* Reducir movimiento si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in,
+  .logo-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+
+/* ============================================================
+   NAV — sombra al hacer scroll (.is-scrolled)
+   ============================================================ */
+.nav.is-scrolled {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ============================================================
+   LOGOS INSTITUCIONALES — .logo-item
+   Clase para cada bloque de logo en la sección "Financiado por"
+   ============================================================ */
+/* Contenedor principal de logos — una sola fila sin scroll */
+.logos-bar {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between; /* distribuye el espacio para que quepan todos */
+  gap: 1.5rem;
+  overflow-x: visible;
+}
+
+/* Mobile: wrap en dos filas */
+@media (max-width: 700px) {
+  .logos-bar {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 1rem 1.5rem;
+  }
+}
+
+/* Cada logo */
+.logo-item {
+  display: flex;
+  align-items: center;
+  flex-shrink: 1;             /* permite que se compriman si hace falta */
+}
+
+.logo-item img {
+  display: block;
+  height: 44px;               /* reducido para que quepan todos en una línea */
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+}
+
+
+/* ============================================================
+   SECCIÓN LOGOS — versión compacta para home sin scroll
+   ============================================================ */
+.section-logos {
+  padding: var(--space-xl) 0;
+  background-color: var(--color-bg);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.logos-label {
+  text-align: left;           /* alineado a la izquierda */
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  margin-bottom: var(--space-lg);
+}
+
+
+/* ============================================================
+   SUBPÁGINAS — Componentes compartidos
+   ============================================================ */
+
+/* Encabezado de página interior */
+.page-hero {
+  padding: var(--space-3xl) 0 var(--space-2xl);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.page-hero__eyebrow {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background-color: var(--color-accent-light);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-pill);
+  margin-bottom: var(--space-md);
+}
+
+.page-hero__title {
+  font-size: var(--text-3xl);
+  margin-bottom: var(--space-md);
+}
+
+.page-hero__desc {
+  font-size: var(--text-md);
+  color: var(--color-text-muted);
+  max-width: 60ch;
+}
+
+@media (min-width: 768px) {
+  .page-hero__title { font-size: var(--text-4xl); }
+}
+
+
+/* ============================================================
+   ENCUESTA — Metodología
+   ============================================================ */
+
+.method-intro {
+  background-color: var(--color-accent-light);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: var(--space-lg) var(--space-xl);
+  margin-bottom: var(--space-2xl);
+  font-size: var(--text-md);
+  color: var(--color-text-muted);
+  max-width: 72ch;
+}
+
+.method-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-3xl);
+}
+
+.method-item {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: var(--space-md) var(--space-lg);
+  align-items: start;
+}
+
+.method-item__icon {
+  color: var(--color-accent);
+  font-size: 1.5rem;
+  line-height: 1;
+  margin-top: 0.15rem;
+}
+
+.method-item__title {
+  font-size: var(--text-lg);
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.method-item__body {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  margin: 0;
+  max-width: none;
+}
+
+/* Temáticas de la encuesta */
+.tematicas {
+  margin-bottom: var(--space-3xl);
+}
+
+.tematica-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-lg) 0;
+}
+
+.tematica-item {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: var(--space-md) var(--space-xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.tematica-item:last-child { border-bottom: none; }
+
+.tematica-item__key {
+  font-weight: 600;
+  color: var(--color-primary);
+  font-size: var(--text-base);
+}
+
+.tematica-item__val {
+  color: var(--color-text-muted);
+  font-size: var(--text-base);
+  margin: 0;
+  max-width: none;
+}
+
+@media (max-width: 600px) {
+  .tematica-item { grid-template-columns: 1fr; gap: var(--space-xs); }
+}
+
+/* Botones de documentos */
+.doc-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  padding: var(--space-2xl) 0;
+  border-top: 1px solid var(--color-border-light);
+}
+
+.doc-btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-lg) var(--space-xl);
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background var(--transition), transform var(--transition);
+  min-width: 160px;
+  text-align: center;
+}
+
+.doc-btn:hover {
+  background-color: var(--color-accent);
+  color: var(--color-text-inverse);
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.doc-btn__icon {
+  font-size: 2rem;
+  opacity: 0.8;
+}
+
+
+/* ============================================================
+   EQUIPO — Grid de miembros
+   ============================================================ */
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-2xl) var(--space-xl);
+  margin-top: var(--space-2xl);
+}
+
+.team-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.team-card__photo {
+  width: 160px;
+  height: 160px;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  object-position: top;
+  background-color: var(--color-surface-alt);
+  margin-bottom: var(--space-md);
+  display: block;
+}
+
+/* Placeholder cuando no hay foto */
+.team-card__photo--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  color: var(--color-text-light);
+  background-color: var(--color-surface);
+  border: 2px dashed var(--color-border);
+}
+
+.team-card__name {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  color: var(--color-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.team-card__role {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.team-card__tag {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background-color: var(--color-accent-light);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+  margin-bottom: var(--space-md);
+}
+
+/* Separador visual entre IP y el resto del equipo */
+.team-section-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  margin: var(--space-3xl) 0 var(--space-lg);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+
+/* ============================================================
+   DIVULGACIÓN — Infografías
+   ============================================================ */
+
+.infografia-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.infografia-card {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border-light);
+  transition: box-shadow var(--transition), transform var(--transition);
+  text-decoration: none;
+}
+
+.infografia-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+  text-decoration: none;
+}
+
+.infografia-card__thumb {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  display: block;
+  background-color: var(--color-surface);
+}
+
+.infografia-card__label {
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* Publicaciones */
+.pub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-xl) var(--space-lg);
+  margin-bottom: var(--space-2xl);
+}
+
+.pub-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.pub-card__cover {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-light);
+  background-color: var(--color-surface);
+  display: block;
+}
+
+.pub-card__cite {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin: 0;
+  max-width: none;
+}
+
+.pub-card__abstract {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin: 0;
+  max-width: none;
+}
+
+/* Noticias + Agenda */
+.news-agenda-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3xl);
+  margin-top: var(--space-3xl);
+  padding-top: var(--space-3xl);
+  border-top: 1px solid var(--color-border-light);
+}
+
+@media (max-width: 768px) {
+  .news-agenda-grid { grid-template-columns: 1fr; }
+}
+
+.news-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--color-border-light);
+  text-decoration: none;
+  color: var(--color-text);
+  transition: color var(--transition);
+}
+
+.news-item:hover { color: var(--color-accent); text-decoration: none; }
+
+.news-item__title {
+  font-size: var(--text-base);
+  font-weight: 500;
+  flex: 1;
+}
+
+.news-item__date {
+  font-size: var(--text-sm);
+  color: var(--color-text-light);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.agenda-item {
+  padding: var(--space-lg);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--color-accent);
+  margin-bottom: var(--space-md);
+}
+
+.agenda-item__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  color: var(--color-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.agenda-item__meta {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* Sección genérica de subpágina */
+.subpage-section {
+  padding: var(--space-3xl) 0;
+}
+
+.subpage-section + .subpage-section {
+  border-top: 1px solid var(--color-border-light);
+}
+
+
+/* ============================================================
+   IIB — INFORMATION IS BEAUTIFUL
+   Utilidades para visualización de datos y comunicación
+   de información compleja de forma clara y expresiva.
+   Inspirado en el trabajo de David McCandless.
+   ============================================================ */
+
+/* --- Número grande de datos -------------------------------- */
+/* Uso: <span class="iib-number">42</span> */
+.iib-number {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 400;
+  color: var(--color-accent);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  display: inline-block;
+}
+
+/* --- Etiqueta de categoría ─────────────────────────────── */
+/* Uso: <span class="iib-label">Clase social</span> */
+.iib-label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  display: inline-block;
+}
+
+/* --- Chip de categoría con color ─────────────────────────── */
+.iib-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-light);
+  color: var(--color-accent-dark);
+}
+
+.iib-chip::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.iib-chip--b { background: rgba(201,82,79,0.10); color: var(--color-data-b); }
+.iib-chip--b::before { background: var(--color-data-b); }
+
+.iib-chip--c { background: rgba(155,123,46,0.10); color: var(--color-data-c); }
+.iib-chip--c::before { background: var(--color-data-c); }
+
+.iib-chip--d { background: rgba(59,111,168,0.10); color: var(--color-data-d); }
+.iib-chip--d::before { background: var(--color-data-d); }
+
+/* --- Barra de progreso ─────────────────────────────────── */
+.iib-progress {
+  width: 100%;
+  height: 4px;
+  background: var(--color-border-light);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.iib-progress__fill {
+  height: 100%;
+  background: var(--color-accent);
+  border-radius: 2px;
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 0;
+}
+
+.iib-progress__fill.is-animated { width: var(--progress-pct, 0%); }
+
+/* --- Separador con acento ─────────────────────────────── */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg,
+    var(--color-accent) 0%,
+    var(--color-border-light) 40%,
+    transparent 100%
+  );
+  border: none;
+  margin: var(--space-lg) 0;
+}
+
+/* --- Callout de estadística ──────────────────────────── */
+.stat-callout {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-sm);
+  padding: var(--space-lg) var(--space-xl);
+  background: var(--color-data-muted);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--color-accent);
+}
+
+.stat-callout__value {
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  color: var(--color-accent);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.stat-callout__context {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  padding-bottom: 4px;
+  max-width: none;
+  margin: 0;
+}
+
+/* --- Tabla de datos IIB ────────────────────────────────── */
+.iib-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.iib-table thead th {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  border-bottom: 2px solid var(--color-border);
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+}
+
+.iib-table tbody td {
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--color-border-light);
+  vertical-align: top;
+  color: var(--color-text);
+}
+
+.iib-table tbody tr:last-child td { border-bottom: none; }
+
+.iib-table tbody tr:hover td {
+  background: var(--color-surface);
+}
+
+/* Columna de estado con pills de color */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 10px 3px 7px;
+  border-radius: var(--radius-pill);
+}
+
+.status-pill::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.status-pill--done {
+  background: rgba(10, 126, 122, 0.10);
+  color: var(--color-accent-dark);
+}
+.status-pill--done::before { background: var(--color-accent); }
+
+.status-pill--progress {
+  background: rgba(155, 123, 46, 0.10);
+  color: var(--color-data-c);
+}
+.status-pill--progress::before { background: var(--color-data-c); }
+
+.status-pill--pending {
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+}
+.status-pill--pending::before { background: var(--color-text-light); }
+
+/* --- Número año / periodo ─────────────────────────────── */
+.year-marker {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.year-marker__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-border);
+  flex-shrink: 0;
+}
+
+.year-marker--active .year-marker__dot {
+  background: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-light);
+}

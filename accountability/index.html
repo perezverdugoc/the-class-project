@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accountability — The Class Project</title>
+  <meta name="description" content="Rendición pública de cuentas del Fondecyt de Iniciación N°11240249. Hitos, productos y avances del proyecto.">
+  <link rel="stylesheet" href="../css/styles.css">
+
+  <style>
+    /* ── ACCOUNTABILITY ───────────────────────────────── */
+
+    .acc-section {
+      padding: var(--space-3xl) 0;
+      border-bottom: 1px solid var(--color-border-light);
+    }
+
+    .acc-section:last-of-type { border-bottom: none; }
+
+    .acc-section h2 {
+      font-family: var(--font-heading);
+      font-size: var(--text-2xl);
+      color: var(--color-primary);
+      margin-bottom: var(--space-lg);
+    }
+
+    /* ── TARJETA FINANCIAMIENTO ──────────────────────── */
+
+    .funding-card {
+      background-color: var(--color-primary);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl);
+      color: var(--color-text-inverse);
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: var(--space-xl);
+    }
+
+    .funding-item__label {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-xs);
+    }
+
+    .funding-item__value {
+      font-family: var(--font-heading);
+      font-size: var(--text-lg);
+      color: var(--color-text-inverse);
+      line-height: 1.3;
+      margin: 0;
+    }
+
+    /* ── TABLA DE HITOS ──────────────────────────────── */
+
+    .hitos-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--text-sm);
+      margin-top: var(--space-lg);
+    }
+
+    .hitos-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: var(--text-xs);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 2px solid var(--color-border-light);
+    }
+
+    .hitos-table td {
+      padding: var(--space-md);
+      border-bottom: 1px solid var(--color-border-light);
+      color: var(--color-text-muted);
+      vertical-align: top;
+      line-height: 1.55;
+    }
+
+    .hitos-table tr:last-child td { border-bottom: none; }
+
+    .hito-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 3px 10px 3px 8px;
+      border-radius: var(--radius-pill);
+      white-space: nowrap;
+    }
+
+    /* Dot indicador de estado */
+    .hito-status::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .hito-status--done {
+      background-color: var(--color-accent-light);
+      color: var(--color-accent-dark);
+    }
+    .hito-status--done::before { background: var(--color-accent); }
+
+    .hito-status--progress {
+      background-color: rgba(155, 123, 46, 0.12);
+      color: var(--color-data-c, #9B7B2E);
+    }
+    .hito-status--progress::before { background: var(--color-data-c, #9B7B2E); }
+
+    .hito-status--pending {
+      background-color: var(--color-surface);
+      color: var(--color-text-light);
+      border: 1px solid var(--color-border-light);
+    }
+    .hito-status--pending::before { background: var(--color-border); }
+
+    /* Hover row en tabla */
+    .hitos-table tbody tr:hover td {
+      background: var(--color-surface);
+    }
+
+    /* Columna fase: número visual */
+    .hitos-table td:first-child {
+      font-family: var(--font-heading);
+      font-size: var(--text-lg);
+      color: var(--color-accent);
+      font-weight: 400;
+      text-align: center;
+      width: 3rem;
+    }
+
+    /* Columna año */
+    .hitos-table td:nth-child(3) {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+    }
+
+    /* ── PRODUCTOS ───────────────────────────────────── */
+
+    .productos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: var(--space-lg);
+      margin-top: var(--space-lg);
+    }
+
+    .producto-card {
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .producto-card__type {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+    }
+
+    .producto-card__title {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--color-primary);
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .producto-card__meta {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+    .producto-card__status {
+      margin-top: auto;
+    }
+
+    /* ── EQUIPO RESPONSABLE ──────────────────────────── */
+
+    .responsable-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      margin-top: var(--space-lg);
+    }
+
+    .responsable-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-md) 0;
+      border-bottom: 1px solid var(--color-border-light);
+    }
+
+    .responsable-item:last-child { border-bottom: none; }
+
+    .responsable-item__name {
+      font-weight: 600;
+      color: var(--color-primary);
+      font-size: var(--text-base);
+    }
+
+    .responsable-item__role {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+
+    .responsable-item__inst {
+      font-size: var(--text-xs);
+      color: var(--color-text-light);
+      margin-left: auto;
+    }
+
+
+    /* ── SEMINARIOS REALIZADOS ──────────────────────── */
+
+    .seminarios-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      margin-top: var(--space-lg);
+    }
+
+    .seminario-item {
+      padding: var(--space-lg);
+      background: var(--color-surface);
+      border-radius: var(--radius-md);
+      border-left: 3px solid var(--color-accent);
+    }
+
+    .seminario-item__meta {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      margin-bottom: var(--space-sm);
+    }
+
+    .seminario-item__date {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    .seminario-item__title {
+      font-family: var(--font-heading);
+      font-size: var(--text-lg);
+      color: var(--color-primary);
+      margin: 0 0 var(--space-xs);
+    }
+
+    .seminario-item__detail {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+    /* ── NOTA METODOLÓGICA ───────────────────────────── */
+
+    .note-box {
+      background-color: var(--color-surface);
+      border-left: 3px solid var(--color-accent);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: var(--space-lg);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      margin-top: var(--space-xl);
+    }
+
+    .note-box p { margin: 0; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="nav" aria-label="Navegación principal">
+      <div class="container">
+        <div class="nav__inner">
+          <a href="/" class="nav__logo">The <span>Class</span> Project</a>
+          <ul class="nav__links" role="list">
+            <li><a href="/" class="nav__link">Inicio</a></li>
+            <li><a href="/proyecto/" class="nav__link">Proyecto</a></li>
+            <li><a href="/encuesta/" class="nav__link">Encuesta</a></li>
+            <li><a href="/equipo/" class="nav__link">Equipo</a></li>
+            <li><a href="/divulgacion/" class="nav__link">Divulgación</a></li>
+            <li><a href="/accountability/" class="nav__link">Transparencia</a></li>
+          </ul>
+          <button class="nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-mobile" aria-label="Abrir menú">
+            <span class="nav__toggle-bar"></span>
+            <span class="nav__toggle-bar"></span>
+            <span class="nav__toggle-bar"></span>
+          </button>
+        </div>
+      </div>
+      <div class="nav__mobile" id="nav-mobile" role="dialog" aria-label="Menú de navegación">
+        <a href="/" class="nav__mobile-link">Inicio</a>
+        <a href="/proyecto/" class="nav__mobile-link">Proyecto</a>
+        <a href="/encuesta/" class="nav__mobile-link">Encuesta</a>
+        <a href="/equipo/" class="nav__mobile-link">Equipo</a>
+        <a href="/divulgacion/" class="nav__mobile-link">Divulgación</a>
+        <a href="/accountability/" class="nav__mobile-link">Transparencia</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <section class="page-hero">
+      <div class="container">
+        <span class="page-hero__eyebrow">Transparencia</span>
+        <h1 class="page-hero__title">Accountability</h1>
+        <p class="page-hero__desc">
+          Rendición pública de cuentas del Fondecyt de Iniciación N°11240249.
+          Avances, hitos comprometidos y productos del proyecto.
+        </p>
+      </div>
+    </section>
+
+    <div class="container">
+
+      <!-- 1. FINANCIAMIENTO -->
+      <section class="acc-section" aria-labelledby="acc-financiamiento">
+        <h2 id="acc-financiamiento">Financiamiento</h2>
+
+        <div class="funding-card">
+          <div class="funding-item">
+            <p class="funding-item__label">Fondo</p>
+            <p class="funding-item__value">Fondecyt de Iniciación N°11240249</p>
+          </div>
+          <div class="funding-item">
+            <p class="funding-item__label">Título</p>
+            <p class="funding-item__value">Class, personal networks and political attitudes</p>
+          </div>
+          <div class="funding-item">
+            <p class="funding-item__label">Financiado por</p>
+            <p class="funding-item__value">Agencia Nacional de Investigación y Desarrollo (ANID)</p>
+          </div>
+          <div class="funding-item">
+            <p class="funding-item__label">Período</p>
+            <p class="funding-item__value">2024–2026 (3 años)</p>
+          </div>
+          <div class="funding-item">
+            <p class="funding-item__label">Investigador responsable</p>
+            <p class="funding-item__value">Gabriel Otero</p>
+          </div>
+          <div class="funding-item">
+            <p class="funding-item__label">Institución ejecutora</p>
+            <p class="funding-item__value">Universidad Diego Portales</p>
+          </div>
+        </div>
+
+        <!-- Barra de avance temporal del proyecto — año 1 de 4 -->
+        <div style="grid-column: 1 / -1; padding-top: var(--space-lg); border-top: 1px solid rgba(255,255,255,0.12);">
+          <p style="font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: var(--color-accent); margin-bottom: var(--space-sm); max-width: none;">Avance temporal del proyecto</p>
+          <div class="iib-progress" style="background: rgba(255,255,255,0.15); height: 6px;">
+            <div class="iib-progress__fill is-animated" style="--progress-pct: 25%; background: var(--color-accent);"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-top: var(--space-xs);">
+            <span style="font-size: var(--text-xs); color: rgba(255,255,255,0.5);">Inicio 2024</span>
+            <span style="font-size: var(--text-xs); color: var(--color-accent); font-weight: 700;">Año 1 de 4 · 25%</span>
+            <span style="font-size: var(--text-xs); color: rgba(255,255,255,0.5);">Cierre 2027</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- 2. HITOS -->
+      <section class="acc-section" aria-labelledby="acc-hitos">
+        <h2 id="acc-hitos">Hitos comprometidos y avances</h2>
+
+        <table class="hitos-table" aria-label="Tabla de hitos del proyecto">
+          <thead>
+            <tr>
+              <th scope="col">Fase</th>
+              <th scope="col">Hito</th>
+              <th scope="col">Año</th>
+              <th scope="col">Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Revisión de literatura y diseño del cuestionario</td>
+              <td>2024</td>
+              <td><span class="hito-status hito-status--done">Completado</span></td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Diseño muestral y operacionalización de variables</td>
+              <td>2024</td>
+              <td><span class="hito-status hito-status--done">Completado</span></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Piloto (50 casos) y ajuste del instrumento</td>
+              <td>2025</td>
+              <td><span class="hito-status hito-status--done">Completado</span></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Levantamiento principal (1.200 encuestas)</td>
+              <td>2025</td>
+              <td><span class="hito-status hito-status--progress">En proceso</span></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Validación y limpieza de datos</td>
+              <td>2025–2026</td>
+              <td><span class="hito-status hito-status--pending">Próximamente</span></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Seminario de presentación de datos (apertura a la comunidad científica)</td>
+              <td>2026</td>
+              <td><span class="hito-status hito-status--pending">Próximamente</span></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Artículo académico 1 (análisis empírico)</td>
+              <td>2026</td>
+              <td><span class="hito-status hito-status--pending">Próximamente</span></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Artículo académico 2 (análisis empírico)</td>
+              <td>2027</td>
+              <td><span class="hito-status hito-status--pending">Próximamente</span></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Seminario final de resultados</td>
+              <td>2027</td>
+              <td><span class="hito-status hito-status--pending">Próximamente</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 3. PRODUCTOS -->
+      <section class="acc-section" aria-labelledby="acc-productos">
+        <h2 id="acc-productos">Productos comprometidos</h2>
+
+        <div class="productos-grid">
+
+          <div class="producto-card">
+            <span class="producto-card__type">Instrumento</span>
+            <p class="producto-card__title">Encuesta de redes personales y actitudes políticas (Gran Santiago)</p>
+            <p class="producto-card__meta">N=1.200 · IPSOS · Año 2 (2025)</p>
+            <div class="producto-card__status">
+              <span class="hito-status hito-status--done">Completado</span>
+            </div>
+          </div>
+
+          <div class="producto-card">
+            <span class="producto-card__type">Divulgación</span>
+            <p class="producto-card__title">Sitio web del proyecto con resultados y materiales abiertos</p>
+            <p class="producto-card__meta">theclassproject.org · En línea</p>
+            <div class="producto-card__status">
+              <span class="hito-status hito-status--done">Completado</span>
+            </div>
+          </div>
+
+          <div class="producto-card">
+            <span class="producto-card__type">Divulgación</span>
+            <p class="producto-card__title">Divulgación científica y comunicación pública de resultados</p>
+            <p class="producto-card__meta">Infografías · noticias · redes sociales</p>
+            <div class="producto-card__status">
+              <span class="hito-status hito-status--progress">En proceso</span>
+            </div>
+          </div>
+
+          <div class="producto-card">
+            <span class="producto-card__type">Evento académico</span>
+            <p class="producto-card__title">Seminario de apertura de datos (comunidad científica)</p>
+            <p class="producto-card__meta">UDP · 2025</p>
+            <div class="producto-card__status">
+              <span class="hito-status hito-status--done">Completado</span>
+            </div>
+          </div>
+
+          <div class="producto-card">
+            <span class="producto-card__type">Evento académico</span>
+            <p class="producto-card__title">Seminario final de presentación de resultados</p>
+            <p class="producto-card__meta">UDP · Año 3 (2026)</p>
+            <div class="producto-card__status">
+              <span class="hito-status hito-status--pending">Próximamente</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- SEMINARIOS REALIZADOS -->
+      <section class="acc-section" aria-labelledby="acc-seminarios">
+        <h2 id="acc-seminarios">Seminarios y eventos realizados</h2>
+
+        <div class="seminarios-list">
+
+          <div class="seminario-item">
+            <div class="seminario-item__meta">
+              <span class="seminario-item__date">Diciembre 2025</span>
+              <span class="hito-status hito-status--done">Completado</span>
+            </div>
+            <p class="seminario-item__title">Seminario Observatorio de Desigualdades</p>
+            <p class="seminario-item__detail">UDP · Santiago · Presentación de avances del proyecto</p>
+          </div>
+
+          <!-- Espacio para agregar más seminarios -->
+          <!-- 
+          <div class="seminario-item">
+            <div class="seminario-item__meta">
+              <span class="seminario-item__date">Mes Año</span>
+              <span class="hito-status hito-status--done">Completado</span>
+            </div>
+            <p class="seminario-item__title">Nombre del seminario</p>
+            <p class="seminario-item__detail">Institución · Ciudad · Descripción breve</p>
+          </div>
+          -->
+
+        </div>
+      </section>
+
+      <!-- 4. EQUIPO RESPONSABLE -->
+      <section class="acc-section" aria-labelledby="acc-equipo">
+        <h2 id="acc-equipo">Equipo responsable</h2>
+
+        <div class="responsable-list">
+          <div class="responsable-item">
+            <div>
+              <p class="responsable-item__name">Gabriel Otero</p>
+              <p class="responsable-item__role">Investigador principal</p>
+            </div>
+            <span class="responsable-item__inst">UDP</span>
+          </div>
+          <div class="responsable-item">
+            <div>
+              <p class="responsable-item__name">Vicente Espinoza</p>
+              <p class="responsable-item__role">Asesor senior</p>
+            </div>
+            <span class="responsable-item__inst">UDP / USACH</span>
+          </div>
+          <div class="responsable-item">
+            <div>
+              <p class="responsable-item__name">Julio Iturra · Alejandro Plaza · Guillermo Beck · Andreas Laffert · Camila Joustra</p>
+              <p class="responsable-item__role">Colaboradores de investigación</p>
+            </div>
+          </div>
+          <div class="responsable-item">
+            <div>
+              <p class="responsable-item__name">Constanza Pérez Verdugo</p>
+              <p class="responsable-item__role">Comunicaciones digitales</p>
+            </div>
+            <span class="responsable-item__inst">ICSO – UDP</span>
+          </div>
+        </div>
+
+        <div class="note-box">
+          <p>
+            Esta página refleja el estado de avance del proyecto a mayo de 2026 y se actualiza de forma periódica.
+            Para consultas sobre el proyecto, contactar a <a href="mailto:gabriel.otero@mail.udp.cl" style="color: var(--color-accent);">gabriel.otero@mail.udp.cl</a>.
+          </p>
+        </div>
+      </section>
+
+    </div><!-- /.container -->
+
+  
+    <!-- ============================================================
+         LOGOS INSTITUCIONALES
+         ============================================================ -->
+    <section class="section-logos" aria-label="Instituciones y financiamiento">
+      <div class="container">
+        <p class="logos-label">Financiado y apoyado por</p>
+        <div class="logos-bar">
+          <div class="logo-item">
+            <img src="../assets/logos/LogoUDP_trans.png" alt="Universidad Diego Portales">
+          </div>
+          <div class="logo-item">
+            <img src="../assets/logos/UDP_FCSH_Logo_NEGRO-ROJO.png" alt="Facultad de Ciencias Sociales y Humanidades, UDP">
+          </div>
+          <div class="logo-item">
+            <img src="../assets/logos/LogoICSOH.png" alt="ICSO — Instituto de Ciencias Sociales, UDP">
+          </div>
+          <div class="logo-item">
+            <img src="../assets/logos/LogoOBDE.png" alt="Observatorio de Desigualdades">
+          </div>
+          <div class="logo-item">
+            <img src="../assets/logos/LogoSociologia.svg" alt="Escuela de Sociología UDP">
+          </div>
+          <div class="logo-item">
+            <img src="../assets/logos/LogoANID.png" alt="ANID — Agencia Nacional de Investigación y Desarrollo">
+          </div>
+        </div>
+      </div>
+    </section>
+
+</main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <p class="footer__logo">The <span>Class</span> Project</p>
+          <p class="footer__desc">The Class project es una plataforma dedicada a compartir los resultados del Fondecyt de Iniciación N°11240249, &ldquo;Class, personal networks and political attitudes&rdquo; (Relaciones entre clases y posiciones políticas), financiado por la Agencia Nacional de Investigación y Desarrollo (ANID).</p>
+        </div>
+        <nav aria-label="Navegación del pie de página">
+          <p class="footer__heading">Secciones</p>
+          <ul class="footer__links" role="list">
+            <li><a href="/" class="footer__link">Inicio</a></li>
+            <li><a href="/proyecto/" class="footer__link">El proyecto</a></li>
+            <li><a href="/encuesta/" class="footer__link">Encuesta</a></li>
+            <li><a href="/equipo/" class="footer__link">Equipo</a></li>
+            <li><a href="/divulgacion/" class="footer__link">Divulgación</a></li>
+            <li><a href="/accountability/" class="footer__link">Accountability</a></li>
+          </ul>
+        </nav>
+        <div>
+          <p class="footer__heading">Institución</p>
+          <ul class="footer__links" role="list">
+            <li><span class="footer__link" style="cursor:default;">Escuela de Sociología</span></li>
+            <li><span class="footer__link" style="cursor:default;">Fac. de Ciencias Sociales y Humanidades</span></li>
+            <li><a href="https://www.udp.cl" class="footer__link" target="_blank" rel="noopener">Universidad Diego Portales</a></li>
+          </ul>
+          <p class="footer__heading" style="margin-top:1.5rem;">Contacto</p>
+          <ul class="footer__links" role="list">
+            <li><a href="mailto:gabriel.otero@mail.udp.cl" class="footer__link">gabriel.otero@mail.udp.cl</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; <span id="footer-year">2026</span> The Class Project. Todos los derechos reservados.</p>
+        <div class="footer__funders"><span>Fondecyt de Iniciación N°11240249</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

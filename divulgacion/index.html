@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Divulgación — The Class Project</title>
+  <meta name="description" content="Infografías, publicaciones académicas de referencia y materiales de divulgación del proyecto The Class Project.">
+  <link rel="stylesheet" href="../css/styles.css">
+
+  <style>
+    /* ── PUBLICACIONES ────────────────────────────────── */
+
+    .pub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: var(--space-xl);
+    }
+
+    .pub-item {
+      padding: var(--space-lg) 0;
+      border-bottom: 1px solid var(--color-border-light);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--space-md);
+      align-items: start;
+    }
+
+    .pub-item:last-child { border-bottom: none; }
+
+    .pub-item__body {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .pub-item__authors {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+    .pub-item__title {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--color-primary);
+      text-decoration: none;
+      line-height: 1.4;
+      transition: color 0.2s;
+    }
+
+    .pub-item__title:hover {
+      color: var(--color-accent);
+    }
+
+    .pub-item__journal {
+      font-size: var(--text-sm);
+      color: var(--color-accent-dark);
+      font-style: italic;
+      margin: 0;
+    }
+
+    .pub-item__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      color: var(--color-accent);
+      text-decoration: none;
+      border: 1px solid var(--color-accent);
+      border-radius: var(--radius-pill);
+      padding: 4px 12px;
+      flex-shrink: 0;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .pub-item__link:hover {
+      background-color: var(--color-accent);
+      color: #fff;
+    }
+
+    /* Botón mostrar más publicaciones */
+    .pub-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      background: none;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-pill);
+      padding: var(--space-sm) var(--space-lg);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      margin-top: var(--space-lg);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .pub-toggle:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    /* Publicaciones ocultas por defecto */
+    .pub-list--hidden { display: none; margin-top: 0; }
+    .pub-list--hidden.is-open { display: flex; }
+
+    /* ── INFOGRAFÍAS ─────────────────────────────────── */
+
+    .infografia-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: var(--space-lg);
+      margin-top: var(--space-xl);
+    }
+
+    .infografia-card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      text-decoration: none;
+      color: inherit;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--color-border-light);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .infografia-card:hover {
+      box-shadow: var(--shadow-md, 0 4px 16px rgba(0,0,0,0.12));
+      transform: translateY(-3px);
+    }
+
+    .infografia-card__thumb {
+      aspect-ratio: 3/4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--color-surface);
+    }
+
+    .infografia-card__label {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-primary);
+      padding: var(--space-sm) var(--space-md);
+      margin: 0;
+    }
+
+    /* Placeholder visual de infografía */
+    .infografia-placeholder {
+      font-family: var(--font-heading);
+      font-size: var(--text-lg);
+      color: var(--color-text-muted);
+      text-align: center;
+      padding: var(--space-lg);
+    }
+
+    /* ── NOTICIAS + AGENDA ───────────────────────────── */
+
+    .news-agenda-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3xl);
+    }
+
+    @media (max-width: 768px) {
+      .news-agenda-grid { grid-template-columns: 1fr; gap: var(--space-xl); }
+    }
+
+    .news-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: var(--space-md) 0;
+      border-bottom: 1px solid var(--color-border-light);
+      text-decoration: none;
+    }
+
+    .news-item:hover .news-item__title { color: var(--color-accent); }
+
+    .news-item__title {
+      font-size: var(--text-base);
+      font-weight: 500;
+      color: var(--color-primary);
+      transition: color 0.2s;
+    }
+
+    .news-item__date {
+      font-size: var(--text-xs);
+      color: var(--color-text-light);
+    }
+
+    .agenda-item {
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: none;
+      background: var(--color-surface);
+      border-radius: var(--radius-md);
+      border-left: 3px solid var(--color-accent);
+      margin-bottom: var(--space-sm);
+    }
+
+    .agenda-item__title {
+      font-size: var(--text-base);
+      font-weight: 500;
+      color: var(--color-primary);
+      margin: 0 0 4px 0;
+    }
+
+    .agenda-item__meta {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+
+
+    /* IIB: year badge in publications */
+    .pub-year-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 1px 7px;
+      border-radius: var(--radius-pill);
+      background: var(--color-accent-light);
+      color: var(--color-accent-dark);
+      margin-left: 2px;
+    }
+
+    /* IIB: Divider in publications section with gradient */
+    .pub-divider {
+      height: 1px;
+      background: linear-gradient(90deg, var(--color-accent) 0%, rgba(10,126,122,0.15) 60%, transparent 100%);
+      border: none;
+      margin: 0.5rem 0 1rem;
+    }
+
+    /* Grid de 4 infografías visible en pantalla */
+    .infografia-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-lg);
+    }
+
+    @media (min-width: 640px) {
+      .infografia-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    /* IIB: infografia card hover */
+    .infografia-card:hover .infografia-card__thumb {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .infografia-card__thumb {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    /* IIB: news items with left accent */
+    .news-item {
+      padding-left: var(--space-md);
+      border-left: 3px solid transparent;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    .news-item:hover {
+      border-left-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="nav" aria-label="Navegación principal">
+      <div class="container">
+        <div class="nav__inner">
+          <a href="/" class="nav__logo">The <span>Class</span> Project</a>
+          <ul class="nav__links" role="list">
+            <li><a href="/" class="nav__link">Inicio</a></li>
+            <li><a href="/proyecto/" class="nav__link">Proyecto</a></li>
+            <li><a href="/encuesta/" class="nav__link">Encuesta</a></li>
+            <li><a href="/equipo/" class="nav__link">Equipo</a></li>
+            <li><a href="/divulgacion/" class="nav__link nav__link--active" aria-current="page">Divulgación</a></li>
+            <li><a href="/accountability/" class="nav__link">Transparencia</a></li>
+          </ul>
+          <button class="nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-mobile" aria-label="Abrir menú de navegación">
+            <span class="nav__toggle-bar"></span>
+            <span class="nav__toggle-bar"></span>
+            <span class="nav__toggle-bar"></span>
+          </button>
+        </div>
+      </div>
+      <div class="nav__mobile" id="nav-mobile" role="dialog" aria-label="Menú de navegación">
+        <a href="/" class="nav__mobile-link">Inicio</a>
+        <a href="/proyecto/" class="nav__mobile-link">Proyecto</a>
+        <a href="/encuesta/" class="nav__mobile-link">Encuesta</a>
+        <a href="/equipo/" class="nav__mobile-link">Equipo</a>
+        <a href="/divulgacion/" class="nav__mobile-link" aria-current="page">Divulgación</a>
+        <a href="/accountability/" class="nav__mobile-link">Transparencia</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <section class="page-hero">
+      <div class="container">
+        <span class="page-hero__eyebrow">Comunicación</span>
+        <h1 class="page-hero__title">Divulgación</h1>
+        <p class="page-hero__desc">
+          Infografías, publicaciones académicas y materiales de difusión del proyecto.
+        </p>
+      </div>
+    </section>
+
+    <!-- INFOGRAFÍAS -->
+    <section class="subpage-section">
+      <div class="container">
+
+        <h2>Infografías</h2>
+        <div class="pub-divider"></div>
+        <p style="color: var(--color-text-muted); font-size: var(--text-sm); margin-bottom: var(--space-xl);">
+          Visualizaciones del marco conceptual, metodología y resultados del proyecto.
+        </p>
+
+        <!-- Grid de infografías — 4 en pantalla, 2 columnas en mobile -->
+        <div class="infografia-grid">
+
+          <a href="infografias/marco-conceptual.html" class="infografia-card" aria-label="Infografía: Marco Conceptual">
+            <div class="infografia-card__thumb" style="background-color: var(--color-primary);">
+              <span class="infografia-placeholder" style="color: rgba(255,255,255,0.75);">Marco<br>Conceptual</span>
+            </div>
+            <p class="infografia-card__label">Marco Conceptual</p>
+          </a>
+
+          <a href="#" class="infografia-card" aria-label="Infografía: Argumentos centrales">
+            <div class="infografia-card__thumb">
+              <span class="infografia-placeholder">Argumentos<br>centrales</span>
+            </div>
+            <p class="infografia-card__label">Argumentos</p>
+          </a>
+
+          <a href="#" class="infografia-card" aria-label="Infografía: Diseño metodológico">
+            <div class="infografia-card__thumb" style="background-color: var(--color-accent);">
+              <span class="infografia-placeholder" style="color: #fff;">Diseño<br>metodológico</span>
+            </div>
+            <p class="infografia-card__label">Metodología</p>
+          </a>
+
+          <a href="#" class="infografia-card" aria-label="Infografía: Resultados">
+            <div class="infografia-card__thumb" style="background-color: #8B6914;">
+              <span class="infografia-placeholder" style="color: #fff;">Resultados</span>
+            </div>
+            <p class="infografia-card__label">Resultados</p>
+          </a>
+
+        </div><!-- /.infografia-grid -->
+
+      </div>
+    </section>
+
+    <!-- PUBLICACIONES -->
+    <section class="subpage-section" style="background-color: var(--color-accent-light);">
+      <div class="container">
+
+        <h2>Publicaciones destacadas</h2>
+        <div class="pub-divider"></div>
+        <p style="color: var(--color-text-muted); font-size: var(--text-sm); max-width: 68ch; margin-bottom: var(--space-lg);">
+          Investigaciones previas sobre clase social, redes personales y actitudes políticas
+          que forman la base académica de este proyecto. Los trabajos aquí reunidos representan
+          el punto de partida empírico y conceptual de la investigación.
+        </p>
+
+        <!-- Publicaciones visibles (primeras 6) -->
+        <div class="pub-list" id="pub-main">
+
+          <div class="pub-item">
+            <div class="pub-item__body">
+              <p class="pub-item__authors">Otero, G., &amp; Mendoza, M. <span class="pub-year-badge">(2024)</span></p>
+              <a href="https://journals.sagepub.com/doi/abs/10.1177/00380385231217625" class="pub-item__title" target="_blank" rel="noopener">
+                The power of diversity: class, networks and attitudes towards inequality
+              </a>
+              <p class="pub-item__journal"><em>Sociology</em>, 58(4), 851–876</p>
+            </div>
+            <a href="https://journals.sagepub.com/doi/abs/10.1177/00380385231217625" class="pub-item__link" target="_blank" rel="noopener" aria-label="Ver publicación">↗</a>
+          </div>
+
+          <div class="pub-item">
+            <div class="pub-item__body">
+              <p class="pub-item__authors">Otero, G., Völker, B., &amp; Rözer, J. <span class="pub-year-badge">(2021)</span></p>
+              <a href="https://academic.oup.com/sf/article-abstract/100/2/649/6146610" class="pub-item__title" target="_blank" rel="noopener">
+                Open but segregated? Class divisions and the network structure of social capital in Chile
+              </a>
+              <p class="pub-item__journal"><em>Social Forces</em>, 100(2), 649–679</p>
+            </div>
+            <a href="https://academic.oup.com/sf/article-abstract/100/2/649/6146610" class="pub-item__link" target="_blank" rel="noopener" aria-label="Ver publicación">↗</a>
+          </div>
+
+          <div class="pub-item">
+            <div class="pub-item__body">
+              <p class="pub-item__authors">Otero, G., Völker, B., Rözer, J., &amp; Mollenhorst, G. <span class="pub-year-badge">(2022)</span></p>
+              <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/1468-4446.12966" class="pub-item__title" target="_blank" rel="noopener">
+                The lives of others: Class divisions, network segregation, and attachment to society in Chile
+              </a>
+              <p class="pub-item__journal"><em>The British Journal of Sociology</em>, 73(4), 754–785</p>
+            </div>
+            <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/1468-4446.12966" class="pub-item__link" target="_blank" rel="noopener" aria-label="Ver publicación">↗</a>
+          </div>
+
+          <div class="pub-item">
+            <div class="pub-item__body">
+              <p class="pub-item__authors">Otero, G., Völker, B., Rözer, J., &amp; Mollenhorst, G. <span class="pub-year-badge">(2024)</span></p>
+              <a href="https://academic.oup.com/esr/article-abstract/40/3/493/7201975" class="pub-item__title" target="_blank" rel="noopener">
+                Differences in access to social capital across societies
+              </a>
+              <p class="pub-item__journal"><em>European Sociological Review</em>, 40(3), 493–510</p>
+            </div>
+            <a href="https://academic.oup.com/esr/article-abstract/40/3/493/7201975" class="pub-item__link" target="_blank" rel="noopener" aria-label="Ver publicación">↗</a>
+          </div>
+
+          <div class="pub-item">
+            <div class="pub-item__body">
+              <p class="pub-item__authors">Espinoza, V., &amp; Otero, G. <span class="pub-year-badge">(2024)</span></p>
+              <a href="https://www.elgaronline.com/edcollchap/book/9781802202373/book-part-9781802202373-31.xml" class="pub-item__title" target="_blank" rel="noopener">
+                Social capital and network processes in the making of social class inequality: debates, concepts and measurement
+              </a>
+              <p class="pub-item__journal"><em>Handbook on Inequality and Social Capital</em> (pp. 333–350). Edward Elgar Publishing</p>
+            </div>
+            <a href="https://www.elgaronline.com/edcollchap/book/9781802202373/book-part-9781802202373-31.xml" class="pub-item__link" target="_blank" rel="noopener" aria-label="Ver publicación">↗</a>
+          </div>
+
+          <div class="pub-item">
+            <div class="pub-item__body">
+              <p class="pub-item__authors">Contreras, D., Otero, G., Díaz, J., &amp; Suárez, N. <span class="pub-year-badge">(2019)</span></p>
+              <a href="https://www.sciencedirect.com/science/article/abs/pii/S0378873318300819" class="pub-item__title" target="_blank" rel="noopener">
+                Inequality in social capital in Chile: Assessing the importance of network size and contacts' occupational prestige on status attainment
+              </a>
+              <p class="pub-item__journal"><em>Social Networks</em>, 58, 59–77</p>
+            </div>
+            <a href="https://www.sciencedirect.com/science/article/abs/pii/S0378873318300819" class="pub-item__link" target="_blank" rel="noopener" aria-label="Ver publicación">↗</a>
+          </div>
+
+        </div><!-- /#pub-main -->
+
+        <!-- Más publicaciones (ocultas, se revelan al hacer clic) -->
+        <div class="pub-list pub-list--hidden" id="pub-more">
+
+          <div class="pub-item">
+            <div class="pub-item__body">
+              <p class="pub-item__authors">Bargsted, M., Espinoza, V., &amp; Plaza, A. <span class="pub-year-badge">(2020)</span></p>
+              <a href="https://papers.uab.cat/article/view/v105-n4-bargsted-espinoza-plaza" class="pub-item__title" target="_blank" rel="noopener">
+                Pautas de homofilia en Chile
+              </a>
+              <p class="pub-item__journal"><em>Papers</em>, 105(4), 583–612</p>
+            </div>
+            <a href="https://papers.uab.cat/article/view/v105-n4-bargsted-espinoza-plaza" class="pub-item__link" target="_blank" rel="noopener" aria-label="Ver publicación">↗</a>
+          </div>
+
+          <div class="pub-item">
+            <div class="pub-item__body">
+              <p class="pub-item__authors">Castillo, J., Iturra, J., Maldonado, L., Atria, J., &amp; Meneses, F. <span class="pub-year-badge">(2023)</span></p>
+              <a href="https://www.tandfonline.com/doi/abs/10.1080/00207659.2023.2274712" class="pub-item__title" target="_blank" rel="noopener">
+                A multidimensional approach for measuring meritocratic beliefs: Advantages, limitations and alternatives to the ISSP social inequality survey
+              </a>
+              <p class="pub-item__journal"><em>International Journal of Sociology</em>, 53(6), 448–472</p>
+            </div>
+            <a href="https://www.tandfonline.com/doi/abs/10.1080/00207659.2023.2274712" class="pub-item__link" target="_blank" rel="noopener" aria-label="Ver publicación">↗</a>
+          </div>
+
+          <div class="pub-item">
+            <div class="pub-item__body">
+              <p class="pub-item__authors">Espinoza, V., Barozet, E., Contreras, D., Gayo, M., &amp; Méndez, M. <span class="pub-year-badge">(2023)</span></p>
+              <a href="https://www.cepal.org/es/publicaciones/68553-estratificacion-desigualdad-pacto-social-chile-actual-evaluaciones-preferencias" class="pub-item__title" target="_blank" rel="noopener">
+                Estratificación, desigualdad y pacto social en el Chile actual: evaluaciones y preferencias de la población para la política pública
+              </a>
+              <p class="pub-item__journal"><em>CEPAL</em></p>
+            </div>
+            <a href="https://www.cepal.org/es/publicaciones/68553-estratificacion-desigualdad-pacto-social-chile-actual-evaluaciones-preferencias" class="pub-item__link" target="_blank" rel="noopener" aria-label="Ver publicación">↗</a>
+          </div>
+
+          <div class="pub-item">
+            <div class="pub-item__body">
+              <p class="pub-item__authors">Espinoza, V., Rey, R., &amp; Barozet, E. <span class="pub-year-badge">(2021)</span></p>
+              <a href="https://www.scielo.org.mx/scielo.php?pid=S2448-64422021000200395&script=sci_arttext" class="pub-item__title" target="_blank" rel="noopener">
+                Incidencia del capital social en el logro ocupacional en Uruguay y Chile
+              </a>
+              <p class="pub-item__journal"><em>Estudios Sociológicos</em>, 39(116), 395–432</p>
+            </div>
+            <a href="https://www.scielo.org.mx/scielo.php?pid=S2448-64422021000200395&script=sci_arttext" class="pub-item__link" target="_blank" rel="noopener" aria-label="Ver publicación">↗</a>
+          </div>
+
+          <div class="pub-item">
+            <div class="pub-item__body">
+              <p class="pub-item__authors">Garretón, M., Espinoza, V., &amp; Cantillan, R. <span class="pub-year-badge">(2023)</span></p>
+              <a href="https://www.tandfonline.com/doi/abs/10.1080/07352166.2021.1974302" class="pub-item__title" target="_blank" rel="noopener">
+                Social capital in the urban context: Diversity and social contacts in Chilean cities
+              </a>
+              <p class="pub-item__journal"><em>Journal of Urban Affairs</em>, 45(9), 1644–1663</p>
+            </div>
+            <a href="https://www.tandfonline.com/doi/abs/10.1080/07352166.2021.1974302" class="pub-item__link" target="_blank" rel="noopener" aria-label="Ver publicación">↗</a>
+          </div>
+
+          <div class="pub-item">
+            <div class="pub-item__body">
+              <p class="pub-item__authors">Iturra, J., Castillo, J., Rufs, C., &amp; Maldonado, L. <span class="pub-year-badge">(2023)</span></p>
+              <a href="https://www.scielo.org.mx/pdf/es/v41n122/2448-6442-es-41-122-309.pdf" class="pub-item__title" target="_blank" rel="noopener">
+                Perception of Economic Inequality and its Influence on the Justification of Legitimate Income Differences
+              </a>
+              <p class="pub-item__journal"><em>Estudios Sociológicos</em>, 41(122)</p>
+            </div>
+            <a href="https://www.scielo.org.mx/pdf/es/v41n122/2448-6442-es-41-122-309.pdf" class="pub-item__link" target="_blank" rel="noopener" aria-label="Ver publicación">↗</a>
+          </div>
+
+          <div class="pub-item">
+            <div class="pub-item__body">
+              <p class="pub-item__authors">Plaza, A., Cantillan, R., Beck, G., &amp; Espinoza, V. <span class="pub-year-badge">(2022)</span></p>
+              <a href="https://openurl.ebsco.com/EPDB%3Agcd%3A3%3A5046451/detailv2?sid=ebsco%3Aplink%3Ascholar&id=ebsco%3Agcd%3A160950450&crl=c&link_origin=scholar.google.com" class="pub-item__title" target="_blank" rel="noopener">
+                Juntos, pero no revueltos: Homofilia en relaciones intergrupales mapuche y no-mapuche
+              </a>
+              <p class="pub-item__journal"><em>Revista de Sociología</em>, 37(1)</p>
+            </div>
+            <a href="https://openurl.ebsco.com/EPDB%3Agcd%3A3%3A5046451/detailv2?sid=ebsco%3Aplink%3Ascholar&id=ebsco%3Agcd%3A160950450&crl=c&link_origin=scholar.google.com" class="pub-item__link" target="_blank" rel="noopener" aria-label="Ver publicación">↗</a>
+          </div>
+
+        </div><!-- /#pub-more -->
+
+        <button class="pub-toggle" id="pub-toggle-btn" aria-expanded="false" aria-controls="pub-more">
+          <span id="pub-toggle-text">Ver todas las publicaciones</span>
+          <svg id="pub-toggle-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+      </div>
+    </section>
+
+    <!-- NOTICIAS + AGENDA -->
+    <section class="subpage-section">
+      <div class="container">
+        <div class="news-agenda-grid">
+
+          <div>
+            <h2>Noticias</h2>
+            <div class="divider" style="margin: 1rem 0 1.5rem;"></div>
+            <a href="#" class="news-item">
+              <span class="news-item__title">Nuevo artículo en <em>Social Networks</em> explora redes personales y desigualdad</span>
+              <span class="news-item__date">Septiembre 2, 2025</span>
+            </a>
+            <a href="#" class="news-item">
+              <span class="news-item__title">The Class Project presenta avances en las XXVII Jornadas de Sociología</span>
+              <span class="news-item__date">Noviembre 15, 2025</span>
+            </a>
+          </div>
+
+          <div>
+            <h2>Agenda</h2>
+            <div class="divider" style="margin: 1rem 0 1.5rem;"></div>
+            <div class="agenda-item">
+              <p class="agenda-item__title">Seminario Observatorio Desigualdades</p>
+              <p class="agenda-item__meta">Jueves 11 de diciembre, 09:00–12:30, UDP</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  
+    <!-- ============================================================
+         LOGOS INSTITUCIONALES
+         ============================================================ -->
+    <section class="section-logos" aria-label="Instituciones y financiamiento">
+      <div class="container">
+        <p class="logos-label">Financiado y apoyado por</p>
+        <div class="logos-bar">
+          <div class="logo-item">
+            <img src="../assets/logos/LogoUDP_trans.png" alt="Universidad Diego Portales">
+          </div>
+          <div class="logo-item">
+            <img src="../assets/logos/UDP_FCSH_Logo_NEGRO-ROJO.png" alt="Facultad de Ciencias Sociales y Humanidades, UDP">
+          </div>
+          <div class="logo-item">
+            <img src="../assets/logos/LogoICSOH.png" alt="ICSO — Instituto de Ciencias Sociales, UDP">
+          </div>
+          <div class="logo-item">
+            <img src="../assets/logos/LogoOBDE.png" alt="Observatorio de Desigualdades">
+          </div>
+          <div class="logo-item">
+            <img src="../assets/logos/LogoSociologia.svg" alt="Escuela de Sociología UDP">
+          </div>
+          <div class="logo-item">
+            <img src="../assets/logos/LogoANID.png" alt="ANID — Agencia Nacional de Investigación y Desarrollo">
+          </div>
+        </div>
+      </div>
+    </section>
+
+</main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <p class="footer__logo">The <span>Class</span> Project</p>
+          <p class="footer__desc">The Class project es una plataforma dedicada a compartir los resultados del Fondecyt de Iniciación N°11240249, &ldquo;Class, personal networks and political attitudes&rdquo; (Relaciones entre clases y posiciones políticas), financiado por la Agencia Nacional de Investigación y Desarrollo (ANID).</p>
+        </div>
+        <nav aria-label="Navegación del pie de página">
+          <p class="footer__heading">Secciones</p>
+          <ul class="footer__links" role="list">
+            <li><a href="/" class="footer__link">Inicio</a></li>
+            <li><a href="/proyecto/" class="footer__link">El proyecto</a></li>
+            <li><a href="/encuesta/" class="footer__link">Encuesta</a></li>
+            <li><a href="/equipo/" class="footer__link">Equipo</a></li>
+            <li><a href="/divulgacion/" class="footer__link">Divulgación</a></li>
+            <li><a href="/accountability/" class="footer__link">Accountability</a></li>
+          </ul>
+        </nav>
+        <div>
+          <p class="footer__heading">Institución</p>
+          <ul class="footer__links" role="list">
+            <li><span class="footer__link" style="cursor:default;">Escuela de Sociología</span></li>
+            <li><span class="footer__link" style="cursor:default;">Fac. de Ciencias Sociales y Humanidades</span></li>
+            <li><a href="https://www.udp.cl" class="footer__link" target="_blank" rel="noopener">Universidad Diego Portales</a></li>
+          </ul>
+          <p class="footer__heading" style="margin-top:1.5rem;">Contacto</p>
+          <ul class="footer__links" role="list">
+            <li><a href="mailto:gabriel.otero@mail.udp.cl" class="footer__link">gabriel.otero@mail.udp.cl</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; <span id="footer-year">2026</span> The Class Project. Todos los derechos reservados.</p>
+        <div class="footer__funders"><span>Fondecyt de Iniciación N°11240249</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Botón expandir publicaciones
+    const btn = document.getElementById('pub-toggle-btn');
+    const more = document.getElementById('pub-more');
+    const txt = document.getElementById('pub-toggle-text');
+    const ico = document.getElementById('pub-toggle-icon');
+
+    btn.addEventListener('click', () => {
+      const open = more.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open);
+      txt.textContent = open ? 'Ver menos publicaciones' : 'Ver todas las publicaciones';
+      ico.style.transform = open ? 'rotate(180deg)' : '';
+    });
+
+
+  </script>
+  <script src="../js/script.js"></script>
+</body>
+</html>

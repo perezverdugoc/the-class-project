@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Proyecto — The Class Project</title>
+  <meta name="description" content="Relaciones entre clases y posiciones políticas. FONDECYT N° 11240249, ANID 2024–2026.">
+  <meta name="author" content="Gabriel Otero, Escuela de Sociología FCSH UDP">
+  <link rel="stylesheet" href="../css/styles.css">
+
+  <style>
+
+    /* ====================================================
+       /proyecto/index.html — estilos de página
+       ==================================================== */
+
+    /* ── 0. HERO OSCURO ─────────────────────────────── */
+
+    .ph {
+      background-color: var(--color-primary);
+      padding: var(--space-3xl) 0 0;
+      overflow: hidden;
+    }
+
+    .ph__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      background-color: rgba(10, 126, 122, 0.18);
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--radius-pill);
+      margin-bottom: var(--space-lg);
+      border: 1px solid rgba(10, 126, 122, 0.35);
+    }
+
+    .ph__title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.75rem, 4.5vw, 3.25rem);
+      line-height: 1.15;
+      color: var(--color-text-inverse);
+      max-width: 22ch;
+      margin-bottom: var(--space-lg);
+      letter-spacing: -0.02em;
+    }
+
+    .ph__lead {
+      font-size: var(--text-md);
+      color: rgba(255,255,255,0.68);
+      max-width: 58ch;
+      line-height: 1.75;
+      margin-bottom: 0;
+    }
+
+    /* Franja de estadísticas — fondo oscuro, parte del hero */
+    .ph__stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: var(--space-3xl);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      background-color: var(--color-primary);
+    }
+
+    @media (max-width: 640px) {
+      .ph__stats { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .ph__stat {
+      padding: var(--space-lg) var(--space-lg);
+      border-right: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .ph__stat:last-child { border-right: none; }
+
+    .ph__stat-value {
+      font-family: var(--font-heading);
+      font-size: var(--text-2xl);
+      color: var(--color-text-inverse);
+      line-height: 1;
+    }
+
+    .ph__stat-label {
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.72);
+    }
+
+
+    /* ── LAYOUT CON SIDEBAR ──────────────────────────── */
+
+    .proyecto-wrap {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 0;
+      align-items: start;
+      max-width: var(--container-max, 1200px);
+      margin: 0 auto;
+      padding: 0 var(--space-lg);
+    }
+
+    @media (max-width: 900px) {
+      .proyecto-wrap { grid-template-columns: 1fr; }
+    }
+
+    /* ── SIDEBAR LATERAL ─────────────────────────────── */
+
+    .proyecto-sidebar {
+      position: sticky;
+      top: calc(64px + var(--space-xl));
+      padding: var(--space-2xl) var(--space-xl) var(--space-2xl) 0;
+      border-right: 1px solid var(--color-border-light);
+    }
+
+    @media (max-width: 900px) {
+      .proyecto-sidebar {
+        position: static;
+        border-right: none;
+        border-bottom: 1px solid var(--color-border-light);
+        padding: var(--space-lg) 0;
+      }
+    }
+
+    .sidebar-nav {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar-nav__label {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-light);
+      margin: 0 0 var(--space-md) 0;
+      padding-left: var(--space-md);
+    }
+
+    .sidebar-nav a {
+      display: block;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      padding: var(--space-xs) var(--space-md);
+      border-left: 2px solid transparent;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      line-height: 1.4;
+    }
+
+    .sidebar-nav a:hover,
+    .sidebar-nav a.active {
+      color: var(--color-accent);
+      border-left-color: var(--color-accent);
+      background-color: var(--color-accent-light);
+    }
+
+    .sidebar-sub {
+      padding-left: var(--space-md);
+      margin-top: var(--space-xs);
+    }
+
+    .sidebar-sub a {
+      font-size: var(--text-xs);
+      padding: 3px var(--space-md);
+      color: var(--color-text-light);
+    }
+
+    .sidebar-sub a:hover,
+    .sidebar-sub a.active {
+      color: var(--color-accent);
+      border-left-color: var(--color-accent);
+      background-color: var(--color-accent-light);
+    }
+
+    /* Separador y último item del sidebar (The Class Project) */
+    .sidebar-nav__sep {
+      height: 1px;
+      background: var(--color-border-light);
+      margin: var(--space-md) var(--space-md);
+    }
+
+    .sidebar-nav a.sidebar-nav__brand {
+      font-weight: 700;
+      color: var(--color-primary);
+      font-size: var(--text-xs);
+      letter-spacing: 0.03em;
+    }
+
+    .sidebar-nav a.sidebar-nav__brand:hover,
+    .sidebar-nav a.sidebar-nav__brand.active {
+      color: var(--color-accent);
+    }
+
+    @media (max-width: 900px) {
+      .sidebar-nav, .sidebar-sub {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-xs);
+      }
+      .sidebar-nav a, .sidebar-sub a {
+        border-left: none;
+        border-bottom: 2px solid transparent;
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: var(--radius-sm);
+        font-size: var(--text-xs);
+      }
+      .sidebar-nav a:hover, .sidebar-nav a.active,
+      .sidebar-sub a:hover, .sidebar-sub a.active {
+        border-left-color: transparent;
+        border-bottom-color: var(--color-accent);
+      }
+      .sidebar-sub { padding-left: 0; margin-top: 0; }
+      .sidebar-nav__sep { display: none; }
+    }
+
+
+    /* ── CONTENIDO PRINCIPAL ─────────────────────────── */
+
+    .proyecto-content {
+      padding: var(--space-2xl) 0 var(--space-2xl) var(--space-2xl);
+    }
+
+    @media (max-width: 900px) {
+      .proyecto-content { padding: var(--space-xl) 0; }
+    }
+
+    .content-section {
+      padding: var(--space-2xl) 0;
+      border-bottom: 1px solid var(--color-border-light);
+      scroll-margin-top: calc(64px + var(--space-xl));
+    }
+
+    .content-section:last-child { border-bottom: none; }
+
+    .content-section h2 {
+      font-family: var(--font-heading);
+      font-size: var(--text-2xl);
+      color: var(--color-primary);
+      margin-bottom: var(--space-lg);
+      line-height: 1.2;
+    }
+
+    .content-section p {
+      font-size: var(--text-base);
+      color: var(--color-text-muted);
+      line-height: 1.8;
+      margin-bottom: var(--space-md);
+    }
+
+    .content-section p:last-child { margin-bottom: 0; }
+
+
+    /* ── DIAGRAMA CAUSAL (rediseñado) ────────────────── */
+
+    .model-diagram {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: stretch;
+      gap: 0;
+      margin: var(--space-2xl) 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    @media (max-width: 640px) {
+      .model-diagram {
+        grid-template-columns: 1fr;
+      }
+      .model-arrow-wrap {
+        padding: var(--space-xs) 0;
+        justify-content: flex-start;
+        padding-left: var(--space-lg);
+      }
+      .model-arrow-wrap svg {
+        transform: rotate(90deg);
+      }
+    }
+
+    .model-node {
+      padding: var(--space-xl);
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      border-top: 4px solid var(--color-border);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    /* IIB color coding: cada nodo tiene un color semántico propio */
+    .model-node--start {
+      border-top-color: var(--color-data-d, #3B6FA8); /* Azul: posición de clase */
+      background: rgba(59,111,168,0.05);
+    }
+    .model-node--start .model-node__label { color: var(--color-data-d, #3B6FA8); }
+
+    .model-node--center {
+      border-top-color: var(--color-accent);           /* Teal: redes personales */
+      background: var(--color-primary);
+    }
+
+    .model-node--end {
+      border-top-color: var(--color-data-b, #C9524F); /* Coral: actitudes políticas */
+      background: rgba(201,82,79,0.05);
+    }
+    .model-node--end .model-node__label { color: var(--color-data-b, #C9524F); }
+
+    .model-node--center .model-node__label { color: var(--color-accent); }
+    .model-node--center .model-node__title  { color: var(--color-text-inverse); }
+    .model-node--center .model-node__desc   { color: rgba(255,255,255,0.58); }
+
+    .model-node__label {
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-light);
+      display: block;
+    }
+
+    .model-node__title {
+      font-family: var(--font-heading);
+      font-size: var(--text-lg);
+      color: var(--color-primary);
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .model-node__desc {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .model-arrow-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+      padding: 0 var(--space-md);
+      flex-shrink: 0;
+    }
+
+    .model-arrow-label {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      color: var(--color-accent);
+      background: var(--color-accent-light);
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+    }
+
+
+    /* ── HIPÓTESIS (rediseñada) ───────────────────────── */
+
+    .hypothesis-card {
+      position: relative;
+      background: var(--color-accent-light);
+      border-left: 4px solid var(--color-accent);
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+      padding: var(--space-2xl) var(--space-2xl) var(--space-2xl) var(--space-3xl);
+      margin: var(--space-xl) 0 var(--space-lg);
+      overflow: hidden;
+    }
+
+    .hypothesis-card__bg-quote {
+      position: absolute;
+      top: -16px;
+      left: 16px;
+      font-family: var(--font-heading);
+      font-size: 120px;
+      line-height: 1;
+      color: var(--color-accent);
+      opacity: 0.12;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .hypothesis-card__eyebrow {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-md);
+      display: block;
+    }
+
+    .hypothesis-card__quote {
+      font-family: var(--font-heading);
+      font-size: var(--text-lg);
+      font-style: italic;
+      color: var(--color-primary);
+      line-height: 1.65;
+      margin: 0 0 var(--space-md);
+      position: relative;
+    }
+
+    .hypothesis-card__footnote {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+
+    /* ── TIMELINE HORIZON (3 fases horizontales) ─────── */
+
+    .timeline-horizon {
+      margin: var(--space-xl) 0;
+    }
+
+    .timeline-horizon__phases {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xl);
+      position: relative;
+    }
+
+    /* Track horizontal que une los 3 nodos */
+    .timeline-horizon__phases::before {
+      content: '';
+      position: absolute;
+      top: 27px;
+      left: 28px;
+      right: 28px;
+      height: 2px;
+      background: linear-gradient(
+        to right,
+        var(--color-accent) 0%,
+        var(--color-accent) 55%,
+        var(--color-border-light) 55%,
+        var(--color-border-light) 100%
+      );
+      z-index: 0;
+    }
+
+    @media (max-width: 680px) {
+      .timeline-horizon__phases {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+      }
+      .timeline-horizon__phases::before { display: none; }
+    }
+
+    .thp {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .thp--upcoming { opacity: 0.62; }
+
+    .thp__marker-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      position: relative;
+      z-index: 1;
+    }
+
+    .thp__num {
+      width: 56px;
+      height: 56px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: white;
+      font-family: var(--font-heading);
+      font-size: var(--text-xl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid white;
+      box-shadow: 0 0 0 2px var(--color-primary);
+      position: relative;
+    }
+
+    .thp--done .thp__num,
+    .thp--active .thp__num {
+      background: var(--color-accent);
+      box-shadow: 0 0 0 2px var(--color-accent);
+    }
+
+    /* Pulso para fase activa */
+    .thp--active .thp__num::after {
+      content: '';
+      position: absolute;
+      inset: -9px;
+      border-radius: 50%;
+      border: 2px solid var(--color-accent);
+      opacity: 0.35;
+      animation: phase-pulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes phase-pulse {
+      0%, 100% { transform: scale(0.85); opacity: 0.35; }
+      50%       { transform: scale(1.1);  opacity: 0;    }
+    }
+
+    .thp__badge {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      white-space: nowrap;
+    }
+
+    .thp__badge--done     { background: var(--color-accent-light); color: #065450; }
+    .thp__badge--active   { background: var(--color-accent); color: white; }
+    .thp__badge--upcoming {
+      background: var(--color-surface);
+      color: var(--color-text-light);
+      border: 1px solid var(--color-border-light);
+    }
+
+    .thp__body {
+      padding-left: calc(56px + var(--space-sm));
+    }
+
+    .thp__title {
+      font-family: var(--font-heading);
+      font-size: var(--text-lg);
+      color: var(--color-primary);
+      margin: 0 0 var(--space-xs);
+    }
+
+    .thp__desc {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      margin: 0 0 var(--space-sm);
+    }
+
+    .thp__period {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      color: var(--color-text-light);
+      letter-spacing: 0.05em;
+    }
+
+    .thp__sub {
+      margin-top: var(--space-sm);
+      list-style: none;
+      padding: 0;
+    }
+
+    .thp__sub li {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      padding: var(--space-xs) 0 var(--space-xs) var(--space-md);
+      border-left: 2px solid var(--color-accent-light);
+      margin-bottom: var(--space-xs);
+    }
+
+    /* Subtítulo de sección dentro de content-section */
+    .section-subtitle {
+      font-family: var(--font-heading);
+      font-size: var(--text-xl);
+      color: var(--color-primary);
+      margin: var(--space-2xl) 0 var(--space-md);
+    }
+
+    .section-subtitle:first-of-type { margin-top: var(--space-lg); }
+
+    /* Brand section (The Class Project) */
+    .brand-section-intro {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-lg);
+      padding: var(--space-xl);
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      border-left: 4px solid var(--color-primary);
+      margin: var(--space-xl) 0;
+    }
+
+    .brand-section-intro__logo {
+      font-family: var(--font-heading);
+      font-size: var(--text-xl);
+      color: var(--color-primary);
+      line-height: 1.1;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    .brand-section-intro__logo span {
+      color: var(--color-accent);
+    }
+
+    @media (max-width: 640px) {
+      .brand-section-intro { flex-direction: column; }
+    }
+
+
+    /* IIB: Destacar los tres ejes de actitudes en el hero */
+    .ph__eje {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 3px 10px 3px 7px;
+      border-radius: var(--radius-pill);
+      margin: 2px 3px;
+    }
+    .ph__eje::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .ph__eje--desg {
+      background: rgba(10,126,122,0.12);
+      color: var(--color-accent-dark);
+    }
+    .ph__eje--desg::before { background: var(--color-accent); }
+    .ph__eje--redis {
+      background: rgba(201,82,79,0.10);
+      color: var(--color-data-b, #C9524F);
+    }
+    .ph__eje--redis::before { background: var(--color-data-b, #C9524F); }
+    .ph__eje--cambio {
+      background: rgba(155,123,46,0.10);
+      color: var(--color-data-c, #9B7B2E);
+    }
+    .ph__eje--cambio::before { background: var(--color-data-c, #9B7B2E); }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav class="nav" aria-label="Navegación principal">
+      <div class="container">
+        <div class="nav__inner">
+          <a href="../" class="nav__logo">The <span>Class</span> Project</a>
+          <ul class="nav__links" role="list">
+            <li><a href="../" class="nav__link">Inicio</a></li>
+            <li><a href="../proyecto/" class="nav__link nav__link--active" aria-current="page">Proyecto</a></li>
+            <li><a href="../encuesta/" class="nav__link">Encuesta</a></li>
+            <li><a href="../equipo/" class="nav__link">Equipo</a></li>
+            <li><a href="../divulgacion/" class="nav__link">Divulgación</a></li>
+            <li><a href="../accountability/" class="nav__link">Transparencia</a></li>
+          </ul>
+          <button class="nav__toggle" id="nav-toggle" aria-expanded="false"
+            aria-controls="nav-mobile" aria-label="Abrir menú">
+            <span class="nav__toggle-bar"></span>
+            <span class="nav__toggle-bar"></span>
+            <span class="nav__toggle-bar"></span>
+          </button>
+        </div>
+      </div>
+      <div class="nav__mobile" id="nav-mobile" role="dialog" aria-label="Menú de navegación">
+        <a href="../" class="nav__mobile-link">Inicio</a>
+        <a href="../proyecto/" class="nav__mobile-link" aria-current="page">Proyecto</a>
+        <a href="../encuesta/" class="nav__mobile-link">Encuesta</a>
+        <a href="../equipo/" class="nav__mobile-link">Equipo</a>
+        <a href="../divulgacion/" class="nav__mobile-link">Divulgación</a>
+        <a href="../accountability/" class="nav__mobile-link">Transparencia</a>
+      </div>
+    </nav>
+  </header>
+
+
+  <main id="main-content">
+
+    <!-- HERO OSCURO -->
+    <section class="ph" aria-labelledby="ph-title">
+      <div class="container">
+
+        <span class="ph__eyebrow">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M6 3.5V6.5L7.5 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          Fondecyt de Iniciación · N°11240249 · ANID 2024–2026
+        </span>
+
+        <h1 class="ph__title" id="ph-title">
+          Relaciones entre clases<br>y posiciones políticas
+        </h1>
+
+        <p class="ph__lead">
+          ¿Importa quiénes son tus amigos, vecinos y colegas para definir tus opiniones políticas?
+          Este proyecto investiga cómo la composición de clase de las redes sociales personales
+          influye en las actitudes políticas en Chile, en particular en aquellas referidas a la
+          <strong style="color: rgba(255,255,255,0.9);">desigualdad</strong>,
+          <strong style="color: rgba(255,255,255,0.9);">redistribución</strong> y
+          <strong style="color: rgba(255,255,255,0.9);">cambio social</strong>.
+        </p>
+
+        <!-- Chips de ejes temáticos — IIB color coding -->
+        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: var(--space-lg);" aria-label="Ejes de investigación">
+          <span style="display:inline-flex;align-items:center;gap:5px;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 12px 4px 9px;border-radius:100px;background:rgba(10,126,122,0.22);color:#5ecfc9;border:1px solid rgba(10,126,122,0.35);">
+            <span style="width:6px;height:6px;border-radius:50%;background:#5ecfc9;flex-shrink:0;"></span>Desigualdad
+          </span>
+          <span style="display:inline-flex;align-items:center;gap:5px;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 12px 4px 9px;border-radius:100px;background:rgba(201,82,79,0.18);color:#e8807d;border:1px solid rgba(201,82,79,0.30);">
+            <span style="width:6px;height:6px;border-radius:50%;background:#e8807d;flex-shrink:0;"></span>Redistribución
+          </span>
+          <span style="display:inline-flex;align-items:center;gap:5px;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 12px 4px 9px;border-radius:100px;background:rgba(155,123,46,0.18);color:#d4a84b;border:1px solid rgba(155,123,46,0.30);">
+            <span style="width:6px;height:6px;border-radius:50%;background:#d4a84b;flex-shrink:0;"></span>Cambio social
+          </span>
+        </div>
+
+      </div>
+
+      <!-- Franja de datos -->
+      <div class="ph__stats">
+        <div class="ph__stat">
+          <span class="ph__stat-value" style="display:inline-flex;align-items:baseline;gap:0.2em;">
+            2024
+            <span style="font-size:0.6em;opacity:0.55;font-family:var(--font-body);font-weight:500;">—2027</span>
+          </span>
+          <span class="ph__stat-label">Período de ejecución</span>
+        </div>
+        <div class="ph__stat">
+          <span class="ph__stat-value">3 años</span>
+          <span class="ph__stat-label">Duración</span>
+        </div>
+        <div class="ph__stat">
+          <span class="ph__stat-value">1.200</span>
+          <span class="ph__stat-label">Encuestados</span>
+        </div>
+        <div class="ph__stat">
+          <span class="ph__stat-value">3</span>
+          <span class="ph__stat-label">Fases de investigación</span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- LAYOUT SIDEBAR + CONTENIDO -->
+    <div class="proyecto-wrap">
+
+      <!-- SIDEBAR LATERAL (sticky) -->
+      <aside class="proyecto-sidebar" aria-label="Navegación de la sección">
+        <p class="sidebar-nav__label">En esta sección</p>
+        <ul class="sidebar-nav">
+          <li><a href="#proyecto" class="active">Investigación</a></li>
+          <li><a href="#contexto">Contexto</a></li>
+          <li><a href="#objetivos">Objetivos</a></li>
+          <li>
+            <a href="#modelo">Modelo de investigación</a>
+            <div class="sidebar-sub">
+              <a href="#diseno">Diseño de la encuesta</a>
+              <a href="#implementacion">Implementación</a>
+              <a href="#difusion">Difusión de resultados</a>
+            </div>
+          </li>
+          <li><div class="sidebar-nav__sep"></div></li>
+          <li><a href="#the-class-project" class="sidebar-nav__brand">The Class Project</a></li>
+        </ul>
+      </aside>
+
+      <!-- CONTENIDO -->
+      <div class="proyecto-content">
+
+        <!-- 1. PROYECTO -->
+        <section class="content-section" id="proyecto" aria-labelledby="sec-proyecto">
+          <h2 id="sec-proyecto">El proyecto</h2>
+          <p>
+            <em>Class, personal networks and political attitudes</em> es un proyecto de investigación
+            financiado por el Fondecyt de Iniciación N°11240249 de la Agencia Nacional de Investigación
+            y Desarrollo (ANID), ejecutado en la Escuela de Sociología de la Facultad de Ciencias Sociales
+            y Humanidades de la Universidad Diego Portales (2024–2026).
+          </p>
+          <p>
+            Para llevar a cabo las pruebas empíricas, este proyecto de investigación adopta un enfoque
+            cuantitativo, mediante la aplicación de una encuesta en el Gran Santiago, Chile.
+          </p>
+
+          <!-- Diagrama causal — rediseñado con chips de etiqueta legibles -->
+          <div class="model-diagram" role="img" aria-label="Diagrama causal: Clase social → Redes personales → Actitudes políticas">
+
+            <div class="model-node model-node--start">
+              <span class="model-node__label">Punto de partida</span>
+              <p class="model-node__title">Clase social</p>
+              <p class="model-node__desc">Posición socioeconómica, ocupación y nivel educacional del individuo.</p>
+            </div>
+
+            <div class="model-arrow-wrap" aria-hidden="true">
+              <span class="model-arrow-label">da forma a</span>
+              <svg viewBox="0 0 32 20" fill="none" width="32" height="20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 10h24M18 3l8 7-8 7" stroke="var(--color-accent)" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+
+            <div class="model-node model-node--center">
+              <span class="model-node__label">Objeto de estudio</span>
+              <p class="model-node__title">Redes personales</p>
+              <p class="model-node__desc">Composición de clase en las relaciones cotidianas: familia, amistades, trabajo, vecindad.</p>
+            </div>
+
+            <div class="model-arrow-wrap" aria-hidden="true">
+              <span class="model-arrow-label">influye en</span>
+              <svg viewBox="0 0 32 20" fill="none" width="32" height="20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 10h24M18 3l8 7-8 7" stroke="var(--color-accent)" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+
+            <div class="model-node model-node--end">
+              <span class="model-node__label">Variable dependiente</span>
+              <p class="model-node__title">Actitudes políticas</p>
+              <p class="model-node__desc">Percepciones sobre desigualdad, redistribución y cambio social.</p>
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- 2. CONTEXTO -->
+        <section class="content-section" id="contexto" aria-labelledby="sec-contexto">
+          <h2 id="sec-contexto">Contexto</h2>
+          <p>
+            La investigación previa proporciona una imagen detallada de las diferencias en actitudes
+            políticas según clase social, especialmente en lo referido a las actitudes de izquierda
+            a derecha y las actitudes hacia la desigualdad. Este cuerpo de literatura es robusto,
+            pero tiene una brecha: se centra en la clase del individuo, sin examinar el entorno social
+            en que se inserta.
+          </p>
+          <p>
+            Se sabe menos sobre los patrones de clase en las relaciones sociales que podrían
+            influenciar estas divisiones políticas. En particular, la teoría sobre redes personales
+            y contacto intergrupal sugiere que la exposición cotidiana a personas de otras clases
+            puede modificar —o reforzar— las percepciones sobre temas clave.
+          </p>
+          <p>
+            Chile ofrece un caso de estudio relevante: alta desigualdad estructural, segregación
+            residencial marcada y divisiones políticas profundas hacen del país un laboratorio
+            ideal para este tipo de análisis comparativo.
+          </p>
+        </section>
+
+
+        <!-- 3. OBJETIVOS -->
+        <section class="content-section" id="objetivos" aria-labelledby="sec-objetivos">
+          <h2 id="sec-objetivos">Objetivos</h2>
+          <p>
+            El proyecto tiene como objetivo general examinar cómo la composición de clase en las
+            redes sociales personales influye en las actitudes políticas, específicamente aquellas
+            referidas a temas socioeconómicos —como las percepciones sobre la desigualdad— y
+            socioculturales —como las percepciones sobre redistribución y cambio social.
+          </p>
+          <p>
+            Se propone un marco teórico para incorporar la red social del individuo en el análisis
+            de clase sobre diferentes temas políticos, reuniendo argumentos que derivan del debate
+            sobre la política de clase y la formación de redes personales. La investigación aborda
+            un vacío relevante: aunque se sabe mucho sobre las diferencias de actitud según clase
+            social, se sabe poco sobre el rol que juegan las redes sociales como mecanismo que
+            amplifica o amortigua esas diferencias.
+          </p>
+
+          <!-- Hipótesis central — rediseñada con fondo teal claro -->
+          <div class="hypothesis-card" role="note" aria-label="Hipótesis central del proyecto">
+            <span class="hypothesis-card__bg-quote">"</span>
+            <span class="hypothesis-card__eyebrow">Hipótesis central</span>
+            <p class="hypothesis-card__quote">
+              "Las configuraciones de red explican una parte sustantiva de la relación
+              clase-actitud, y pueden fortalecer las divisiones de clase en las actitudes
+              políticas más allá de la clase misma."
+            </p>
+            <p class="hypothesis-card__footnote">
+              El proyecto pone a prueba esta hipótesis con datos de encuesta en población adulta
+              de la Región Metropolitana de Santiago de Chile.
+            </p>
+          </div>
+
+          <!-- Contribución específica -->
+          <h3 class="section-subtitle">Contribución específica</h3>
+          <p>
+            Al integrar sistemáticamente las redes personales en el análisis de clase,
+            este proyecto avanza sobre el estado del arte en sociología política y ciencia
+            política comparada. Los resultados son relevantes tanto para la discusión teórica
+            sobre los mecanismos de formación de actitudes como para el diseño de políticas
+            orientadas a la cohesión social en contextos de alta desigualdad.
+          </p>
+          <p>
+            Chile ofrece un caso de estudio estratégico: la combinación de alta desigualdad
+            estructural, marcada segregación residencial y profundas divisiones políticas
+            permite examinar estos mecanismos en condiciones de alta intensidad, con potencial
+            comparativo hacia otros contextos latinoamericanos y del Sur Global.
+          </p>
+        </section>
+
+
+        <!-- 4. MODELO DE INVESTIGACIÓN -->
+        <section class="content-section" id="modelo" aria-labelledby="sec-modelo">
+          <h2 id="sec-modelo">Modelo de investigación</h2>
+          <p>
+            El proyecto articula tres componentes. La posición de clase del individuo influye sobre
+            la composición de clase de sus redes personales, y esa composición —no solo la clase
+            propia— explica sus actitudes políticas frente a la desigualdad, redistribución y
+            cambio social.
+          </p>
+          <p>
+            El diseño del estudio se estructura en tres fases secuenciales, cada una con productos
+            académicos y de divulgación específicos.
+          </p>
+        </section>
+
+
+        <!-- 5. DISEÑO DE LA ENCUESTA — timeline horizontal con 3 fases -->
+        <section class="content-section" id="diseno" aria-labelledby="sec-diseno">
+          <h2 id="sec-diseno">Diseño de la encuesta</h2>
+          <p>
+            El estudio se estructura en tres fases secuenciales. La primera — ya completada —
+            establece las bases teóricas y el instrumento; la segunda ejecuta el trabajo de campo;
+            la tercera comunica los resultados a audiencias académicas y ciudadanas.
+          </p>
+
+          <!-- Timeline horizonte: las 3 fases en progresión visual -->
+          <div class="timeline-horizon">
+            <div class="timeline-horizon__phases">
+
+              <!-- Fase 1 — Completada -->
+              <div class="thp thp--done">
+                <div class="thp__marker-row">
+                  <div class="thp__num">1</div>
+                  <span class="thp__badge thp__badge--done">Completada</span>
+                </div>
+                <div class="thp__body">
+                  <h3 class="thp__title">Diseño del instrumento</h3>
+                  <p class="thp__desc">Revisión exhaustiva de la literatura, definición de hipótesis y diseño del cuestionario con insumos teóricos y empíricos para los tres dominios temáticos del proyecto.</p>
+                  <span class="thp__period">2024 · Año 1</span>
+                </div>
+              </div>
+
+              <!-- Fase 2 — En curso -->
+              <div class="thp thp--active">
+                <div class="thp__marker-row">
+                  <div class="thp__num">2</div>
+                  <span class="thp__badge thp__badge--active">En curso</span>
+                </div>
+                <div class="thp__body">
+                  <h3 class="thp__title">Trabajo de campo</h3>
+                  <p class="thp__desc">Aplicación de la encuesta en la Región Metropolitana. Muestra de 1.200 personas, diseño muestral multietápico, piloto de 50 casos y validación de datos.</p>
+                  <span class="thp__period">2025 · Año 2</span>
+                </div>
+              </div>
+
+              <!-- Fase 3 — Próximamente -->
+              <div class="thp thp--upcoming">
+                <div class="thp__marker-row">
+                  <div class="thp__num">3</div>
+                  <span class="thp__badge thp__badge--upcoming">Próximamente</span>
+                </div>
+                <div class="thp__body">
+                  <h3 class="thp__title">Publicación y comunicación</h3>
+                  <p class="thp__desc">Publicaciones en revistas ISI/Scopus, seminario final de hallazgos, infografías y materiales de divulgación para público general y tomadores de decisiones.</p>
+                  <span class="thp__period">2026–2027 · Años 3–4</span>
+                </div>
+              </div>
+
+            </div><!-- /.timeline-horizon__phases -->
+          </div><!-- /.timeline-horizon -->
+        </section>
+
+
+        <!-- 6. IMPLEMENTACIÓN DEL INSTRUMENTO -->
+        <section class="content-section" id="implementacion" aria-labelledby="sec-implementacion">
+          <h2 id="sec-implementacion">Implementación del instrumento</h2>
+          <p>
+            El trabajo de campo se lleva a cabo mediante encuestas presenciales aplicadas por
+            IPSOS en la Región Metropolitana de Santiago. El diseño muestral es multietápico
+            y estratificado, con cobertura de todas las comunas del Gran Santiago.
+          </p>
+          <p>
+            Tras la aplicación de un piloto de 50 casos para validar el instrumento, el
+            levantamiento principal tiene como objetivo alcanzar una muestra de 1.200 personas.
+            Los datos son sometidos a un protocolo de validación y limpieza antes de su análisis.
+          </p>
+        </section>
+
+
+        <!-- 7. DIFUSIÓN DE RESULTADOS -->
+        <section class="content-section" id="difusion" aria-labelledby="sec-difusion">
+          <h2 id="sec-difusion">Difusión de resultados</h2>
+          <p>
+            Los resultados del proyecto se comunicarán tanto en espacios académicos como
+            hacia la ciudadanía y tomadores de decisiones. Están previstos dos artículos
+            en revistas de corriente principal (ISI/Scopus), un seminario final de
+            presentación de hallazgos y materiales de divulgación pública.
+          </p>
+          <p>
+            Toda la producción académica y de divulgación se hará accesible a través de
+            este sitio web, que se actualizará de manera continua durante el período
+            de ejecución del proyecto.
+          </p>
+        </section>
+
+
+        <!-- 8. THE CLASS PROJECT — paraguas de marca -->
+        <section class="content-section" id="the-class-project" aria-labelledby="sec-tcp">
+          <h2 id="sec-tcp">The Class Project</h2>
+
+          <div class="brand-section-intro">
+            <div class="brand-section-intro__logo">
+              The <span>Class</span><br>Project
+            </div>
+            <p style="margin: 0; font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.75;">
+              Plataforma de comunicación pública del Fondecyt de Iniciación N°11240249.
+              Reúne los productos y avances de la investigación bajo una identidad editorial
+              unificada, orientada a distintos públicos: comunidad académica, estudiantes,
+              tomadores de decisiones y ciudadanía informada.
+            </p>
+          </div>
+
+          <p>
+            La plataforma incluye el sitio web <strong>theclassproject.org</strong>,
+            infografías, actualizaciones sobre el trabajo de campo y publicaciones
+            académicas de acceso abierto. Todo el contenido se actualiza a lo largo
+            del período de ejecución del proyecto (2024–2026).
+          </p>
+
+          <div style="margin-top: var(--space-xl); display: flex; gap: var(--space-md); flex-wrap: wrap;">
+            <a href="../encuesta/" class="btn btn--primary">Conocer la encuesta</a>
+            <a href="../equipo/" class="btn btn--outline">Ver el equipo</a>
+            <a href="../divulgacion/" class="btn btn--outline">Ver divulgación</a>
+          </div>
+        </section>
+
+      </div><!-- /.proyecto-content -->      </div><!-- /.proyecto-content -->
+
+    </div><!-- /.proyecto-wrap -->
+
+
+
+    <!-- ============================================================
+         LOGOS INSTITUCIONALES
+         ============================================================ -->
+    <section class="section-logos" aria-label="Instituciones y financiamiento">
+      <div class="container">
+        <p class="logos-label">Financiado y apoyado por</p>
+        <div class="logos-bar">
+          <div class="logo-item">
+            <img src="../assets/logos/LogoUDP_trans.png" alt="Universidad Diego Portales">
+          </div>
+          <div class="logo-item">
+            <img src="../assets/logos/UDP_FCSH_Logo_NEGRO-ROJO.png" alt="Facultad de Ciencias Sociales y Humanidades, UDP">
+          </div>
+          <div class="logo-item">
+            <img src="../assets/logos/LogoICSOH.png" alt="ICSO — Instituto de Ciencias Sociales, UDP">
+          </div>
+          <div class="logo-item">
+            <img src="../assets/logos/LogoOBDE.png" alt="Observatorio de Desigualdades">
+          </div>
+          <div class="logo-item">
+            <img src="../assets/logos/LogoSociologia.svg" alt="Escuela de Sociología UDP">
+          </div>
+          <div class="logo-item">
+            <img src="../assets/logos/LogoANID.png" alt="ANID — Agencia Nacional de Investigación y Desarrollo">
+          </div>
+        </div>
+      </div>
+    </section>
+
+</main>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <p class="footer__logo">The <span>Class</span> Project</p>
+          <p class="footer__desc">
+            The Class project es una plataforma dedicada a compartir los resultados del Fondecyt de Iniciación N°11240249, &ldquo;Class, personal networks and political attitudes&rdquo; (Relaciones entre clases y posiciones políticas), financiado por la Agencia Nacional de Investigación y Desarrollo (ANID).
+          </p>
+        </div>
+        <nav aria-label="Navegación del pie de página">
+          <p class="footer__heading">Secciones</p>
+          <ul class="footer__links" role="list">
+            <li><a href="../" class="footer__link">Inicio</a></li>
+            <li><a href="../proyecto/" class="footer__link">El proyecto</a></li>
+            <li><a href="../encuesta/" class="footer__link">Encuesta</a></li>
+            <li><a href="../equipo/" class="footer__link">Equipo</a></li>
+            <li><a href="../divulgacion/" class="footer__link">Divulgación</a></li>
+            <li><a href="../accountability/" class="footer__link">Accountability</a></li>
+          </ul>
+        </nav>
+        <div>
+          <p class="footer__heading">Institución</p>
+          <ul class="footer__links" role="list">
+            <li><span class="footer__link" style="cursor:default;">Escuela de Sociología</span></li>
+            <li><span class="footer__link" style="cursor:default;">Fac. de Ciencias Sociales y Humanidades</span></li>
+            <li><a href="https://www.udp.cl" class="footer__link" target="_blank" rel="noopener">Universidad Diego Portales</a></li>
+          </ul>
+          <p class="footer__heading" style="margin-top:1.5rem;">Contacto</p>
+          <ul class="footer__links" role="list">
+            <li><a href="mailto:gabriel.otero@mail.udp.cl" class="footer__link">gabriel.otero@mail.udp.cl</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; <span id="footer-year">2026</span> The Class Project. Todos los derechos reservados.</p>
+        <div class="footer__funders"><span>Fondecyt de Iniciación N°11240249</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script de sidebar: marca el item activo según scroll -->
+  <script>
+    // Sidebar scroll spy
+    const sidebarLinks = document.querySelectorAll('.sidebar-nav a, .sidebar-sub a');
+    const sections = Array.from(sidebarLinks)
+      .map(a => document.querySelector(a.getAttribute('href')))
+      .filter(Boolean);
+
+    function updateActive() {
+      const scrollY = window.scrollY + 100;
+      let active = sections[0];
+      sections.forEach(s => { if (s.offsetTop <= scrollY) active = s; });
+      sidebarLinks.forEach(a => {
+        a.classList.toggle('active', document.querySelector(a.getAttribute('href')) === active);
+      });
+    }
+
+    window.addEventListener('scroll', updateActive, { passive: true });
+    updateActive();
+  </script>
+  <script src="../js/script.js"></script>
+</body>
+</html>

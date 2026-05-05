@@ -1,0 +1,8 @@
+# robots.txt — The Class Project
+# Permite que todos los motores de búsqueda indexen el sitio
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://theclassproject.org/sitemap.xml

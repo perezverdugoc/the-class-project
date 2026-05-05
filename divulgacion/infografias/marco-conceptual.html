@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marco Conceptual — The Class Project</title>
+  <link rel="stylesheet" href="../../css/styles.css">
+
+  <style>
+    /* ============================================================
+       INFOGRAFÍA — Marco Conceptual
+       Sistema modular reutilizable para todas las infografías.
+       Para crear una nueva: duplica este archivo y edita solo
+       el bloque #infografia-content.
+       ============================================================ */
+
+    body {
+      background-color: var(--color-surface);
+    }
+
+    /* Wrapper de la infografía — máximo A4 landscape en pantalla */
+    .infografia-page {
+      max-width: 900px;
+      margin: var(--space-3xl) auto;
+      padding: var(--space-lg);
+    }
+
+    /* Tarjeta principal — fondo blanco, sombra editorial */
+    .infografia-card {
+      background-color: var(--color-bg);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+    }
+
+    /* ── ENCABEZADO ──────────────────────────────────── */
+
+    .infog-header {
+      background-color: var(--color-primary);
+      padding: var(--space-2xl) var(--space-2xl) var(--space-xl);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-xl);
+    }
+
+    .infog-header__left {
+      flex: 1;
+    }
+
+    .infog-header__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      background-color: rgba(10,126,122,0.2);
+      border: 1px solid rgba(10,126,122,0.35);
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      margin-bottom: var(--space-md);
+    }
+
+    .infog-header__title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      color: var(--color-text-inverse);
+      line-height: 1.15;
+      margin: 0 0 var(--space-sm) 0;
+      max-width: 28ch;
+    }
+
+    .infog-header__subtitle {
+      font-size: var(--text-sm);
+      color: rgba(255,255,255,0.55);
+      margin: 0;
+      max-width: 56ch;
+    }
+
+    .infog-header__brand {
+      flex-shrink: 0;
+      text-align: right;
+    }
+
+    .infog-header__brand-name {
+      font-family: var(--font-heading);
+      font-size: var(--text-lg);
+      color: var(--color-text-inverse);
+      margin: 0 0 4px 0;
+    }
+
+    .infog-header__brand-name span { color: var(--color-accent); }
+
+    .infog-header__brand-sub {
+      font-size: var(--text-xs);
+      color: rgba(255,255,255,0.4);
+      margin: 0;
+    }
+
+    /* ── CUERPO ──────────────────────────────────────── */
+
+    .infog-body {
+      padding: var(--space-2xl);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2xl);
+    }
+
+    /* ── ARGUMENTO CENTRAL ───────────────────────────── */
+
+    .infog-argument {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    .infog-argument__question {
+      font-family: var(--font-heading);
+      font-size: clamp(1.1rem, 2.5vw, 1.625rem);
+      color: var(--color-primary);
+      font-style: italic;
+      line-height: 1.4;
+      margin: 0;
+      padding-left: var(--space-lg);
+      border-left: 3px solid var(--color-accent);
+    }
+
+    /* ── DIAGRAMA CAUSAL (3 nodos) ────────────────────── */
+
+    .infog-diagram {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 0;
+      align-items: center;
+    }
+
+    @media (max-width: 600px) {
+      .infog-diagram {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+    }
+
+    .infog-node {
+      padding: var(--space-xl);
+      border-radius: var(--radius-lg);
+      background-color: var(--color-surface);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      height: 100%;
+    }
+
+    .infog-node--accent {
+      background-color: var(--color-primary);
+    }
+
+    .infog-node__number {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: var(--color-accent);
+      color: #fff;
+      font-family: var(--font-heading);
+      font-size: var(--text-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .infog-node__label {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+    }
+
+    .infog-node__title {
+      font-family: var(--font-heading);
+      font-size: var(--text-lg);
+      color: var(--color-primary);
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .infog-node--accent .infog-node__title,
+    .infog-node--accent .infog-node__desc {
+      color: var(--color-text-inverse);
+    }
+
+    .infog-node--accent .infog-node__desc { color: rgba(255,255,255,0.6); }
+
+    .infog-node__desc {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* Flecha entre nodos */
+    .infog-arrow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 0 var(--space-md);
+    }
+
+    .infog-arrow__label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      white-space: nowrap;
+    }
+
+    /* ── HIPÓTESIS ───────────────────────────────────── */
+
+    .infog-hypothesis {
+      background-color: var(--color-accent-light);
+      border: 1px solid rgba(10,126,122,0.2);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      display: flex;
+      gap: var(--space-lg);
+      align-items: flex-start;
+    }
+
+    .infog-hypothesis__icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      background-color: var(--color-accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.2rem;
+    }
+
+    .infog-hypothesis__label {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent-dark);
+      margin-bottom: var(--space-xs);
+    }
+
+    .infog-hypothesis__text {
+      font-family: var(--font-heading);
+      font-size: var(--text-lg);
+      font-style: italic;
+      color: var(--color-primary);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* ── DIMENSIONES ─────────────────────────────────── */
+
+    .infog-dimensions {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: var(--space-md);
+    }
+
+    .infog-dim {
+      background-color: var(--color-surface);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      border-left: 3px solid var(--color-accent);
+    }
+
+    .infog-dim__cat {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-light);
+      margin-bottom: 4px;
+    }
+
+    .infog-dim__title {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-primary);
+      margin: 0;
+    }
+
+    /* ── PIE DE INFOGRAFÍA ───────────────────────────── */
+
+    .infog-footer {
+      background-color: var(--color-surface);
+      padding: var(--space-lg) var(--space-2xl);
+      border-top: 1px solid var(--color-border-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-lg);
+    }
+
+    .infog-footer__credit {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+    .infog-footer__credit strong { color: var(--color-primary); }
+
+    .infog-footer__url {
+      font-size: var(--text-xs);
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    /* ── BREADCRUMB DE VUELTA ────────────────────────── */
+
+    .infog-nav {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+      font-size: var(--text-sm);
+    }
+
+    .infog-nav a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    .infog-nav a:hover { text-decoration: underline; }
+
+    .infog-nav__sep { color: var(--color-text-light); }
+
+    .infog-nav__current { color: var(--color-text-muted); }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="nav" aria-label="Navegación principal">
+      <div class="container">
+        <div class="nav__inner">
+          <a href="/" class="nav__logo">The <span>Class</span> Project</a>
+          <ul class="nav__links" role="list">
+            <li><a href="/" class="nav__link">Inicio</a></li>
+            <li><a href="/proyecto/" class="nav__link">Proyecto</a></li>
+            <li><a href="/encuesta/" class="nav__link">Encuesta</a></li>
+            <li><a href="/equipo/" class="nav__link">Equipo</a></li>
+            <li><a href="/divulgacion/" class="nav__link nav__link--active">Divulgación</a></li>
+          </ul>
+          <button class="nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-mobile" aria-label="Abrir menú">
+            <span class="nav__toggle-bar"></span>
+            <span class="nav__toggle-bar"></span>
+            <span class="nav__toggle-bar"></span>
+          </button>
+        </div>
+      </div>
+      <div class="nav__mobile" id="nav-mobile" role="dialog" aria-label="Menú de navegación">
+        <a href="/" class="nav__mobile-link">Inicio</a>
+        <a href="/proyecto/" class="nav__mobile-link">Proyecto</a>
+        <a href="/encuesta/" class="nav__mobile-link">Encuesta</a>
+        <a href="/equipo/" class="nav__mobile-link">Equipo</a>
+        <a href="/divulgacion/" class="nav__mobile-link">Divulgación</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <div class="infografia-page">
+
+      <!-- Breadcrumb -->
+      <nav class="infog-nav" aria-label="Ruta de navegación">
+        <a href="/divulgacion/">Divulgación</a>
+        <span class="infog-nav__sep" aria-hidden="true">›</span>
+        <span class="infog-nav__current">Marco Conceptual</span>
+      </nav>
+
+      <!-- Infografía -->
+      <article class="infografia-card" aria-label="Infografía: Marco Conceptual del proyecto">
+
+        <!-- Encabezado -->
+        <header class="infog-header">
+          <div class="infog-header__left">
+            <span class="infog-header__eyebrow">Infografía 01 · Marco Conceptual</span>
+            <h1 class="infog-header__title">
+              Clase social, redes personales y actitudes políticas
+            </h1>
+            <p class="infog-header__subtitle">
+              ¿Cómo influye la composición de clase de tu red social en lo que piensas
+              sobre la desigualdad, la redistribución y el cambio social?
+            </p>
+          </div>
+          <div class="infog-header__brand" aria-hidden="true">
+            <p class="infog-header__brand-name">The <span>Class</span> Project</p>
+            <p class="infog-header__brand-sub">Fondecyt N°11240249 · ANID</p>
+          </div>
+        </header>
+
+        <!-- Cuerpo -->
+        <div class="infog-body">
+
+          <!-- Pregunta central -->
+          <div class="infog-argument">
+            <p class="infog-argument__question">
+              ¿Importa quiénes son tus amigos, vecinos y colegas para definir tus opiniones políticas?
+            </p>
+          </div>
+
+          <!-- Diagrama causal -->
+          <div class="infog-diagram" role="img" aria-label="Diagrama: Clase social → Redes personales → Actitudes políticas">
+
+            <!-- Nodo 1 -->
+            <div class="infog-node">
+              <div class="infog-node__number" aria-label="Paso 1">1</div>
+              <span class="infog-node__label">Punto de partida</span>
+              <p class="infog-node__title">Clase social del individuo</p>
+              <p class="infog-node__desc">Posición socioeconómica, ocupación y nivel educacional.</p>
+            </div>
+
+            <!-- Flecha 1 -->
+            <div class="infog-arrow" aria-hidden="true">
+              <span class="infog-arrow__label">da forma a</span>
+              <svg width="32" height="20" viewBox="0 0 32 20" fill="none">
+                <path d="M2 10h24M20 4l8 6-8 6" stroke="var(--color-accent)" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+
+            <!-- Nodo central -->
+            <div class="infog-node infog-node--accent">
+              <div class="infog-node__number" aria-label="Paso 2">2</div>
+              <span class="infog-node__label">Objeto de estudio</span>
+              <p class="infog-node__title">Composición de clase en redes personales</p>
+              <p class="infog-node__desc">¿Con quiénes te relacionas? Familia, trabajo, vecindad, amistad.</p>
+            </div>
+
+            <!-- Flecha 2 -->
+            <div class="infog-arrow" aria-hidden="true">
+              <span class="infog-arrow__label">influye en</span>
+              <svg width="32" height="20" viewBox="0 0 32 20" fill="none">
+                <path d="M2 10h24M20 4l8 6-8 6" stroke="var(--color-accent)" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+
+            <!-- Nodo 3 -->
+            <div class="infog-node">
+              <div class="infog-node__number" aria-label="Paso 3">3</div>
+              <span class="infog-node__label">Variable explicada</span>
+              <p class="infog-node__title">Actitudes políticas</p>
+              <p class="infog-node__desc">Opiniones sobre desigualdad, redistribución y cambio social.</p>
+            </div>
+
+          </div><!-- /.infog-diagram -->
+
+          <!-- Hipótesis -->
+          <div class="infog-hypothesis">
+            <div class="infog-hypothesis__icon" aria-hidden="true">H</div>
+            <div>
+              <p class="infog-hypothesis__label">Hipótesis central</p>
+              <p class="infog-hypothesis__text">
+                "La composición de clase de las redes personales explica una parte sustantiva
+                de las divisiones políticas, más allá de la clase propia del individuo."
+              </p>
+            </div>
+          </div>
+
+          <!-- Dimensiones de actitudes -->
+          <div>
+            <p style="font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-light); margin-bottom: var(--space-md);">
+              Actitudes políticas analizadas
+            </p>
+            <div class="infog-dimensions">
+              <div class="infog-dim">
+                <p class="infog-dim__cat">Socioeconómico</p>
+                <p class="infog-dim__title">Desigualdad</p>
+              </div>
+              <div class="infog-dim">
+                <p class="infog-dim__cat">Socioeconómico</p>
+                <p class="infog-dim__title">Redistribución</p>
+              </div>
+              <div class="infog-dim">
+                <p class="infog-dim__cat">Sociocultural</p>
+                <p class="infog-dim__title">Cambio social</p>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /.infog-body -->
+
+        <!-- Pie -->
+        <footer class="infog-footer">
+          <p class="infog-footer__credit">
+            <strong>The Class Project</strong> · Fondecyt de Iniciación N°11240249 ·
+            Financiado por la Agencia Nacional de Investigación y Desarrollo (ANID)
+          </p>
+          <a href="https://theclassproject.org" class="infog-footer__url">theclassproject.org</a>
+        </footer>
+
+      </article><!-- /.infografia-card -->
+    </div><!-- /.infografia-page -->
+  </main>
+
+  <script src="../../js/script.js"></script>
+</body>
+</html>
