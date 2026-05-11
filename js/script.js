@@ -155,6 +155,66 @@
 })();
 
 
+/* ─── 6. MODALES DE PERFIL ───────────────────────────────────────
+   Cada botón .profile-card__btn tiene data-modal="<id-del-modal>".
+   Al hacer clic, se elimina el atributo [hidden] del modal objetivo.
+   El modal se cierra con:
+     - El botón .profile-modal__close
+     - Clic en el backdrop .profile-modal__backdrop
+     - Tecla Escape
+   ─────────────────────────────────────────────────────────────── */
+(function initProfileModals() {
+  var lastFocused = null;
+
+  /* Abrir modal */
+  function openModal(modalId) {
+    var modal = document.getElementById(modalId);
+    if (!modal) return;
+
+    lastFocused = document.activeElement;
+    modal.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden'; /* evitar scroll del fondo */
+
+    /* Mover foco al botón de cierre para accesibilidad */
+    var closeBtn = modal.querySelector('.profile-modal__close');
+    if (closeBtn) closeBtn.focus();
+  }
+
+  /* Cerrar modal */
+  function closeModal(modal) {
+    if (!modal) return;
+    modal.setAttribute('hidden', '');
+    document.body.style.overflow = '';
+    if (lastFocused) lastFocused.focus();
+  }
+
+  /* Clic en botones "Ver perfil" */
+  document.querySelectorAll('.profile-card__btn[data-modal]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      openModal(btn.getAttribute('data-modal'));
+    });
+  });
+
+  /* Clic en el botón X o en el backdrop → cerrar */
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('.profile-modal__close')) {
+      closeModal(e.target.closest('.profile-modal'));
+    }
+    if (e.target.classList.contains('profile-modal__backdrop')) {
+      closeModal(e.target.closest('.profile-modal'));
+    }
+  });
+
+  /* Tecla Escape → cerrar el modal abierto */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      var openModals = document.querySelectorAll('.profile-modal:not([hidden])');
+      openModals.forEach(function (modal) { closeModal(modal); });
+    }
+  });
+})();
+
+
 /* ─── 5. INTERSECTIONOBSERVER — FADE-IN ─────────────────────────
    Anima la entrada de .logo-item y .fade-in al viewport.
    Las .card NO se ocultan: son contenido visible siempre.
