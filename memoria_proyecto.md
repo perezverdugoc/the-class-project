@@ -1,6 +1,4 @@
-Aquí tienes el resumen consolidado, listo para pegar:
 
----
 
 # The Class Project — Estado del proyecto y acuerdos de trabajo
 
@@ -36,11 +34,11 @@ Rol operativo: gestionar y producir sitio web, redes sociales, mailing, identida
 
 ## Estructura del sitio
 
-Cinco páginas: **Inicio, Proyecto, Encuesta, Equipo, Divulgación**.
+Seis páginas: **Inicio, Proyecto, Encuesta, Equipo, Divulgación, Transparencia**.
 
 ### Decisiones de estructura acordadas
 
-- **Footer:** se edita desde Apariencia → Editor → Partes del sitio → Footer. Impacta las 5 páginas, por eso se prioriza primero. Guardar tras cada cambio individual.
+- **Footer:** se edita desde Apariencia → Editor → Partes del sitio → Footer. Impacta las 6 páginas, por eso se prioriza primero. Guardar tras cada cambio individual.
 - **Jerarquía narrativa global:** qué es → por qué importa → cómo se investiga → qué produce.
 - **Bloque Columnas:** formato estándar para tarjetas de equipo, características de la encuesta, fases del proyecto y descargas. Siempre con alineación "Ancho amplio".
 - **/equipo:** layout de 2 filas × 4 columnas. Cada tarjeta: imagen + nombre (H3) + rol + botón "Ver perfil". Jerarquía uniforme: **todos en H3** (Gabriel no lleva H2 diferenciado, se puede destacar con etiqueta o borde si es necesario).
