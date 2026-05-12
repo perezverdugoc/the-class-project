@@ -246,3 +246,110 @@
 
   targets.forEach(function (el) { observer.observe(el); });
 })();
+
+
+/* ─── 7. SCROLLSPY — SIDEBAR ACTIVO POR SECCIÓN ─────────────────
+   Marca como .active el link del sidebar cuya sección ancla
+   es la más visible en el viewport.
+
+   Funciona en todas las páginas que tengan:
+     .sidebar-nav a      (Proyecto)
+     .encuesta-nav a     (Encuesta)
+     .equipo-nav a       (Equipo)
+     .divulgacion-nav a  (Divulgación)
+
+   Cómo funciona:
+   - Toma todos los links del sidebar que apuntan a #anclas.
+   - Observa cada sección con IntersectionObserver.
+   - Al entrar/salir del viewport, actualiza la clase .active
+     en el link correspondiente (siempre queda uno activo).
+   ─────────────────────────────────────────────────────────────── */
+(function initScrollSpy() {
+  /* Selectores de sidebars activos en el sitio */
+  var NAV_SELECTOR = [
+    '.sidebar-nav a[href^="#"]',
+    '.encuesta-nav a[href^="#"]',
+    '.equipo-nav a[href^="#"]',
+    '.divulgacion-nav a[href^="#"]'
+  ].join(', ');
+
+  var navLinks = document.querySelectorAll(NAV_SELECTOR);
+  if (!navLinks.length) return;
+  if (!('IntersectionObserver' in window)) return;
+
+  /* Mapa ancla → link del nav */
+  var linkMap = {};
+  navLinks.forEach(function (link) {
+    var hash = link.getAttribute('href');
+    if (hash && hash.startsWith('#')) {
+      linkMap[hash.slice(1)] = link;
+    }
+  });
+
+  /* Secciones a observar */
+  var sectionIds = Object.keys(linkMap);
+  if (!sectionIds.length) return;
+
+  /* Qué sección está más visible actualmente */
+  var visibleSections = {};
+
+  function updateActive() {
+    /* Buscar la sección con mayor ratio de visibilidad
+       o, si ninguna está en viewport, la más cercana al top */
+    var bestId = null;
+    var bestRatio = -1;
+
+    sectionIds.forEach(function (id) {
+      var ratio = visibleSections[id] || 0;
+      if (ratio > bestRatio) {
+        bestRatio = ratio;
+        bestId = id;
+      }
+    });
+
+    /* Si nada está en viewport, usar la sección cuyo top sea
+       el más cercano al viewport (hacia arriba) */
+    if (bestRatio === 0) {
+      var scrollY = window.scrollY + 80; /* offset nav */
+      var closest = null;
+      var closestDist = Infinity;
+      sectionIds.forEach(function (id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        var dist = Math.abs(el.getBoundingClientRect().top + window.scrollY - scrollY);
+        if (dist < closestDist) {
+          closestDist = dist;
+          closest = id;
+        }
+      });
+      bestId = closest;
+    }
+
+    /* Aplicar .active */
+    navLinks.forEach(function (link) {
+      link.classList.remove('active');
+    });
+    if (bestId && linkMap[bestId]) {
+      linkMap[bestId].classList.add('active');
+    }
+  }
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      visibleSections[entry.target.id] = entry.intersectionRatio;
+    });
+    updateActive();
+  }, {
+    /* Zona de detección: desde 80px debajo del top hasta el bottom */
+    rootMargin: '-80px 0px -20% 0px',
+    threshold: [0, 0.1, 0.25, 0.5, 1.0]
+  });
+
+  sectionIds.forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+
+  /* Actualizar también al cargar la página (si hay hash en la URL) */
+  updateActive();
+})();
