@@ -124,7 +124,7 @@
     .profile-card__short { display: none; } /* hidden in compact cards */
 
     .profile-card__btn {
-      margin-top: var(--space-md);
+      margin-top: auto; /* empuja el botón al fondo de la card */
       display: inline-flex;
       align-items: center;
       gap: 5px;
@@ -140,6 +140,135 @@
     }
 
     .profile-card__btn:hover { background: var(--color-accent); color: white; }
+
+    /* ── Layout equipo: nav lateral + contenido ──────── */
+
+    .equipo-wrap {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: var(--space-3xl);
+      align-items: start;
+      max-width: var(--container-max, 1200px);
+      margin: 0 auto;
+      padding: var(--space-3xl) var(--space-lg);
+    }
+
+    @media (max-width: 800px) {
+      .equipo-wrap {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+      }
+    }
+
+    /* ── Submenú nav (mismo estilo que Proyecto y Encuesta) ── */
+
+    .equipo-nav {
+      position: sticky;
+      top: calc(64px + var(--space-xl));
+    }
+
+    .equipo-nav__label {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-light);
+      margin: 0 0 var(--space-md) 0;
+      padding-left: var(--space-md);
+    }
+
+    .equipo-nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .equipo-nav a {
+      display: block;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      padding: var(--space-xs) var(--space-md);
+      border-left: 2px solid transparent;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      line-height: 1.4;
+    }
+
+    .equipo-nav a:hover,
+    .equipo-nav a.active {
+      color: var(--color-accent);
+      border-left-color: var(--color-accent);
+      background-color: var(--color-accent-light);
+    }
+
+    @media (max-width: 800px) {
+      .equipo-nav {
+        position: static;
+        order: -1;
+      }
+      .equipo-nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-xs);
+      }
+      .equipo-nav a {
+        border-left: none;
+        border-bottom: 2px solid transparent;
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: var(--radius-sm);
+        font-size: var(--text-xs);
+      }
+      .equipo-nav a:hover,
+      .equipo-nav a.active {
+        border-left-color: transparent;
+        border-bottom-color: var(--color-accent);
+      }
+    }
+
+    /* ── Cabeceras de sección ─────────────────────────── */
+
+    .team-group {
+      margin-bottom: var(--space-3xl);
+      scroll-margin-top: 80px;
+    }
+
+    .team-group__heading {
+      font-family: var(--font-heading);
+      font-size: var(--text-xl);
+      color: var(--color-primary);
+      margin-bottom: var(--space-sm);
+      padding-bottom: var(--space-sm);
+      border-bottom: 2px solid var(--color-accent-light);
+    }
+
+    .team-subgroup__heading {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      font-weight: 700;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      font-size: var(--text-xs);
+      margin: var(--space-xl) 0 var(--space-md);
+    }
+
+    /* ── Grillas por sección ──────────────────────────── */
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-xl) var(--space-lg);
+    }
+
+    @media (min-width: 500px) {
+      .team-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (min-width: 900px) {
+      .team-grid { grid-template-columns: repeat(4, 1fr); }
+    }
 
     /* ── Tesistas ─────────────────────────────────────── */
     .tesistas-section {
@@ -391,201 +520,212 @@
       </div>
     </section>
 
-    <section class="team-section">
-      <div class="container">
-        <div class="team-grid-all">
+    <!-- LAYOUT: nav lateral + contenido organizado por secciones -->
+    <div class="equipo-wrap">
 
-          <!-- GABRIEL OTERO -->
-          <article class="profile-card">
-            <div class="profile-card__cover">
-              <img src="../assets/equipo/gabriel-otero.jpg" alt="Gabriel Otero" class="profile-card__photo">
-            </div>
-            <div class="profile-card__body">
-              <h2 class="profile-card__name">Gabriel Otero</h2>
-              <p class="profile-card__role">Investigador principal</p>
-              <p class="profile-card__inst">Escuela de Sociología, FCSH, UDP</p>
-              <p class="profile-card__short">Académico UDP, director del Observatorio de Desigualdades, investigador asociado COES. PhD en Human Geography, Utrecht University.</p>
-              <button class="profile-card__btn" data-modal="modal-gabriel-otero" aria-haspopup="dialog">
-                Ver perfil
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </button>
-            </div>
-          </article>
-          <!-- VICENTE ESPINOZA -->
-          <article class="profile-card">
-            <div class="profile-card__cover">
-              <img src="../assets/equipo/vicente_espinoza.jpg" alt="Vicente Espinoza" class="profile-card__photo">
-            </div>
-            <div class="profile-card__body">
-              <h2 class="profile-card__name">Vicente Espinoza</h2>
-              <p class="profile-card__role">Asesor senior</p>
-              <p class="profile-card__inst">ICSO, UDP</p>
-              <p class="profile-card__short">Doctor en Sociología, Universidad de Toronto. Investigador de cohesión social, redes personales y capital social. Más de 100 artículos académicos.</p>
-              <button class="profile-card__btn" data-modal="modal-vicente-espinoza" aria-haspopup="dialog">
-                Ver perfil
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </button>
-            </div>
-          </article>
-          <!-- GUILLERMO BECK -->
-          <article class="profile-card">
-            <div class="profile-card__cover">
-              <img src="../assets/equipo/guillermo_beck.jpg" alt="Guillermo Beck" class="profile-card__photo">
-            </div>
-            <div class="profile-card__body">
-              <h2 class="profile-card__name">Guillermo Beck</h2>
-              <p class="profile-card__role">Colaborador</p>
-              <p class="profile-card__inst">Pontificia Universidad Católica de Chile</p>
-              <p class="profile-card__short">Sociólogo (U. de Concepción), magíster y doctorando en Sociología (PUC). Investiga actitudes hacia la desigualdad, redistribución e identidad social.</p>
-              <button class="profile-card__btn" data-modal="modal-guillermo-beck" aria-haspopup="dialog">
-                Ver perfil
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </button>
-            </div>
-          </article>
-          <!-- JULIO ITURRA -->
-          <article class="profile-card">
-            <div class="profile-card__cover">
-              <img src="../assets/equipo/julio-iturra.jpg" alt="Julio Iturra" class="profile-card__photo">
-            </div>
-            <div class="profile-card__body">
-              <h2 class="profile-card__name">Julio Iturra</h2>
-              <p class="profile-card__role">Colaborador</p>
-              <p class="profile-card__inst">Universidad de Bremen, Alemania</p>
-              <p class="profile-card__short">Investigador doctoral en BIGSSS, Universidad de Bremen. Sociólogo (U. de Concepción), magíster en Sociología (PUC). Especialista en desigualdad de clase y justicia distributiva.</p>
-              <button class="profile-card__btn" data-modal="modal-julio-iturra" aria-haspopup="dialog">
-                Ver perfil
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </button>
-            </div>
-          </article>
-          <!-- CAMILA JOUSTRA -->
-          <article class="profile-card">
-            <div class="profile-card__cover">
-              <img src="../assets/equipo/Camila_Joustra.jpg" alt="Camila Joustra" class="profile-card__photo">
-            </div>
-            <div class="profile-card__body">
-              <h2 class="profile-card__name">Camila Joustra</h2>
-              <p class="profile-card__role">Colaboradora</p>
-              <p class="profile-card__inst">Universidad Diego Portales</p>
-              <p class="profile-card__short">Socióloga (PUC), magíster en Métodos para la Investigación Social (UDP). Investiga la intersección entre estratificación objetiva-subjetiva y actitudes políticas.</p>
-              <button class="profile-card__btn" data-modal="modal-camila-joustra" aria-haspopup="dialog">
-                Ver perfil
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </button>
-            </div>
-          </article>
-          <!-- ANDREAS LAFFERT -->
-          <article class="profile-card">
-            <div class="profile-card__cover">
-              <img src="../assets/equipo/Andreas_Laffert.jpg" alt="Andreas Laffert" class="profile-card__photo">
-            </div>
-            <div class="profile-card__body">
-              <h2 class="profile-card__name">Andreas Laffert</h2>
-              <p class="profile-card__role">Colaborador</p>
-              <p class="profile-card__inst">Universidad de Chile / COES</p>
-              <p class="profile-card__short">Sociólogo (U. de Chile), magíster (c) en Sociología (PUC), becario ANID. Asistente de investigación en COES. Especialista en estratificación y metodologías cuantitativas.</p>
-              <button class="profile-card__btn" data-modal="modal-andreas-laffert" aria-haspopup="dialog">
-                Ver perfil
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </button>
-            </div>
-          </article>
-          <!-- CONSTANZA PÉREZ VERDUGO -->
-          <article class="profile-card">
-            <div class="profile-card__cover">
-              <img src="../assets/equipo/ConstanzaPerez.jpeg" alt="Constanza Pérez Verdugo" class="profile-card__photo">
-            </div>
-            <div class="profile-card__body">
-              <h2 class="profile-card__name">Constanza Pérez Verdugo</h2>
-              <p class="profile-card__role">Comunicaciones digitales</p>
-              <p class="profile-card__inst">ICSO – UDP</p>
-              <p class="profile-card__short">Periodista y magíster en Políticas Públicas (FEN, U. de Chile). Diploma en Diseño Gráfico Digital. Combina comunicación estratégica, divulgación académica y narrativa digital.</p>
-              <button class="profile-card__btn" data-modal="modal-constanza-perez" aria-haspopup="dialog">
-                Ver perfil
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </button>
-            </div>
-          </article>
-          <!-- ALEJANDRO PLAZA -->
-          <article class="profile-card">
-            <div class="profile-card__cover">
-              <img src="../assets/equipo/AlejandroPlaza.jpg" alt="Alejandro Plaza" class="profile-card__photo">
-            </div>
-            <div class="profile-card__body">
-              <h2 class="profile-card__name">Alejandro Plaza</h2>
-              <p class="profile-card__role">Colaborador</p>
-              <p class="profile-card__inst">Hertie School / Humboldt-Universität zu Berlin</p>
-              <p class="profile-card__short">Sociólogo (U. de Chile), magíster en Sociología (PUC). Doctorando en grupo DYNAMICS (Hertie School / HU Berlin). Excoordinador técnico de ELSOC-COES.</p>
-              <button class="profile-card__btn" data-modal="modal-alejandro-plaza" aria-haspopup="dialog">
-                Ver perfil
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </button>
-            </div>
-          </article>
-        </div><!-- /.team-grid-all -->
-      </div><!-- /.container -->
+      <!-- SUBMENÚ NAVEGACIÓN LATERAL -->
+      <nav class="equipo-nav" aria-label="Secciones del equipo">
+        <p class="equipo-nav__label">En esta sección</p>
+        <ul>
+          <li><a href="#investigadores">Investigadores</a></li>
+          <li><a href="#comunicaciones">Comunicaciones</a></li>
+          <li><a href="#colaboradores">Colaboradores</a></li>
+        </ul>
+      </nav>
 
+      <!-- CONTENIDO ORGANIZADO -->
+      <div class="equipo-content">
 
-      <!-- ================================================
-           TESISTAS
-           ================================================ -->
+        <!-- ═══════════════════════════════════════════════
+             INVESTIGADORES
+             ═══════════════════════════════════════════════ -->
+        <div class="team-group" id="investigadores">
+          <h2 class="team-group__heading">Investigadores</h2>
 
-    </section><!-- /.team-section -->
+          <p class="team-subgroup__heading">Equipo principal</p>
+          <div class="team-grid">
 
-    <section class="tesistas-section">
-      <div class="container">
+            <!-- GABRIEL OTERO -->
+            <article class="profile-card">
+              <div class="profile-card__cover">
+                <img src="../assets/equipo/gabriel-otero.jpg" alt="Gabriel Otero" class="profile-card__photo">
+              </div>
+              <div class="profile-card__body">
+                <h3 class="profile-card__name">Gabriel Otero</h3>
+                <p class="profile-card__role">Investigador principal</p>
+                <p class="profile-card__inst">Escuela de Sociología, FCSH, UDP</p>
+                <button class="profile-card__btn" data-modal="modal-gabriel-otero" aria-haspopup="dialog">
+                  Ver perfil
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </article>
 
-        <h2 style="font-size: var(--text-2xl); margin-bottom: var(--space-sm);">Tesistas</h2>
-        <div class="divider" style="margin: 0.5rem 0 var(--space-lg);"></div>
-        <p style="color: var(--color-text-muted); font-size: var(--text-sm); max-width: 52ch; margin-bottom: var(--space-xl);">
-          Estudiantes de pregrado y posgrado que desarrollan sus tesis en el marco del proyecto.
-        </p>
+            <!-- CAMILA JOUSTRA -->
+            <article class="profile-card">
+              <div class="profile-card__cover">
+                <img src="../assets/equipo/Camila_Joustra.jpg" alt="Camila Joustra" class="profile-card__photo">
+              </div>
+              <div class="profile-card__body">
+                <h3 class="profile-card__name">Camila Joustra</h3>
+                <p class="profile-card__role">Asistente de investigación</p>
+                <p class="profile-card__inst">Universidad LUT, Finlandia</p>
+                <button class="profile-card__btn" data-modal="modal-camila-joustra" aria-haspopup="dialog">
+                  Ver perfil
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </article>
 
-        <div class="team-grid-tesistas">
+          </div><!-- /.team-grid equipo principal -->
 
-          <div class="tesista-card">
-            <div class="tesista-card__avatar">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-              </svg>
+          <p class="team-subgroup__heading">Tesistas</p>
+          <p style="color: var(--color-text-muted); font-size: var(--text-sm); max-width: 52ch; margin-bottom: var(--space-xl);">
+            Estudiantes de pregrado y posgrado que desarrollan sus tesis en el marco del proyecto.
+          </p>
+          <div class="team-grid-tesistas">
+            <div class="tesista-card">
+              <div class="tesista-card__avatar"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+              <p class="tesista-card__name">Por confirmar</p>
+              <p class="tesista-card__label">Tesis de pregrado o magíster</p>
             </div>
-            <p class="tesista-card__name">Por confirmar</p>
-            <p class="tesista-card__label">Tesis de pregrado o magíster</p>
-          </div>
-
-          <div class="tesista-card">
-            <div class="tesista-card__avatar">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-              </svg>
+            <div class="tesista-card">
+              <div class="tesista-card__avatar"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+              <p class="tesista-card__name">Por confirmar</p>
+              <p class="tesista-card__label">Tesis de pregrado o magíster</p>
             </div>
-            <p class="tesista-card__name">Por confirmar</p>
-            <p class="tesista-card__label">Tesis de pregrado o magíster</p>
-          </div>
-
-          <div class="tesista-card">
-            <div class="tesista-card__avatar">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-              </svg>
+            <div class="tesista-card">
+              <div class="tesista-card__avatar"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+              <p class="tesista-card__name">Por confirmar</p>
+              <p class="tesista-card__label">Tesis de pregrado o magíster</p>
             </div>
-            <p class="tesista-card__name">Por confirmar</p>
-            <p class="tesista-card__label">Tesis de pregrado o magíster</p>
-          </div>
-
-          <div class="tesista-card">
-            <div class="tesista-card__avatar">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-              </svg>
+            <div class="tesista-card">
+              <div class="tesista-card__avatar"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+              <p class="tesista-card__name">Por confirmar</p>
+              <p class="tesista-card__label">Tesis de pregrado o magíster</p>
             </div>
-            <p class="tesista-card__name">Por confirmar</p>
-            <p class="tesista-card__label">Tesis de pregrado o magíster</p>
-          </div>
+          </div><!-- /.team-grid-tesistas -->
 
-        </div><!-- /.team-grid-tesistas -->
-      </div><!-- /.container -->
+        </div><!-- /.team-group #investigadores -->
+
+        <!-- ═══════════════════════════════════════════════
+             COMUNICACIONES
+             ═══════════════════════════════════════════════ -->
+        <div class="team-group" id="comunicaciones">
+          <h2 class="team-group__heading">Comunicaciones</h2>
+          <div class="team-grid">
+
+            <!-- CONSTANZA PÉREZ -->
+            <article class="profile-card">
+              <div class="profile-card__cover">
+                <img src="../assets/equipo/ConstanzaPerez.jpeg" alt="Constanza Pérez" class="profile-card__photo">
+              </div>
+              <div class="profile-card__body">
+                <h3 class="profile-card__name">Constanza Pérez</h3>
+                <p class="profile-card__role">Comunicaciones</p>
+                <p class="profile-card__inst">ICSO – UDP</p>
+                <button class="profile-card__btn" data-modal="modal-constanza-perez" aria-haspopup="dialog">
+                  Ver perfil
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </article>
+
+          </div><!-- /.team-grid comunicaciones -->
+        </div><!-- /.team-group #comunicaciones -->
+
+        <!-- ═══════════════════════════════════════════════
+             COLABORADORES
+             ═══════════════════════════════════════════════ -->
+        <div class="team-group" id="colaboradores">
+          <h2 class="team-group__heading">Colaboradores</h2>
+          <div class="team-grid">
+
+            <!-- VICENTE ESPINOZA (primero) -->
+            <article class="profile-card">
+              <div class="profile-card__cover">
+                <img src="../assets/equipo/vicente_espinoza.jpg" alt="Vicente Espinoza" class="profile-card__photo">
+              </div>
+              <div class="profile-card__body">
+                <h3 class="profile-card__name">Vicente Espinoza</h3>
+                <p class="profile-card__role">Asesor senior</p>
+                <p class="profile-card__inst">ICSO, UDP</p>
+                <button class="profile-card__btn" data-modal="modal-vicente-espinoza" aria-haspopup="dialog">
+                  Ver perfil
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </article>
+
+            <!-- GUILLERMO BECK -->
+            <article class="profile-card">
+              <div class="profile-card__cover">
+                <img src="../assets/equipo/guillermo_beck.jpg" alt="Guillermo Beck" class="profile-card__photo">
+              </div>
+              <div class="profile-card__body">
+                <h3 class="profile-card__name">Guillermo Beck</h3>
+                <p class="profile-card__role">Colaborador</p>
+                <p class="profile-card__inst">Pontificia Universidad Católica de Chile</p>
+                <button class="profile-card__btn" data-modal="modal-guillermo-beck" aria-haspopup="dialog">
+                  Ver perfil
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </article>
+
+            <!-- JULIO ITURRA -->
+            <article class="profile-card">
+              <div class="profile-card__cover">
+                <img src="../assets/equipo/julio-iturra.jpg" alt="Julio Iturra" class="profile-card__photo">
+              </div>
+              <div class="profile-card__body">
+                <h3 class="profile-card__name">Julio Iturra</h3>
+                <p class="profile-card__role">Colaborador</p>
+                <p class="profile-card__inst">Universidad de Bremen, Alemania</p>
+                <button class="profile-card__btn" data-modal="modal-julio-iturra" aria-haspopup="dialog">
+                  Ver perfil
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </article>
+
+            <!-- ANDREAS LAFFERT -->
+            <article class="profile-card">
+              <div class="profile-card__cover">
+                <img src="../assets/equipo/Andreas_Laffert.jpg" alt="Andreas Laffert" class="profile-card__photo">
+              </div>
+              <div class="profile-card__body">
+                <h3 class="profile-card__name">Andreas Laffert</h3>
+                <p class="profile-card__role">Colaborador</p>
+                <p class="profile-card__inst">Universidad de Chile / OBDE</p>
+                <button class="profile-card__btn" data-modal="modal-andreas-laffert" aria-haspopup="dialog">
+                  Ver perfil
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </article>
+
+            <!-- ALEJANDRO PLAZA -->
+            <article class="profile-card">
+              <div class="profile-card__cover">
+                <img src="../assets/equipo/AlejandroPlaza.jpg" alt="Alejandro Plaza" class="profile-card__photo">
+              </div>
+              <div class="profile-card__body">
+                <h3 class="profile-card__name">Alejandro Plaza</h3>
+                <p class="profile-card__role">Colaborador</p>
+                <p class="profile-card__inst">Hertie School / Humboldt-Universität zu Berlin</p>
+                <button class="profile-card__btn" data-modal="modal-alejandro-plaza" aria-haspopup="dialog">
+                  Ver perfil
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </article>
+
+          </div><!-- /.team-grid colaboradores -->
+        </div><!-- /.team-group #colaboradores -->
+
+      </div><!-- /.equipo-content -->
+    </div><!-- /.equipo-wrap -->
 
   <!-- Modal: Gabriel Otero -->
   <div class="profile-modal" id="modal-gabriel-otero" role="dialog" aria-modal="true" aria-labelledby="modal-gabriel-otero-title" hidden>
@@ -707,8 +847,8 @@
       <div class="profile-modal__body">
         <div class="profile-modal__header">
           <h2 id="modal-camila-joustra-title" class="profile-modal__name">Camila Joustra</h2>
-          <p class="profile-modal__role">Colaboradora</p>
-          <p class="profile-modal__inst">Universidad Diego Portales</p>
+          <p class="profile-modal__role">Asistente de investigación</p>
+          <p class="profile-modal__inst">Universidad LUT, Finlandia</p>
         </div>
         <div class="profile-modal__bio">
               <p>Socióloga por la Pontificia Universidad Católica de Chile y magíster en Métodos para la Investigación Social por la Universidad Diego Portales. Cuenta con cuatro años de experiencia como asistente de investigación en proyectos nacionales empleando técnicas de análisis cuantitativo y cualitativo.</p>
@@ -735,7 +875,7 @@
         <div class="profile-modal__header">
           <h2 id="modal-andreas-laffert-title" class="profile-modal__name">Andreas Laffert</h2>
           <p class="profile-modal__role">Colaborador</p>
-          <p class="profile-modal__inst">Universidad de Chile / COES</p>
+          <p class="profile-modal__inst">Universidad de Chile / OBDE</p>
         </div>
         <div class="profile-modal__bio">
               <p>Sociólogo por la Universidad de Chile y magíster (c) en Sociología por la Pontificia Universidad Católica de Chile. Becario del Programa de Capital Humano Avanzado de ANID para estudios de magíster (2024–actualidad). Se desempeña como asistente de investigación en el Observatorio de Cohesión Social (OCS) del COES.</p>
@@ -745,7 +885,7 @@
       </div>
     </div>
   </div>
-  <!-- Modal: Constanza Pérez Verdugo -->
+  <!-- Modal: Constanza Pérez -->
   <div class="profile-modal" id="modal-constanza-perez" role="dialog" aria-modal="true" aria-labelledby="modal-constanza-perez-title" hidden>
     <div class="profile-modal__backdrop"></div>
     <div class="profile-modal__card">
@@ -753,12 +893,12 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
       <div class="profile-modal__cover">
-        <img src="../assets/equipo/ConstanzaPerez.jpeg" alt="Constanza Pérez Verdugo" class="profile-modal__photo">
+        <img src="../assets/equipo/ConstanzaPerez.jpeg" alt="Constanza Pérez" class="profile-modal__photo">
       </div>
       <div class="profile-modal__body">
         <div class="profile-modal__header">
-          <h2 id="modal-constanza-perez-title" class="profile-modal__name">Constanza Pérez Verdugo</h2>
-          <p class="profile-modal__role">Comunicaciones digitales</p>
+          <h2 id="modal-constanza-perez-title" class="profile-modal__name">Constanza Pérez</h2>
+          <p class="profile-modal__role">Comunicaciones</p>
           <p class="profile-modal__inst">ICSO – UDP</p>
         </div>
         <div class="profile-modal__bio">
@@ -795,6 +935,7 @@
   </div>
 
     <!-- LOGOS -->
+    <div style="padding-bottom: var(--space-3xl);"></div>
     <section class="section-logos" aria-label="Instituciones y financiamiento">
       <div class="container">
         <p class="logos-label">Financiado y apoyado por</p>
@@ -826,14 +967,17 @@
             <li><a href="/encuesta/" class="footer__link">Encuesta</a></li>
             <li><a href="/equipo/" class="footer__link">Equipo</a></li>
             <li><a href="/divulgacion/" class="footer__link">Divulgación</a></li>
-            <li><a href="/accountability/" class="footer__link">Accountability</a></li>
+            <li><a href="/accountability/" class="footer__link">Transparencia</a></li>
+            <li><a href="/encuesta/#cuestionario" class="footer__link">Cuestionario</a></li>
+            <li><a href="/encuesta/#mapa" class="footer__link">Mapa interactivo</a></li>
+            <li><a href="/encuesta/#variables" class="footer__link">Listado de variables</a></li>
           </ul>
         </nav>
         <div>
           <p class="footer__heading">Institución</p>
           <ul class="footer__links" role="list">
             <li><span class="footer__link" style="cursor:default;">Escuela de Sociología</span></li>
-                        <li><span class="footer__link" style="cursor:default;">Fac. de Ciencias Sociales y Humanidades</span></li>
+            <li><span class="footer__link" style="cursor:default;">Facultad de Ciencias Sociales y Humanidades</span></li>
             <li><a href="https://www.udp.cl" class="footer__link" target="_blank" rel="noopener">Universidad Diego Portales</a></li>
           </ul>
           <p class="footer__heading" style="margin-top: 1.5rem;">Contacto</p>
@@ -852,6 +996,11 @@
             <a href="https://tiktok.com/@theclassproject" class="social-icon" target="_blank" rel="noopener" aria-label="TikTok">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.3 6.3 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.53a8.16 8.16 0 0 0 4.77 1.52V7.57a4.85 4.85 0 0 1-1-.88z"></path>
+              </svg>
+            </a>
+            <a href="https://youtube.com/@theclassproject" class="social-icon" target="_blank" rel="noopener" aria-label="YouTube">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
               </svg>
             </a>
             <a href="https://linkedin.com/company/theclassproject" class="social-icon" target="_blank" rel="noopener" aria-label="LinkedIn">

@@ -1,0 +1,1933 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Encuesta de Clase, Redes y Actitudes Políticas</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Serif:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F2EC;
+    --surface: #FFFFFF;
+    --border: #D8D2C6;
+    --border-dark: #B5AFA4;
+    --text-primary: #1A1814;
+    --text-secondary: #5C5750;
+    --text-muted: #9B958E;
+    --accent: #1A3A5C;
+    --accent-light: #E8EFF6;
+    --accent-mid: #2D6EA8;
+    --highlight: #C8873A;
+    --highlight-light: #FDF4E7;
+    --success: #2A6049;
+    --success-light: #E6F2ED;
+    --section-bg: #EEE9E1;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+    --serif: 'IBM Plex Serif', serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .doc-header {
+    background: var(--accent);
+    color: white;
+    padding: 0;
+  }
+  .doc-header-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 28px 40px 24px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 20px;
+  }
+  .doc-title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+  }
+  .doc-subtitle {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+  .doc-meta {
+    text-align: right;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.8;
+  }
+
+  /* ── TOC BAR ── */
+  .toc-bar {
+    background: var(--accent);
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+  .toc-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 40px;
+    gap: 0;
+  }
+  .toc-link {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    padding: 8px 16px 8px 0;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.15s;
+    border-right: 1px solid rgba(255,255,255,0.12);
+    padding-right: 16px;
+    margin-right: 16px;
+  }
+  .toc-link:last-child { border-right: none; }
+  .toc-link:hover { color: white; }
+
+  /* ── MAIN CONTAINER ── */
+  .main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 40px 60px;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    margin-top: 40px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent);
+  }
+  .section-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: white;
+    background: var(--accent);
+    padding: 3px 8px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: -0.01em;
+  }
+  .section-vars {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  /* ── PREAMBLE ── */
+  .preamble {
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent-mid);
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: var(--accent);
+    font-style: italic;
+    border-radius: 0 4px 4px 0;
+  }
+  .preamble-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-mid);
+    font-style: normal;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* ── QUESTION BLOCK ── */
+  .question-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  .question-block:hover {
+    border-color: var(--border-dark);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+
+  /* Single question */
+  .q-single {
+    padding: 14px 18px;
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+  .q-code {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 3px 6px;
+    border-radius: 2px;
+    text-align: center;
+    white-space: nowrap;
+    margin-top: 1px;
+  }
+  .q-content {}
+  .q-text {
+    font-size: 13px;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+  .q-text strong { font-weight: 600; }
+  .q-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+  }
+  .opt-pill {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    background: var(--section-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+  .opt-pill.highlight {
+    background: var(--highlight-light);
+    border-color: #E8C490;
+    color: #7A5020;
+  }
+  .q-open {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    border: 1px dashed var(--border-dark);
+    border-radius: 3px;
+    padding: 5px 12px;
+    display: inline-block;
+  }
+  .q-scale {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+  .scale-bar {
+    display: flex;
+    gap: 2px;
+    align-items: center;
+  }
+  .scale-cell {
+    width: 20px;
+    height: 18px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: var(--text-muted);
+  }
+  .scale-label {
+    font-size: 9px;
+    color: var(--text-muted);
+    max-width: 80px;
+  }
+
+  /* Table / grid of items */
+  .q-table {
+    width: 100%;
+  }
+  .q-table-header {
+    background: var(--section-bg);
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    gap: 8px;
+  }
+  .q-table-header .q-text {
+    margin-bottom: 0;
+    font-weight: 500;
+  }
+  .table-cols {
+    display: flex;
+    gap: 2px;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .col-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text-muted);
+    text-align: center;
+    width: 40px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    padding-bottom: 2px;
+  }
+  .table-row {
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    gap: 8px;
+    align-items: center;
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .table-row:last-child { border-bottom: none; }
+  .table-row:nth-child(even) { background: #FBFAF8; }
+  .row-item {
+    font-size: 12.5px;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+  .row-boxes {
+    display: flex;
+    gap: 2px;
+  }
+  .check-box {
+    width: 40px;
+    height: 28px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* Likert row */
+  .likert-cols {
+    display: flex;
+    gap: 2px;
+  }
+  .likert-cell {
+    width: 40px;
+    height: 28px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+
+  /* Confidente sub-table */
+  .confidente-group {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  .confidente-header {
+    background: var(--section-bg);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .confidente-title {
+    font-family: var(--serif);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    font-style: italic;
+  }
+  .confidente-note {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-left: auto;
+  }
+  .confidente-row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .confidente-row:last-child { border-bottom: none; }
+  .confidente-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    padding: 8px 12px;
+    background: #FBFAF8;
+    border-right: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+  }
+  .confidente-value {
+    padding: 8px 14px;
+    font-size: 12.5px;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  /* Note / instruction */
+  .instr {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    background: var(--section-bg);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+  }
+  .instr::before {
+    content: "▸ ";
+    color: var(--highlight);
+  }
+
+  /* Subsection label */
+  .subsection-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-mid);
+    margin: 20px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px dashed var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .subsection-label::before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 2px;
+    background: var(--accent-mid);
+  }
+
+  /* Numeric input */
+  .num-input {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--border);
+    background: white;
+    border-radius: 3px;
+    padding: 4px 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    min-width: 120px;
+  }
+  .num-input::after { content: "___________"; letter-spacing: 2px; }
+
+  /* YES/NO binary */
+  .binary {
+    display: inline-flex;
+    gap: 6px;
+  }
+  .bin-opt {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 10px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--text-secondary);
+    background: white;
+  }
+  .bin-opt.yes { border-color: #9EC8A4; color: #2A6049; background: #F0FAF2; }
+  .bin-opt.no { border-color: #E0B8B8; color: #7A2A2A; background: #FDF4F4; }
+
+  /* Skip / filter note */
+  .skip-note {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--highlight);
+    background: var(--highlight-light);
+    border: 1px solid #E8C490;
+    padding: 4px 10px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-top: 6px;
+  }
+
+  /* Footer */
+  .doc-footer {
+    max-width: 960px;
+    margin: 40px auto 0;
+    padding: 20px 40px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+
+  /* ── LIKERT LEGEND ── */
+  .likert-legend {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .legend-cells {
+    display: flex;
+    gap: 2px;
+  }
+  .legend-item {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    padding: 2px 6px;
+    border-radius: 2px;
+  }
+  .legend-lo {
+    color: #7A3030;
+    background: #FDF0F0;
+    border: 1px solid #EEC8C8;
+  }
+  .legend-hi {
+    color: #2A6049;
+    background: #F0FAF4;
+    border: 1px solid #A8D8BE;
+  }
+
+  @media print {
+    .toc-bar { display: none; }
+    .section { break-inside: avoid; }
+    .question-block { break-inside: avoid; }
+    body { background: white; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="doc-header">
+  <div class="doc-header-inner">
+    <div>
+      <div class="doc-subtitle">Cuestionario Oficial · Versión Encuestador/a</div>
+      <div class="doc-title">Encuesta Social de Clase, Redes y Actitudes Políticas</div>
+    </div>
+    <div class="doc-meta">
+      335 variables<br>
+      20 módulos<br>
+      Versión 1.0
+    </div>
+  </div>
+  <div class="toc-bar">
+    <div class="toc-inner">
+      <a class="toc-link" href="#s1">I. Redes ocupacionales</a>
+      <a class="toc-link" href="#s2">II. Redes grupos/partidos</a>
+      <a class="toc-link" href="#s3">III. Id. política</a>
+      <a class="toc-link" href="#s4">IV. Actitudes políticas</a>
+      <a class="toc-link" href="#s5">V. Estatus subjetivo</a>
+      <a class="toc-link" href="#s6">VI. Identidad de clase</a>
+      <a class="toc-link" href="#s7">VII. Redes cercanas</a>
+      <a class="toc-link" href="#s8">VIII. Cohesión social</a>
+      <a class="toc-link" href="#s9">IX. Democracia</a>
+      <a class="toc-link" href="#s10">X. Alienación</a>
+      <a class="toc-link" href="#s11">XI. Socioeconómica</a>
+      <a class="toc-link" href="#s12">XII. Apoyo familiar</a>
+      <a class="toc-link" href="#s13">XIII. Orígenes</a>
+      <a class="toc-link" href="#s14">XIV. Bienestar</a>
+      <a class="toc-link" href="#s15">XV. Sociodemográfica</a>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN I: REDES OCUPACIONALES
+═══════════════════════════════════════════════════════ -->
+<div class="section" id="s1">
+  <div class="section-header">
+    <span class="section-num">MÓDULO I</span>
+    <span class="section-title">Redes Ocupacionales</span>
+    <span class="section-vars">54 variables · Q01</span>
+  </div>
+
+  <div class="preamble">
+    <span class="preamble-label">Preámbulo · Leer al inicio del módulo</span>
+    Para comenzar, le voy a preguntar sobre algunos de sus conocidos o conocidas en distintas ocupaciones. Pueden ser familiares, amigos u otras personas con las que podría conversar si se encontrara con ellas o ellos en la calle o en un centro comercial.
+  </div>
+
+  <!-- Bloque 1A: conocidos en general -->
+  <div class="subsection-label">A. Conocidos/as en general</div>
+  <div class="instr">Leer pregunta marco una vez. Registrar número aproximado para cada ocupación.</div>
+
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>¿Puede indicarme, aunque sea en términos aproximados, cuántas personas que usted conoce son…?</strong></div>
+      <div style="font-size:11px; color:var(--text-secondary)">Registre número aproximado en cada ítem. Acepte estimaciones.</div>
+    </div>
+    <!-- rows -->
+    <div class="table-row">
+      <div class="q-code">Q0101</div>
+      <div class="row-item">Gerentes/as o directores/as de grandes empresas</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0102</div>
+      <div class="row-item">Profesores/as de educación media o básica</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0103</div>
+      <div class="row-item">Mecánicos/as de autos</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0104</div>
+      <div class="row-item">Vendedores de tiendas o almacenes</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0105</div>
+      <div class="row-item">Ingenieros/as civiles, industriales y mecánicos</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0106</div>
+      <div class="row-item">Cajeros de supermercados, tiendas u otro comercio</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0107</div>
+      <div class="row-item">Altos funcionarios del gobierno</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0108</div>
+      <div class="row-item">Guardias de seguridad</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0109</div>
+      <div class="row-item">Profesores/as universitarios</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0110</div>
+      <div class="row-item">Trabajadores agrícolas (de cosecha y cultivo de alimentos)</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0111</div>
+      <div class="row-item">Comerciantes y dueños de locales, tiendas o almacenes</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0112</div>
+      <div class="row-item">Repartidores/as de comida (Rappi, Uber Eats, PedidosYa)</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0113</div>
+      <div class="row-item">Conductores de camiones y vehículos pesados</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0114</div>
+      <div class="row-item">Médicos o doctor/as</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0115</div>
+      <div class="row-item">Secretarios/as</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0116</div>
+      <div class="row-item">Enfermeros/as o asistentes médicos/as TENS</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0117</div>
+      <div class="row-item">Cocineros/as</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0118</div>
+      <div class="row-item">Vendedores/as ambulantes</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0119</div>
+      <div class="row-item">Electricistas</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0120</div>
+      <div class="row-item">Abogados/as</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0121</div>
+      <div class="row-item">Obreros/as de construcción o fábricas</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0122</div>
+      <div class="row-item">Aseadores/as de oficina o auxiliares de aseo</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0123</div>
+      <div class="row-item">Arquitectos/as</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0124</div>
+      <div class="row-item">Parvularios/as</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0125</div>
+      <div class="row-item">Carabineros/as y policías</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0126</div>
+      <div class="row-item">Trabajadores sociales</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0127</div>
+      <div class="row-item">Contadores/as</div>
+      <div class="num-input"></div>
+    </div>
+  </div>
+
+  <!-- Bloque 1B: familiares y amigos -->
+  <div class="subsection-label">B. Familiares y amigos/as cercanos/as</div>
+  <div class="preamble">
+    <span class="preamble-label">Preámbulo · Leer</span>
+    Ahora me gustaría centrarme solo en sus familiares y amigos/as cercanos/as.
+  </div>
+  <div class="instr">Repetir las mismas 27 ocupaciones. Registrar número aproximado. Códigos Q0201–Q0227.</div>
+
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>¿Puede indicarme, aunque sea en términos aproximados, cuántas personas de su familia y amigos/as cercanos/as son…?</strong></div>
+    </div>
+    <div class="table-row" style="background:var(--section-bg)">
+      <div class="q-code" style="color:var(--text-muted)">Q02xx</div>
+      <div class="row-item" style="color:var(--text-secondary); font-style:italic">Mismas 27 ocupaciones del bloque anterior (Q0201–Q0227)</div>
+      <div class="num-input"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN II: REDES GRUPOS SOCIALES Y PARTIDOS
+═══════════════════════════════════════════════════════ -->
+<div class="section" id="s2">
+  <div class="section-header">
+    <span class="section-num">MÓDULO II</span>
+    <span class="section-title">Redes de Conocidos en Grupos Sociales y Partidos</span>
+    <span class="section-vars">9 variables · Q03</span>
+  </div>
+
+  <div class="preamble">
+    <span class="preamble-label">Preámbulo · Leer</span>
+    Ahora le voy a hacer preguntas sobre las personas que quizás usted conoce en distintos grupos sociales y partidos políticos.
+  </div>
+
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>¿Más allá de si son familiares, amigos cercanos u otros conocidos, cuántas personas que usted conoce son…?</strong></div>
+      <div style="font-size:11px; color:var(--text-secondary)">Ingrese un número aproximado en cada caso.</div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0301</div>
+      <div class="row-item">Personas en prisión, privadas de libertad o con arresto domiciliario</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0302</div>
+      <div class="row-item">Mujeres que se han efectuado un aborto</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0303</div>
+      <div class="row-item">Personas inscritas en el Partido Republicano</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0304</div>
+      <div class="row-item">Personas inscritas en el Frente Amplio</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0305</div>
+      <div class="row-item">Inmigrantes Peruanos</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0306</div>
+      <div class="row-item">Inmigrantes Haitianos</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0307</div>
+      <div class="row-item">Inmigrantes Venezolanos</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0308</div>
+      <div class="row-item">Inmigrantes Colombianos</div>
+      <div class="num-input"></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0309</div>
+      <div class="row-item">Homosexuales (gays o lesbianas)</div>
+      <div class="num-input"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN III: IDENTIFICACIÓN POLÍTICA
+═══════════════════════════════════════════════════════ -->
+<div class="section" id="s3">
+  <div class="section-header">
+    <span class="section-num">MÓDULO III</span>
+    <span class="section-title">Identificación Política</span>
+    <span class="section-vars">3 variables · Q04–Q05</span>
+  </div>
+
+  <div class="question-block">
+    <div class="q-single">
+      <div class="q-code">Q0401</div>
+      <div class="q-content">
+        <div class="q-text">Tradicionalmente en nuestro país la gente define las posiciones políticas como más cercanas a la izquierda, al centro o a la derecha.<br><strong>Usando una escala de 0 a 10 donde 0 es "Izquierda", 5 es "Centro" y 10 es "Derecha", ¿dónde se ubicaría usted?</strong></div>
+        <div class="q-scale">
+          <span class="scale-label">0 = Izquierda</span>
+          <div class="scale-bar">
+            <div class="scale-cell">0</div><div class="scale-cell">1</div><div class="scale-cell">2</div><div class="scale-cell">3</div><div class="scale-cell">4</div><div class="scale-cell">5</div><div class="scale-cell">6</div><div class="scale-cell">7</div><div class="scale-cell">8</div><div class="scale-cell">9</div><div class="scale-cell">10</div>
+          </div>
+          <span class="scale-label">10 = Derecha</span>
+        </div>
+        <div style="margin-top:6px; display:flex; gap:6px;">
+          <span class="opt-pill highlight">11 = Independiente (no leer)</span>
+          <span class="opt-pill highlight">12 = Ninguno (no leer)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <div class="q-single">
+      <div class="q-code">Q0402</div>
+      <div class="q-content">
+        <div class="q-text"><strong>Pensando en la familia con la que usted creció, ¿cuál considera que era la posición política principal o predominante en su hogar?</strong></div>
+        <div class="q-scale">
+          <span class="scale-label">0 = Izquierda</span>
+          <div class="scale-bar">
+            <div class="scale-cell">0</div><div class="scale-cell">1</div><div class="scale-cell">2</div><div class="scale-cell">3</div><div class="scale-cell">4</div><div class="scale-cell">5</div><div class="scale-cell">6</div><div class="scale-cell">7</div><div class="scale-cell">8</div><div class="scale-cell">9</div><div class="scale-cell">10</div>
+          </div>
+          <span class="scale-label">10 = Derecha</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <div class="q-single">
+      <div class="q-code">Q05</div>
+      <div class="q-content">
+        <div class="q-text"><strong>Y, en la actualidad, ¿con qué partido político se identifica más en términos de sus intereses, creencias y valores?</strong></div>
+        <div class="q-options">
+          <span class="opt-pill">1 Partido Comunista (PC)</span>
+          <span class="opt-pill">2 Frente Amplio</span>
+          <span class="opt-pill">3 Partido Socialista (PS)</span>
+          <span class="opt-pill">4 PPD</span>
+          <span class="opt-pill">5 PDC</span>
+          <span class="opt-pill">6 Evópoli</span>
+          <span class="opt-pill">7 Renovación Nacional</span>
+          <span class="opt-pill">8 UDI</span>
+          <span class="opt-pill">9 P. Republicano</span>
+          <span class="opt-pill highlight">97 Ninguno (no leer)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN IV: ACTITUDES POLÍTICAS
+═══════════════════════════════════════════════════════ -->
+<div class="section" id="s4">
+  <div class="section-header">
+    <span class="section-num">MÓDULO IV</span>
+    <span class="section-title">Actitudes Políticas</span>
+    <span class="section-vars">46 variables · Q06–Q17</span>
+  </div>
+
+  <div class="preamble">
+    <span class="preamble-label">Preámbulo · Leer</span>
+    Ahora le voy a preguntar sobre su opinión respecto de distintos temas socioeconómicos.
+  </div>
+
+  <!-- Q06: responsabilidad provisión -->
+  <div class="subsection-label">A. Responsabilidad en provisión de servicios</div>
+  <div class="instr">Leer opciones completas. Marcar una sola respuesta por ítem.</div>
+
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>¿Quién debería ser el principal responsable de garantizar…?</strong></div>
+      <div style="margin-top:6px; display:flex; gap:6px; flex-wrap:wrap;">
+        <span class="opt-pill">1 Cada persona/familia (privado)</span>
+        <span class="opt-pill">2 El Estado (gratuito universal)</span>
+        <span class="opt-pill">3 Sistema mixto</span>
+      </div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0601</div>
+      <div class="row-item">Acceso a servicios de salud</div>
+      <div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0602</div>
+      <div class="row-item">Acceso a educación</div>
+      <div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0603</div>
+      <div class="row-item">Pensiones</div>
+      <div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div></div>
+    </div>
+  </div>
+
+  <!-- Q07: desigualdad -->
+  <div class="subsection-label">B. Desigualdad y redistribución (escala 1–5)</div>
+  <div class="instr">Escala: 1=Muy en desacuerdo · 2=En desacuerdo · 3=Ni/ni · 4=De acuerdo · 5=Muy de acuerdo</div>
+
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>¿Cuán de acuerdo o en desacuerdo está usted con cada una de las siguientes afirmaciones?</strong></div>
+      <div class="likert-legend">
+          <span class="legend-item legend-lo">1 = Muy en desacuerdo</span>
+          <div class="legend-cells"><span class="col-label">1</span><span class="col-label">2</span><span class="col-label">3</span><span class="col-label">4</span><span class="col-label">5</span></div>
+          <span class="legend-item legend-hi">5 = Muy de acuerdo</span>
+        </div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0701</div>
+      <div class="row-item">En Chile, las diferencias de ingreso son demasiado grandes</div>
+      <div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0702</div>
+      <div class="row-item">Las personas tienen igualdad de oportunidades para salir adelante</div>
+      <div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0703</div>
+      <div class="row-item">El gobierno debería reducir las diferencias de ingresos entre quienes tienen más y quienes tienen menos</div>
+      <div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0704</div>
+      <div class="row-item">El gobierno debería entregar más ayuda económica a las personas con menos recursos</div>
+      <div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0705</div>
+      <div class="row-item">El gobierno debería garantizar un nivel de vida decente para los desempleados</div>
+      <div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0706</div>
+      <div class="row-item">Se deberían aumentar los impuestos a las personas de mayores ingresos para financiar programas sociales</div>
+      <div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0707</div>
+      <div class="row-item">Se debería aumentar el impuesto a la herencia de las personas más ricas para reducir la desigualdad</div>
+      <div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div>
+    </div>
+  </div>
+
+  <!-- Q08: justicia distributiva -->
+  <div class="subsection-label">C. Justicia distributiva (escala 1–5)</div>
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>Por favor, señale su grado de acuerdo o desacuerdo con las siguientes afirmaciones:</strong></div>
+      <div class="likert-legend">
+          <span class="legend-item legend-lo">1 = Muy en desacuerdo</span>
+          <div class="legend-cells"><span class="col-label">1</span><span class="col-label">2</span><span class="col-label">3</span><span class="col-label">4</span><span class="col-label">5</span></div>
+          <span class="legend-item legend-hi">5 = Muy de acuerdo</span>
+        </div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0801</div>
+      <div class="row-item">Es justo que las personas de altos ingresos tengan mejores pensiones</div>
+      <div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0802</div>
+      <div class="row-item">Es justo que los de altos ingresos tengan mejor educación para sus hijos</div>
+      <div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0803</div>
+      <div class="row-item">Es justo que los de altos ingresos accedan a mejor atención de salud</div>
+      <div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div>
+    </div>
+  </div>
+
+  <!-- Q09: meritocracia -->
+  <div class="subsection-label">D. Percepción meritocrática (escala 1–5)</div>
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>¿Cuán de acuerdo o en desacuerdo está con las siguientes afirmaciones?</strong></div>
+      <div class="likert-legend">
+          <span class="legend-item legend-lo">1 = Muy en desacuerdo</span>
+          <div class="legend-cells"><span class="col-label">1</span><span class="col-label">2</span><span class="col-label">3</span><span class="col-label">4</span><span class="col-label">5</span></div>
+          <span class="legend-item legend-hi">5 = Muy de acuerdo</span>
+        </div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0901</div>
+      <div class="row-item">En Chile, quienes más se esfuerzan generalmente obtienen mayores recompensas</div>
+      <div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div>
+    </div>
+    <div class="table-row">
+      <div class="q-code">Q0902</div>
+      <div class="row-item">En Chile, quienes poseen más talento generalmente obtienen mayores recompensas</div>
+      <div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div>
+    </div>
+  </div>
+
+  <!-- Q10: razones desigualdad -->
+  <div class="subsection-label">E. Razones de la desigualdad</div>
+  <div class="question-block">
+    <div class="q-single">
+      <div class="q-code">Q1001</div>
+      <div class="q-content">
+        <div class="q-text"><strong>Según su opinión, ¿cuál es la principal razón por la que algunas personas tienen mayores ingresos que otras?</strong></div>
+        <div class="q-options">
+          <span class="opt-pill">1 Se han esforzado más</span>
+          <span class="opt-pill">2 Son más inteligentes</span>
+          <span class="opt-pill">3 Provienen de familias con más recursos</span>
+          <span class="opt-pill">4 Han tenido suerte</span>
+          <span class="opt-pill">5 Tienen mejores contactos</span>
+          <span class="opt-pill">6 Son más ambiciosos/as</span>
+          <span class="opt-pill">7 Otra razón</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="question-block">
+    <div class="q-single">
+      <div class="q-code">Q1002</div>
+      <div class="q-content">
+        <div class="q-text"><strong>Según su opinión, ¿cuál es la principal razón por la que algunas personas son pobres?</strong></div>
+        <div class="q-open">Pregunta abierta — registrar verbatim</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q11: barrio -->
+  <div class="question-block">
+    <div class="q-single">
+      <div class="q-code">Q11</div>
+      <div class="q-content">
+        <div class="q-text"><strong>En las ciudades, algunos barrios son diversos (distintos niveles socioeconómicos). Otros son más homogéneos. Personalmente, ¿en qué tipo de barrio preferiría vivir?</strong></div>
+        <div class="q-options">
+          <span class="opt-pill">1 Barrios muy homogéneos</span>
+          <span class="opt-pill">2 Barrios homogéneos</span>
+          <span class="opt-pill">3 Barrios diversos</span>
+          <span class="opt-pill">4 Barrios muy diversos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q12–Q17: actitudes socioculturales, seguridad, medio ambiente, inmigración, temas valóricos, género -->
+  <div class="subsection-label">F. Actitudes socioculturales y de autoridad (escala 1–5)</div>
+  <div class="instr">Escala: 1=Muy en desacuerdo · 2=En desacuerdo · 3=Ni/ni · 4=De acuerdo · 5=Muy de acuerdo</div>
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>En general, ¿cuán de acuerdo o en desacuerdo está usted con cada una de las siguientes afirmaciones?</strong></div>
+      <div class="table-cols">
+        <span class="col-label">1</span><span class="col-label">2</span><span class="col-label">3</span><span class="col-label">4</span><span class="col-label">5</span>
+      </div>
+    </div>
+    <div class="table-row"><div class="q-code">Q1201</div><div class="row-item">Una sociedad ideal requiere que algunos grupos estén en posición superior y otros inferior</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q1202</div><div class="row-item">Las jerarquías entre grupos son necesarias para mantener el orden social</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q1203</div><div class="row-item">En vez de tanta preocupación por derechos, lo que este país necesita es un gobierno firme</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q1204</div><div class="row-item">Lo que nuestro país necesita es un mandatario/a fuerte con determinación</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q1205</div><div class="row-item">Los principios religiosos deberían guiar las leyes y políticas públicas</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q1206</div><div class="row-item">Las personas deberían tener mayor respeto por las creencias religiosas</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+  </div>
+
+  <div class="subsection-label">G. Violencia y delincuencia (escala 1–5)</div>
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>¿Cuán de acuerdo o en desacuerdo está usted con las siguientes afirmaciones sobre violencia y delincuencia?</strong></div>
+      <div class="likert-legend">
+          <span class="legend-item legend-lo">1 = Muy en desacuerdo</span>
+          <div class="legend-cells"><span class="col-label">1</span><span class="col-label">2</span><span class="col-label">3</span><span class="col-label">4</span><span class="col-label">5</span></div>
+          <span class="legend-item legend-hi">5 = Muy de acuerdo</span>
+        </div>
+    </div>
+    <div class="table-row"><div class="q-code">Q1301</div><div class="row-item">Las personas deberían poder portar armas de fuego para su defensa personal</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q1302</div><div class="row-item">Los carabineros deberían tener más libertad para usar la fuerza en el combate contra la criminalidad</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q1303</div><div class="row-item">Las fuerzas armadas deberían intervenir en zonas con alta delincuencia</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q1304</div><div class="row-item">Los adolescentes que cometen delitos graves deberían ser juzgados como adultos</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q1305</div><div class="row-item">Quienes cometen crímenes graves deberían ser castigados con la pena de muerte</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+  </div>
+
+  <div class="subsection-label">H. Medio ambiente e inmigración (escala 1–5)</div>
+  <div class="preamble"><span class="preamble-label">Preámbulo</span>Ahora me gustaría saber su opinión sobre temas medioambientales e inmigración.</div>
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>En general, ¿cuán de acuerdo o en desacuerdo está usted con cada una de las siguientes afirmaciones?</strong></div>
+      <div class="likert-legend">
+          <span class="legend-item legend-lo">1 = Muy en desacuerdo</span>
+          <div class="legend-cells"><span class="col-label">1</span><span class="col-label">2</span><span class="col-label">3</span><span class="col-label">4</span><span class="col-label">5</span></div>
+          <span class="legend-item legend-hi">5 = Muy de acuerdo</span>
+        </div>
+    </div>
+    <div class="table-row"><div class="q-code">Q1401</div><div class="row-item">El crecimiento económico debe ser prioritario, incluso si esto implica daños al medio ambiente</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q1402</div><div class="row-item">Se deberían clausurar empresas contaminantes, incluso si esto implica aumento en desempleo</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q1403</div><div class="row-item">Los gobiernos deberían establecer leyes ambientales más estrictas para reducir el cambio climático</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q1404</div><div class="row-item">El cambio climático no es un problema tan grave como se ha tratado de sugerir</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q1501</div><div class="row-item">Los barrios empeoran cuando llegan inmigrantes a vivir</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q1502</div><div class="row-item">La inmigración aumenta el desempleo para los chilenos</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q1503</div><div class="row-item">La inmigración aumenta la tasa de criminalidad</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q1504</div><div class="row-item">Los inmigrantes deberían tener los mismos derechos que las personas nacidas en Chile</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+  </div>
+
+  <div class="subsection-label">I. Temas valóricos (escala 1–5)</div>
+  <div class="preamble"><span class="preamble-label">Preámbulo</span>Ahora vamos a hablar de algunos temas valóricos.</div>
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>En general, ¿cuán de acuerdo o en desacuerdo está usted con los siguientes temas?</strong></div>
+      <div class="likert-legend">
+          <span class="legend-item legend-lo">1 = Muy en desacuerdo</span>
+          <div class="legend-cells"><span class="col-label">1</span><span class="col-label">2</span><span class="col-label">3</span><span class="col-label">4</span><span class="col-label">5</span></div>
+          <span class="legend-item legend-hi">5 = Muy de acuerdo</span>
+        </div>
+    </div>
+    <div class="table-row"><div class="q-code">Q1601</div><div class="row-item">La eutanasia: que una persona con enfermedad incurable pueda decidir terminar su vida con ayuda médica</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q1602</div><div class="row-item">La educación sexual y de género en los colegios</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q1603</div><div class="row-item">El aborto en cualquier circunstancia antes de los tres meses de gestación</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q1604</div><div class="row-item">La adopción de hijos/as por parejas homosexuales</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q1605</div><div class="row-item">La cirugía de reasignación de género desde los 14 años</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+  </div>
+
+  <div class="subsection-label">J. Actitudes de género (escala 1–5)</div>
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>¿Cuán de acuerdo o en desacuerdo está usted con las siguientes afirmaciones?</strong></div>
+      <div class="likert-legend">
+          <span class="legend-item legend-lo">1 = Muy en desacuerdo</span>
+          <div class="legend-cells"><span class="col-label">1</span><span class="col-label">2</span><span class="col-label">3</span><span class="col-label">4</span><span class="col-label">5</span></div>
+          <span class="legend-item legend-hi">5 = Muy de acuerdo</span>
+        </div>
+    </div>
+    <div class="table-row"><div class="q-code">Q1701</div><div class="row-item">Es preferible que los hombres se hagan cargo de proveer el sustento económico del hogar, más que las mujeres</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q1702</div><div class="row-item">En general, los hombres son mejores gerentes que las mujeres</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q1703</div><div class="row-item">Si hay pocos trabajos, los hombres deberían tener prioridad para ser contratados antes que las mujeres</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q1704</div><div class="row-item">En última instancia, la responsabilidad de cuidar la casa y los niños es de la mujer más que de los hombres</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN V: ESTATUS SUBJETIVO
+═══════════════════════════════════════════════════════ -->
+<div class="section" id="s5">
+  <div class="section-header">
+    <span class="section-num">MÓDULO V</span>
+    <span class="section-title">Estatus Subjetivo</span>
+    <span class="section-vars">2 variables · Q18</span>
+  </div>
+
+  <div class="preamble"><span class="preamble-label">Preámbulo</span>En nuestra sociedad, hay grupos que tienden a ubicarse en los niveles más altos y grupos que tienden a ubicarse en los niveles más bajos de la sociedad.</div>
+
+  <div class="question-block">
+    <div class="q-single">
+      <div class="q-code">Q1801</div>
+      <div class="q-content">
+        <div class="q-text"><strong>Usando la escala presentada, donde 0 es el nivel más bajo y 10 el nivel más alto, ¿dónde se ubicaría usted en la sociedad chilena?</strong></div>
+        <div class="q-scale">
+          <span class="scale-label">0 = Más bajo</span>
+          <div class="scale-bar"><div class="scale-cell">0</div><div class="scale-cell">1</div><div class="scale-cell">2</div><div class="scale-cell">3</div><div class="scale-cell">4</div><div class="scale-cell">5</div><div class="scale-cell">6</div><div class="scale-cell">7</div><div class="scale-cell">8</div><div class="scale-cell">9</div><div class="scale-cell">10</div></div>
+          <span class="scale-label">10 = Más alto</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <div class="q-single">
+      <div class="q-code">Q1802</div>
+      <div class="q-content">
+        <div class="q-text"><strong>Y, ¿en qué posición ubicaría a la familia u hogar donde usted creció durante su infancia y adolescencia?</strong></div>
+        <div class="q-scale">
+          <span class="scale-label">0 = Más bajo</span>
+          <div class="scale-bar"><div class="scale-cell">0</div><div class="scale-cell">1</div><div class="scale-cell">2</div><div class="scale-cell">3</div><div class="scale-cell">4</div><div class="scale-cell">5</div><div class="scale-cell">6</div><div class="scale-cell">7</div><div class="scale-cell">8</div><div class="scale-cell">9</div><div class="scale-cell">10</div></div>
+          <span class="scale-label">10 = Más alto</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN VI: IDENTIDAD DE CLASE
+═══════════════════════════════════════════════════════ -->
+<div class="section" id="s6">
+  <div class="section-header">
+    <span class="section-num">MÓDULO VI</span>
+    <span class="section-title">Identidad de Clase</span>
+    <span class="section-vars">3 variables · Q19</span>
+  </div>
+
+  <div class="question-block">
+    <div class="q-single">
+      <div class="q-code">Q1901</div>
+      <div class="q-content">
+        <div class="q-text">La gente algunas veces se describe a sí misma como perteneciendo a una clase social.<br><strong>¿A cuál de las siguientes clases considera usted que pertenece?</strong></div>
+        <div class="q-options">
+          <span class="opt-pill">1 Clase baja</span>
+          <span class="opt-pill">2 Clase media baja</span>
+          <span class="opt-pill">3 Clase media</span>
+          <span class="opt-pill">4 Clase media alta</span>
+          <span class="opt-pill">5 Clase alta</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <div class="q-single">
+      <div class="q-code">Q1902</div>
+      <div class="q-content">
+        <div class="q-text"><strong>Pensando en [clase social nombrada], ¿cuán de acuerdo está con: "Me siento identificado/a con la gente de la [clase escogida]"?</strong></div>
+        <div class="q-options">
+          <span class="opt-pill">1 Muy en desacuerdo</span>
+          <span class="opt-pill">2 En desacuerdo</span>
+          <span class="opt-pill">3 Ni/ni</span>
+          <span class="opt-pill">4 De acuerdo</span>
+          <span class="opt-pill">5 Muy de acuerdo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <div class="q-single">
+      <div class="q-code">Q1903</div>
+      <div class="q-content">
+        <div class="q-text"><strong>¿En qué clase social ubicaría a la familia u hogar donde usted creció durante su infancia y adolescencia?</strong></div>
+        <div class="q-options">
+          <span class="opt-pill">1 Clase baja</span>
+          <span class="opt-pill">2 Clase media baja</span>
+          <span class="opt-pill">3 Clase media</span>
+          <span class="opt-pill">4 Clase media alta</span>
+          <span class="opt-pill">5 Clase alta</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN VII: REDES CERCANAS
+═══════════════════════════════════════════════════════ -->
+<div class="section" id="s7">
+  <div class="section-header">
+    <span class="section-num">MÓDULO VII</span>
+    <span class="section-title">Redes Cercanas (Confidentes)</span>
+    <span class="section-vars">61 variables · Q20–Q25</span>
+  </div>
+
+  <div class="preamble"><span class="preamble-label">Preámbulo</span>Vamos a volver a hablar de sus contactos, pero ahora de las personas más cercanas. Ocasionalmente la gente conversa con otras personas acerca de asuntos que le importan.</div>
+
+  <div class="question-block">
+    <div class="q-single">
+      <div class="q-code">Q20</div>
+      <div class="q-content">
+        <div class="q-text"><strong>Considerando los últimos seis meses, ¿con cuántas personas ha conversado sobre temas importantes para usted, ya sea en persona o por teléfono?</strong></div>
+        <div class="q-text" style="font-size:12px; color:var(--text-secondary)">Indique únicamente una cifra. Luego solicitaremos los nombres de dichas personas.</div>
+        <div class="num-input" style="margin-top:6px"></div>
+        <span class="skip-note">▸ Si 0: pasar a Módulo VIII</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="instr">Repetir el bloque siguiente para cada confidente nombrado (hasta 5). Registrar nombre o alias en el encabezado.</div>
+
+  <!-- Confidente 1 -->
+  <div class="confidente-group">
+    <div class="confidente-header">
+      <span class="confidente-title">Confidente 1</span>
+      <span style="font-family:var(--mono);font-size:11px;color:var(--text-secondary)">Nombre: ___________________________</span>
+      <span class="confidente-note">Q2101–Q2110</span>
+    </div>
+    <div class="confidente-row">
+      <div class="confidente-label">Q2101 · Sexo</div>
+      <div class="confidente-value">
+        <span class="opt-pill">1 Hombre</span><span class="opt-pill">2 Mujer</span><span class="opt-pill">3 Otro</span>
+      </div>
+    </div>
+    <div class="confidente-row">
+      <div class="confidente-label">Q2102 · Edad</div>
+      <div class="confidente-value"><div class="num-input" style="min-width:80px"></div></div>
+    </div>
+    <div class="confidente-row">
+      <div class="confidente-label">Q2103 · Nivel educativo</div>
+      <div class="confidente-value">
+        <span class="opt-pill">1 Básica o menos</span><span class="opt-pill">2 Media</span><span class="opt-pill">3 Técnica</span><span class="opt-pill">4 Univ. incompleta</span><span class="opt-pill">5 Univ. completa</span><span class="opt-pill">6 Postgrado</span>
+      </div>
+    </div>
+    <div class="confidente-row">
+      <div class="confidente-label">Q2104 · Ocupación</div>
+      <div class="confidente-value"><div class="q-open">Pregunta abierta → Codif. ISCO-08</div></div>
+    </div>
+    <div class="confidente-row">
+      <div class="confidente-label">Q2105 · Relación</div>
+      <div class="confidente-value">
+        <span class="opt-pill">1 Pareja</span><span class="opt-pill">2 Madre/padre</span><span class="opt-pill">3 Hermano/a</span><span class="opt-pill">4 Hijo/a</span><span class="opt-pill">5 Otro familiar</span><span class="opt-pill">6 Amigo/a</span><span class="opt-pill">7 Otro conocido</span>
+      </div>
+    </div>
+    <div class="confidente-row">
+      <div class="confidente-label">Q2106 · Años que se conocen</div>
+      <div class="confidente-value"><div class="num-input" style="min-width:80px"></div></div>
+    </div>
+    <div class="confidente-row">
+      <div class="confidente-label">Q2107 · Lugar que se conocieron</div>
+      <div class="confidente-value"><div class="q-open">Pregunta abierta</div></div>
+    </div>
+    <div class="confidente-row">
+      <div class="confidente-label">Q2108 · Posición política</div>
+      <div class="confidente-value">
+        <span class="opt-pill">1 Izquierda</span><span class="opt-pill">2 Centro</span><span class="opt-pill">3 Derecha</span><span class="opt-pill">4 Ninguna</span>
+      </div>
+    </div>
+    <div class="confidente-row">
+      <div class="confidente-label">Q2109 · Clase social percibida</div>
+      <div class="confidente-value">
+        <span class="opt-pill">1 Baja</span><span class="opt-pill">2 Media baja</span><span class="opt-pill">3 Media</span><span class="opt-pill">4 Media alta</span><span class="opt-pill">5 Alta</span>
+      </div>
+    </div>
+    <div class="confidente-row">
+      <div class="confidente-label">Q2110 · ¿5 más importantes?</div>
+      <div class="confidente-value">
+        <span class="bin-opt yes">1 Sí</span><span class="bin-opt no">2 No</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="instr">Repetir estructura idéntica para Confidentes 2–5 (Q2201–Q2210, Q2301–Q2310, Q2401–Q2410, Q2501–Q2510)</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN VIII: COHESIÓN SOCIAL
+═══════════════════════════════════════════════════════ -->
+<div class="section" id="s8">
+  <div class="section-header">
+    <span class="section-num">MÓDULO VIII</span>
+    <span class="section-title">Cohesión Social</span>
+    <span class="section-vars">37 variables · Q26–Q36</span>
+  </div>
+
+  <div class="subsection-label">A. Sentido de pertenencia (escala 1–5)</div>
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>¿En qué medida se encuentra usted de acuerdo o en desacuerdo con cada una de las siguientes afirmaciones?</strong></div>
+      <div class="likert-legend">
+          <span class="legend-item legend-lo">1 = Muy en desacuerdo</span>
+          <div class="legend-cells"><span class="col-label">1</span><span class="col-label">2</span><span class="col-label">3</span><span class="col-label">4</span><span class="col-label">5</span></div>
+          <span class="legend-item legend-hi">5 = Muy de acuerdo</span>
+        </div>
+    </div>
+    <div class="table-row"><div class="q-code">Q2601</div><div class="row-item">Me siento integrado/a a este país</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q2602</div><div class="row-item">Me siento parte de Chile</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+  </div>
+
+  <div class="subsection-label">B. Sociabilidad</div>
+  <div class="question-block">
+    <div class="q-single">
+      <div class="q-code">Q27</div>
+      <div class="q-content">
+        <div class="q-text"><strong>¿Cuántos amigos o amigas cercanos/as aproximadamente tiene usted?</strong></div>
+        <div class="num-input" style="margin-top:6px"></div>
+      </div>
+    </div>
+  </div>
+  <div class="question-block">
+    <div class="q-single">
+      <div class="q-code">Q28</div>
+      <div class="q-content">
+        <div class="q-text"><strong>En un día de semana normal, ¿con cuántas personas tiene Ud. contacto (cara a cara, teléfono, mensajes)?</strong></div>
+        <div class="q-options">
+          <span class="opt-pill">1 Con ninguna</span><span class="opt-pill">2 1–4</span><span class="opt-pill">3 5–9</span><span class="opt-pill">4 10–19</span><span class="opt-pill">5 20–49</span><span class="opt-pill">6 50–99</span><span class="opt-pill">7 100 o más</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="question-block">
+    <div class="q-single">
+      <div class="q-code">Q29</div>
+      <div class="q-content">
+        <div class="q-text"><strong>¿A cuántas de estas personas ve cara a cara en un día de semana normal?</strong></div>
+        <div class="q-options">
+          <span class="opt-pill">1 A todas o casi todas</span><span class="opt-pill">2 A la mayoría</span><span class="opt-pill">3 A la mitad aprox.</span><span class="opt-pill">4 A algunas</span><span class="opt-pill">5 A ninguna o casi ninguna</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="question-block">
+    <div class="q-single">
+      <div class="q-code">Q30</div>
+      <div class="q-content">
+        <div class="q-text"><strong>¿Cuál es el lugar físico o virtual más importante en su vida para conversar y discutir sobre temas públicos o políticos?</strong></div>
+        <div class="q-open">Pregunta abierta</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection-label">C. Acceso a apoyo social</div>
+  <div class="instr">Marcar Sí / No para cada ítem. Sin escala de acuerdo.</div>
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>¿Conoce a alguien a quien pueda pedirle ayuda gratuita y fácilmente en los siguientes temas?</strong></div>
+      <div style="display:flex;gap:6px;margin-top:4px;">
+        <span class="bin-opt yes">1 Sí</span><span class="bin-opt no">2 No</span>
+      </div>
+    </div>
+    <div class="table-row"><div class="q-code">Q3101</div><div class="row-item">Acompañarle si se sintiera algo desanimado/a o deprimido/a</div><div class="binary"><span class="bin-opt yes">Sí</span><span class="bin-opt no">No</span></div></div>
+    <div class="table-row"><div class="q-code">Q3102</div><div class="row-item">Prestarle dinero (más de $500.000)</div><div class="binary"><span class="bin-opt yes">Sí</span><span class="bin-opt no">No</span></div></div>
+    <div class="table-row"><div class="q-code">Q3103</div><div class="row-item">Proporcionarle asesoramiento sobre trámites administrativos y asuntos legales</div><div class="binary"><span class="bin-opt yes">Sí</span><span class="bin-opt no">No</span></div></div>
+    <div class="table-row"><div class="q-code">Q3104</div><div class="row-item">Darle consejos médicos si tiene algún problema de salud</div><div class="binary"><span class="bin-opt yes">Sí</span><span class="bin-opt no">No</span></div></div>
+    <div class="table-row"><div class="q-code">Q3105</div><div class="row-item">Proporcionarle un lugar para quedarse durante una semana si tiene algún problema</div><div class="binary"><span class="bin-opt yes">Sí</span><span class="bin-opt no">No</span></div></div>
+    <div class="table-row"><div class="q-code">Q3106</div><div class="row-item">Ayudarle con instalaciones o reparaciones en su hogar</div><div class="binary"><span class="bin-opt yes">Sí</span><span class="bin-opt no">No</span></div></div>
+    <div class="table-row"><div class="q-code">Q3107</div><div class="row-item">Cuidarle si estuviera enfermo/a en cama durante unos días</div><div class="binary"><span class="bin-opt yes">Sí</span><span class="bin-opt no">No</span></div></div>
+  </div>
+
+  <div class="subsection-label">D. Confianza interpersonal e institucional</div>
+  <div class="question-block">
+    <div class="q-single">
+      <div class="q-code">Q32</div>
+      <div class="q-content">
+        <div class="q-text"><strong>En general, ¿cuánto confía en las personas que residen en Chile?</strong></div>
+        <div class="q-options">
+          <span class="opt-pill">1 Nada</span><span class="opt-pill">2 Poca</span><span class="opt-pill">3 Algo</span><span class="opt-pill">4 Bastante</span><span class="opt-pill">5 Mucha</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>¿Cuánto confía usted en cada uno de los siguientes grupos sociales?</strong></div>
+      <div class="likert-legend">
+          <span class="legend-item legend-lo">1 = Nada</span>
+          <div class="legend-cells"><span class="col-label">1</span><span class="col-label">2</span><span class="col-label">3</span><span class="col-label">4</span><span class="col-label">5</span></div>
+          <span class="legend-item legend-hi">5 = Mucha</span>
+        </div>
+    </div>
+    <div class="table-row"><div class="q-code">Q3301</div><div class="row-item">Militantes del Frente Amplio</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q3302</div><div class="row-item">Militantes del Partido Republicano</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q3303</div><div class="row-item">Inmigrantes Peruanos</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q3304</div><div class="row-item">Inmigrantes Haitianos</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q3305</div><div class="row-item">Inmigrantes Venezolanos</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q3306</div><div class="row-item">Inmigrantes Colombianos</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q3307</div><div class="row-item">Homosexuales (gays y lesbianas)</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+  </div>
+
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>¿Cuánto confía usted en cada una de las siguientes instituciones?</strong></div>
+      <div class="table-cols"><span class="col-label">Nada</span><span class="col-label">Poca</span><span class="col-label">Algo</span><span class="col-label">Bastante</span><span class="col-label">Mucha</span></div>
+    </div>
+    <div class="table-row"><div class="q-code">Q3401</div><div class="row-item">El poder judicial</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q3402</div><div class="row-item">Las fuerzas armadas</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q3403</div><div class="row-item">Las empresas privadas</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q3404</div><div class="row-item">El Congreso Nacional</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q3405</div><div class="row-item">Carabineros</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q3406</div><div class="row-item">Los sindicatos</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+  </div>
+
+  <div class="subsection-label">E. Participación en organizaciones</div>
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>¿Participa o no en cada una de las siguientes organizaciones?</strong></div>
+      <div style="display:flex;gap:6px;margin-top:4px;"><span class="bin-opt yes">1 Sí</span><span class="bin-opt no">2 No</span></div>
+    </div>
+    <div class="table-row"><div class="q-code">Q3501</div><div class="row-item">Junta de vecinos u otra organización vecinal</div><div class="binary"><span class="bin-opt yes">Sí</span><span class="bin-opt no">No</span></div></div>
+    <div class="table-row"><div class="q-code">Q3502</div><div class="row-item">Organización religiosa o Iglesia</div><div class="binary"><span class="bin-opt yes">Sí</span><span class="bin-opt no">No</span></div></div>
+    <div class="table-row"><div class="q-code">Q3503</div><div class="row-item">Sindicato u asociación gremial o profesional</div><div class="binary"><span class="bin-opt yes">Sí</span><span class="bin-opt no">No</span></div></div>
+    <div class="table-row"><div class="q-code">Q3504</div><div class="row-item">Organización o club deportivo o recreativo</div><div class="binary"><span class="bin-opt yes">Sí</span><span class="bin-opt no">No</span></div></div>
+    <div class="table-row"><div class="q-code">Q3505</div><div class="row-item">Organización artística, musical o educativa</div><div class="binary"><span class="bin-opt yes">Sí</span><span class="bin-opt no">No</span></div></div>
+    <div class="table-row"><div class="q-code">Q3506</div><div class="row-item">Organizaciones benéficas o de trabajo voluntario</div><div class="binary"><span class="bin-opt yes">Sí</span><span class="bin-opt no">No</span></div></div>
+    <div class="table-row"><div class="q-code">Q3507</div><div class="row-item">Partido o movimiento político</div><div class="binary"><span class="bin-opt yes">Sí</span><span class="bin-opt no">No</span></div></div>
+  </div>
+
+  <div class="subsection-label">F. Respeto por normas (escala 1–5)</div>
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>¿En qué medida se encuentra de acuerdo o en desacuerdo con las siguientes afirmaciones?</strong></div>
+      <div class="likert-legend">
+          <span class="legend-item legend-lo">1 = Muy en desacuerdo</span>
+          <div class="legend-cells"><span class="col-label">1</span><span class="col-label">2</span><span class="col-label">3</span><span class="col-label">4</span><span class="col-label">5</span></div>
+          <span class="legend-item legend-hi">5 = Muy de acuerdo</span>
+        </div>
+    </div>
+    <div class="table-row"><div class="q-code">Q3601</div><div class="row-item">Las leyes solo existen para controlar a las personas y no deberían ser seguidas estrictamente</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q3602</div><div class="row-item">Si las normas sociales no me benefician, no veo por qué debería cumplirlas</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q3603</div><div class="row-item">Romper algunas reglas es aceptable si no se afecta a otras personas</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN IX: DEMOCRACIA Y ALIENACIÓN
+═══════════════════════════════════════════════════════ -->
+<div class="section" id="s9">
+  <div class="section-header">
+    <span class="section-num">MÓDULO IX</span>
+    <span class="section-title">Democracia, Alienación y Anomia</span>
+    <span class="section-vars">15 variables · Q37–Q39</span>
+  </div>
+
+  <div class="question-block">
+    <div class="q-single">
+      <div class="q-code">Q37</div>
+      <div class="q-content">
+        <div class="q-text"><strong>¿Con cuál de las siguientes frases está usted más de acuerdo?</strong></div>
+        <div class="q-options">
+          <span class="opt-pill">1 La democracia es preferible a cualquier otra forma de gobierno</span>
+          <span class="opt-pill">2 En algunas circunstancias, un gobierno autoritario puede ser preferible</span>
+          <span class="opt-pill">3 A la gente como uno nos da lo mismo un régimen democrático que uno autoritario</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection-label" id="s10">Alienación percibida (escala 1–5)</div>
+  <div class="preamble"><span class="preamble-label">Preámbulo</span>Ahora voy a preguntar sobre cómo se ve a usted y la sociedad actualmente.</div>
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>¿Cuán de acuerdo o en desacuerdo está usted con cada una de las siguientes afirmaciones?</strong></div>
+      <div class="likert-legend">
+          <span class="legend-item legend-lo">1 = Muy en desacuerdo</span>
+          <div class="legend-cells"><span class="col-label">1</span><span class="col-label">2</span><span class="col-label">3</span><span class="col-label">4</span><span class="col-label">5</span></div>
+          <span class="legend-item legend-hi">5 = Muy de acuerdo</span>
+        </div>
+    </div>
+    <div class="table-row"><div class="q-code">Q3801</div><div class="row-item">Siento que tengo mucho control sobre las cosas que pasan en mi vida diaria</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q3802</div><div class="row-item">La mayoría de las cosas que me pasan son el resultado de mis propias decisiones</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q3803</div><div class="row-item">Siento que tengo el poder de cambiar mi situación si lo necesito</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q3804</div><div class="row-item">Siento que las actividades que realizo (estudiar, trabajar) no tienen un impacto real en la sociedad</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q3805</div><div class="row-item">En general, las actividades que realizo no me parecen muy valiosas ni significativas</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q3806</div><div class="row-item">A menudo me pregunto si las actividades que realizo diariamente realmente tienen algún sentido</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row" style="background:#FFF9F0"><div class="q-code" style="color:var(--highlight)">Q3807</div><div class="row-item">Las personas en posiciones de poder no entienden los problemas de gente como uno</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row" style="background:#FFF9F0"><div class="q-code" style="color:var(--highlight)">Q3808</div><div class="row-item">Las personas en posiciones de poder no se preocupan por los problemas de personas como yo</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row" style="background:#FFF9F0"><div class="q-code" style="color:var(--highlight)">Q3809</div><div class="row-item">A los poderosos les importa poco lo que pueda ocurrirle a alguien como yo</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q3901</div><div class="row-item">En Chile, las normas y reglas sociales se han debilitado profundamente</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q3902</div><div class="row-item">Cada vez hay menos estándares morales y valores compartidos de convivencia</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q3903</div><div class="row-item">Parece que a mucha gente ya no le importan las leyes</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q3904</div><div class="row-item">Las autoridades parecen perder el control sobre lo que pasa en el país</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q3905</div><div class="row-item">La sociedad está tan desorganizada que parece estar perdiendo su dirección</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+  </div>
+  <div style="font-family:var(--mono);font-size:10px;color:var(--text-muted);margin-bottom:6px;">▸ Filas en naranja = Percepción de exclusión (Q3807–Q3809)</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN X–XI: SOCIOECONÓMICA (resumen)
+═══════════════════════════════════════════════════════ -->
+<div class="section" id="s11">
+  <div class="section-header">
+    <span class="section-num">MÓDULO X–XI</span>
+    <span class="section-title">Caracterización Socioeconómica y Laboral</span>
+    <span class="section-vars">54 variables · Q40–Q59</span>
+  </div>
+
+  <div class="subsection-label">A. Educación</div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q40</div><div class="q-content">
+      <div class="q-text"><strong>¿Cuál es su nivel educacional?</strong> (Último tipo aprobado o actual si estudia)</div>
+      <div class="q-options"><span class="opt-pill">1 Sin estudios</span><span class="opt-pill">2 Ed. Básica inc.</span><span class="opt-pill">3 Ed. Básica comp.</span><span class="opt-pill">4 Ed. Media inc.</span><span class="opt-pill">5 Ed. Media comp.</span><span class="opt-pill">6 Téc. Superior inc.</span><span class="opt-pill">7 Téc. Superior comp.</span><span class="opt-pill">8 Univ. inc.</span><span class="opt-pill">9 Univ. comp.</span><span class="opt-pill">10 Postgrado</span></div>
+    </div></div>
+  </div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q41</div><div class="q-content">
+      <div class="q-text"><strong>El colegio del cual egresó, ¿de qué tipo era?</strong></div>
+      <div class="q-options"><span class="opt-pill">1 Municipal o público</span><span class="opt-pill">2 Particular subvencionado</span><span class="opt-pill">3 Particular pagado</span></div>
+    </div></div>
+  </div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q42</div><div class="q-content">
+      <div class="q-text"><strong>Nombre de la universidad, instituto o CFT donde estudió o se recibió</strong></div>
+      <div class="q-open">Pregunta abierta</div>
+    </div></div>
+  </div>
+
+  <div class="subsection-label">B. Situación laboral</div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q43</div><div class="q-content">
+      <div class="q-text"><strong>¿Cuál de estas situaciones describe mejor su actividad principal durante el último mes?</strong></div>
+      <div class="q-options"><span class="opt-pill">1 Trabaja jornada completa</span><span class="opt-pill">2 Trabaja a tiempo parcial/ocasional</span><span class="opt-pill">3 Estudia y trabaja</span><span class="opt-pill">4 Solo estudia</span><span class="opt-pill">5 Jubilado/pensionado</span><span class="opt-pill">6 Desempleado, buscando trabajo</span><span class="opt-pill">7 Tareas no remuneradas (hogar, cuidados)</span><span class="opt-pill">8 Otro</span></div>
+    </div></div>
+  </div>
+
+  <div class="instr">Si NO trabaja actualmente: aplicar módulo Q44 (experiencia laboral previa, última ocupación, tipo de contrato). Si SÍ trabaja: aplicar módulo Q45 (ocupación actual, tipo contrato, posición, tamaño empresa, teletrabajo, ingreso).</div>
+
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q4510</div><div class="q-content">
+      <div class="q-text"><strong>¿Cuál es el ingreso mensual que usted recibe por su actividad laboral?</strong> (Ingreso líquido)</div>
+      <div class="num-input" style="min-width:160px"></div>
+      <div class="skip-note">▸ Si no responde → aplicar Q4511 (rangos)</div>
+    </div></div>
+  </div>
+
+  <div class="subsection-label">C. Sostenedor/a del hogar</div>
+  <div class="instr">Si el/la encuestado/a NO es el principal sostenedor del hogar, aplicar módulo Q51–Q52 (educación, situación laboral y ocupación del sostenedor).</div>
+
+  <div class="subsection-label">D. Ingresos y patrimonio del hogar</div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q5701</div><div class="q-content">
+      <div class="q-text"><strong>¿Cuál fue el ingreso total de su hogar el mes pasado?</strong> (Suma de todos los miembros, líquido)</div>
+      <div class="num-input" style="min-width:160px"></div>
+      <div class="skip-note">▸ Si no responde → aplicar Q5702 (rangos)</div>
+    </div></div>
+  </div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q55</div><div class="q-content">
+      <div class="q-text"><strong>Si algún miembro de su hogar perdiera su trabajo, ¿tendría ahorros suficientes para los próximos tres meses?</strong></div>
+      <div class="q-options"><span class="opt-pill">1 No tendría ahorros</span><span class="opt-pill">2 Tendría pocos ahorros</span><span class="opt-pill">3 Ahorros suficientes</span><span class="opt-pill">4 Muchos ahorros</span></div>
+    </div></div>
+  </div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q56</div><div class="q-content">
+      <div class="q-text"><strong>¿Hasta qué punto se siente sobrecargado/a por sus deudas?</strong></div>
+      <div class="q-options"><span class="opt-pill">1 Nada</span><span class="opt-pill">2 No muy sobrecargado</span><span class="opt-pill">3 Bastante sobrecargado</span><span class="opt-pill">4 Muy sobrecargado</span></div>
+    </div></div>
+  </div>
+
+  <div class="subsection-label">E. Vivienda y patrimonio</div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q58</div><div class="q-content">
+      <div class="q-text"><strong>La casa/departamento donde vive actualmente es…</strong></div>
+      <div class="q-options"><span class="opt-pill">1 Propia y pagada</span><span class="opt-pill">2 Propia y pagando a plazo</span><span class="opt-pill">3 Arrendada</span><span class="opt-pill">4 Cedida por trabajo</span><span class="opt-pill">5 Propia compartida</span><span class="opt-pill">6 Cedida por familiar o amigo</span><span class="opt-pill">7 Otra</span></div>
+    </div></div>
+  </div>
+
+  <div class="subsection-label">F. Percepción de riqueza y pobreza</div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q6001</div><div class="q-content">
+      <div class="q-text"><strong>¿A partir de qué nivel de ingreso mensual diría que un hogar puede considerarse rico?</strong></div>
+      <div class="num-input" style="min-width:160px"></div>
+    </div></div>
+  </div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q6002</div><div class="q-content">
+      <div class="q-text"><strong>¿Hasta qué nivel de ingreso mensual diría que un hogar puede considerarse pobre?</strong></div>
+      <div class="num-input" style="min-width:160px"></div>
+    </div></div>
+  </div>
+
+  <div class="subsection-label">G. Alienación en el trabajo (escala 1–5)</div>
+  <div class="instr">Solo para personas que trabajan actualmente.</div>
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>¿Qué tan de acuerdo o en desacuerdo está usted con las siguientes afirmaciones sobre su trabajo?</strong></div>
+      <div class="likert-legend">
+          <span class="legend-item legend-lo">1 = Muy en desacuerdo</span>
+          <div class="legend-cells"><span class="col-label">1</span><span class="col-label">2</span><span class="col-label">3</span><span class="col-label">4</span><span class="col-label">5</span></div>
+          <span class="legend-item legend-hi">5 = Muy de acuerdo</span>
+        </div>
+    </div>
+    <div class="table-row"><div class="q-code">Q4601</div><div class="row-item">Enfrentar mis tareas diarias en el trabajo es una experiencia aburrida</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q4602</div><div class="row-item">No disfruto mucho mi trabajo</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q4603</div><div class="row-item">El trabajo es más una carga o una obligación que algo significativo</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q4604</div><div class="row-item">Siento poca motivación para realizar las tareas de mi trabajo</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN XII: APOYO FAMILIAR
+═══════════════════════════════════════════════════════ -->
+<div class="section" id="s12">
+  <div class="section-header">
+    <span class="section-num">MÓDULO XII</span>
+    <span class="section-title">Apoyo Familiar</span>
+    <span class="section-vars">6 variables · Q61–Q63</span>
+  </div>
+
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q61</div><div class="q-content">
+      <div class="q-text"><strong>¿Apoyas económicamente a algún familiar en sus gastos mensuales?</strong> (transferencia, cuentas, arriendo, etc.)</div>
+      <div class="q-options"><span class="opt-pill">1 No he apoyado</span><span class="opt-pill">2 Sí, menos de $200.000/mes</span><span class="opt-pill">3 Sí, $200.000–$500.000/mes</span><span class="opt-pill">4 Sí, más de $500.000/mes</span></div>
+    </div></div>
+  </div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q62</div><div class="q-content">
+      <div class="q-text"><strong>En el último año, ¿has recibido apoyo económico de algún familiar en tus gastos mensuales?</strong></div>
+      <div class="q-options"><span class="opt-pill">1 No he recibido</span><span class="opt-pill">2 Sí, menos de $200.000</span><span class="opt-pill">3 Sí, $200.000–$500.000</span><span class="opt-pill">4 Sí, más de $500.000</span></div>
+    </div></div>
+  </div>
+
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>¿Te ha apoyado económicamente algún familiar en alguno de los siguientes gastos?</strong></div>
+      <div style="display:flex;gap:6px;margin-top:4px;"><span class="bin-opt yes">1 Sí</span><span class="bin-opt no">2 No</span></div>
+    </div>
+    <div class="table-row"><div class="q-code">Q6301</div><div class="row-item">Financiamiento total o parcial de un programa de postgrado</div><div class="binary"><span class="bin-opt yes">Sí</span><span class="bin-opt no">No</span></div></div>
+    <div class="table-row"><div class="q-code">Q6302</div><div class="row-item">Financiamiento total o parcial de un vehículo</div><div class="binary"><span class="bin-opt yes">Sí</span><span class="bin-opt no">No</span></div></div>
+    <div class="table-row"><div class="q-code">Q6303</div><div class="row-item">Préstamo o regalo monetario mayor a $1.000.000</div><div class="binary"><span class="bin-opt yes">Sí</span><span class="bin-opt no">No</span></div></div>
+    <div class="table-row"><div class="q-code">Q6304</div><div class="row-item">Pie para la compra de una vivienda</div><div class="binary"><span class="bin-opt yes">Sí</span><span class="bin-opt no">No</span></div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN XIII: ORÍGENES SOCIALES + BIENES PÚBLICOS
+═══════════════════════════════════════════════════════ -->
+<div class="section" id="s13">
+  <div class="section-header">
+    <span class="section-num">MÓDULO XIII</span>
+    <span class="section-title">Orígenes Sociales y Provisión de Bienes Públicos</span>
+    <span class="section-vars">10 variables · Q64–Q65</span>
+  </div>
+
+  <div class="preamble"><span class="preamble-label">Preámbulo · Orígenes</span>Para ir finalizando, le voy a preguntar brevemente por sus orígenes sociales.</div>
+
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q6401</div><div class="q-content">
+      <div class="q-text"><strong>¿Quién era el/la principal sostenedor/a del hogar donde usted vivía cuando tenía alrededor de 15 años?</strong></div>
+      <div class="q-options"><span class="opt-pill">1 Su padre u otro hombre</span><span class="opt-pill">2 Su madre u otra mujer</span><span class="opt-pill">3 Otra persona</span></div>
+    </div></div>
+  </div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q6402</div><div class="q-content">
+      <div class="q-text"><strong>¿Cuál es el nivel educativo más alto que alcanzó esta persona?</strong> (ESPONTÁNEA)</div>
+      <div class="q-options"><span class="opt-pill">1 Sin estudios</span><span class="opt-pill">2 Básica inc.</span><span class="opt-pill">3 Básica comp.</span><span class="opt-pill">4 Media inc.</span><span class="opt-pill">5 Media comp.</span><span class="opt-pill">6 Téc. inc.</span><span class="opt-pill">7 Téc. comp.</span><span class="opt-pill">8 Univ. inc.</span><span class="opt-pill">9 Univ. comp.</span><span class="opt-pill">10 Postgrado</span></div>
+    </div></div>
+  </div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q6403</div><div class="q-content">
+      <div class="q-text"><strong>¿Cuál era el trabajo principal de esta persona cuando usted tenía alrededor de 15 años?</strong></div>
+      <div class="q-open">Pregunta abierta → Codif. ISCO-08</div>
+    </div></div>
+  </div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q6404</div><div class="q-content">
+      <div class="q-text"><strong>En ese trabajo, la persona a cargo del hogar trabajaba como…</strong></div>
+      <div class="q-options"><span class="opt-pill">1 Empleado empresa privada</span><span class="opt-pill">2 Empleado sector público</span><span class="opt-pill">3 Empleado empresa pública</span><span class="opt-pill">4 FF.AA.</span><span class="opt-pill">5 Empleador/a</span><span class="opt-pill">6 Trabaja solo</span><span class="opt-pill">7 Familiar no remunerado</span></div>
+    </div></div>
+  </div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q6405</div><div class="q-content">
+      <div class="q-text"><strong>Dentro de la empresa donde trabajaba, ¿qué frase describe mejor su posición?</strong></div>
+      <div class="q-options"><span class="opt-pill">1 Directivo/a o gerente de alto nivel</span><span class="opt-pill">2 Gerente de nivel medio</span><span class="opt-pill">3 Supervisor o capataz</span><span class="opt-pill">4 Empleado/obrero regular</span></div>
+    </div></div>
+  </div>
+
+  <div class="preamble" style="margin-top:20px"><span class="preamble-label">Preámbulo · Bienes públicos</span>Ahora le voy a preguntar sobre cosas que usted podría haber hecho o no en los últimos 5 años.</div>
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>En los últimos cinco años, usted…</strong></div>
+      <div style="display:flex;gap:6px;margin-top:4px;"><span class="bin-opt yes">1 Sí</span><span class="bin-opt no">2 No</span></div>
+    </div>
+    <div class="table-row"><div class="q-code">Q6501</div><div class="row-item">¿Ha recibido atención oportuna y de calidad en el sistema de salud pública cuando lo ha necesitado?</div><div class="binary"><span class="bin-opt yes">Sí</span><span class="bin-opt no">No</span></div></div>
+    <div class="table-row"><div class="q-code">Q6502</div><div class="row-item">¿Ha sido beneficiario de algún programa de subsidio habitacional?</div><div class="binary"><span class="bin-opt yes">Sí</span><span class="bin-opt no">No</span></div></div>
+    <div class="table-row"><div class="q-code">Q6503</div><div class="row-item">¿Ha recibido algún tipo de beneficio social (bonos o subsidios del gobierno)?</div><div class="binary"><span class="bin-opt yes">Sí</span><span class="bin-opt no">No</span></div></div>
+    <div class="table-row"><div class="q-code">Q6504</div><div class="row-item">¿Ha conseguido un empleo en el sector público?</div><div class="binary"><span class="bin-opt yes">Sí</span><span class="bin-opt no">No</span></div></div>
+    <div class="table-row"><div class="q-code">Q6505</div><div class="row-item">¿Ha habido alguna inversión en infraestructura pública (calles, plazas, escuelas) en su barrio?</div><div class="binary"><span class="bin-opt yes">Sí</span><span class="bin-opt no">No</span></div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN XIV: SALUD, BIENESTAR Y SOLEDAD
+═══════════════════════════════════════════════════════ -->
+<div class="section" id="s14">
+  <div class="section-header">
+    <span class="section-num">MÓDULO XIV</span>
+    <span class="section-title">Salud, Bienestar y Soledad</span>
+    <span class="section-vars">8 variables · Q66–Q67</span>
+  </div>
+
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>¿Cuántas veces durante las últimas dos semanas ha sentido alguna de las siguientes molestias?</strong></div>
+      <div class="likert-legend">
+          <span class="legend-item legend-lo">1 = Nunca</span>
+          <div class="legend-cells"><span class="col-label">1</span><span class="col-label">2</span><span class="col-label">3</span><span class="col-label">4</span><span class="col-label">5</span></div>
+          <span class="legend-item legend-hi">5 = Todos los días</span>
+        </div>
+    </div>
+    <div class="table-row"><div class="q-code">Q6601</div><div class="row-item">Sensación de nerviosismo, ansiedad o de tener los nervios de punta</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q6602</div><div class="row-item">No ser capaz de dejar de preocuparte ni de controlar las preocupaciones</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q6603</div><div class="row-item">Poco interés o alegría para realizar sus actividades</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q6604</div><div class="row-item">Decaimiento, pesadez o desesperanza</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+  </div>
+
+  <div class="question-block">
+    <div class="q-table-header">
+      <div class="q-text"><strong>Y, utilizando la misma escala, ¿cuánto tiempo durante las últimas dos semanas…?</strong></div>
+      <div class="likert-legend">
+          <span class="legend-item legend-lo">1 = Nunca</span>
+          <div class="legend-cells"><span class="col-label">1</span><span class="col-label">2</span><span class="col-label">3</span><span class="col-label">4</span><span class="col-label">5</span></div>
+          <span class="legend-item legend-hi">5 = Todos los días</span>
+        </div>
+    </div>
+    <div class="table-row"><div class="q-code">Q6701</div><div class="row-item">Se ha sentido aislado/a de los/as demás</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q6702</div><div class="row-item">Ha sentido que le han dejado de lado</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q6703</div><div class="row-item">Ha echado de menos tener compañía de otras personas</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+    <div class="table-row"><div class="q-code">Q6704</div><div class="row-item">Se ha sentido solo/a</div><div class="likert-cols"><div class="likert-cell">1</div><div class="likert-cell">2</div><div class="likert-cell">3</div><div class="likert-cell">4</div><div class="likert-cell">5</div></div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN XV: CARACTERIZACIÓN SOCIODEMOGRÁFICA
+═══════════════════════════════════════════════════════ -->
+<div class="section" id="s15">
+  <div class="section-header">
+    <span class="section-num">MÓDULO XV</span>
+    <span class="section-title">Caracterización Sociodemográfica</span>
+    <span class="section-vars">14 variables · Q68–Q80</span>
+  </div>
+
+  <div class="preamble"><span class="preamble-label">Preámbulo</span>Para finalizar, le haré algunas preguntas que nos servirán para hacer agrupaciones estadísticas.</div>
+
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q68</div><div class="q-content">
+      <div class="q-text"><strong>¿Cuál es su sexo?</strong></div>
+      <div class="q-options"><span class="opt-pill">1 Hombre</span><span class="opt-pill">2 Mujer</span></div>
+    </div></div>
+  </div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q69</div><div class="q-content">
+      <div class="q-text"><strong>¿Con qué género se identifica Ud.?</strong></div>
+      <div class="q-options"><span class="opt-pill">1 Masculino</span><span class="opt-pill">2 Femenino</span><span class="opt-pill">3 Trans masculino</span><span class="opt-pill">4 Trans femenino</span><span class="opt-pill">5 No binario</span><span class="opt-pill">6 Otro</span></div>
+    </div></div>
+  </div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q70</div><div class="q-content">
+      <div class="q-text"><strong>¿Cuál es su edad?</strong></div>
+      <div class="num-input" style="min-width:80px"></div>
+    </div></div>
+  </div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q71</div><div class="q-content">
+      <div class="q-text"><strong>¿Cuál es su estado conyugal o civil actual?</strong></div>
+      <div class="q-options"><span class="opt-pill">1 Casado legalmente</span><span class="opt-pill">2 Conviviente sin AUC</span><span class="opt-pill">3 Conviviente con AUC</span><span class="opt-pill">4 Soltero/a</span><span class="opt-pill">5 Viudo/a</span><span class="opt-pill">6 Anulado/a</span><span class="opt-pill">7 Divorciado/a</span><span class="opt-pill">8 Separado/a</span><span class="opt-pill">9 Otro</span></div>
+    </div></div>
+  </div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q72</div><div class="q-content">
+      <div class="q-text"><strong>¿Cuántos hijos e hijas ha tenido usted en su vida?</strong></div>
+      <div class="num-input" style="min-width:80px"></div>
+    </div></div>
+  </div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q73</div><div class="q-content">
+      <div class="q-text"><strong>¿Cuál describe mejor la estructura familiar de su hogar?</strong></div>
+      <div class="q-options"><span class="opt-pill">1 Vivo solo/a</span><span class="opt-pill">2 Con pareja (sin hijos)</span><span class="opt-pill">3 Con pareja e hijos/as</span><span class="opt-pill">4 Con hijos/as (sin pareja)</span><span class="opt-pill">5 Con padres y/o hermanos</span><span class="opt-pill">6 Con no familiares</span><span class="opt-pill">7 Otra</span></div>
+    </div></div>
+  </div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q74</div><div class="q-content">
+      <div class="q-text"><strong>¿Cómo se declara usted en términos religiosos?</strong></div>
+      <div class="q-options"><span class="opt-pill">1 Católico/a</span><span class="opt-pill">2 Evangélico/a</span><span class="opt-pill">3 Protestante histórico/a</span><span class="opt-pill">4 Judío/a</span><span class="opt-pill">5 Creyente no adherente</span><span class="opt-pill">6 Otra</span><span class="opt-pill">7 Ateo/a</span><span class="opt-pill">8 Agnóstico/a</span><span class="opt-pill">9 Ninguna</span></div>
+    </div></div>
+  </div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q76</div><div class="q-content">
+      <div class="q-text"><strong>¿Con qué frecuencia asiste usted a servicios religiosos o practica su culto?</strong></div>
+      <div class="q-options"><span class="opt-pill">1 Varias veces a la semana</span><span class="opt-pill">2 Una vez a la semana</span><span class="opt-pill">3 2–3 veces al mes</span><span class="opt-pill">4 Una vez al mes</span><span class="opt-pill">5 Varias veces al año</span><span class="opt-pill">6 Una vez al año</span><span class="opt-pill">7 Nunca o casi nunca</span></div>
+    </div></div>
+  </div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q77</div><div class="q-content">
+      <div class="q-text"><strong>¿En qué ciudad nació usted?</strong></div>
+      <div class="q-open">Pregunta abierta</div>
+    </div></div>
+  </div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q78</div><div class="q-content">
+      <div class="q-text"><strong>¿En qué comuna vivía a los 15 años?</strong></div>
+      <div class="q-open">Pregunta abierta</div>
+    </div></div>
+  </div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q79</div><div class="q-content">
+      <div class="q-text"><strong>¿Cuál es su nacionalidad?</strong> (Si tiene más de una, la que más le identifica)</div>
+      <div class="q-options"><span class="opt-pill">1 Chilena</span><span class="opt-pill">2 Peruana</span><span class="opt-pill">3 Argentina</span><span class="opt-pill">4 Colombiana</span><span class="opt-pill">5 Venezolana</span><span class="opt-pill">6 Boliviana</span><span class="opt-pill">7 Haitiana</span><span class="opt-pill">8 Española</span><span class="opt-pill">9 Otra</span></div>
+    </div></div>
+  </div>
+  <div class="question-block">
+    <div class="q-single"><div class="q-code">Q80</div><div class="q-content">
+      <div class="q-text"><strong>Por sus antepasados y teniendo en cuenta su familia paterna y materna ¿cuál es su origen étnico?</strong></div>
+      <div class="q-options"><span class="opt-pill">1 Pueblo originario/indígena</span><span class="opt-pill">2 Mestizo/a</span><span class="opt-pill">3 Europeo/a</span><span class="opt-pill">4 Árabe</span><span class="opt-pill">5 Afrodescendiente</span><span class="opt-pill">6 Judío/a</span><span class="opt-pill">7 Asiático/a</span><span class="opt-pill">8 Otro</span></div>
+    </div></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <span>The Social Survey of Class, Networks and Political Attitudes · Diseño de cuestionario</span>
+  <span>335 variables · 15 módulos activos</span>
+</div>
+
+</div><!-- /main -->
+</body>
+</html>

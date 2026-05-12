@@ -3,49 +3,43 @@
 
   <url>
     <loc>https://theclassproject.org/</loc>
-    <lastmod>2026-05-04</lastmod>
+    <lastmod>2026-05-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://theclassproject.org/proyecto/</loc>
-    <lastmod>2026-05-04</lastmod>
+    <lastmod>2026-05-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://theclassproject.org/encuesta/</loc>
-    <lastmod>2026-05-04</lastmod>
+    <lastmod>2026-05-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://theclassproject.org/equipo/</loc>
-    <lastmod>2026-05-04</lastmod>
+    <lastmod>2026-05-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://theclassproject.org/divulgacion/</loc>
-    <lastmod>2026-05-04</lastmod>
+    <lastmod>2026-05-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
+  <!-- Nota: la carpeta se llama /accountability/ — el texto visible en el sitio es "Transparencia" -->
   <url>
     <loc>https://theclassproject.org/accountability/</loc>
-    <lastmod>2026-05-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://theclassproject.org/transparencia/</loc>
-    <lastmod>2026-05-04</lastmod>
+    <lastmod>2026-05-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
