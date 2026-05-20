@@ -728,21 +728,21 @@
           ¿Importa quiénes son tus amigos, vecinos y colegas para definir tus opiniones políticas?
           Este proyecto investiga cómo la composición de clase de las redes sociales personales
           influye en las actitudes políticas en Chile, en particular en aquellas referidas a la
-          <strong style="color: rgba(255,255,255,0.9);">desigualdad</strong>,
-          <strong style="color: rgba(255,255,255,0.9);">redistribución</strong> y
-          <strong style="color: rgba(255,255,255,0.9);">cambio social</strong>.
+          <strong class="hero-strong">desigualdad</strong>,
+          <strong class="hero-strong">redistribución</strong> y
+          <strong class="hero-strong">cambio social</strong>.
         </p>
 
         <!-- Chips de ejes temáticos — IIB color coding -->
-        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: var(--space-lg);" aria-label="Ejes de investigación">
-          <span style="display:inline-flex;align-items:center;gap:5px;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 12px 4px 9px;border-radius:100px;background:rgba(10,126,122,0.22);color:#5ecfc9;border:1px solid rgba(10,126,122,0.35);">
-            <span style="width:6px;height:6px;border-radius:50%;background:#5ecfc9;flex-shrink:0;"></span>Desigualdad
+        <div class="temas-list" aria-label="Ejes de investigación">
+          <span class="tema-chip">
+            <span class="tema-chip__dot tema-chip__dot--clases"></span>Desigualdad
           </span>
-          <span style="display:inline-flex;align-items:center;gap:5px;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 12px 4px 9px;border-radius:100px;background:rgba(201,82,79,0.18);color:#e8807d;border:1px solid rgba(201,82,79,0.30);">
-            <span style="width:6px;height:6px;border-radius:50%;background:#e8807d;flex-shrink:0;"></span>Redistribución
+          <span class="tema-chip">
+            <span class="tema-chip__dot tema-chip__dot--redes"></span>Redistribución
           </span>
-          <span style="display:inline-flex;align-items:center;gap:5px;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 12px 4px 9px;border-radius:100px;background:rgba(155,123,46,0.18);color:#d4a84b;border:1px solid rgba(155,123,46,0.30);">
-            <span style="width:6px;height:6px;border-radius:50%;background:#d4a84b;flex-shrink:0;"></span>Cambio social
+          <span class="tema-chip">
+            <span class="tema-chip__dot tema-chip__dot--politico"></span>Cambio social
           </span>
         </div>
 
@@ -751,9 +751,9 @@
       <!-- Franja de datos -->
       <div class="ph__stats">
         <div class="ph__stat">
-          <span class="ph__stat-value" style="display:inline-flex;align-items:baseline;gap:0.2em;">
+          <span class="ph__stat-value">
             2024
-            <span style="font-size:0.6em;opacity:0.55;font-family:var(--font-body);font-weight:500;">—2027</span>
+            <span class="ph__stat-suffix">—2027</span>
           </span>
           <span class="ph__stat-label">Período de ejecución</span>
         </div>
@@ -943,7 +943,7 @@
 
         <!-- 5. DISEÑO DE LA ENCUESTA — timeline horizontal con 3 fases -->
         <section class="content-section" id="diseno" aria-labelledby="sec-diseno">
-          <p style="font-size:var(--text-xs);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-light);margin-bottom:var(--space-xs);">↳ Modelo de investigación</p>
+          <p class="section-eyebrow">↳ Modelo de investigación</p>
           <h2 id="sec-diseno">Diseño de la encuesta</h2>
           <p>
             El estudio se estructura en tres fases secuenciales. La primera — ya completada —
@@ -1033,7 +1033,7 @@
             <div class="brand-section-intro__logo">
               The <span>Class</span><br>Project
             </div>
-            <p style="margin: 0; font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.75;">
+            <p class="text-sm-muted">
               Plataforma de comunicación pública del Fondecyt de Iniciación N°11240249.
               Reúne los productos y avances de la investigación bajo una identidad editorial
               unificada, orientada a distintos públicos: comunidad académica, estudiantes,
@@ -1048,7 +1048,7 @@
             del período de ejecución del proyecto (2024–2027).
           </p>
 
-          <div style="margin-top: var(--space-xl); display: flex; gap: var(--space-md); flex-wrap: wrap;">
+          <div class="tcp-actions">
             <a href="../encuesta/" class="btn btn--primary">Conocer la encuesta</a>
             <a href="../equipo/" class="btn btn--outline">Ver el equipo</a>
             <a href="../divulgacion/" class="btn btn--outline">Ver divulgación</a>
@@ -1119,15 +1119,15 @@
         <div>
           <p class="footer__heading">Institución</p>
           <ul class="footer__links" role="list">
-            <li><span class="footer__link" style="cursor:default;">Escuela de Sociología</span></li>
-            <li><span class="footer__link" style="cursor:default;">Facultad de Ciencias Sociales y Humanidades</span></li>
+            <li><span class="footer__link footer__link--static">Escuela de Sociología</span></li>
+            <li><span class="footer__link footer__link--static">Facultad de Ciencias Sociales y Humanidades</span></li>
             <li><a href="https://www.udp.cl" class="footer__link" target="_blank" rel="noopener">Universidad Diego Portales</a></li>
           </ul>
-          <p class="footer__heading" style="margin-top: 1.5rem;">Contacto</p>
+          <p class="footer__heading footer__heading--mt">Contacto</p>
           <ul class="footer__links" role="list">
             <li><a href="mailto:gabriel.otero@mail.udp.cl" class="footer__link">gabriel.otero@mail.udp.cl</a></li>
           </ul>
-          <p class="footer__heading" style="margin-top: 1.5rem;">Redes</p>
+          <p class="footer__heading footer__heading--mt">Redes</p>
           <div class="social-icons">
             <a href="https://instagram.com/theclassproject" class="social-icon" target="_blank" rel="noopener" aria-label="Instagram">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1157,11 +1157,4 @@
         </div>
       </div><!-- /.footer__grid -->
       <div class="footer__bottom">
-        <p class="footer__copy">&copy; <span id="footer-year">2026</span> The Class Project. Todos los derechos reservados.</p>
-        <div class="footer__funders"><span>Fondecyt de Iniciación N°11240249</span></div>
-      </div>
-    </div>
-  </footer>
-  <script src="../js/script.js"></script>
-</body>
-</html>
+        <p class="footer__copy">&copy; <span id="footer-year">2026</span> Th

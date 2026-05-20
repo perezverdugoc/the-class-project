@@ -445,7 +445,7 @@
 
         <h2>Infografías</h2>
         <div class="pub-divider"></div>
-        <p style="color: var(--color-text-muted); font-size: var(--text-sm); margin-bottom: var(--space-xl);">
+        <p class="section-intro">
           Visualizaciones del marco conceptual, metodología y resultados del proyecto.
         </p>
 
@@ -453,8 +453,8 @@
         <div class="infografia-grid">
 
           <a href="infografias/marco-conceptual.html" class="infografia-card" aria-label="Infografía: Marco Conceptual">
-            <div class="infografia-card__thumb" style="background-color: var(--color-primary);">
-              <span class="infografia-placeholder" style="color: rgba(255,255,255,0.75);">Marco<br>Conceptual</span>
+            <div class="infografia-card__thumb infografia-card__thumb--primary">
+              <span class="infografia-placeholder">Marco<br>Conceptual</span>
             </div>
             <p class="infografia-card__label">Marco Conceptual</p>
           </a>
@@ -467,15 +467,15 @@
           </a>
 
           <a href="#" class="infografia-card" aria-label="Infografía: Diseño metodológico">
-            <div class="infografia-card__thumb" style="background-color: var(--color-accent);">
-              <span class="infografia-placeholder" style="color: #fff;">Diseño<br>metodológico</span>
+            <div class="infografia-card__thumb infografia-card__thumb--accent">
+              <span class="infografia-placeholder">Diseño<br>metodológico</span>
             </div>
             <p class="infografia-card__label">Metodología</p>
           </a>
 
           <a href="#" class="infografia-card" aria-label="Infografía: Resultados">
-            <div class="infografia-card__thumb" style="background-color: #8B6914;">
-              <span class="infografia-placeholder" style="color: #fff;">Resultados</span>
+            <div class="infografia-card__thumb infografia-card__thumb--gold">
+              <span class="infografia-placeholder">Resultados</span>
             </div>
             <p class="infografia-card__label">Resultados</p>
           </a>
@@ -491,16 +491,16 @@
 
         <h2>Publicaciones destacadas</h2>
         <div class="pub-divider"></div>
-        <p style="color: var(--color-text-muted); font-size: var(--text-sm); max-width: 68ch; margin-bottom: var(--space-lg);">
+        <p class="section-intro">
           Investigaciones previas sobre clase social, redes personales y actitudes políticas
           que forman la base académica de este proyecto. Los trabajos aquí reunidos representan
           el punto de partida empírico y conceptual de la investigación.
         </p>
 
         <!-- Publicaciones nuevas con agradecimiento Fondecyt — destacadas -->
-        <div style="margin-bottom: var(--space-xl);">
-          <p style="font-size:var(--text-xs);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent);margin-bottom:var(--space-sm);">Publicaciones del proyecto · Fondecyt N°11240249</p>
-          <div class="pub-list" style="margin-top:0; border: 1px solid rgba(10,126,122,0.25); border-radius: var(--radius-lg); padding: var(--space-md) var(--space-lg); background: rgba(10,126,122,0.04);">
+        <div class="pub-destacadas">
+          <p class="pub-destacadas__label">Publicaciones del proyecto · Fondecyt N°11240249</p>
+          <div class="pub-list pub-destacadas__list">
 
             <div class="pub-item">
               <div class="pub-item__body">
@@ -535,7 +535,7 @@
               <a href="https://doi.org/10.1016/j.cities.2026.106899" class="pub-item__link" target="_blank" rel="noopener" aria-label="Ver publicación">↗</a>
             </div>
 
-            <div class="pub-item" style="border-bottom:none;">
+            <div class="pub-item pub-item--last">
               <div class="pub-item__body">
                 <p class="pub-item__authors">González, F., Gómez, M. &amp; Otero, G. <span class="pub-year-badge">(2025)</span></p>
                 <a href="https://doi.org/10.1080/00346764.2025.2593303" class="pub-item__title" target="_blank" rel="noopener">
@@ -549,7 +549,7 @@
           </div>
         </div>
 
-        <p style="font-size:var(--text-xs);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-light);margin-bottom:var(--space-sm);">Publicaciones de referencia</p>
+        <p class="section-eyebrow">Publicaciones de referencia</p>
         <!-- Publicaciones visibles (primeras 6) -->
         <div class="pub-list" id="pub-main">
 
@@ -622,7 +622,7 @@
         </div><!-- /#pub-main -->
 
         <!-- Más publicaciones (ocultas, se revelan al hacer clic) -->
-        <div class="pub-list" id="pub-more" style="margin-top: var(--space-xl);">
+        <div class="pub-list" id="pub-more">
 
           <div class="pub-item">
             <div class="pub-item__body">
@@ -714,7 +714,7 @@
 
           <div id="noticias-col">
             <h2 id="noticias-heading">Noticias</h2>
-            <div class="divider" style="margin: 1rem 0 1.5rem;"></div>
+            <div class="divider divider--section"></div>
             <a href="/divulgacion/notas/nota-social-networks/" class="news-item">
               <span class="news-item__title">Nuevo artículo en <em>Social Networks</em> explora redes personales y desigualdad</span>
               <span class="news-item__date">2 de septiembre de 2025</span>
@@ -727,7 +727,7 @@
 
           <div id="agenda">
             <h2>Agenda</h2>
-            <div class="divider" style="margin: 1rem 0 1.5rem;"></div>
+            <div class="divider divider--section"></div>
             <div class="agenda-item">
               <p class="agenda-item__title">Seminario Observatorio Desigualdades</p>
               <p class="agenda-item__meta">Jueves 11 de diciembre, 09:00–12:30, UDP</p>
@@ -801,15 +801,15 @@
         <div>
           <p class="footer__heading">Institución</p>
           <ul class="footer__links" role="list">
-            <li><span class="footer__link" style="cursor:default;">Escuela de Sociología</span></li>
-            <li><span class="footer__link" style="cursor:default;">Facultad de Ciencias Sociales y Humanidades</span></li>
+            <li><span class="footer__link footer__link--static">Escuela de Sociología</span></li>
+            <li><span class="footer__link footer__link--static">Facultad de Ciencias Sociales y Humanidades</span></li>
             <li><a href="https://www.udp.cl" class="footer__link" target="_blank" rel="noopener">Universidad Diego Portales</a></li>
           </ul>
-          <p class="footer__heading" style="margin-top: 1.5rem;">Contacto</p>
+          <p class="footer__heading footer__heading--mt">Contacto</p>
           <ul class="footer__links" role="list">
             <li><a href="mailto:gabriel.otero@mail.udp.cl" class="footer__link">gabriel.otero@mail.udp.cl</a></li>
           </ul>
-          <p class="footer__heading" style="margin-top: 1.5rem;">Redes</p>
+          <p class="footer__heading footer__heading--mt">Redes</p>
           <div class="social-icons">
             <a href="https://instagram.com/theclassproject" class="social-icon" target="_blank" rel="noopener" aria-label="Instagram">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

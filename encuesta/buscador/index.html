@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y9DYSQMWKG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y9DYSQMWKG');
+  </script>
+
+  <title>Buscador de variables — The Class Project</title>
+  <meta name="description" content="Buscador técnico del instrumento de medición. Explora preguntas, variables y módulos del cuestionario del proyecto FONDECYT The Class Project.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Buscador de variables — The Class Project">
+  <meta property="og:description" content="Buscador técnico del instrumento de medición. Explora preguntas, variables y módulos del cuestionario.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://theclassproject.org/encuesta/buscador/">
+  <meta property="og:image" content="https://theclassproject.org/assets/logos/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="es_CL">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://theclassproject.org/assets/logos/og-image.jpg">
+
+  <link rel="stylesheet" href="../../css/styles.css">
+
+  <style>
+    /* ══════════════════════════════════════════════════════════
+       BUSCADOR TÉCNICO — estilos específicos de esta página
+       Usa las variables CSS del sitio (styles.css).
+       No redefinir colores — todo hereda del sistema de diseño.
+       ══════════════════════════════════════════════════════════ */
+
+    /* ── Hero de sección (mismo patrón que otras páginas) ── */
+    .buscador-hero {
+      background-color: var(--color-surface);
+      border-bottom: 1px solid var(--color-border-light);
+      padding: var(--space-3xl) 0 var(--space-2xl);
+    }
+
+    .buscador-hero .container {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .buscador-hero__eyebrow {
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin: 0;
+    }
+
+    .buscador-hero__title {
+      font-family: var(--font-heading);
+      font-size: var(--text-3xl);
+      color: var(--color-primary);
+      margin: 0;
+      line-height: 1.15;
+    }
+
+    .buscador-hero__desc {
+      font-size: var(--text-base);
+      color: var(--color-text-muted);
+      max-width: 640px;
+      margin: var(--space-xs) 0 0;
+      line-height: 1.6;
+    }
+
+    @media (min-width: 768px) {
+      .buscador-hero__title { font-size: var(--text-4xl); }
+    }
+
+    /* ── Contenedor principal del buscador ── */
+    .buscador-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: var(--space-3xl) var(--container-pad);
+    }
+
+    /* ── Guía de búsqueda ── */
+    .busq-guia {
+      font-size: var(--text-xs);
+      color: var(--color-text-light);
+      letter-spacing: 0.04em;
+      margin: 0 0 var(--space-sm);
+      font-family: var(--font-body);
+    }
+
+    /* ── Input de búsqueda ── */
+    .busq-input-wrap {
+      position: relative;
+      margin-bottom: var(--space-md);
+    }
+
+    .busq-input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.85rem 1rem 0.85rem 2.8rem;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-text);
+      background: var(--color-bg);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-md);
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .busq-input::placeholder {
+      color: var(--color-text-light);
+    }
+
+    .busq-input:focus {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(10, 126, 122, 0.12);
+    }
+
+    .busq-input-icon {
+      position: absolute;
+      left: 0.9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--color-text-light);
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    /* ── Botonera de filtro ── */
+    .busq-filtros {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-xl);
+    }
+
+    .busq-btn-filtro {
+      padding: 0.35rem 0.9rem;
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-pill);
+      background: var(--color-bg);
+      color: var(--color-text-muted);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .busq-btn-filtro:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    /* Estados activos por tipo de filtro */
+    .busq-btn-filtro.f-activo-todos  { background: var(--color-primary); border-color: var(--color-primary); color: #fff; }
+    .busq-btn-filtro.f-activo-preg   { background: #2E7D32; border-color: #2E7D32; color: #fff; }
+    .busq-btn-filtro.f-activo-var    { background: #1565C0; border-color: #1565C0; color: #fff; }
+    .busq-btn-filtro.f-activo-sec    { background: #7B1FA2; border-color: #7B1FA2; color: #fff; }
+
+    /* ── Contador de resultados ── */
+    .busq-contador {
+      font-size: var(--text-xs);
+      color: var(--color-text-light);
+      margin-bottom: var(--space-md);
+      font-family: var(--font-body);
+      min-height: 1.4em;
+    }
+
+    /* ── Lista de tarjetas ── */
+    .busq-lista {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    /* ── Tarjeta individual ── */
+    .busq-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .busq-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-border);
+    }
+
+    /* Cabecera clickeable */
+    .busq-card__header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: 0.85rem var(--space-md);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .busq-card__code {
+      font-family: monospace;
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* Badges semánticos — colores fijos por convención científica */
+    .busq-badge {
+      font-family: monospace;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.2em 0.55em;
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .busq-badge--pregunta { background: #E8F5E9; color: #2E7D32; }
+    .busq-badge--variable { background: #E3F2FD; color: #1565C0; }
+    .busq-badge--seccion  { background: #F3E5F5; color: #7B1FA2; }
+
+    .busq-card__titulo {
+      flex: 1;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--color-text);
+      line-height: 1.35;
+    }
+
+    /* Flecha */
+    .busq-card__arrow {
+      margin-left: auto;
+      flex-shrink: 0;
+      color: var(--color-text-light);
+      font-size: 0.75rem;
+      transition: transform var(--transition), color var(--transition);
+    }
+
+    .busq-card.is-open .busq-card__arrow {
+      transform: rotate(90deg);
+      color: var(--color-accent);
+    }
+
+    /* Panel expandible */
+    .busq-card__panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.32s ease;
+    }
+
+    .busq-card.is-open .busq-card__panel {
+      max-height: 600px;
+    }
+
+    .busq-card__body {
+      padding: var(--space-md) var(--space-md) var(--space-lg);
+      border-top: 1px solid var(--color-border-light);
+    }
+
+    /* Filas de metadatos */
+    .busq-meta {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: var(--space-xs) var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .busq-meta__key {
+      font-family: monospace;
+      font-size: 0.78rem;
+      color: var(--color-text-light);
+      padding-top: 0.1em;
+      white-space: nowrap;
+    }
+
+    .busq-meta__val {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: var(--color-text);
+      line-height: 1.55;
+    }
+
+    /* Enlace cruzado */
+    .busq-crosslink {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35em;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      color: var(--color-accent);
+      text-decoration: none;
+      border: 1px solid var(--color-accent-light);
+      border-radius: var(--radius-pill);
+      padding: 0.3em 0.8em;
+      background: var(--color-accent-light);
+      transition: background var(--transition), border-color var(--transition);
+      cursor: pointer;
+    }
+
+    .busq-crosslink:hover {
+      background: rgba(10,126,122,0.15);
+      border-color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    /* Flash highlight al aterrizar en tarjeta destino */
+    @keyframes flashHL {
+      0%   { background-color: rgba(10, 126, 122, 0.12); }
+      65%  { background-color: rgba(10, 126, 122, 0.12); }
+      100% { background-color: var(--color-bg); }
+    }
+
+    .busq-card.flashing {
+      animation: flashHL 1.1s ease forwards;
+    }
+
+    /* Mensaje vacío */
+    .busq-empty {
+      text-align: center;
+      padding: var(--space-3xl) var(--space-md);
+      color: var(--color-text-light);
+      font-size: var(--text-sm);
+    }
+
+    .busq-empty__icon { font-size: 2rem; margin-bottom: var(--space-sm); }
+
+    /* Breadcrumb */
+    .buscador-breadcrumb {
+      font-size: var(--text-xs);
+      color: var(--color-text-light);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .buscador-breadcrumb a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    .buscador-breadcrumb a:hover { text-decoration: underline; }
+
+    .buscador-breadcrumb span { margin: 0 0.4em; }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       NAVEGACIÓN PRINCIPAL
+       ══════════════════════════════════════════ -->
+  <nav class="nav" aria-label="Navegación principal">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="/" class="nav__logo">The <span>Class</span> Project</a>
+        <ul class="nav__links" role="list">
+          <li><a href="/" class="nav__link">Inicio</a></li>
+          <li><a href="/proyecto/" class="nav__link">Proyecto</a></li>
+          <li><a href="/encuesta/" class="nav__link nav__link--active" aria-current="page">Encuesta</a></li>
+          <li><a href="/equipo/" class="nav__link">Equipo</a></li>
+          <li><a href="/divulgacion/" class="nav__link">Divulgación</a></li>
+          <li><a href="/accountability/" class="nav__link">Transparencia</a></li>
+        </ul>
+        <button class="nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-mobile" aria-label="Abrir menú de navegación">
+          <span class="nav__toggle-bar"></span>
+          <span class="nav__toggle-bar"></span>
+          <span class="nav__toggle-bar"></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav__mobile" id="nav-mobile" role="dialog" aria-label="Menú de navegación">
+      <a href="/" class="nav__mobile-link">Inicio</a>
+      <a href="/proyecto/" class="nav__mobile-link">Proyecto</a>
+      <a href="/encuesta/" class="nav__mobile-link" aria-current="page">Encuesta</a>
+      <a href="/equipo/" class="nav__mobile-link">Equipo</a>
+      <a href="/divulgacion/" class="nav__mobile-link">Divulgación</a>
+      <a href="/accountability/" class="nav__mobile-link">Transparencia</a>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════
+       HERO DE SECCIÓN
+       ══════════════════════════════════════════ -->
+  <section class="buscador-hero">
+    <div class="container">
+      <p class="buscador-hero__eyebrow">Encuesta · Instrumento de medición</p>
+      <h1 class="buscador-hero__title">Buscador de variables</h1>
+      <p class="buscador-hero__desc">
+        Catálogo técnico interactivo del cuestionario. Busca preguntas, variables codificadas
+        y módulos por nombre, código o texto exacto. Haz clic en cualquier ítem para ver sus
+        metadatos y navegar entre pregunta y variable vinculada.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       BUSCADOR
+       ══════════════════════════════════════════ -->
+  <main>
+    <div class="buscador-wrap">
+
+      <!-- Breadcrumb -->
+      <nav class="buscador-breadcrumb" aria-label="Breadcrumb">
+        <a href="/encuesta/">Encuesta</a>
+        <span aria-hidden="true">›</span>
+        Buscador de variables
+      </nav>
+
+      <!-- Guía -->
+      <p class="busq-guia">Buscador Técnico · busca: desigualdad, red, clase, confianza, módulo...</p>
+
+      <!-- Input -->
+      <div class="busq-input-wrap">
+        <span class="busq-input-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </span>
+        <input
+          type="search"
+          id="busq-input"
+          class="busq-input"
+          placeholder="🔍 Escribe para buscar preguntas o variables..."
+          autocomplete="off"
+          spellcheck="false"
+          aria-label="Buscar preguntas o variables"
+        >
+      </div>
+
+      <!-- Filtros -->
+      <div class="busq-filtros" role="group" aria-label="Filtrar por tipo">
+        <button class="busq-btn-filtro f-activo-todos" data-filtro="todos">Todos</button>
+        <button class="busq-btn-filtro" data-filtro="pregunta">Preguntas</button>
+        <button class="busq-btn-filtro" data-filtro="variable">Variables</button>
+        <button class="busq-btn-filtro" data-filtro="seccion">Secciones</button>
+      </div>
+
+      <!-- Contador -->
+      <p class="busq-contador" id="busq-contador" aria-live="polite" aria-atomic="true"></p>
+
+      <!-- Resultados -->
+      <div class="busq-lista" id="busq-lista" role="list"></div>
+
+    </div>
+  </main>
+
+  <!-- ══════════════════════════════════════════
+       FOOTER (idéntico al resto del sitio)
+       ══════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+
+        <div>
+          <p class="footer__logo">The <span>Class</span> Project</p>
+          <p class="footer__desc">The Class project es una plataforma dedicada a compartir los resultados del Fondecyt de Iniciaci&oacute;n N&deg;11240249, &ldquo;Class, personal networks and political attitudes&rdquo; (Relaciones entre clases y posiciones pol&iacute;ticas), financiado por la Agencia Nacional de Investigaci&oacute;n y Desarrollo (ANID).</p>
+        </div>
+
+        <div>
+          <p class="footer__heading">Secciones</p>
+          <ul class="footer__links" role="list">
+            <li><a href="/" class="footer__link">Inicio</a></li>
+            <li><a href="/proyecto/" class="footer__link">El proyecto</a></li>
+            <li><a href="/encuesta/" class="footer__link">Encuesta</a></li>
+            <li><a href="/equipo/" class="footer__link">Equipo</a></li>
+            <li><a href="/divulgacion/" class="footer__link">Divulgaci&oacute;n</a></li>
+            <li><a href="/accountability/" class="footer__link">Transparencia</a></li>
+            <li><a href="/encuesta/#cuestionario" class="footer__link">Cuestionario</a></li>
+            <li><a href="/encuesta/buscador/" class="footer__link">Buscador de variables</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer__heading">Instituci&oacute;n</p>
+          <ul class="footer__links" role="list">
+            <li><span class="footer__link footer__link--static">Escuela de Sociolog&iacute;a</span></li>
+            <li><span class="footer__link footer__link--static">Facultad de Ciencias Sociales y Humanidades</span></li>
+            <li><a href="https://www.udp.cl" class="footer__link" target="_blank" rel="noopener">Universidad Diego Portales</a></li>
+          </ul>
+          <p class="footer__heading footer__heading--mt">Contacto</p>
+          <ul class="footer__links" role="list">
+            <li><a href="mailto:gabriel.otero@mail.udp.cl" class="footer__link">gabriel.otero@mail.udp.cl</a></li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; <span id="footer-year"></span> The Class Project · FONDECYT de Iniciaci&oacute;n N&deg;11240249 · ANID</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════
+       SCRIPTS
+       ══════════════════════════════════════════ -->
+  <script src="../../js/script.js"></script>
+
+  <script>
+    /* ══════════════════════════════════════════════════════════
+       BUSCADOR TÉCNICO — lógica completa en Vanilla JS
+       Base de datos: instrumento de medición The Class Project
+       FONDECYT de Iniciación N° 11240249 · ANID 2024-2027
+       ══════════════════════════════════════════════════════════ */
+
+    /* ── 1. DATASET ──────────────────────────────────────────── */
+    const DATA = [
+      // ── MÓDULO A: POSICIÓN SOCIAL ──
+      { id: "sec_mod_a", tipo: "seccion", codigo_visual: "MOD-A", titulo: "Módulo A — Posición Social y Clase", id_vinculo: "", modulo: "Metodología", texto_exacto: "Variables de nivel educacional, situación laboral, ingresos del hogar y autoidentificación de clase social.", valores: "Preguntas: P1, P2, P3, P4 | Variables: EDUC_01, OCUP_01, INGR_01, CLASE_01" },
+      { id: "preg_p1", tipo: "pregunta", codigo_visual: "P1", titulo: "Nivel educacional más alto alcanzado", id_vinculo: "var_educ_01", modulo: "Módulo A — Posición Social", texto_exacto: "¿Cuál es su nivel educacional más alto alcanzado?", valores: "0=Sin estudios, 1=Básica incompleta, 2=Básica completa, 3=Media incompleta, 4=Media completa, 5=Técnico superior, 6=Universitaria incompleta, 7=Universitaria, 8=Postgrado" },
+      { id: "var_educ_01", tipo: "variable", codigo_visual: "EDUC_01", titulo: "EDUC_01: Nivel educacional", id_vinculo: "preg_p1", modulo: "Módulo A", texto_exacto: "Nivel educacional más alto alcanzado por el encuestado.", valores: "Ordinal | Rango: 0-8" },
+      { id: "preg_p4", tipo: "pregunta", codigo_visual: "P4", titulo: "Autoidentificación de clase social", id_vinculo: "var_clase_01", modulo: "Módulo A — Posición Social", texto_exacto: "¿Cómo se autoidentifica en términos de clase social?", valores: "1=Baja, 2=Media-baja, 3=Media, 4=Media-alta, 5=Alta" },
+      { id: "var_clase_01", tipo: "variable", codigo_visual: "CLASE_01", titulo: "CLASE_01: Autoidentificación de clase", id_vinculo: "preg_p4", modulo: "Módulo A", texto_exacto: "Percepción subjetiva de pertenencia de clase social del encuestado.", valores: "Ordinal | Rango: 1-5" },
+
+      // ── MÓDULO B: REDES PERSONALES ──
+      { id: "sec_mod_b", tipo: "seccion", codigo_visual: "MOD-B", titulo: "Módulo B — Redes Personales y Capital Social", id_vinculo: "", modulo: "Metodología", texto_exacto: "Variables sobre tamaño y composición de redes personales, capital social, heterogeneidad y frecuencia de contacto.", valores: "Preguntas: P5, P6, P7, P8 | Variables: RED_TAM, RED_HET, CAP_SOC, CONT_FRQ" },
+      { id: "preg_p5", tipo: "pregunta", codigo_visual: "P5", titulo: "Tamaño de la red personal", id_vinculo: "var_red_tam", modulo: "Módulo B — Redes Personales", texto_exacto: "En los últimos 6 meses, ¿con cuántas personas distintas ha tenido una conversación importante?", valores: "Continua (0–99 contactos)" },
+      { id: "var_red_tam", tipo: "variable", codigo_visual: "RED_TAM", titulo: "RED_TAM: Tamaño de red personal", id_vinculo: "preg_p5", modulo: "Módulo B", texto_exacto: "Número de contactos con quienes el encuestado tiene conversaciones significativas.", valores: "Continua | Rango: 0-99" },
+      { id: "var_red_het", tipo: "variable", codigo_visual: "RED_HET", titulo: "RED_HET: Heterogeneidad económica de red", id_vinculo: "", modulo: "Módulo B", texto_exacto: "Proporción de contactos con mejor situación económica que el encuestado.", valores: "Ordinal | 1=Ninguno ... 5=Todos" },
+      { id: "var_cap_soc", tipo: "variable", codigo_visual: "CAP_SOC", titulo: "CAP_SOC: Capital social extenso", id_vinculo: "", modulo: "Módulo B", texto_exacto: "Índice de diversidad ocupacional en la red personal.", valores: "Continua | Rango: 0-10 ocupaciones distintas" },
+
+      // ── MÓDULO C: ACTITUDES POLÍTICAS ──
+      { id: "sec_mod_c", tipo: "seccion", codigo_visual: "MOD-C", titulo: "Módulo C — Actitudes Políticas", id_vinculo: "", modulo: "Metodología", texto_exacto: "Variables de posicionamiento ideológico, percepción de desigualdad, confianza institucional y participación electoral.", valores: "Preguntas: P9, P10, P11, P12 | Variables: IDEO_01, DES_01, CONF_GOB, VOTO_01" },
+      { id: "preg_p9", tipo: "pregunta", codigo_visual: "P9", titulo: "Autoubicación ideológica izquierda–derecha", id_vinculo: "var_ideo_01", modulo: "Módulo C — Actitudes Políticas", texto_exacto: "En una escala del 1 al 10, ¿dónde se ubica políticamente? (1 = Izquierda, 10 = Derecha)", valores: "1=Izquierda ... 10=Derecha" },
+      { id: "var_ideo_01", tipo: "variable", codigo_visual: "IDEO_01", titulo: "IDEO_01: Autoubicación ideológica", id_vinculo: "preg_p9", modulo: "Módulo C", texto_exacto: "Posición ideológica autodeclarada en escala izquierda–derecha.", valores: "Ordinal | Rango: 1-10" },
+      { id: "preg_p10", tipo: "pregunta", codigo_visual: "P10", titulo: "Percepción de desigualdad de ingresos", id_vinculo: "var_des_01", modulo: "Módulo C — Actitudes Políticas", texto_exacto: "¿Qué tan de acuerdo está: 'Las diferencias de ingresos en Chile son demasiado grandes'?", valores: "Likert | 1=Muy en desacuerdo ... 5=Muy de acuerdo" },
+      { id: "var_des_01", tipo: "variable", codigo_visual: "DES_01", titulo: "DES_01: Percepción de desigualdad", id_vinculo: "preg_p10", modulo: "Módulo C", texto_exacto: "Grado de acuerdo con que las diferencias de ingresos en Chile son excesivas.", valores: "Ordinal Likert | Rango: 1-5" },
+      { id: "preg_p11", tipo: "pregunta", codigo_visual: "P11", titulo: "Confianza en instituciones", id_vinculo: "", modulo: "Módulo C — Actitudes Políticas", texto_exacto: "¿Qué tanta confianza tiene en: gobierno, congreso, partidos, FF.AA., iglesia, empresarios, sindicatos, medios?", valores: "Likert (1–5) × 8 ítems" },
+
+      // ── MÓDULO D: TERRITORIO ──
+      { id: "sec_mod_d", tipo: "seccion", codigo_visual: "MOD-D", titulo: "Módulo D — Territorio y Segregación", id_vinculo: "", modulo: "Metodología", texto_exacto: "Variables sobre tiempo de residencia, contacto interclase y percepción de desigualdad barrial.", valores: "Preguntas: P13, P14, P15, P16 | Variables: TERR_AÑO, BARR_DES, DET_CLA" },
+      { id: "preg_p16", tipo: "pregunta", codigo_visual: "P16", titulo: "Determinismo de clase en oportunidades de vida", id_vinculo: "var_det_cla", modulo: "Módulo D — Territorio", texto_exacto: "¿Cree que en Chile la clase social en que uno nace determina las oportunidades de vida?", valores: "Likert | 1=Muy en desacuerdo ... 5=Muy de acuerdo" },
+      { id: "var_det_cla", tipo: "variable", codigo_visual: "DET_CLA", titulo: "DET_CLA: Determinismo de clase", id_vinculo: "preg_p16", modulo: "Módulo D", texto_exacto: "Creencia en que la clase de origen determina las oportunidades de vida.", valores: "Ordinal Likert | Rango: 1-5" },
+
+      // ── MÓDULO E: SOCIODEMOGRÁFICO ──
+      { id: "sec_mod_e", tipo: "seccion", codigo_visual: "MOD-E", titulo: "Módulo E — Perfil Sociodemográfico", id_vinculo: "", modulo: "Metodología", texto_exacto: "Variables de sexo, edad, comuna, tamaño del hogar y acceso a internet.", valores: "Preguntas: P17, P18, P19, P20, P21 | Variables: SEXO, EDAD, COMUNA, HOG_TAM" }
+    ];
+
+    /* ── 2. UTILIDADES ───────────────────────────────────────── */
+
+    /* Escapado XSS */
+    function escHTML(str) {
+      return String(str || '')
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    /* Texto buscable: codigo_visual + titulo + texto_exacto */
+    function textoBuscable(item) {
+      return [item.codigo_visual, item.titulo, item.texto_exacto]
+        .filter(Boolean).join(' ').toLowerCase();
+    }
+
+    /* Badge CSS class */
+    function badgeClass(tipo) {
+      return tipo === 'pregunta' ? 'busq-badge--pregunta'
+           : tipo === 'variable' ? 'busq-badge--variable'
+           : 'busq-badge--seccion';
+    }
+
+    /* Badge label */
+    function badgeLabel(tipo) {
+      return tipo === 'pregunta' ? 'Pregunta'
+           : tipo === 'variable' ? 'Variable'
+           : 'Sección';
+    }
+
+    /* Label del enlace cruzado */
+    function crossLinkLabel(tipo) {
+      return tipo === 'pregunta'
+        ? 'Ver Variable Técnica Correspondiente ➜'
+        : 'Ver Pregunta del Cuestionario Original ➜';
+    }
+
+    /* ── 3. RENDERIZADO ──────────────────────────────────────── */
+
+    function renderCard(item) {
+      const tieneCrossLink = item.tipo !== 'seccion' && item.id_vinculo;
+      const crossLinkHTML = tieneCrossLink
+        ? `<button class="busq-crosslink" data-target="${escHTML(item.id_vinculo)}">${crossLinkLabel(item.tipo)}</button>`
+        : '';
+
+      return `
+        <div class="busq-card" id="${escHTML(item.id)}" role="listitem">
+          <div class="busq-card__header" tabindex="0" role="button" aria-expanded="false" aria-controls="panel-${escHTML(item.id)}">
+            <span class="busq-card__code">${escHTML(item.codigo_visual)}</span>
+            <span class="busq-badge ${badgeClass(item.tipo)}">${badgeLabel(item.tipo)}</span>
+            <span class="busq-card__titulo">${escHTML(item.titulo)}</span>
+            <span class="busq-card__arrow" aria-hidden="true">►</span>
+          </div>
+          <div class="busq-card__panel" id="panel-${escHTML(item.id)}" role="region">
+            <div class="busq-card__body">
+              <div class="busq-meta">
+                <span class="busq-meta__key">módulo:</span>
+                <span class="busq-meta__val">${escHTML(item.modulo)}</span>
+                <span class="busq-meta__key">texto_exacto:</span>
+                <span class="busq-meta__val">${escHTML(item.texto_exacto)}</span>
+                <span class="busq-meta__key">valores:</span>
+                <span class="busq-meta__val">${escHTML(item.valores)}</span>
+              </div>
+              ${crossLinkHTML}
+            </div>
+          </div>
+        </div>`;
+    }
+
+    /* ── 4. ESTADO ───────────────────────────────────────────── */
+    let filtroActual = 'todos';
+    let queryActual  = '';
+
+    /* ── 5. FILTRADO Y PINTADO ───────────────────────────────── */
+    function pintarResultados() {
+      const lista    = document.getElementById('busq-lista');
+      const contador = document.getElementById('busq-contador');
+
+      const q = queryActual.trim().toLowerCase();
+      const resultados = DATA.filter(item => {
+        if (filtroActual !== 'todos' && item.tipo !== filtroActual) return false;
+        if (!q) return true;
+        return textoBuscable(item).includes(q);
+      });
+
+      lista.innerHTML = resultados.length
+        ? resultados.map(renderCard).join('')
+        : `<div class="busq-empty">
+             <div class="busq-empty__icon">🔍</div>
+             <p>No se encontraron resultados para <strong>"${escHTML(queryActual)}"</strong>.</p>
+             <p>Prueba con: desigualdad, red, clase, confianza, módulo…</p>
+           </div>`;
+
+      contador.textContent = resultados.length
+        ? `${resultados.length} resultado${resultados.length !== 1 ? 's' : ''}`
+        : '';
+
+      /* Re-vincular eventos tras cada render */
+      vincularEventos();
+    }
+
+    /* ── 6. ACORDEÓN ─────────────────────────────────────────── */
+    function openCard(card) {
+      if (!card) return;
+      const header = card.querySelector('.busq-card__header');
+      card.classList.add('is-open');
+      if (header) header.setAttribute('aria-expanded', 'true');
+    }
+
+    function toggleCard(card) {
+      if (!card) return;
+      const header = card.querySelector('.busq-card__header');
+      const isOpen = card.classList.toggle('is-open');
+      if (header) header.setAttribute('aria-expanded', String(isOpen));
+    }
+
+    /* ── 7. NAVEGACIÓN CRUZADA ───────────────────────────────── */
+    function navegarA(targetId) {
+      /* Buscar la tarjeta en el DOM actual */
+      let card = document.getElementById(targetId);
+
+      /* Si no está visible (filtro activo la oculta), resetear */
+      if (!card) {
+        filtroActual = 'todos';
+        queryActual  = '';
+        document.getElementById('busq-input').value = '';
+        actualizarBotonesF();
+        pintarResultados();
+        card = document.getElementById(targetId);
+      }
+
+      if (!card) return; /* No existe en el dataset */
+
+      /* Scroll suave al centro */
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      /* Abrir y destacar con leve retardo (esperar scroll) */
+      setTimeout(() => {
+        openCard(card);
+        /* Flash highlight */
+        card.classList.remove('flashing');
+        void card.offsetWidth; /* reflow para reiniciar animación */
+        card.classList.add('flashing');
+        card.addEventListener('animationend', () => {
+          card.classList.remove('flashing');
+        }, { once: true });
+      }, 420);
+    }
+
+    /* ── 8. EVENTOS ──────────────────────────────────────────── */
+    function vincularEventos() {
+      /* Acordeón — clic en header */
+      document.querySelectorAll('.busq-card__header').forEach(header => {
+        header.addEventListener('click', () => toggleCard(header.closest('.busq-card')));
+        header.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleCard(header.closest('.busq-card'));
+          }
+        });
+      });
+
+      /* Enlace cruzado */
+      document.querySelectorAll('.busq-crosslink').forEach(btn => {
+        btn.addEventListener('click', () => navegarA(btn.dataset.target));
+      });
+    }
+
+    /* ── 9. FILTROS ──────────────────────────────────────────── */
+    const CLASE_FILTRO = {
+      todos:    'f-activo-todos',
+      pregunta: 'f-activo-preg',
+      variable: 'f-activo-var',
+      seccion:  'f-activo-sec'
+    };
+
+    function actualizarBotonesF() {
+      document.querySelectorAll('.busq-btn-filtro').forEach(btn => {
+        Object.values(CLASE_FILTRO).forEach(c => btn.classList.remove(c));
+        if (btn.dataset.filtro === filtroActual) {
+          btn.classList.add(CLASE_FILTRO[filtroActual]);
+        }
+      });
+    }
+
+    /* ── 10. INIT ────────────────────────────────────────────── */
+    (function init() {
+      /* Búsqueda en tiempo real */
+      const input = document.getElementById('busq-input');
+      input.addEventListener('input', () => {
+        queryActual = input.value;
+        pintarResultados();
+      });
+
+      /* Botones de filtro */
+      document.querySelectorAll('.busq-btn-filtro').forEach(btn => {
+        btn.addEventListener('click', () => {
+          filtroActual = btn.dataset.filtro;
+          actualizarBotonesF();
+          pintarResultados();
+        });
+      });
+
+      /* Pintado inicial */
+      pintarResultados();
+    })();
+  </script>
+
+</body>
+</html>
