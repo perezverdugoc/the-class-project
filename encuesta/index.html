@@ -395,65 +395,6 @@
       .mapa-interactive { grid-template-columns: 1fr; }
     }
 
-    .mapa-rm-svg {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .mapa-compass-label {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      fill: var(--color-text-light, #888);
-      font-family: var(--font-body);
-    }
-
-    .mapa-geo-label {
-      font-size: 9px;
-      fill: rgba(100,130,160,0.55);
-      font-family: var(--font-body);
-      font-style: italic;
-    }
-
-    .mapa-zona {
-      cursor: pointer;
-      outline: none;
-    }
-
-    .mapa-zona rect {
-      transition: opacity 0.15s, filter 0.15s;
-    }
-
-    .mapa-zona:hover rect,
-    .mapa-zona:focus rect {
-      opacity: 0.82;
-      filter: brightness(1.12);
-    }
-
-    .mapa-zona.is-active rect {
-      stroke: #fff;
-      stroke-width: 3;
-      filter: brightness(1.08);
-    }
-
-    .mz-name {
-      fill: #fff;
-      font-size: 12px;
-      font-weight: 700;
-      text-anchor: middle;
-      pointer-events: none;
-      font-family: var(--font-heading, serif);
-    }
-
-    .mz-n {
-      fill: rgba(255,255,255,0.72);
-      font-size: 10px;
-      text-anchor: middle;
-      pointer-events: none;
-      font-family: var(--font-body, sans-serif);
-    }
 
     .mapa-footnote {
       font-size: 11px;
@@ -737,7 +678,47 @@
       padding: 0 1px;
     }
 
-  </style>
+
+    /* ── MAPA LEAFLET ──────────────────────────────── */
+    .mapa-leaflet-col {
+      width: 100%;
+      height: 480px;
+      border-radius: 8px;
+      background: #fff;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    @media (max-width: 860px) {
+      .mapa-leaflet-col { height: 320px; }
+    }
+    .leaflet-container {
+      background: #fff !important;
+      font-family: var(--font-body, sans-serif) !important;
+    }
+    .leaflet-zoom-animated { will-change: auto !important; }
+    .mapa-tooltip {
+      font-family: var(--font-body, sans-serif);
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: none !important;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.14);
+      background: #fff;
+      color: var(--color-text, #222);
+      line-height: 1.4;
+    }
+    .mapa-leaflet-col .leaflet-control-zoom {
+      border: none;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    }
+    .mapa-leaflet-col .leaflet-control-zoom a {
+      color: var(--color-text, #333);
+      border-radius: 4px;
+    }
+
+    </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTLSeB68ARYJipY1SQ==" crossorigin="anonymous"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWoFqsFR3wbgemXrHouLoNAFVfWefnFuSivYmFBSbgcRT5giFdI8g==" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -919,91 +900,10 @@
 
             <div class="mapa-interactive" role="region" aria-label="Mapa interactivo de zonas de muestreo">
 
-              <!-- SVG ESQUEMÁTICO DEL MAPA RM -->
+              <!-- MAPA LEAFLET: polígonos geográficos reales RM -->
               <div class="mapa-svg-col">
-                <svg viewBox="0 0 495 490" class="mapa-rm-svg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-
-                  <!-- Fondo -->
-                  <rect x="0" y="0" width="495" height="490" fill="#f4f7fa" rx="10"/>
-
-                  <!-- Indicador Norte -->
-                  <text x="247" y="11" class="mapa-compass-label" text-anchor="middle">&#8593; Norte</text>
-
-                  <!-- CHACABUCO -->
-                  <g class="mapa-zona" data-zona="chacabuco" tabindex="0" role="button" aria-label="Zona Chacabuco, 57 encuestados">
-                    <rect x="150" y="17" width="200" height="62" rx="6" fill="#5B7FA6"/>
-                    <text class="mz-name" x="250" y="44">Chacabuco</text>
-                    <text class="mz-n" x="250" y="62">n = 57</text>
-                  </g>
-
-                  <!-- NORTE -->
-                  <g class="mapa-zona" data-zona="norte" tabindex="0" role="button" aria-label="Zona Norte, 144 encuestados">
-                    <rect x="150" y="85" width="200" height="88" rx="6" fill="#2E6DA4"/>
-                    <text class="mz-name" x="250" y="124">Norte</text>
-                    <text class="mz-n" x="250" y="142">n = 144</text>
-                  </g>
-
-                  <!-- PONIENTE -->
-                  <g class="mapa-zona" data-zona="poniente" tabindex="0" role="button" aria-label="Zona Poniente, 199 encuestados">
-                    <rect x="5" y="85" width="140" height="170" rx="6" fill="#1D6A8A"/>
-                    <text class="mz-name" x="75" y="168">Poniente</text>
-                    <text class="mz-n" x="75" y="186">n = 199</text>
-                  </g>
-
-                  <!-- ORIENTE -->
-                  <g class="mapa-zona" data-zona="oriente" tabindex="0" role="button" aria-label="Zona Oriente, 194 encuestados">
-                    <rect x="355" y="85" width="135" height="170" rx="6" fill="#3A7DC9"/>
-                    <text class="mz-name" x="422" y="168">Oriente</text>
-                    <text class="mz-n" x="422" y="186">n = 194</text>
-                  </g>
-
-                  <!-- CENTRO -->
-                  <g class="mapa-zona" data-zona="centro" tabindex="0" role="button" aria-label="Zona Centro, 105 encuestados">
-                    <rect x="150" y="179" width="200" height="72" rx="6" fill="#1A3A5C"/>
-                    <text class="mz-name" x="250" y="212">Centro</text>
-                    <text class="mz-n" x="250" y="230">n = 105</text>
-                  </g>
-
-                  <!-- SUR -->
-                  <g class="mapa-zona" data-zona="sur" tabindex="0" role="button" aria-label="Zona Sur, 268 encuestados">
-                    <rect x="150" y="257" width="200" height="125" rx="6" fill="#134F7A"/>
-                    <text class="mz-name" x="250" y="314">Sur</text>
-                    <text class="mz-n" x="250" y="332">n = 268</text>
-                  </g>
-
-                  <!-- TALAGANTE -->
-                  <g class="mapa-zona" data-zona="talagante" tabindex="0" role="button" aria-label="Zona Talagante, 57 encuestados">
-                    <rect x="5" y="261" width="140" height="121" rx="6" fill="#3D7A96"/>
-                    <text class="mz-name" x="75" y="319">Talagante</text>
-                    <text class="mz-n" x="75" y="337">n = 57</text>
-                  </g>
-
-                  <!-- CORDILLERA -->
-                  <g class="mapa-zona" data-zona="cordillera" tabindex="0" role="button" aria-label="Zona Cordillera, 103 encuestados">
-                    <rect x="355" y="261" width="135" height="200" rx="6" fill="#1A6E8A"/>
-                    <text class="mz-name" x="422" y="355">Cordillera</text>
-                    <text class="mz-n" x="422" y="373">n = 103</text>
-                  </g>
-
-                  <!-- MAIPO -->
-                  <g class="mapa-zona" data-zona="maipo" tabindex="0" role="button" aria-label="Zona Maipo, 89 encuestados">
-                    <rect x="150" y="388" width="200" height="95" rx="6" fill="#246E8A"/>
-                    <text class="mz-name" x="250" y="432">Maipo</text>
-                    <text class="mz-n" x="250" y="450">n = 89</text>
-                  </g>
-
-                  <!-- MELIPILLA -->
-                  <g class="mapa-zona" data-zona="melipilla" tabindex="0" role="button" aria-label="Zona Melipilla, 35 encuestados">
-                    <rect x="5" y="388" width="140" height="95" rx="6" fill="#4A8FAA"/>
-                    <text class="mz-name" x="75" y="432">Melipilla</text>
-                    <text class="mz-n" x="75" y="450">n = 35</text>
-                  </g>
-
-                  <!-- Etiqueta Andes -->
-                  <text x="488" y="370" class="mapa-geo-label" text-anchor="end">Andes &#8594;</text>
-
-                </svg>
-                <p class="mapa-footnote">N&#8202;=&#8202;1.251 &middot; 10 zonas &middot; 41 comunas &middot; Regi&oacute;n Metropolitana de Santiago</p>
+                <div id="leaflet-mapa" class="mapa-leaflet-col" role="region" aria-label="Mapa de zonas de muestreo"></div>
+                <p class="mapa-footnote">N&#8202;=&#8202;1.251 &middot; 10 zonas &middot; 41 comunas &middot; Región Metropolitana de Santiago &middot; Haz clic en una zona para ver el detalle</p>
               </div>
 
               <!-- PANEL DE DETALLE DE ZONA -->
@@ -1286,50 +1186,126 @@
       melipilla:  { name: 'Zona Melipilla',   n: 35,  color: '#4A8FAA', comunas: [['Melipilla', 35]] }
     };
 
-    var placeholder  = document.getElementById('mapa-placeholder');
-    var content      = document.getElementById('mapa-content');
-    var panelTitle   = document.getElementById('mapa-panel-title');
-    var panelBadge   = document.getElementById('mapa-panel-n');
-    var panelList    = document.getElementById('mapa-panel-list');
-    var panelSubtotal= document.getElementById('mapa-panel-subtotal');
-    var panelHeader  = document.getElementById('mapa-panel-header');
+    /* Normalizar nombres para comparar (sin tilde, lowercase) */
+    function norm(s) {
+      return (s || '').toLowerCase()
+        .normalize('NFD').replace(/[̀-ͯ]/g, '')
+        .replace(/\s+/g, ' ').trim();
+    }
 
-    if (!placeholder) return;
-
-    document.querySelectorAll('.mapa-zona').forEach(function(zona) {
-      function activate() {
-        var id   = zona.dataset.zona;
-        var data = ZONAS_DATA[id];
-        if (!data) return;
-
-        document.querySelectorAll('.mapa-zona').forEach(function(z) { z.classList.remove('is-active'); });
-        zona.classList.add('is-active');
-
-        panelHeader.style.borderLeftColor = data.color;
-        panelTitle.textContent = data.name;
-        panelBadge.textContent = 'n = ' + data.n;
-
-        panelList.innerHTML = data.comunas.map(function(c) {
-          return '<li><span class="mapa-panel__com-name">' + c[0] + '</span><span class="mapa-panel__com-n">n = ' + c[1] + '</span></li>';
-        }).join('');
-
-        var nc = data.comunas.length;
-        panelSubtotal.textContent = nc + (nc === 1 ? ' comuna' : ' comunas');
-
-        placeholder.hidden = true;
-        content.hidden = false;
-
-        /* En mobile, scroll al panel */
-        if (window.innerWidth < 860) {
-          document.getElementById('mapa-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }
-
-      zona.addEventListener('click', activate);
-      zona.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
-      });
+    /* Construir lookup comuna → zonaKey */
+    var LOOKUP = {};
+    Object.keys(ZONAS_DATA).forEach(function(k) {
+      ZONAS_DATA[k].comunas.forEach(function(c) { LOOKUP[norm(c[0])] = k; });
     });
+
+    /* Elementos del panel */
+    var placeholder = document.getElementById('mapa-placeholder');
+    var content     = document.getElementById('mapa-content');
+    var panelTitle  = document.getElementById('mapa-panel-title');
+    var panelN      = document.getElementById('mapa-panel-n');
+    var panelList   = document.getElementById('mapa-panel-list');
+    var panelSub    = document.getElementById('mapa-panel-subtotal');
+
+    var activeZona  = null;
+    var geoLayer    = null;
+
+    /* Panel: mostrar zona */
+    function showPanel(zonaKey) {
+      var z = ZONAS_DATA[zonaKey];
+      panelTitle.textContent = z.name;
+      panelN.textContent     = 'n = ' + z.n;
+      panelN.style.background = z.color;
+      panelList.innerHTML = z.comunas.map(function(c) {
+        return '<li><span class="mapa-panel__com-name">' + c[0] + '</span>'
+             + '<span class="mapa-panel__com-n">n = ' + c[1] + '</span></li>';
+      }).join('');
+      var pct = ((z.n / 1251) * 100).toFixed(1);
+      panelSub.textContent = z.n + ' encuestados · ' + pct + '% de la muestra';
+      placeholder.hidden = true;
+      content.hidden     = false;
+    }
+
+    /* Helpers de estilo */
+    function getZonaKey(f) {
+      var n = f.properties.NOM_COM || f.properties.COMUNA || f.properties.nombre || '';
+      return LOOKUP[norm(n)] || null;
+    }
+
+    function baseStyle(f) {
+      var k = getZonaKey(f);
+      return {
+        fillColor:   k ? ZONAS_DATA[k].color : '#dde3ea',
+        fillOpacity: k ? 0.72 : 0.22,
+        color:       '#ffffff',
+        weight:      1,
+        opacity:     1
+      };
+    }
+
+    function activateZona(zonaKey) {
+      activeZona = zonaKey;
+      geoLayer.eachLayer(function(layer) {
+        var fk = getZonaKey(layer.feature);
+        if (fk === zonaKey) {
+          layer.setStyle({ fillOpacity: 0.95, weight: 2, color: '#fff' });
+          layer.bringToFront();
+        } else if (fk) {
+          layer.setStyle({ fillOpacity: 0.28 });
+        }
+      });
+      showPanel(zonaKey);
+    }
+
+    /* Init mapa Leaflet — sin tiles, fondo blanco */
+    if (!document.getElementById('leaflet-mapa')) return;
+    var map = L.map('leaflet-mapa', {
+      zoomControl:       true,
+      attributionControl: false,
+      scrollWheelZoom:   false,
+      doubleClickZoom:   false,
+      boxZoom:           false
+    });
+
+    /* Cargar GeoJSON comunas RM */
+    var GEO_URL = 'https://raw.githubusercontent.com/robsalasco/precenso_2016_geojson_chile/master/Comunas/RM.geojson';
+
+    fetch(GEO_URL)
+      .then(function(r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .then(function(data) {
+        geoLayer = L.geoJSON(data, {
+          style: baseStyle,
+          onEachFeature: function(feature, layer) {
+            var zonaKey = getZonaKey(feature);
+            if (!zonaKey) return;
+            var z       = ZONAS_DATA[zonaKey];
+            var nombre  = feature.properties.NOM_COM || feature.properties.COMUNA || '';
+
+            layer.bindTooltip(
+              '<strong>' + nombre + '</strong><br><span style="color:#666">' + z.name + '</span>',
+              { sticky: true, className: 'mapa-tooltip', direction: 'top' }
+            );
+
+            layer.on('click', function() { activateZona(zonaKey); });
+            layer.on('mouseover', function() {
+              if (activeZona !== zonaKey) layer.setStyle({ fillOpacity: 0.9, weight: 2 });
+            });
+            layer.on('mouseout', function() {
+              if (activeZona !== zonaKey) geoLayer.resetStyle(layer);
+            });
+          }
+        }).addTo(map);
+
+        map.fitBounds(geoLayer.getBounds(), { padding: [12, 12] });
+      })
+      .catch(function(err) {
+        console.warn('Mapa no disponible:', err);
+        var el = document.getElementById('leaflet-mapa');
+        el.innerHTML = '<p style="text-align:center;padding:3rem 1rem;color:#888;font-family:sans-serif">Mapa no disponible sin conexión a internet</p>';
+      });
   })();
   </script>
 
