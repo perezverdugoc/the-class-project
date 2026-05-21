@@ -679,46 +679,23 @@
     }
 
 
-    /* ── MAPA LEAFLET ──────────────────────────────── */
-    .mapa-leaflet-col {
+    /* ── MAPA SVG GEOGRÁFICO ───────────────────────── */
+    .mapa-svg-col {
       width: 100%;
-      height: 480px;
+      min-height: 400px;
       border-radius: 8px;
-      background: #fff;
       overflow: hidden;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-    }
-    @media (max-width: 860px) {
-      .mapa-leaflet-col { height: 320px; }
-    }
-    .leaflet-container {
-      background: #fff !important;
-      font-family: var(--font-body, sans-serif) !important;
-    }
-    .leaflet-zoom-animated { will-change: auto !important; }
-    .mapa-tooltip {
-      font-family: var(--font-body, sans-serif);
-      font-size: 12px;
-      padding: 6px 10px;
-      border-radius: 6px;
-      border: none !important;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.14);
       background: #fff;
-      color: var(--color-text, #222);
-      line-height: 1.4;
     }
-    .mapa-leaflet-col .leaflet-control-zoom {
-      border: none;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    #mapa-svg .geo-s {
+      cursor: pointer;
+      transition: fill-opacity 0.15s;
     }
-    .mapa-leaflet-col .leaflet-control-zoom a {
-      color: var(--color-text, #333);
-      border-radius: 4px;
-    }
+    #mapa-svg .geo-s:hover { fill-opacity: 0.92 !important; }
+    #mapa-svg .geo-s.is-active { stroke-width: 2 !important; stroke: #fff !important; }
+    #mapa-svg .geo-s.is-dim   { fill-opacity: 0.20 !important; }
 
     </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTLSeB68ARYJipY1SQ==" crossorigin="anonymous"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWoFqsFR3wbgemXrHouLoNAFVfWefnFuSivYmFBSbgcRT5giFdI8g==" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -902,7 +879,71 @@
 
               <!-- MAPA LEAFLET: polígonos geográficos reales RM -->
               <div class="mapa-svg-col">
-                <div id="leaflet-mapa" class="mapa-leaflet-col" role="region" aria-label="Mapa de zonas de muestreo"></div>
+                <div class="mapa-svg-col" id="mapa-svg-wrap">
+                <svg id="mapa-svg" viewBox="0 0 480 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;background:#fff">
+  <polygon class="geo-com geo-s" data-zona="chacabuco" data-n="Colina" points="201.6,125.0 304.0,125.0 304.0,41.7 201.6,41.7 201.6,125.0" fill="#5B7FA6" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="chacabuco" data-n="Lampa" points="134.4,175.0 201.6,175.0 201.6,91.7 134.4,91.7 134.4,175.0" fill="#5B7FA6" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com" data-n="Til Til" points="176.0,41.7 272.0,41.7 272.0,-41.7 176.0,-41.7 176.0,41.7" fill="#dde3ea" fill-opacity="0.22" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="norte" data-n="Quilicura" points="224.0,170.8 256.0,170.8 256.0,137.5 224.0,137.5 224.0,170.8" fill="#2E6DA4" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="norte" data-n="Huechuraba" points="256.0,166.7 284.8,166.7 284.8,137.5 256.0,137.5 256.0,166.7" fill="#2E6DA4" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="norte" data-n="Conchalí" points="246.4,183.3 272.0,183.3 272.0,162.5 246.4,162.5 246.4,183.3" fill="#2E6DA4" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="norte" data-n="Independencia" points="262.4,183.3 278.4,183.3 278.4,166.7 262.4,166.7 262.4,183.3" fill="#2E6DA4" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="norte" data-n="Recoleta" points="278.4,183.3 297.6,183.3 297.6,162.5 278.4,162.5 278.4,183.3" fill="#2E6DA4" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="norte" data-n="Renca" points="224.0,195.8 246.4,195.8 246.4,166.7 224.0,166.7 224.0,195.8" fill="#2E6DA4" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="poniente" data-n="Quinta Normal" points="236.8,204.2 252.8,204.2 252.8,183.3 236.8,183.3 236.8,204.2" fill="#1D6A8A" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="poniente" data-n="Lo Prado" points="224.0,208.3 236.8,208.3 236.8,187.5 224.0,187.5 224.0,208.3" fill="#1D6A8A" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="poniente" data-n="Cerro Navia" points="214.4,195.8 230.4,195.8 230.4,175.0 214.4,175.0 214.4,195.8" fill="#1D6A8A" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="poniente" data-n="Pudahuel" points="176.0,225.0 217.6,225.0 217.6,175.0 176.0,175.0 176.0,225.0" fill="#1D6A8A" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="poniente" data-n="Cerrillos" points="214.4,225.0 236.8,225.0 236.8,204.2 214.4,204.2 214.4,225.0" fill="#1D6A8A" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="poniente" data-n="Maipú" points="182.4,258.3 249.6,258.3 249.6,225.0 182.4,225.0 182.4,258.3" fill="#1D6A8A" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="oriente" data-n="Vitacura" points="284.8,175.0 304.0,175.0 304.0,154.2 284.8,154.2 284.8,175.0" fill="#3A7DC9" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="oriente" data-n="Providencia" points="278.4,187.5 294.4,187.5 294.4,175.0 278.4,175.0 278.4,187.5" fill="#3A7DC9" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="oriente" data-n="Las Condes" points="300.8,200.0 329.6,200.0 329.6,154.2 300.8,154.2 300.8,200.0" fill="#3A7DC9" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="oriente" data-n="Ñuñoa" points="281.6,204.2 297.6,204.2 297.6,187.5 281.6,187.5 281.6,204.2" fill="#3A7DC9" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="oriente" data-n="La Reina" points="297.6,208.3 316.8,208.3 316.8,187.5 297.6,187.5 297.6,208.3" fill="#3A7DC9" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="centro" data-n="Santiago" points="256.0,195.8 278.4,195.8 278.4,179.2 256.0,179.2 256.0,195.8" fill="#1A3A5C" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="centro" data-n="Estación Central" points="240.0,212.5 256.0,212.5 256.0,191.7 240.0,191.7 240.0,212.5" fill="#1A3A5C" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="sur" data-n="Macul" points="281.6,220.8 297.6,220.8 297.6,204.2 281.6,204.2 281.6,220.8" fill="#134F7A" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="sur" data-n="San Joaquín" points="265.6,220.8 281.6,220.8 281.6,204.2 265.6,204.2 265.6,220.8" fill="#134F7A" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="sur" data-n="Pedro Aguirre Cerda" points="249.6,225.0 265.6,225.0 265.6,208.3 249.6,208.3 249.6,225.0" fill="#134F7A" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="sur" data-n="Lo Espejo" points="240.0,233.3 256.0,233.3 256.0,212.5 240.0,212.5 240.0,233.3" fill="#134F7A" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="sur" data-n="La Cisterna" points="265.6,233.3 281.6,233.3 281.6,216.7 265.6,216.7 265.6,233.3" fill="#134F7A" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="sur" data-n="San Miguel" points="265.6,216.7 281.6,216.7 281.6,200.0 265.6,200.0 265.6,216.7" fill="#134F7A" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="sur" data-n="La Granja" points="281.6,241.7 297.6,241.7 297.6,220.8 281.6,220.8 281.6,241.7" fill="#134F7A" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="sur" data-n="San Ramón" points="265.6,245.8 281.6,245.8 281.6,229.2 265.6,229.2 265.6,245.8" fill="#134F7A" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="sur" data-n="El Bosque" points="249.6,254.2 268.8,254.2 268.8,233.3 249.6,233.3 249.6,254.2" fill="#134F7A" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="sur" data-n="La Pintana" points="281.6,266.7 300.8,266.7 300.8,241.7 281.6,241.7 281.6,266.7" fill="#134F7A" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="sur" data-n="Peñalolén" points="304.0,229.2 326.4,229.2 326.4,200.0 304.0,200.0 304.0,229.2" fill="#134F7A" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="sur" data-n="La Florida" points="297.6,250.0 323.2,250.0 323.2,225.0 297.6,225.0 297.6,250.0" fill="#134F7A" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="talagante" data-n="Padre Hurtado" points="198.4,250.0 224.0,250.0 224.0,225.0 198.4,225.0 198.4,250.0" fill="#3D7A96" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="talagante" data-n="Peñaflor" points="169.6,270.8 201.6,270.8 201.6,245.8 169.6,245.8 169.6,270.8" fill="#3D7A96" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="talagante" data-n="Talagante" points="153.6,295.8 185.6,295.8 185.6,266.7 153.6,266.7 153.6,295.8" fill="#3D7A96" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com" data-n="El Monte" points="134.4,291.7 153.6,291.7 153.6,258.3 134.4,258.3 134.4,291.7" fill="#dde3ea" fill-opacity="0.22" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com" data-n="Isla de Maipo" points="185.6,316.7 217.6,316.7 217.6,283.3 185.6,283.3 185.6,316.7" fill="#dde3ea" fill-opacity="0.22" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="cordillera" data-n="Puente Alto" points="275.2,270.8 304.0,270.8 304.0,241.7 275.2,241.7 275.2,270.8" fill="#1A6E8A" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="cordillera" data-n="Pirque" points="294.4,316.7 332.8,316.7 332.8,262.5 294.4,262.5 294.4,316.7" fill="#1A6E8A" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="cordillera" data-n="San José de Maipo" points="332.8,416.7 464.0,416.7 464.0,229.2 332.8,229.2 332.8,416.7" fill="#1A6E8A" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="maipo" data-n="San Bernardo" points="236.8,270.8 275.2,270.8 275.2,237.5 236.8,237.5 236.8,270.8" fill="#246E8A" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com" data-n="Calera de Tango" points="211.2,283.3 236.8,283.3 236.8,254.2 211.2,254.2 211.2,283.3" fill="#dde3ea" fill-opacity="0.22" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="maipo" data-n="Buin" points="224.0,325.0 262.4,325.0 262.4,287.5 224.0,287.5 224.0,325.0" fill="#246E8A" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com" data-n="Paine" points="217.6,383.3 288.0,383.3 288.0,325.0 217.6,325.0 217.6,383.3" fill="#dde3ea" fill-opacity="0.22" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com" data-n="Curacaví" points="115.2,187.5 176.0,187.5 176.0,125.0 115.2,125.0 115.2,187.5" fill="#dde3ea" fill-opacity="0.22" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com" data-n="María Pinto" points="121.6,229.2 163.2,229.2 163.2,183.3 121.6,183.3 121.6,229.2" fill="#dde3ea" fill-opacity="0.22" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com geo-s" data-zona="melipilla" data-n="Melipilla" points="48.0,341.7 121.6,341.7 121.6,270.8 48.0,270.8 48.0,341.7" fill="#4A8FAA" fill-opacity="0.75" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com" data-n="San Pedro" points="6.4,395.8 64.0,395.8 64.0,291.7 6.4,291.7 6.4,395.8" fill="#dde3ea" fill-opacity="0.22" stroke="#fff" stroke-width="0.8"/>
+  <polygon class="geo-com" data-n="Alhué" points="48.0,458.3 144.0,458.3 144.0,354.2 48.0,354.2 48.0,458.3" fill="#dde3ea" fill-opacity="0.22" stroke="#fff" stroke-width="0.8"/>
+  <text x="256.0" y="83.3" text-anchor="middle" font-size="7.5" font-family="sans-serif" fill="rgba(255,255,255,0.95)" font-weight="700" pointer-events="none">Chacabuco</text>
+  <text x="240.0" y="154.2" text-anchor="middle" font-size="7.5" font-family="sans-serif" fill="rgba(255,255,255,0.95)" font-weight="700" pointer-events="none">Norte</text>
+  <text x="201.6" y="216.7" text-anchor="middle" font-size="7.5" font-family="sans-serif" fill="rgba(255,255,255,0.95)" font-weight="700" pointer-events="none">Poniente</text>
+  <text x="307.2" y="179.2" text-anchor="middle" font-size="7.5" font-family="sans-serif" fill="rgba(255,255,255,0.95)" font-weight="700" pointer-events="none">Oriente</text>
+  <text x="265.6" y="187.5" text-anchor="middle" font-size="7.5" font-family="sans-serif" fill="rgba(255,255,255,0.95)" font-weight="700" pointer-events="none">Centro</text>
+  <text x="288.0" y="237.5" text-anchor="middle" font-size="7.5" font-family="sans-serif" fill="rgba(255,255,255,0.95)" font-weight="700" pointer-events="none">Sur</text>
+  <text x="179.2" y="270.8" text-anchor="middle" font-size="7.5" font-family="sans-serif" fill="rgba(255,255,255,0.95)" font-weight="700" pointer-events="none">Talagante</text>
+  <text x="297.6" y="270.8" text-anchor="middle" font-size="7.5" font-family="sans-serif" fill="rgba(255,255,255,0.95)" font-weight="700" pointer-events="none">Cordillera</text>
+  <text x="256.0" y="258.3" text-anchor="middle" font-size="7.5" font-family="sans-serif" fill="rgba(255,255,255,0.95)" font-weight="700" pointer-events="none">Maipo</text>
+  <text x="83.2" y="308.3" text-anchor="middle" font-size="7.5" font-family="sans-serif" fill="rgba(255,255,255,0.95)" font-weight="700" pointer-events="none">Melipilla</text>
+</svg>
+              </div>
                 <p class="mapa-footnote">N&#8202;=&#8202;1.251 &middot; 10 zonas &middot; 41 comunas &middot; Región Metropolitana de Santiago &middot; Haz clic en una zona para ver el detalle</p>
               </div>
 
@@ -1186,20 +1227,6 @@
       melipilla:  { name: 'Zona Melipilla',   n: 35,  color: '#4A8FAA', comunas: [['Melipilla', 35]] }
     };
 
-    /* Normalizar nombres para comparar (sin tilde, lowercase) */
-    function norm(s) {
-      return (s || '').toLowerCase()
-        .normalize('NFD').replace(/[̀-ͯ]/g, '')
-        .replace(/\s+/g, ' ').trim();
-    }
-
-    /* Construir lookup comuna → zonaKey */
-    var LOOKUP = {};
-    Object.keys(ZONAS_DATA).forEach(function(k) {
-      ZONAS_DATA[k].comunas.forEach(function(c) { LOOKUP[norm(c[0])] = k; });
-    });
-
-    /* Elementos del panel */
     var placeholder = document.getElementById('mapa-placeholder');
     var content     = document.getElementById('mapa-content');
     var panelTitle  = document.getElementById('mapa-panel-title');
@@ -1207,15 +1234,17 @@
     var panelList   = document.getElementById('mapa-panel-list');
     var panelSub    = document.getElementById('mapa-panel-subtotal');
 
-    var activeZona  = null;
-    var geoLayer    = null;
+    var svg = document.getElementById('mapa-svg');
+    if (!svg) return;
 
-    /* Panel: mostrar zona */
+    var polys = svg.querySelectorAll('.geo-s');
+    var activeZona = null;
+
     function showPanel(zonaKey) {
       var z = ZONAS_DATA[zonaKey];
-      panelTitle.textContent = z.name;
-      panelN.textContent     = 'n = ' + z.n;
-      panelN.style.background = z.color;
+      panelTitle.textContent   = z.name;
+      panelN.textContent       = 'n = ' + z.n;
+      panelN.style.background  = z.color;
       panelList.innerHTML = z.comunas.map(function(c) {
         return '<li><span class="mapa-panel__com-name">' + c[0] + '</span>'
              + '<span class="mapa-panel__com-n">n = ' + c[1] + '</span></li>';
@@ -1226,86 +1255,49 @@
       content.hidden     = false;
     }
 
-    /* Helpers de estilo */
-    function getZonaKey(f) {
-      var n = f.properties.NOM_COM || f.properties.COMUNA || f.properties.nombre || '';
-      return LOOKUP[norm(n)] || null;
-    }
-
-    function baseStyle(f) {
-      var k = getZonaKey(f);
-      return {
-        fillColor:   k ? ZONAS_DATA[k].color : '#dde3ea',
-        fillOpacity: k ? 0.72 : 0.22,
-        color:       '#ffffff',
-        weight:      1,
-        opacity:     1
-      };
-    }
-
     function activateZona(zonaKey) {
       activeZona = zonaKey;
-      geoLayer.eachLayer(function(layer) {
-        var fk = getZonaKey(layer.feature);
-        if (fk === zonaKey) {
-          layer.setStyle({ fillOpacity: 0.95, weight: 2, color: '#fff' });
-          layer.bringToFront();
-        } else if (fk) {
-          layer.setStyle({ fillOpacity: 0.28 });
-        }
+      polys.forEach(function(p) {
+        var pz = p.dataset.zona;
+        p.classList.remove('is-active', 'is-dim');
+        if (pz === zonaKey)      p.classList.add('is-active');
+        else if (pz)             p.classList.add('is-dim');
       });
       showPanel(zonaKey);
     }
 
-    /* Init mapa Leaflet — sin tiles, fondo blanco */
-    if (!document.getElementById('leaflet-mapa')) return;
-    var map = L.map('leaflet-mapa', {
-      zoomControl:       true,
-      attributionControl: false,
-      scrollWheelZoom:   false,
-      doubleClickZoom:   false,
-      boxZoom:           false
-    });
+    /* Tooltip simple */
+    var tip = document.createElement('div');
+    tip.style.cssText = 'position:fixed;background:#fff;border-radius:6px;padding:5px 10px;font-size:12px;box-shadow:0 2px 8px rgba(0,0,0,0.15);pointer-events:none;display:none;z-index:999;line-height:1.4;font-family:var(--font-body,sans-serif)';
+    document.body.appendChild(tip);
 
-    /* Cargar GeoJSON comunas RM */
-    var GEO_URL = '../assets/data/comunas-rm.geojson';
+    polys.forEach(function(p) {
+      var zonaKey = p.dataset.zona;
+      var nombre  = p.dataset.n;
 
-    fetch(GEO_URL)
-      .then(function(r) {
-        if (!r.ok) throw new Error('HTTP ' + r.status);
-        return r.json();
-      })
-      .then(function(data) {
-        geoLayer = L.geoJSON(data, {
-          style: baseStyle,
-          onEachFeature: function(feature, layer) {
-            var zonaKey = getZonaKey(feature);
-            if (!zonaKey) return;
-            var z       = ZONAS_DATA[zonaKey];
-            var nombre  = feature.properties.NOM_COM || feature.properties.COMUNA || '';
-
-            layer.bindTooltip(
-              '<strong>' + nombre + '</strong><br><span style="color:#666">' + z.name + '</span>',
-              { sticky: true, className: 'mapa-tooltip', direction: 'top' }
-            );
-
-            layer.on('click', function() { activateZona(zonaKey); });
-            layer.on('mouseover', function() {
-              if (activeZona !== zonaKey) layer.setStyle({ fillOpacity: 0.9, weight: 2 });
-            });
-            layer.on('mouseout', function() {
-              if (activeZona !== zonaKey) geoLayer.resetStyle(layer);
-            });
-          }
-        }).addTo(map);
-
-        map.fitBounds(geoLayer.getBounds(), { padding: [12, 12] });
-      })
-      .catch(function(err) {
-        console.warn('Mapa no disponible:', err);
-        var el = document.getElementById('leaflet-mapa');
-        el.innerHTML = '<p style="text-align:center;padding:3rem 1rem;color:#888;font-family:sans-serif">Mapa no disponible sin conexión a internet</p>';
+      p.addEventListener('mouseenter', function(e) {
+        if (zonaKey && activeZona !== zonaKey) p.style.fillOpacity = '0.92';
+        tip.innerHTML = '<strong>' + nombre + '</strong>' + (zonaKey ? '<br><span style="color:#666">' + ZONAS_DATA[zonaKey].name + '</span>' : '');
+        tip.style.display = 'block';
       });
+      p.addEventListener('mousemove', function(e) {
+        tip.style.left = (e.clientX + 14) + 'px';
+        tip.style.top  = (e.clientY - 32) + 'px';
+      });
+      p.addEventListener('mouseleave', function() {
+        if (zonaKey && activeZona !== zonaKey) p.style.fillOpacity = '';
+        tip.style.display = 'none';
+      });
+      if (zonaKey) {
+        p.addEventListener('click', function() { activateZona(zonaKey); });
+        p.setAttribute('tabindex', '0');
+        p.setAttribute('role', 'button');
+        p.setAttribute('aria-label', nombre + ' – ' + ZONAS_DATA[zonaKey].name);
+        p.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activateZona(zonaKey); }
+        });
+      }
+    });
   })();
   </script>
 
