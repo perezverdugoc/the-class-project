@@ -1,0 +1,26 @@
+# ─────────────────────────────────────────────
+# Documentos de trabajo internos
+# (quedan en carpeta local, no se suben a GitHub)
+# ─────────────────────────────────────────────
+
+# Instrucciones y conversaciones con Claude
+Cowork _ Proyecto The Class.md
+Instrucciones_Maestras_TheClass.md
+Instrucciones edición sitio web.md
+Refuerzo instrucciones web.md
+Buscador código encuesta.md
+memoria_proyecto.md
+accountability.md
+
+# Estrategia y planificación interna
+Consolidación Estratégica 2026_ The Class Project.md
+
+# Carpeta de contexto interno
+instrucciones contexto/
+
+# Editor
+.vscode/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
