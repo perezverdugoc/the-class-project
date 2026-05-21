@@ -876,176 +876,89 @@
 
               <!-- MAPA SVG INTERACTIVO — Zonas de muestreo RM -->
               <div class="mapa-svg-col" id="mapa-svg-wrap">
-                <svg id="mapa-svg" viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg"
-                     style="width:100%;height:auto;display:block;border-radius:8px;background:#dce8f2"
+                <!-- ═══ MAPA GEOGRÁFICO RM — formas reales, proyección Mercator ═══ -->
+                <svg id="mapa-svg" viewBox="0 0 480 520" xmlns="http://www.w3.org/2000/svg"
+                     style="width:100%;height:auto;display:block;border-radius:12px;background:#EEF2F7"
                      aria-label="Mapa interactivo de zonas de muestreo — Región Metropolitana de Santiago">
 
                   <defs>
-                    <!-- Trama diagonal para Cordillera (sugiere montañas) -->
-                    <pattern id="mtn-hatch" patternUnits="userSpaceOnUse" width="10" height="10" patternTransform="rotate(45)">
-                      <line x1="0" y1="0" x2="0" y2="10" stroke="rgba(255,255,255,0.20)" stroke-width="4"/>
-                    </pattern>
+                    <filter id="zone-shadow">
+                      <feDropShadow dx="0" dy="1" stdDeviation="3" flood-color="rgba(0,0,0,0.12)"/>
+                    </filter>
                   </defs>
 
-                  <!--
-                    LAYOUT (480×480 px):
-                    Columna izquierda  x=0-90   : MELIPILLA (oeste rural)
-                    Columna derecha    x=385-480 : CORDILLERA (Andes)
-                    Franja norte       y=0-105   : CHACABUCO
-                    Franja sur         y=410-480 : MAIPO
-                    Zona urbana NW     x=90-285, y=105-195 : NORTE
-                    Zona urbana E      x=285-385, y=105-260 : ORIENTE
-                    Zona urbana W      x=90-190, y=195-355  : PONIENTE
-                    Zona urbana C      x=190-285, y=195-260 : CENTRO
-                    Zona urbana SW     x=90-190, y=355-410  : TALAGANTE
-                    Zona urbana S      x=190-385, y=260-410 : SUR
-                  -->
+                  <!-- Comunas fuera de muestra -->
+                  <path d="M 156.0,151.8 L 188.7,125.9 L 219.0,87.0 L 230.7,48.3 L 207.3,16.0 L 172.3,22.5 L 142.0,41.8 L 132.7,80.6 L 142.0,125.9 L 156.0,151.8 Z" fill="#E0E4EC" stroke="#C8CDD8" stroke-width="0.5"/>
+                  <path d="M 160.7,255.7 L 179.3,255.7 L 184.0,268.7 L 184.0,294.7 L 170.0,301.3 L 156.0,294.7 L 156.0,268.7 L 160.7,255.7 Z" fill="#E0E4EC" stroke="#C8CDD8" stroke-width="0.5"/>
+                  <path d="M 188.7,288.2 L 202.7,288.2 L 212.0,294.7 L 212.0,314.3 L 202.7,320.8 L 188.7,320.8 L 179.3,307.8 L 188.7,288.2 Z" fill="#E0E4EC" stroke="#C8CDD8" stroke-width="0.5"/>
+                  <path d="M 221.3,255.7 L 235.3,255.7 L 240.0,268.7 L 240.0,288.2 L 230.7,294.7 L 221.3,288.2 L 216.7,275.2 L 221.3,255.7 Z" fill="#E0E4EC" stroke="#C8CDD8" stroke-width="0.5"/>
+                  <path d="M 202.7,314.3 L 230.7,314.3 L 244.7,327.3 L 244.7,366.5 L 230.7,386.1 L 207.3,386.1 L 188.7,373.0 L 188.7,333.9 L 202.7,314.3 Z" fill="#E0E4EC" stroke="#C8CDD8" stroke-width="0.5"/>
+                  <path d="M 114.0,184.2 L 160.7,184.2 L 193.3,203.7 L 193.3,236.2 L 165.3,249.2 L 132.7,242.7 L 109.3,223.2 L 114.0,184.2 Z" fill="#E0E4EC" stroke="#C8CDD8" stroke-width="0.5"/>
+                  <path d="M 146.7,210.2 L 170.0,210.2 L 193.3,223.2 L 193.3,249.2 L 170.0,255.7 L 151.3,249.2 L 142.0,229.7 L 146.7,210.2 Z" fill="#E0E4EC" stroke="#C8CDD8" stroke-width="0.5"/>
+                  <path d="M 39.3,262.2 L 62.7,262.2 L 100.0,275.2 L 137.3,301.3 L 142.0,346.9 L 123.3,373.0 L 76.7,379.6 L 34.7,366.5 L 16.0,320.8 L 25.3,281.7 L 39.3,262.2 Z" fill="#E0E4EC" stroke="#C8CDD8" stroke-width="0.5"/>
+                  <path d="M 104.7,346.9 L 160.7,346.9 L 198.0,366.5 L 207.3,412.3 L 193.3,451.5 L 156.0,471.2 L 109.3,458.1 L 72.0,418.8 L 76.7,366.5 L 104.7,346.9 Z" fill="#E0E4EC" stroke="#C8CDD8" stroke-width="0.5"/>
 
-                  <!-- MELIPILLA — oeste rural, columna completa -->
-                  <polygon class="geo-s" data-zona="melipilla" data-n="Melipilla"
-                    points="0,0 90,0 90,480 0,480"
-                    fill="#4A8FAA" fill-opacity="0.82" stroke="#fff" stroke-width="1.2"/>
+                  <!-- Comunas en muestra -->
+                  <path class="geo-s" data-zona="chacabuco" data-n="Colina" d="M 216.7,151.8 L 296.0,151.8 L 300.7,100.0 L 289.0,80.6 L 226.0,74.1 L 202.7,93.5 L 207.3,125.9 L 216.7,151.8 Z" fill="#5B9BD5" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Colina"/>
+                  <path class="geo-s" data-zona="chacabuco" data-n="Lampa" d="M 160.7,203.7 L 219.0,203.7 L 223.7,177.7 L 216.7,145.3 L 188.7,132.3 L 160.7,151.8 L 156.0,177.7 L 160.7,203.7 Z" fill="#5B9BD5" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Lampa"/>
+                  <path class="geo-s" data-zona="norte" data-n="Quilicura" d="M 230.7,164.8 L 254.0,158.3 L 263.3,171.2 L 263.3,190.7 L 249.3,197.2 L 230.7,197.2 L 223.7,184.2 L 230.7,164.8 Z" fill="#3B6FA8" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Quilicura"/>
+                  <path class="geo-s" data-zona="norte" data-n="Huechuraba" d="M 263.3,164.8 L 277.3,161.5 L 284.3,171.2 L 284.3,190.7 L 272.7,197.2 L 263.3,190.7 L 258.7,177.7 L 263.3,164.8 Z" fill="#3B6FA8" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Huechuraba"/>
+                  <path class="geo-s" data-zona="norte" data-n="Renca" d="M 230.7,197.2 L 249.3,197.2 L 254.0,203.7 L 254.0,223.2 L 244.7,223.2 L 230.7,216.7 L 226.0,206.9 L 230.7,197.2 Z" fill="#3B6FA8" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Renca"/>
+                  <path class="geo-s" data-zona="norte" data-n="Conchalí" d="M 258.7,177.7 L 272.7,171.2 L 277.3,177.7 L 277.3,197.2 L 268.0,203.7 L 258.7,197.2 L 254.0,190.7 L 258.7,177.7 Z" fill="#3B6FA8" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Conchalí"/>
+                  <path class="geo-s" data-zona="norte" data-n="Independencia" d="M 263.3,184.2 L 268.0,177.7 L 272.7,177.7 L 277.3,190.7 L 277.3,197.2 L 268.0,203.7 L 263.3,197.2 L 263.3,184.2 Z" fill="#3B6FA8" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Independencia"/>
+                  <path class="geo-s" data-zona="norte" data-n="Recoleta" d="M 268.0,177.7 L 277.3,171.2 L 284.3,177.7 L 284.3,197.2 L 277.3,197.2 L 272.7,190.7 L 268.0,190.7 L 268.0,177.7 Z" fill="#3B6FA8" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Recoleta"/>
+                  <path class="geo-s" data-zona="poniente" data-n="Quinta Normal" d="M 249.3,197.2 L 258.7,197.2 L 263.3,203.7 L 263.3,216.7 L 254.0,216.7 L 249.3,210.2 L 244.7,203.7 L 249.3,197.2 Z" fill="#0A7E7A" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Quinta Normal"/>
+                  <path class="geo-s" data-zona="poniente" data-n="Lo Prado" d="M 240.0,203.7 L 249.3,203.7 L 254.0,216.7 L 254.0,223.2 L 244.7,226.4 L 240.0,223.2 L 235.3,213.4 L 240.0,203.7 Z" fill="#0A7E7A" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Lo Prado"/>
+                  <path class="geo-s" data-zona="poniente" data-n="Cerro Navia" d="M 235.3,190.7 L 244.7,190.7 L 249.3,197.2 L 249.3,210.2 L 240.0,210.2 L 230.7,206.9 L 226.0,200.4 L 235.3,190.7 Z" fill="#0A7E7A" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Cerro Navia"/>
+                  <path class="geo-s" data-zona="poniente" data-n="Pudahuel" d="M 142.0,203.7 L 212.0,197.2 L 221.3,210.2 L 230.7,216.7 L 230.7,236.2 L 219.0,242.7 L 195.7,236.2 L 172.3,223.2 L 149.0,216.7 L 137.3,210.2 L 142.0,203.7 Z" fill="#0A7E7A" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Pudahuel"/>
+                  <path class="geo-s" data-zona="poniente" data-n="Cerrillos" d="M 230.7,216.7 L 244.7,216.7 L 249.3,223.2 L 249.3,242.7 L 240.0,242.7 L 230.7,236.2 L 226.0,229.7 L 230.7,216.7 Z" fill="#0A7E7A" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Cerrillos"/>
+                  <path class="geo-s" data-zona="poniente" data-n="Maipú" d="M 226.0,232.9 L 240.0,229.7 L 249.3,236.2 L 254.0,255.7 L 249.3,275.2 L 240.0,281.7 L 226.0,275.2 L 212.0,262.2 L 207.3,242.7 L 216.7,229.7 L 226.0,232.9 Z" fill="#0A7E7A" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Maipú"/>
+                  <path class="geo-s" data-zona="oriente" data-n="Lo Barnechea" d="M 286.7,171.2 L 305.3,145.3 L 328.7,119.4 L 366.0,112.9 L 370.7,151.8 L 352.0,184.2 L 333.3,197.2 L 314.7,203.7 L 300.7,197.2 L 291.3,190.7 L 286.7,171.2 Z" fill="#9B7B2E" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Lo Barnechea"/>
+                  <path class="geo-s" data-zona="oriente" data-n="Vitacura" d="M 277.3,171.2 L 286.7,171.2 L 291.3,184.2 L 291.3,197.2 L 282.0,203.7 L 272.7,197.2 L 270.3,184.2 L 277.3,171.2 Z" fill="#9B7B2E" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Vitacura"/>
+                  <path class="geo-s" data-zona="oriente" data-n="Las Condes" d="M 282.0,164.8 L 300.7,151.8 L 314.7,158.3 L 333.3,177.7 L 333.3,210.2 L 314.7,216.7 L 296.0,216.7 L 286.7,210.2 L 277.3,203.7 L 272.7,190.7 L 277.3,171.2 L 282.0,164.8 Z" fill="#9B7B2E" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Las Condes"/>
+                  <path class="geo-s" data-zona="oriente" data-n="Providencia" d="M 272.7,190.7 L 277.3,184.2 L 282.0,190.7 L 282.0,203.7 L 277.3,210.2 L 268.0,210.2 L 268.0,197.2 L 272.7,190.7 Z" fill="#9B7B2E" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Providencia"/>
+                  <path class="geo-s" data-zona="oriente" data-n="Ñuñoa" d="M 272.7,203.7 L 282.0,203.7 L 286.7,210.2 L 282.0,223.2 L 272.7,229.7 L 268.0,223.2 L 263.3,216.7 L 268.0,203.7 L 272.7,203.7 Z" fill="#9B7B2E" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Ñuñoa"/>
+                  <path class="geo-s" data-zona="oriente" data-n="La Reina" d="M 277.3,203.7 L 291.3,203.7 L 296.0,216.7 L 291.3,229.7 L 282.0,236.2 L 272.7,229.7 L 272.7,216.7 L 277.3,203.7 Z" fill="#9B7B2E" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="La Reina"/>
+                  <path class="geo-s" data-zona="centro" data-n="Santiago" d="M 258.7,197.2 L 268.0,197.2 L 272.7,203.7 L 268.0,223.2 L 258.7,223.2 L 254.0,216.7 L 254.0,203.7 L 258.7,197.2 Z" fill="#2D3142" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Santiago"/>
+                  <path class="geo-s" data-zona="centro" data-n="Estación Central" d="M 249.3,203.7 L 258.7,203.7 L 258.7,223.2 L 254.0,223.2 L 249.3,216.7 L 244.7,210.2 L 249.3,203.7 Z" fill="#2D3142" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Estación Central"/>
+                  <path class="geo-s" data-zona="sur" data-n="San Miguel" d="M 263.3,216.7 L 268.0,216.7 L 272.7,223.2 L 272.7,236.2 L 263.3,236.2 L 258.7,229.7 L 258.7,223.2 L 263.3,216.7 Z" fill="#C9524F" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="San Miguel"/>
+                  <path class="geo-s" data-zona="sur" data-n="Macul" d="M 272.7,216.7 L 277.3,216.7 L 282.0,223.2 L 282.0,236.2 L 272.7,242.7 L 268.0,236.2 L 268.0,223.2 L 272.7,216.7 Z" fill="#C9524F" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Macul"/>
+                  <path class="geo-s" data-zona="sur" data-n="San Joaquín" d="M 263.3,229.7 L 272.7,229.7 L 272.7,242.7 L 268.0,249.2 L 258.7,249.2 L 258.7,236.2 L 263.3,229.7 Z" fill="#C9524F" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="San Joaquín"/>
+                  <path class="geo-s" data-zona="sur" data-n="Pedro Aguirre Cerda" d="M 254.0,223.2 L 263.3,223.2 L 263.3,236.2 L 258.7,242.7 L 249.3,242.7 L 249.3,229.7 L 254.0,223.2 Z" fill="#C9524F" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Pedro Aguirre Cerda"/>
+                  <path class="geo-s" data-zona="sur" data-n="Lo Espejo" d="M 240.0,229.7 L 254.0,229.7 L 258.7,242.7 L 254.0,255.7 L 244.7,255.7 L 240.0,249.2 L 235.3,236.2 L 240.0,229.7 Z" fill="#C9524F" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Lo Espejo"/>
+                  <path class="geo-s" data-zona="sur" data-n="La Cisterna" d="M 258.7,236.2 L 268.0,236.2 L 268.0,255.7 L 258.7,255.7 L 254.0,249.2 L 254.0,242.7 L 258.7,236.2 Z" fill="#C9524F" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="La Cisterna"/>
+                  <path class="geo-s" data-zona="sur" data-n="La Granja" d="M 268.0,242.7 L 277.3,242.7 L 282.0,249.2 L 282.0,268.7 L 272.7,275.2 L 263.3,268.7 L 263.3,255.7 L 268.0,242.7 Z" fill="#C9524F" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="La Granja"/>
+                  <path class="geo-s" data-zona="sur" data-n="San Ramón" d="M 263.3,249.2 L 268.0,249.2 L 272.7,255.7 L 272.7,275.2 L 263.3,275.2 L 258.7,268.7 L 258.7,255.7 L 263.3,249.2 Z" fill="#C9524F" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="San Ramón"/>
+                  <path class="geo-s" data-zona="sur" data-n="El Bosque" d="M 254.0,249.2 L 263.3,249.2 L 263.3,268.7 L 258.7,275.2 L 249.3,275.2 L 244.7,268.7 L 249.3,255.7 L 254.0,249.2 Z" fill="#C9524F" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="El Bosque"/>
+                  <path class="geo-s" data-zona="sur" data-n="La Pintana" d="M 268.0,268.7 L 277.3,268.7 L 286.7,275.2 L 286.7,294.7 L 277.3,301.3 L 263.3,301.3 L 258.7,288.2 L 263.3,275.2 L 268.0,268.7 Z" fill="#C9524F" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="La Pintana"/>
+                  <path class="geo-s" data-zona="sur" data-n="La Florida" d="M 277.3,236.2 L 291.3,236.2 L 300.7,249.2 L 300.7,275.2 L 291.3,288.2 L 277.3,288.2 L 272.7,275.2 L 272.7,249.2 L 277.3,236.2 Z" fill="#C9524F" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="La Florida"/>
+                  <path class="geo-s" data-zona="sur" data-n="Peñalolén" d="M 286.7,210.2 L 305.3,210.2 L 314.7,223.2 L 314.7,249.2 L 300.7,255.7 L 291.3,255.7 L 282.0,242.7 L 282.0,223.2 L 286.7,210.2 Z" fill="#C9524F" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Peñalolén"/>
+                  <path class="geo-s" data-zona="talagante" data-n="Padre Hurtado" d="M 207.3,232.9 L 226.0,232.9 L 230.7,242.7 L 226.0,262.2 L 212.0,262.2 L 202.7,255.7 L 202.7,242.7 L 207.3,232.9 Z" fill="#6B9E6B" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Padre Hurtado"/>
+                  <path class="geo-s" data-zona="talagante" data-n="Peñaflor" d="M 198.0,249.2 L 212.0,249.2 L 216.7,262.2 L 212.0,281.7 L 198.0,281.7 L 188.7,275.2 L 193.3,255.7 L 198.0,249.2 Z" fill="#6B9E6B" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Peñaflor"/>
+                  <path class="geo-s" data-zona="talagante" data-n="Talagante" d="M 184.0,262.2 L 198.0,262.2 L 202.7,275.2 L 202.7,294.7 L 188.7,301.3 L 174.7,294.7 L 174.7,275.2 L 184.0,262.2 Z" fill="#6B9E6B" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Talagante"/>
+                  <path class="geo-s" data-zona="cordillera" data-n="Puente Alto" d="M 272.7,249.2 L 286.7,249.2 L 291.3,262.2 L 291.3,288.2 L 282.0,294.7 L 268.0,294.7 L 258.7,281.7 L 263.3,262.2 L 272.7,249.2 Z" fill="#1A7A6A" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Puente Alto"/>
+                  <path class="geo-s" data-zona="cordillera" data-n="Pirque" d="M 282.0,281.7 L 300.7,275.2 L 314.7,288.2 L 328.7,314.3 L 324.0,340.4 L 300.7,346.9 L 277.3,333.9 L 268.0,307.8 L 277.3,288.2 L 282.0,281.7 Z" fill="#1A7A6A" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Pirque"/>
+                  <path class="geo-s" data-zona="cordillera" data-n="San José de Maipo" d="M 277.3,223.2 L 305.3,216.7 L 342.7,223.2 L 394.0,236.2 L 436.0,275.2 L 464.0,346.9 L 464.0,451.5 L 417.3,504.0 L 370.7,504.0 L 333.3,445.0 L 300.7,379.6 L 272.7,314.3 L 268.0,249.2 L 277.3,223.2 Z" fill="#1A7A6A" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="San José de Maipo"/>
+                  <path class="geo-s" data-zona="maipo" data-n="San Bernardo" d="M 240.0,242.7 L 258.7,242.7 L 263.3,255.7 L 263.3,288.2 L 254.0,294.7 L 240.0,294.7 L 230.7,281.7 L 230.7,262.2 L 240.0,242.7 Z" fill="#7B5EA7" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="San Bernardo"/>
+                  <path class="geo-s" data-zona="maipo" data-n="Buin" d="M 221.3,281.7 L 244.7,281.7 L 254.0,294.7 L 254.0,327.3 L 240.0,340.4 L 221.3,340.4 L 207.3,327.3 L 212.0,294.7 L 221.3,281.7 Z" fill="#7B5EA7" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Buin"/>
+                  <path class="geo-s" data-zona="melipilla" data-n="Melipilla" d="M 62.7,249.2 L 132.7,249.2 L 165.3,268.7 L 193.3,288.2 L 193.3,320.8 L 174.7,340.4 L 137.3,346.9 L 95.3,346.9 L 62.7,320.8 L 48.7,288.2 L 62.7,249.2 Z" fill="#B07D5A" fill-opacity="0.88" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" aria-label="Melipilla"/>
 
-                  <!-- CHACABUCO — norte -->
-                  <polygon class="geo-s" data-zona="chacabuco" data-n="Chacabuco"
-                    points="90,0 385,0 385,105 90,105"
-                    fill="#5B7FA6" fill-opacity="0.82" stroke="#fff" stroke-width="1.2"/>
-
-                  <!-- NORTE — noroeste urbano -->
-                  <polygon class="geo-s" data-zona="norte" data-n="Norte"
-                    points="90,105 285,105 285,195 90,195"
-                    fill="#2E6DA4" fill-opacity="0.82" stroke="#fff" stroke-width="1.2"/>
-
-                  <!-- ORIENTE — este urbano (Las Condes, Ñuñoa…) -->
-                  <polygon class="geo-s" data-zona="oriente" data-n="Oriente"
-                    points="285,105 385,105 385,260 285,260"
-                    fill="#3A7DC9" fill-opacity="0.82" stroke="#fff" stroke-width="1.2"/>
-
-                  <!-- PONIENTE — oeste urbano (Maipú, Pudahuel…) -->
-                  <polygon class="geo-s" data-zona="poniente" data-n="Poniente"
-                    points="90,195 190,195 190,355 90,355"
-                    fill="#1D6A8A" fill-opacity="0.82" stroke="#fff" stroke-width="1.2"/>
-
-                  <!-- CENTRO — núcleo urbano (Santiago, Estación Central) -->
-                  <polygon class="geo-s" data-zona="centro" data-n="Centro"
-                    points="190,195 285,195 285,260 190,260"
-                    fill="#1A3A5C" fill-opacity="0.82" stroke="#fff" stroke-width="1.2"/>
-
-                  <!-- SUR — sur urbano (La Florida, Peñalolén…) -->
-                  <polygon class="geo-s" data-zona="sur" data-n="Sur"
-                    points="190,260 385,260 385,410 190,410"
-                    fill="#134F7A" fill-opacity="0.82" stroke="#fff" stroke-width="1.2"/>
-
-                  <!-- TALAGANTE — suroeste (Peñaflor, Padre Hurtado…) -->
-                  <polygon class="geo-s" data-zona="talagante" data-n="Talagante"
-                    points="90,355 190,355 190,410 90,410"
-                    fill="#3D7A96" fill-opacity="0.82" stroke="#fff" stroke-width="1.2"/>
-
-                  <!-- MAIPO — sur (San Bernardo, Buin) -->
-                  <polygon class="geo-s" data-zona="maipo" data-n="Maipo"
-                    points="90,410 385,410 385,480 90,480"
-                    fill="#246E8A" fill-opacity="0.82" stroke="#fff" stroke-width="1.2"/>
-
-                  <!-- CORDILLERA — este, Andes (Puente Alto, San José de Maipo…) -->
-                  <polygon class="geo-s" data-zona="cordillera" data-n="Cordillera"
-                    points="385,0 480,0 480,480 385,480"
-                    fill="#1A6E8A" fill-opacity="0.82" stroke="#fff" stroke-width="1.2"/>
-                  <!-- Trama montaña encima (sin capturar clics) -->
-                  <rect x="385" y="0" width="95" height="480"
-                        fill="url(#mtn-hatch)" pointer-events="none"/>
-
-                  <!-- ── Etiquetas ──────────────────────────────── -->
-
-                  <!-- MELIPILLA: texto vertical (zona 90px ancha) -->
-                  <text x="45" y="230" text-anchor="middle" dominant-baseline="middle"
-                        transform="rotate(-90,45,230)"
-                        font-size="9.5" font-family="sans-serif" font-weight="700"
-                        letter-spacing="1" fill="rgba(255,255,255,0.95)" pointer-events="none">MELIPILLA</text>
-                  <text x="45" y="253" text-anchor="middle" dominant-baseline="middle"
-                        transform="rotate(-90,45,253)"
-                        font-size="8.5" font-family="sans-serif"
-                        fill="rgba(255,255,255,0.80)" pointer-events="none">n = 35</text>
-
-                  <!-- CHACABUCO -->
-                  <text x="237" y="44" text-anchor="middle" dominant-baseline="middle"
-                        font-size="12.5" font-family="sans-serif" font-weight="700"
-                        letter-spacing="1" fill="rgba(255,255,255,0.95)" pointer-events="none">CHACABUCO</text>
-                  <text x="237" y="63" text-anchor="middle" dominant-baseline="middle"
-                        font-size="10" font-family="sans-serif"
-                        fill="rgba(255,255,255,0.85)" pointer-events="none">n = 57</text>
-
-                  <!-- NORTE -->
-                  <text x="187" y="142" text-anchor="middle" dominant-baseline="middle"
-                        font-size="12.5" font-family="sans-serif" font-weight="700"
-                        letter-spacing="1" fill="rgba(255,255,255,0.95)" pointer-events="none">NORTE</text>
-                  <text x="187" y="161" text-anchor="middle" dominant-baseline="middle"
-                        font-size="10" font-family="sans-serif"
-                        fill="rgba(255,255,255,0.85)" pointer-events="none">n = 144</text>
-
-                  <!-- ORIENTE -->
-                  <text x="335" y="172" text-anchor="middle" dominant-baseline="middle"
-                        font-size="11.5" font-family="sans-serif" font-weight="700"
-                        letter-spacing="1" fill="rgba(255,255,255,0.95)" pointer-events="none">ORIENTE</text>
-                  <text x="335" y="191" text-anchor="middle" dominant-baseline="middle"
-                        font-size="10" font-family="sans-serif"
-                        fill="rgba(255,255,255,0.85)" pointer-events="none">n = 194</text>
-
-                  <!-- PONIENTE -->
-                  <text x="140" y="262" text-anchor="middle" dominant-baseline="middle"
-                        font-size="10.5" font-family="sans-serif" font-weight="700"
-                        letter-spacing="0.5" fill="rgba(255,255,255,0.95)" pointer-events="none">PONIENTE</text>
-                  <text x="140" y="280" text-anchor="middle" dominant-baseline="middle"
-                        font-size="9.5" font-family="sans-serif"
-                        fill="rgba(255,255,255,0.85)" pointer-events="none">n = 199</text>
-
-                  <!-- CENTRO -->
-                  <text x="237" y="220" text-anchor="middle" dominant-baseline="middle"
-                        font-size="10.5" font-family="sans-serif" font-weight="700"
-                        letter-spacing="0.5" fill="rgba(255,255,255,0.95)" pointer-events="none">CENTRO</text>
-                  <text x="237" y="237" text-anchor="middle" dominant-baseline="middle"
-                        font-size="9.5" font-family="sans-serif"
-                        fill="rgba(255,255,255,0.85)" pointer-events="none">n = 105</text>
-
-                  <!-- SUR -->
-                  <text x="287" y="325" text-anchor="middle" dominant-baseline="middle"
-                        font-size="15" font-family="sans-serif" font-weight="700"
-                        letter-spacing="1" fill="rgba(255,255,255,0.95)" pointer-events="none">SUR</text>
-                  <text x="287" y="347" text-anchor="middle" dominant-baseline="middle"
-                        font-size="10" font-family="sans-serif"
-                        fill="rgba(255,255,255,0.85)" pointer-events="none">n = 268</text>
-
-                  <!-- TALAGANTE (zona pequeña: 100×55 px) -->
-                  <text x="140" y="376" text-anchor="middle" dominant-baseline="middle"
-                        font-size="8.5" font-family="sans-serif" font-weight="700"
-                        letter-spacing="0.3" fill="rgba(255,255,255,0.95)" pointer-events="none">TALAGANTE</text>
-                  <text x="140" y="393" text-anchor="middle" dominant-baseline="middle"
-                        font-size="8" font-family="sans-serif"
-                        fill="rgba(255,255,255,0.82)" pointer-events="none">n = 57</text>
-
-                  <!-- MAIPO -->
-                  <text x="237" y="437" text-anchor="middle" dominant-baseline="middle"
-                        font-size="12.5" font-family="sans-serif" font-weight="700"
-                        letter-spacing="1" fill="rgba(255,255,255,0.95)" pointer-events="none">MAIPO</text>
-                  <text x="237" y="456" text-anchor="middle" dominant-baseline="middle"
-                        font-size="10" font-family="sans-serif"
-                        fill="rgba(255,255,255,0.85)" pointer-events="none">n = 89</text>
-
-                  <!-- CORDILLERA: texto vertical (zona 95px ancha) -->
-                  <text x="432" y="230" text-anchor="middle" dominant-baseline="middle"
-                        transform="rotate(90,432,230)"
-                        font-size="9.5" font-family="sans-serif" font-weight="700"
-                        letter-spacing="1" fill="rgba(255,255,255,0.95)" pointer-events="none">CORDILLERA</text>
-                  <text x="432" y="253" text-anchor="middle" dominant-baseline="middle"
-                        transform="rotate(90,432,253)"
-                        font-size="8.5" font-family="sans-serif"
-                        fill="rgba(255,255,255,0.80)" pointer-events="none">n = 103</text>
+                  <!-- Etiquetas de zona -->
+                  <text x="215" y="130" text-anchor="middle" dominant-baseline="middle" font-size="7.5" font-family="DM Sans,sans-serif" font-weight="700" letter-spacing="0.5" fill="rgba(255,255,255,0.93)" pointer-events="none">CHACABUCO</text>
+                  <text x="257" y="185" text-anchor="middle" dominant-baseline="middle" font-size="7.5" font-family="DM Sans,sans-serif" font-weight="700" letter-spacing="0.5" fill="rgba(255,255,255,0.93)" pointer-events="none">NORTE</text>
+                  <text x="228" y="222" text-anchor="middle" dominant-baseline="middle" font-size="7" font-family="DM Sans,sans-serif" font-weight="700" letter-spacing="0.5" fill="rgba(255,255,255,0.93)" pointer-events="none">PONIENTE</text>
+                  <text x="305" y="192" text-anchor="middle" dominant-baseline="middle" font-size="7.5" font-family="DM Sans,sans-serif" font-weight="700" letter-spacing="0.5" fill="rgba(255,255,255,0.93)" pointer-events="none">ORIENTE</text>
+                  <text x="259" y="208" text-anchor="middle" dominant-baseline="middle" font-size="6.5" font-family="DM Sans,sans-serif" font-weight="700" letter-spacing="0.3" fill="rgba(255,255,255,0.93)" pointer-events="none">CENTRO</text>
+                  <text x="268" y="252" text-anchor="middle" dominant-baseline="middle" font-size="8" font-family="DM Sans,sans-serif" font-weight="700" letter-spacing="0.5" fill="rgba(255,255,255,0.93)" pointer-events="none">SUR</text>
+                  <text x="197" y="264" text-anchor="middle" dominant-baseline="middle" font-size="6.5" font-family="DM Sans,sans-serif" font-weight="700" letter-spacing="0.3" fill="rgba(255,255,255,0.93)" pointer-events="none">TALAGANTE</text>
+                  <text x="360" y="340" text-anchor="middle" dominant-baseline="middle" font-size="7" font-family="DM Sans,sans-serif" font-weight="700" letter-spacing="0.4" fill="rgba(255,255,255,0.93)" pointer-events="none">CORDILLERA</text>
+                  <text x="239" y="275" text-anchor="middle" dominant-baseline="middle" font-size="7" font-family="DM Sans,sans-serif" font-weight="700" letter-spacing="0.5" fill="rgba(255,255,255,0.93)" pointer-events="none">MAIPO</text>
+                  <text x="121" y="295" text-anchor="middle" dominant-baseline="middle" font-size="7" font-family="DM Sans,sans-serif" font-weight="700" letter-spacing="0.5" fill="rgba(255,255,255,0.93)" pointer-events="none">MELIPILLA</text>
 
                   <!-- Indicador Norte -->
-                  <g transform="translate(108,18)" pointer-events="none">
-                    <circle cx="0" cy="0" r="11" fill="rgba(0,0,0,0.22)"/>
-                    <text x="0" y="1" text-anchor="middle" dominant-baseline="middle"
-                          font-size="10" font-family="sans-serif" font-weight="900"
-                          fill="rgba(255,255,255,0.92)">N</text>
+                  <g transform="translate(36,32)" pointer-events="none">
+                    <circle cx="0" cy="0" r="11" fill="rgba(28,28,30,0.35)"/>
+                    <text x="0" y="1" text-anchor="middle" dominant-baseline="middle" font-size="10" font-family="sans-serif" font-weight="900" fill="rgba(255,255,255,0.92)">N</text>
                   </g>
 
                 </svg>
