@@ -67,48 +67,34 @@
       width: 100%;
       max-width: 960px;
     }
-    #map-svg-wrap { flex: 1 1 560px; min-width: 280px; position: relative; }
+    #map-svg-wrap {
+      flex: 1 1 560px;
+      min-width: 280px;
+      position: relative;
+    }
     #map-svg { width: 100%; height: auto; display: block; }
-
-    /* ── Loading ── */
-    #map-loading {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      background: #fff;
-    }
-    .spinner {
-      width: 32px; height: 32px;
-      border: 3px solid var(--color-border-light);
-      border-top-color: var(--color-accent);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .loading-text { font-size: 0.82rem; color: var(--color-text-muted); }
 
     /* ── Comunas ── */
     .commune {
-      stroke: rgba(255,255,255,0.7);
-      stroke-width: 0.5;
-      transition: opacity 0.16s ease, filter 0.16s ease;
+      stroke: rgba(255,255,255,0.65);
+      stroke-width: 0.6;
+      transition: opacity 0.18s ease, filter 0.18s ease;
       cursor: pointer;
     }
     .commune-out {
       fill: #EAEAED;
-      stroke: #D4D4D8;
+      stroke: #CFCFD4;
       stroke-width: 0.4;
       cursor: default;
+      opacity: 0.7;
     }
-    .commune.zone-dimmed  { opacity: 0.2; }
-    .commune.zone-active  {
-      filter: brightness(1.1) drop-shadow(0 2px 10px rgba(0,0,0,0.22));
+    .commune.zone-dimmed {
+      opacity: 0.18;
+    }
+    .commune.zone-active {
+      filter: brightness(1.12) drop-shadow(0 2px 10px rgba(0,0,0,0.25));
       stroke: rgba(255,255,255,0.95);
-      stroke-width: 1.2;
+      stroke-width: 1.3;
     }
 
     /* ── Tooltip ── */
@@ -117,58 +103,86 @@
       pointer-events: none;
       background: var(--color-primary);
       color: #fff;
-      border-radius: 8px;
-      padding: 10px 14px;
+      border-radius: 9px;
+      padding: 11px 15px;
       font-size: 0.8rem;
       line-height: 1.5;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.22);
       opacity: 0;
-      transform: translateY(4px);
+      transform: translateY(5px);
       transition: opacity 0.14s, transform 0.14s;
-      max-width: 200px;
+      max-width: 210px;
       z-index: 9999;
     }
     #tooltip.visible { opacity: 1; transform: translateY(0); }
     .tt-zone {
-      font-size: 0.67rem; font-weight: 600;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      opacity: 0.58; margin-bottom: 2px;
+      font-size: 0.67rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      opacity: 0.55;
+      margin-bottom: 3px;
     }
-    .tt-name { font-weight: 500; font-size: 0.9rem; }
+    .tt-name { font-weight: 500; font-size: 0.92rem; }
 
     /* ── Leyenda ── */
-    .map-legend { flex: 0 0 172px; padding-top: 12px; }
+    .map-legend { flex: 0 0 176px; padding-top: 14px; }
     .legend-title {
-      font-size: 0.69rem; font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--color-text-muted); margin-bottom: 14px;
+      font-size: 0.69rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 14px;
     }
-    .legend-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .legend-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
     .legend-item {
-      display: flex; align-items: center; gap: 9px;
-      font-size: 0.81rem; cursor: pointer;
-      padding: 4px 6px; border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 0.81rem;
+      cursor: pointer;
+      padding: 5px 7px;
+      border-radius: 7px;
       transition: background 0.13s;
     }
     .legend-item:hover { background: var(--color-surface); }
-    .legend-swatch { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+    .legend-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
     .legend-item-label { flex: 1; }
     .legend-count {
-      font-size: 0.71rem; color: var(--color-text-muted);
+      font-size: 0.71rem;
+      color: var(--color-text-muted);
       font-variant-numeric: tabular-nums;
     }
-    .legend-divider { height: 1px; background: var(--color-border-light); margin: 8px 6px; }
-    .legend-out {
-      display: flex; align-items: center; gap: 9px;
-      font-size: 0.77rem; color: var(--color-text-muted);
-      padding: 4px 6px;
+    .legend-divider {
+      height: 1px;
+      background: var(--color-border-light);
+      margin: 9px 7px;
     }
-    .legend-out .legend-swatch { background: #EAEAED; border: 1px solid #D4D4D8; }
+    .legend-out {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      padding: 5px 7px;
+    }
+    .legend-out .legend-swatch {
+      background: #EAEAED;
+      border: 1px solid #CFCFD4;
+    }
 
     .map-source {
       margin-top: 28px;
-      font-size: 0.71rem; color: var(--color-text-muted);
-      text-align: center; max-width: 580px;
+      font-size: 0.72rem;
+      color: var(--color-text-muted);
+      text-align: center;
+      max-width: 560px;
     }
 
     @media (max-width: 660px) {
@@ -191,14 +205,8 @@
   </header>
 
   <div class="map-layout">
-
     <div id="map-svg-wrap">
-      <!-- Loading state -->
-      <div id="map-loading">
-        <div class="spinner"></div>
-        <span class="loading-text">Cargando mapa…</span>
-      </div>
-      <svg id="map-svg" viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg"></svg>
+      <svg id="map-svg" viewBox="0 0 560 580" xmlns="http://www.w3.org/2000/svg"></svg>
     </div>
 
     <aside class="map-legend">
@@ -218,243 +226,172 @@
   </div>
 
   <p class="map-source">
-    Fuente: diseño muestral Fondecyt de Iniciación N° 11240249
+    Fuente: diseño muestral Fondecyt de Iniciación N°&nbsp;11240249
     "Class, personal networks and political attitudes". ANID 2024–2027.
   </p>
 
-  <script>
-  /* ══════════════════════════════════════════════════════
-     CONFIGURACIÓN DE ZONAS
-  ══════════════════════════════════════════════════════ */
-  const ZONES = {
-    chacabuco:  { label: 'Chacabuco',  color: '#5B9BD5' },
-    norte:      { label: 'Norte',      color: '#3B6FA8' },
-    poniente:   { label: 'Poniente',   color: '#0A7E7A' },
-    oriente:    { label: 'Oriente',    color: '#9B7B2E' },
-    centro:     { label: 'Centro',     color: '#2D3142' },
-    sur:        { label: 'Sur',        color: '#C9524F' },
-    talagante:  { label: 'Talagante',  color: '#6B9E6B' },
-    cordillera: { label: 'Cordillera', color: '#1A7A6A' },
-    maipo:      { label: 'Maipo',      color: '#7B5EA7' },
-    melipilla:  { label: 'Melipilla',  color: '#B07D5A' },
-  };
+<script>
+/* ════════════════════════════════════════════════════════
+   CONFIGURACIÓN DE ZONAS
+════════════════════════════════════════════════════════ */
+const ZONES = {
+  chacabuco:  { label: 'Chacabuco',  color: '#5B9BD5' },
+  norte:      { label: 'Norte',      color: '#3B6FA8' },
+  poniente:   { label: 'Poniente',   color: '#0A7E7A' },
+  oriente:    { label: 'Oriente',    color: '#9B7B2E' },
+  centro:     { label: 'Centro',     color: '#2D3142' },
+  sur:        { label: 'Sur',        color: '#C9524F' },
+  talagante:  { label: 'Talagante',  color: '#6B9E6B' },
+  cordillera: { label: 'Cordillera', color: '#1A7A6A' },
+  maipo:      { label: 'Maipo',      color: '#7B5EA7' },
+  melipilla:  { label: 'Melipilla',  color: '#B07D5A' },
+};
 
-  /* Mapeo nombre de comuna → zona
-     (normalizado: sin tildes, minúsculas, para comparación robusta) */
-  const COMMUNE_ZONES = {
-    'colina':'chacabuco', 'lampa':'chacabuco',
-    'quilicura':'norte', 'huechuraba':'norte', 'conchali':'norte',
-    'independencia':'norte', 'recoleta':'norte', 'renca':'norte',
-    'quinta normal':'poniente', 'lo prado':'poniente', 'cerro navia':'poniente',
-    'pudahuel':'poniente', 'cerrillos':'poniente', 'maipu':'poniente',
-    'vitacura':'oriente', 'providencia':'oriente', 'las condes':'oriente',
-    'nunoa':'oriente', 'la reina':'oriente', 'lo barnechea':'oriente',
-    'santiago':'centro', 'estacion central':'centro',
-    'macul':'sur', 'san joaquin':'sur', 'pedro aguirre cerda':'sur',
-    'lo espejo':'sur', 'la cisterna':'sur', 'san miguel':'sur',
-    'la granja':'sur', 'san ramon':'sur', 'el bosque':'sur',
-    'la pintana':'sur', 'penalolen':'sur', 'la florida':'sur',
-    'padre hurtado':'talagante', 'penaflor':'talagante', 'talagante':'talagante',
-    'puente alto':'cordillera', 'pirque':'cordillera', 'san jose de maipo':'cordillera',
-    'san bernardo':'maipo', 'buin':'maipo',
-    'melipilla':'melipilla',
-  };
+const W = 560, H = 580;
+const svg     = d3.select('#map-svg');
+const tooltip = document.getElementById('tooltip');
+const ttZone  = document.getElementById('tt-zone');
+const ttName  = document.getElementById('tt-name');
+let zoneCounts = {};
 
-  /* Normaliza nombre: quita tildes, minúsculas */
-  function norm(s) {
-    return (s || '').toLowerCase()
-      .normalize('NFD').replace(/[̀-ͯ]/g, '');
-  }
+/* ════════════════════════════════════════════════════════
+   CARGA DEL GEOJSON LOCAL
+════════════════════════════════════════════════════════ */
+d3.json('../assets/data/comunas-rm.geojson').then(render).catch(err => {
+  console.error(err);
+  svg.append('text')
+    .attr('x', W/2).attr('y', H/2)
+    .attr('text-anchor','middle')
+    .attr('fill','#6E6E73').attr('font-size', 13)
+    .attr('font-family','DM Sans, sans-serif')
+    .text('Abre con Live Server (VS Code) para ver el mapa');
+});
 
-  /* ══════════════════════════════════════════════════════
-     RENDER
-  ══════════════════════════════════════════════════════ */
-  const svg      = d3.select('#map-svg');
-  const W = 560, H = 560;
-  const tooltip  = document.getElementById('tooltip');
-  const ttZone   = document.getElementById('tt-zone');
-  const ttName   = document.getElementById('tt-name');
-  const loading  = document.getElementById('map-loading');
+/* ════════════════════════════════════════════════════════
+   RENDER PRINCIPAL
+════════════════════════════════════════════════════════ */
+function render(data) {
 
-  let zoneCounts = {};
-
-  /* Fuente de datos: GeoJSON real de BCN vía fcortes/Chile-GeoJSON
-     El navegador puede hacer este fetch cross-origin sin problema */
-  const GEOJSON_URL =
-    'https://raw.githubusercontent.com/fcortes/Chile-GeoJSON/master/comunas.geojson';
-
-  d3.json(GEOJSON_URL).then(function(all) {
-
-    /* ── 1. Filtrar sólo comunas de la RM (REGION = "13") ── */
-    const rmFeatures = all.features.filter(f => {
-      const reg = String(f.properties.REGION || f.properties.region || '');
-      const nom = String(f.properties.NOM_REG || f.properties.nom_reg || '');
-      return reg === '13' || nom.includes('Metropolitana') || nom.includes('metropolitana');
-    });
-
-    if (rmFeatures.length === 0) {
-      /* Si no hay filtro por región, intentar filtro geográfico:
-         RM está entre latitudes -34.5 y -32.9, longitudes -72 y -69.5 */
-      const fallback = all.features.filter(f => {
-        try {
-          const coords = f.geometry.coordinates.flat(3);
-          const lons = coords.filter((_,i) => i%2===0);
-          const lats = coords.filter((_,i) => i%2===1);
-          const avgLon = lons.reduce((a,b)=>a+b,0)/lons.length;
-          const avgLat = lats.reduce((a,b)=>a+b,0)/lats.length;
-          return avgLon > -72 && avgLon < -69.5 && avgLat > -34.6 && avgLat < -32.8;
-        } catch(e) { return false; }
-      });
-      renderMap({ ...all, features: fallback });
-    } else {
-      renderMap({ ...all, features: rmFeatures });
-    }
-
-  }).catch(function(err) {
-    console.error('Error cargando GeoJSON:', err);
-    /* Fallback: carga el GeoJSON local simplificado */
-    d3.json('../assets/data/comunas-rm.geojson')
-      .then(renderMap)
-      .catch(() => {
-        loading.innerHTML = `
-          <p style="color:#6E6E73;font-size:0.85rem;text-align:center;padding:24px">
-            Mapa no disponible.<br>Abre el archivo desde un servidor local<br>
-            (<code>npx serve</code> o Live Server en VS Code).
-          </p>`;
-      });
+  /* Anotar zona en cada feature */
+  data.features.forEach(f => {
+    f._zona = f.properties.ZONA || null;
+    if (f._zona) zoneCounts[f._zona] = (zoneCounts[f._zona] || 0) + 1;
   });
 
-  /* ══════════════════════════════════════════════════════
-     FUNCIÓN PRINCIPAL DE RENDER
-  ══════════════════════════════════════════════════════ */
-  function renderMap(data) {
-    loading.style.display = 'none';
+  /* Proyección Mercator ajustada al bounding box real del GeoJSON */
+  const proj = d3.geoMercator()
+    .fitExtent([[24, 20], [W - 20, H - 20]], data);
+  const path = d3.geoPath().projection(proj);
 
-    /* Anota zona en cada feature */
-    data.features.forEach(f => {
-      const nomKey = norm(f.properties.NOM_COM || f.properties.nom_com || '');
-      f._zona = COMMUNE_ZONES[nomKey] || null;
-      if (f._zona) zoneCounts[f._zona] = (zoneCounts[f._zona] || 0) + 1;
-    });
+  /* Sombra suave del conjunto */
+  const defs = svg.append('defs');
+  const f = defs.append('filter').attr('id','map-shadow');
+  f.append('feDropShadow')
+    .attr('dx',0).attr('dy',3).attr('stdDeviation',6)
+    .attr('flood-color','rgba(0,0,0,0.09)');
 
-    /* Proyección ajustada a los datos reales */
-    const projection = d3.geoMercator()
-      .fitExtent([[28, 28], [W - 28, H - 28]], data);
-    const path = d3.geoPath().projection(projection);
+  const g = svg.append('g').attr('filter','url(#map-shadow)');
 
-    /* Sombra suave */
-    const defs = svg.append('defs');
-    const filt = defs.append('filter').attr('id', 'glow');
-    filt.append('feDropShadow')
-      .attr('dx', 0).attr('dy', 2).attr('stdDeviation', 5)
-      .attr('flood-color', 'rgba(0,0,0,0.10)');
-
-    const g = svg.append('g').attr('filter', 'url(#glow)');
-
-    /* ── Dibuja comunas ── */
-    g.selectAll('path')
-      .data(data.features)
-      .join('path')
-        .attr('class', d => d._zona ? 'commune commune-' + d._zona : 'commune commune-out')
-        .attr('d', path)
-        .attr('fill', d => {
-          if (!d._zona) return '#EAEAED';
-          return ZONES[d._zona].color;
-        })
-        .attr('stroke', d => d._zona ? 'rgba(255,255,255,0.72)' : '#D4D4D8')
-        .attr('stroke-width', d => d._zona ? 0.55 : 0.4)
-        .on('mouseenter', function(event, d) {
-          if (!d._zona) return;
-          /* Atenúa otras zonas */
-          d3.selectAll('.commune').each(function(dd) {
-            const same = dd._zona === d._zona;
-            d3.select(this)
-              .classed('zone-dimmed', !same && !!dd._zona)
-              .classed('zone-active', same);
-          });
-          ttZone.textContent = ZONES[d._zona].label;
-          ttName.textContent = d.properties.NOM_COM || d.properties.nom_com || '';
-          tooltip.classList.add('visible');
-        })
-        .on('mousemove', function(event) {
-          let x = event.clientX + 14, y = event.clientY + 14;
-          if (x + 215 > window.innerWidth)  x = event.clientX - 215 - 14;
-          if (y + 80  > window.innerHeight) y = event.clientY - 80  - 14;
-          tooltip.style.left = x + 'px';
-          tooltip.style.top  = y + 'px';
-        })
-        .on('mouseleave', function() {
-          d3.selectAll('.commune')
-            .classed('zone-dimmed', false)
-            .classed('zone-active', false);
-          tooltip.classList.remove('visible');
-        });
-
-    /* ── Etiquetas de zona ── */
-    /* Calcula centroid de cada zona como promedio de centroids de sus comunas */
-    const zoneCentroids = {};
-    data.features.forEach(f => {
-      if (!f._zona) return;
-      const c = path.centroid(f);
-      if (!isFinite(c[0]) || !isFinite(c[1])) return;
-      if (!zoneCentroids[f._zona]) zoneCentroids[f._zona] = [];
-      zoneCentroids[f._zona].push(c);
-    });
-
-    Object.entries(zoneCentroids).forEach(([zone, pts]) => {
-      if (!pts.length) return;
-      const cx = pts.reduce((s,p) => s + p[0], 0) / pts.length;
-      const cy = pts.reduce((s,p) => s + p[1], 0) / pts.length;
-      svg.append('text')
-        .attr('x', cx).attr('y', cy + 3)
-        .attr('text-anchor', 'middle')
-        .attr('pointer-events', 'none')
-        .attr('font-family', "'DM Sans', sans-serif")
-        .attr('font-size', '8.5')
-        .attr('font-weight', '600')
-        .attr('letter-spacing', '0.04em')
-        .attr('fill', 'rgba(255,255,255,0.90)')
-        .text(ZONES[zone].label.toUpperCase());
-    });
-
-    /* ── Leyenda ── */
-    buildLegend(data);
-  }
-
-  /* ══════════════════════════════════════════════════════
-     LEYENDA
-  ══════════════════════════════════════════════════════ */
-  function buildLegend(data) {
-    const list = document.getElementById('legend-list');
-    list.innerHTML = '';
-
-    const sorted = Object.entries(ZONES)
-      .sort((a, b) => (zoneCounts[b[0]] || 0) - (zoneCounts[a[0]] || 0));
-
-    sorted.forEach(([key, zone]) => {
-      const li = document.createElement('li');
-      li.className = 'legend-item';
-      li.innerHTML = `
-        <span class="legend-swatch" style="background:${zone.color}"></span>
-        <span class="legend-item-label">${zone.label}</span>
-        <span class="legend-count">${zoneCounts[key] || '—'}</span>
-      `;
-      li.addEventListener('mouseenter', () => {
-        d3.selectAll('.commune').each(function(d) {
-          const same = d._zona === key;
+  /* ── Dibuja comunas ── */
+  g.selectAll('path')
+    .data(data.features)
+    .join('path')
+      .attr('class', d => d._zona
+        ? 'commune commune-' + d._zona
+        : 'commune commune-out')
+      .attr('d', path)
+      .attr('fill', d => d._zona ? ZONES[d._zona].color : '#EAEAED')
+      .attr('stroke', d => d._zona ? 'rgba(255,255,255,0.65)' : '#CFCFD4')
+      .attr('stroke-width', d => d._zona ? 0.6 : 0.4)
+      .on('mouseenter', function(event, d) {
+        if (!d._zona) return;
+        /* Atenúa otras zonas */
+        d3.selectAll('.commune').each(function(dd) {
+          const same = dd._zona === d._zona;
           d3.select(this)
-            .classed('zone-dimmed', !same && !!d._zona)
+            .classed('zone-dimmed', !same && !!dd._zona)
             .classed('zone-active', same);
         });
-      });
-      li.addEventListener('mouseleave', () => {
+        ttZone.textContent = ZONES[d._zona].label;
+        ttName.textContent = d.properties.NOM_COM;
+        tooltip.classList.add('visible');
+      })
+      .on('mousemove', function(event) {
+        let x = event.clientX + 14, y = event.clientY + 14;
+        if (x + 220 > window.innerWidth)  x = event.clientX - 220 - 14;
+        if (y + 80  > window.innerHeight) y = event.clientY - 80  - 14;
+        tooltip.style.left = x + 'px';
+        tooltip.style.top  = y + 'px';
+      })
+      .on('mouseleave', function() {
         d3.selectAll('.commune')
-          .classed('zone-dimmed', false).classed('zone-active', false);
+          .classed('zone-dimmed', false)
+          .classed('zone-active', false);
+        tooltip.classList.remove('visible');
       });
-      list.appendChild(li);
-    });
-  }
-  </script>
 
+  /* ── Etiquetas de zona (centroid promedio) ── */
+  const centroids = {};
+  data.features.forEach(f => {
+    if (!f._zona) return;
+    const c = path.centroid(f);
+    if (!isFinite(c[0])) return;
+    if (!centroids[f._zona]) centroids[f._zona] = [];
+    centroids[f._zona].push(c);
+  });
+
+  Object.entries(centroids).forEach(([zone, pts]) => {
+    const cx = pts.reduce((s,p) => s+p[0], 0) / pts.length;
+    const cy = pts.reduce((s,p) => s+p[1], 0) / pts.length;
+    svg.append('text')
+      .attr('x', cx).attr('y', cy + 4)
+      .attr('text-anchor', 'middle')
+      .attr('pointer-events', 'none')
+      .attr('font-family', "'DM Sans', sans-serif")
+      .attr('font-size', '8')
+      .attr('font-weight', '700')
+      .attr('letter-spacing', '0.05em')
+      .attr('fill', 'rgba(255,255,255,0.93)')
+      .style('text-shadow', '0 1px 3px rgba(0,0,0,0.4)')
+      .text(ZONES[zone].label.toUpperCase());
+  });
+
+  buildLegend();
+}
+
+/* ════════════════════════════════════════════════════════
+   LEYENDA
+════════════════════════════════════════════════════════ */
+function buildLegend() {
+  const list = document.getElementById('legend-list');
+  list.innerHTML = '';
+  const sorted = Object.entries(ZONES)
+    .sort((a,b) => (zoneCounts[b[0]]||0) - (zoneCounts[a[0]]||0));
+
+  sorted.forEach(([key, zone]) => {
+    const li = document.createElement('li');
+    li.className = 'legend-item';
+    li.innerHTML = `
+      <span class="legend-swatch" style="background:${zone.color}"></span>
+      <span class="legend-item-label">${zone.label}</span>
+      <span class="legend-count">${zoneCounts[key] || '—'}</span>
+    `;
+    li.addEventListener('mouseenter', () => {
+      d3.selectAll('.commune').each(function(d) {
+        const same = d._zona === key;
+        d3.select(this)
+          .classed('zone-dimmed', !same && !!d._zona)
+          .classed('zone-active', same);
+      });
+    });
+    li.addEventListener('mouseleave', () => {
+      d3.selectAll('.commune')
+        .classed('zone-dimmed', false)
+        .classed('zone-active', false);
+    });
+    list.appendChild(li);
+  });
+}
+</script>
 </body>
 </html>
