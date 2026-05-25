@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Distribución territorial — The Class Project</title>
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-bg:        #0f1117;
+      --color-surface:   #181c27;
+      --color-border:    #2a2f3e;
+      --color-text:      #e8eaf0;
+      --color-muted:     #6b7280;
+      --color-accent:    #c8a96e;
+
+      /* Zonas — paleta sobria, distinguible */
+      --z-centro:        #4e9de0;
+      --z-norte:         #6ab187;
+      --z-oriente:       #e07b54;
+      --z-poniente:      #a67bbf;
+      --z-sur:           #e0c854;
+      --z-chacabuco:     #5bc4c4;
+      --z-cordillera:    #e05480;
+      --z-maipo:         #87b45e;
+      --z-melipilla:     #e0954a;
+      --z-talagante:     #7b9ee0;
+    }
+
+    html, body { height: 100%; font-family: 'Georgia', serif; background: var(--color-bg); color: var(--color-text); }
+
+    /* Layout */
+    .layout {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      grid-template-columns: 1fr 280px;
+      height: 100vh;
+      gap: 0;
+    }
+
+    /* Header */
+    header {
+      grid-column: 1 / -1;
+      padding: 18px 28px;
+      border-bottom: 1px solid var(--color-border);
+      background: var(--color-surface);
+      display: flex;
+      align-items: baseline;
+      gap: 18px;
+    }
+    header h1 {
+      font-size: 1rem;
+      font-weight: normal;
+      letter-spacing: 0.05em;
+      color: var(--color-accent);
+      text-transform: uppercase;
+      font-size: 0.78rem;
+    }
+    header p {
+      font-size: 0.82rem;
+      color: var(--color-muted);
+    }
+
+    /* Mapa */
+    #map {
+      background: var(--color-bg);
+    }
+
+    /* Panel lateral */
+    .panel {
+      background: var(--color-surface);
+      border-left: 1px solid var(--color-border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .panel-section {
+      padding: 20px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .panel-section h2 {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 14px;
+    }
+
+    /* Leyenda de zonas */
+    .zona-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 0;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .zona-item:hover { opacity: 0.75; }
+    .zona-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .zona-label {
+      font-size: 0.78rem;
+      color: var(--color-text);
+      flex: 1;
+    }
+    .zona-n {
+      font-size: 0.72rem;
+      color: var(--color-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Info de selección */
+    .info-box {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .info-box h2 {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 14px;
+    }
+    .info-placeholder {
+      font-size: 0.8rem;
+      color: var(--color-muted);
+      line-height: 1.6;
+    }
+    .info-comuna {
+      display: none;
+    }
+    .info-comuna h3 {
+      font-size: 1.05rem;
+      font-weight: normal;
+      color: var(--color-accent);
+      margin-bottom: 6px;
+    }
+    .info-meta {
+      font-size: 0.78rem;
+      color: var(--color-muted);
+      margin-bottom: 16px;
+    }
+    .info-stat {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 0.82rem;
+    }
+    .info-stat-label { color: var(--color-muted); }
+    .info-stat-value { color: var(--color-text); font-variant-numeric: tabular-nums; }
+
+    /* Total */
+    .total-bar {
+      padding: 14px 20px;
+      border-top: 1px solid var(--color-border);
+      background: var(--color-bg);
+      font-size: 0.75rem;
+      color: var(--color-muted);
+      display: flex;
+      justify-content: space-between;
+    }
+    .total-bar span { color: var(--color-text); }
+
+    /* Overrides Leaflet para tema oscuro */
+    .leaflet-container { background: #0f1117 !important; }
+    .leaflet-control-zoom a {
+      background: var(--color-surface) !important;
+      color: var(--color-text) !important;
+      border-color: var(--color-border) !important;
+    }
+    .leaflet-control-attribution {
+      background: rgba(15,17,23,0.8) !important;
+      color: var(--color-muted) !important;
+      font-size: 0.65rem !important;
+    }
+    .leaflet-control-attribution a { color: var(--color-muted) !important; }
+
+    /* Tooltip del mapa */
+    .leaflet-tooltip {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+      border-radius: 4px;
+      font-family: 'Georgia', serif;
+      font-size: 0.78rem;
+      padding: 6px 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    .leaflet-tooltip::before { display: none; }
+  </style>
+</head>
+<body>
+
+<div class="layout">
+
+  <header>
+    <h1>The Class Project</h1>
+    <p>Distribución territorial de la muestra — Región Metropolitana, 2025</p>
+  </header>
+
+  <div id="map"></div>
+
+  <aside class="panel">
+
+    <div class="panel-section">
+      <h2>Zonas</h2>
+      <div id="leyenda"></div>
+    </div>
+
+    <div class="info-box">
+      <h2>Detalle</h2>
+      <p class="info-placeholder" id="info-placeholder">Haz clic en una comuna para ver el detalle.</p>
+      <div class="info-comuna" id="info-comuna">
+        <h3 id="info-nombre"></h3>
+        <div class="info-meta" id="info-zona-label"></div>
+        <div class="info-stat">
+          <span class="info-stat-label">Casos en esta comuna</span>
+          <span class="info-stat-value" id="info-n"></span>
+        </div>
+        <div class="info-stat">
+          <span class="info-stat-label">% del total nacional</span>
+          <span class="info-stat-value" id="info-pct"></span>
+        </div>
+        <div class="info-stat">
+          <span class="info-stat-label">% de su zona</span>
+          <span class="info-stat-value" id="info-pct-zona"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="total-bar">
+      <span>N total</span>
+      <span>1.251 casos</span>
+    </div>
+
+  </aside>
+
+</div>
+
+<script>
+// ── Configuración de zonas ────────────────────────────────────────────────
+const ZONAS = {
+  "Zona Centro":     { color: "var(--z-centro)",     n: 105 },
+  "Zona Norte":      { color: "var(--z-norte)",      n: 144 },
+  "Zona Oriente":    { color: "var(--z-oriente)",    n: 194 },
+  "Zona Poniente":   { color: "var(--z-poniente)",   n: 199 },
+  "Zona Sur":        { color: "var(--z-sur)",        n: 268 },
+  "Zona Chacabuco":  { color: "var(--z-chacabuco)",  n: 57  },
+  "Zona Cordillera": { color: "var(--z-cordillera)", n: 103 },
+  "Zona Maipo":      { color: "var(--z-maipo)",      n: 89  },
+  "Zona Melipilla":  { color: "var(--z-melipilla)",  n: 35  },
+  "Zona Talagante":  { color: "var(--z-talagante)",  n: 57  },
+};
+
+const N_TOTAL = 1251;
+
+// ── Colores CSS resueltos (para Leaflet, que no entiende var()) ───────────
+const COLOR_MAP = {
+  "Zona Centro":     "#4e9de0",
+  "Zona Norte":      "#6ab187",
+  "Zona Oriente":    "#e07b54",
+  "Zona Poniente":   "#a67bbf",
+  "Zona Sur":        "#e0c854",
+  "Zona Chacabuco":  "#5bc4c4",
+  "Zona Cordillera": "#e05480",
+  "Zona Maipo":      "#87b45e",
+  "Zona Melipilla":  "#e0954a",
+  "Zona Talagante":  "#7b9ee0",
+};
+
+// ── Leyenda lateral ───────────────────────────────────────────────────────
+const leyendaEl = document.getElementById("leyenda");
+Object.entries(ZONAS).forEach(([nombre, info]) => {
+  const div = document.createElement("div");
+  div.className = "zona-item";
+  div.innerHTML = `
+    <div class="zona-dot" style="background:${COLOR_MAP[nombre]}"></div>
+    <span class="zona-label">${nombre.replace("Zona ","")}</span>
+    <span class="zona-n">n=${info.n}</span>
+  `;
+  leyendaEl.appendChild(div);
+});
+
+// ── Mapa ─────────────────────────────────────────────────────────────────
+const map = L.map("map", {
+  center: [-33.55, -70.65],
+  zoom: 9,
+  zoomControl: true,
+  attributionControl: true,
+});
+
+// Sin tile de fondo (mapa de datos puro)
+// Opcional: agregar tiles si se quiere contexto geográfico
+// L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{attribution:'© OpenStreetMap © CARTO'}).addTo(map);
+
+// ── Estilo por feature ────────────────────────────────────────────────────
+function estilo(feature) {
+  const zona = feature.properties.zona;
+  const n    = feature.properties.n;
+  const nMax = 95; // La Florida es la más alta
+  const opacity = 0.35 + 0.55 * (n / nMax);  // opacidad proporcional a n
+  return {
+    fillColor:   COLOR_MAP[zona] || "#888",
+    fillOpacity: opacity,
+    color:       "#0f1117",
+    weight:      1.2,
+    opacity:     1,
+  };
+}
+
+let capaActiva = null;
+
+function onEachFeature(feature, layer) {
+  const p = feature.properties;
+
+  // Tooltip al hover
+  layer.bindTooltip(
+    `<strong>${p.comuna}</strong><br>${p.zona} · n = ${p.n}`,
+    { sticky: true, className: "" }
+  );
+
+  layer.on({
+    mouseover(e) {
+      if (capaActiva !== layer) {
+        layer.setStyle({ weight: 2.5, color: "#fff" });
+      }
+    },
+    mouseout(e) {
+      if (capaActiva !== layer) {
+        geoCapa.resetStyle(layer);
+      }
+    },
+    click(e) {
+      // Resetear capa anterior
+      if (capaActiva) geoCapa.resetStyle(capaActiva);
+      capaActiva = layer;
+      layer.setStyle({ weight: 2.5, color: "#fff" });
+
+      // Actualizar panel
+      const pctTotal = ((p.n / N_TOTAL) * 100).toFixed(1);
+      const nZona    = ZONAS[p.zona]?.n || 1;
+      const pctZona  = ((p.n / nZona) * 100).toFixed(1);
+
+      document.getElementById("info-placeholder").style.display = "none";
+      const box = document.getElementById("info-comuna");
+      box.style.display = "block";
+      document.getElementById("info-nombre").textContent  = p.comuna;
+      document.getElementById("info-zona-label").textContent = p.zona;
+      document.getElementById("info-n").textContent       = p.n.toLocaleString("es-CL");
+      document.getElementById("info-pct").textContent     = pctTotal + "%";
+      document.getElementById("info-pct-zona").textContent = pctZona + "%";
+
+      map.fitBounds(layer.getBounds(), { padding: [40, 40] });
+    }
+  });
+}
+
+// ── Cargar GeoJSON ────────────────────────────────────────────────────────
+let geoCapa;
+fetch("data/comunas-rm.geojson")
+  .then(r => {
+    if (!r.ok) throw new Error(`HTTP ${r.status}: no se pudo cargar data/comunas-rm.geojson`);
+    return r.json();
+  })
+  .then(data => {
+    geoCapa = L.geoJSON(data, {
+      style: estilo,
+      onEachFeature: onEachFeature,
+    }).addTo(map);
+    map.fitBounds(geoCapa.getBounds(), { padding: [20, 20] });
+  })
+  .catch(err => {
+    document.getElementById("map").innerHTML =
+      `<div style="padding:40px;color:#e05480;font-family:monospace;font-size:0.85rem;">
+        Error al cargar el GeoJSON:<br><br>${err.message}<br><br>
+        Verifica que <code>data/comunas-rm.geojson</code> existe y que el servidor local está corriendo.
+      </div>`;
+    console.error("Error GeoJSON:", err);
+  });
+</script>
+
+</body>
+</html>
