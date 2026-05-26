@@ -373,11 +373,77 @@
       margin-bottom: var(--space-sm);
     }
 
-    /* publicaciones destacadas dentro del sidebar layout */
-    .divulgacion-content #publicaciones {
-      background-color: var(--color-accent-light);
+    /* ── PUBLICACIONES DESTACADAS (bloque del proyecto) ──────── */
+    .pub-destacadas {
+      background-color: var(--color-primary);
       border-radius: var(--radius-lg);
-      padding: var(--space-2xl);
+      padding: var(--space-xl) var(--space-2xl);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .pub-destacadas__label {
+      display: block;
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-md);
+    }
+
+    .pub-destacadas .pub-item {
+      border-bottom-color: rgba(255,255,255,0.12);
+    }
+
+    .pub-destacadas .pub-item__authors {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .pub-destacadas .pub-item__title {
+      color: #ffffff;
+    }
+
+    .pub-destacadas .pub-item__title:hover {
+      color: var(--color-accent);
+    }
+
+    .pub-destacadas .pub-item__journal {
+      color: rgba(255,255,255,0.45);
+    }
+
+    .pub-destacadas .pub-item__link {
+      color: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+
+    .pub-destacadas .pub-item__link:hover {
+      background-color: var(--color-accent);
+      color: #fff;
+    }
+
+    .pub-destacadas .pub-year-badge {
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.75);
+    }
+
+    /* ── THUMBNAIL COLORS (infografías) ──────────────────────── */
+    .infografia-card__thumb--primary {
+      background-color: var(--color-accent-light);
+    }
+    .infografia-card__thumb--primary .infografia-placeholder {
+      color: var(--color-accent-dark);
+    }
+    .infografia-card__thumb--accent {
+      background-color: #dceef7;
+    }
+    .infografia-card__thumb--accent .infografia-placeholder {
+      color: #1a5c7a;
+    }
+    .infografia-card__thumb--gold {
+      background-color: #fef3c7;
+    }
+    .infografia-card__thumb--gold .infografia-placeholder {
+      color: #92400e;
     }
   </style>
 </head>
