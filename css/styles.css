@@ -1785,22 +1785,38 @@ body {
 .infografia-placeholder          { color: rgba(255, 255, 255, 0.75); }
 
 /* ── Divulgación — publicaciones destacadas ── */
-.pub-destacadas         { margin-bottom: var(--space-xl); }
+.pub-destacadas {
+  background-color: #1C1C1E;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  margin-bottom: 2rem;
+}
 .pub-destacadas__label  {
+  display: block;
   font-size: var(--text-xs);
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-accent);
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-md);
 }
 .pub-destacadas__list {
   margin-top: 0;
-  border: 1px solid rgba(10, 126, 122, 0.25);
-  border-radius: var(--radius-lg);
-  padding: var(--space-md) var(--space-lg);
-  background: rgba(10, 126, 122, 0.04);
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
 }
+.pub-destacadas .pub-item {
+  border-bottom-color: rgba(255,255,255,0.12);
+}
+.pub-destacadas .pub-item__authors  { color: rgba(255,255,255,0.5); }
+.pub-destacadas .pub-item__title    { color: #ffffff; }
+.pub-destacadas .pub-item__title:hover { color: var(--color-accent); }
+.pub-destacadas .pub-item__journal  { color: rgba(255,255,255,0.45); }
+.pub-destacadas .pub-item__link     { color: var(--color-accent); border-color: var(--color-accent); }
+.pub-destacadas .pub-item__link:hover { background-color: var(--color-accent); color: #fff; }
+.pub-destacadas .pub-year-badge     { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.75); }
 .pub-item--last { border-bottom: none; }
 #pub-more       { margin-top: var(--space-xl); }
 
