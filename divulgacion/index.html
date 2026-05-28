@@ -471,9 +471,13 @@
 
     .redes-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: var(--space-lg);
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-md);
       margin-top: var(--space-xl);
+    }
+
+    @media (max-width: 768px) {
+      .redes-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     .red-card {
