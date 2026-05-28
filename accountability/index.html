@@ -410,6 +410,11 @@
     .productos-group-label { padding-left: 0; border-left: none; }
     .productos-group-label:first-of-type { margin-top: var(--space-lg); }
 
+    /* Layout columna para difusión y formación */
+    .productos-grid--col {
+      grid-template-columns: 1fr;
+    }
+
     /* Badge de tipo en hitos de difusión */
     .hito-tipo {
       display: inline-block;
@@ -737,32 +742,50 @@
         </div>
 
         <p class="productos-group-label">Difusión y divulgación</p>
-        <div class="productos-grid">
+        <div class="productos-grid productos-grid--col">
           <div class="producto-card">
-            <span class="producto-card__type">Plataforma digital</span>
-            <p class="producto-card__title">Sitio web del proyecto con resultados y materiales abiertos</p>
-            <p class="producto-card__meta">theclassproject.org · En línea</p>
+            <span class="producto-card__type">Año 1 · 2024</span>
+            <p class="producto-card__title">Sitio web — Diseño y desarrollo</p>
+            <p class="producto-card__meta">theclassproject.org</p>
             <div class="producto-card__status"><span class="hito-status hito-status--done">Completado</span></div>
           </div>
           <div class="producto-card">
-            <span class="producto-card__type">Comunicación pública</span>
-            <p class="producto-card__title">Divulgación científica y comunicación de resultados</p>
-            <p class="producto-card__meta">Infografías · noticias · redes sociales</p>
+            <span class="producto-card__type">Año 2 · 2025</span>
+            <p class="producto-card__title">Sitio web — Generación de contenidos</p>
+            <p class="producto-card__meta">Infografías, noticias, materiales de divulgación</p>
+            <div class="producto-card__status"><span class="hito-status hito-status--done">Completado</span></div>
+          </div>
+          <div class="producto-card">
+            <span class="producto-card__type">Año 3 · 2026</span>
+            <p class="producto-card__title">Sitio web — Divulgación de resultados</p>
+            <p class="producto-card__meta">Publicación de hallazgos y materiales abiertos</p>
             <div class="producto-card__status"><span class="hito-status hito-status--progress">En curso</span></div>
           </div>
         </div>
 
         <p class="productos-group-label">Formación de capital humano</p>
-        <div class="productos-grid">
+        <div class="productos-grid productos-grid--col">
           <div class="producto-card">
-            <span class="producto-card__type">Formación</span>
-            <p class="producto-card__title">Dirección de 2 tesis de pregrado</p>
+            <span class="producto-card__type">Pregrado</span>
+            <p class="producto-card__title">Dirección de Tesis 1 de pregrado</p>
             <p class="producto-card__meta">Escuela de Sociología UDP · 2026</p>
             <div class="producto-card__status"><span class="hito-status hito-status--progress">En curso</span></div>
           </div>
           <div class="producto-card">
-            <span class="producto-card__type">Formación</span>
-            <p class="producto-card__title">Dirección de 2 tesis de magíster</p>
+            <span class="producto-card__type">Pregrado</span>
+            <p class="producto-card__title">Dirección de Tesis 2 de pregrado</p>
+            <p class="producto-card__meta">Escuela de Sociología UDP · 2026</p>
+            <div class="producto-card__status"><span class="hito-status hito-status--progress">En curso</span></div>
+          </div>
+          <div class="producto-card">
+            <span class="producto-card__type">Magíster</span>
+            <p class="producto-card__title">Dirección de Tesis 1 de magíster</p>
+            <p class="producto-card__meta">Escuela de Sociología UDP · 2026</p>
+            <div class="producto-card__status"><span class="hito-status hito-status--progress">En curso</span></div>
+          </div>
+          <div class="producto-card">
+            <span class="producto-card__type">Magíster</span>
+            <p class="producto-card__title">Dirección de Tesis 2 de magíster</p>
             <p class="producto-card__meta">Escuela de Sociología UDP · 2026</p>
             <div class="producto-card__status"><span class="hito-status hito-status--progress">En curso</span></div>
           </div>
@@ -908,7 +931,7 @@
         </div>
       </div><!-- /.footer__grid -->
       <div class="footer__bottom">
-        e Class Project. Todos los derechos reservados.</p>
+        <p class="footer__copy">&copy; <span id="footer-year">2026</span> The Class Project. Todos los derechos reservados.</p>
         <div class="footer__funders"><span>Fondecyt de Iniciación N°11240249</span></div>
       </div>
     </div>
