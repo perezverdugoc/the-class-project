@@ -13,10 +13,10 @@
     gtag('config', 'G-Y9DYSQMWKG');
   </script>
 
-  <title>Accountability — The Class Project</title>
+  <title>Transparencia y rendición de cuentas — The Class Project</title>
   <meta name="description" content="Rendición pública de cuentas del Fondecyt de Iniciación N°11240249. Hitos, productos y avances del proyecto.">
   <!-- Open Graph -->
-  <meta property="og:title" content="Accountability — The Class Project">
+  <meta property="og:title" content="Transparencia y rendición de cuentas — The Class Project">
   <meta property="og:description" content="Rendición pública de cuentas. Hitos, productos y avances del FONDECYT N° 11240249.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://theclassproject.org/accountability/">
@@ -26,7 +26,7 @@
   <meta property="og:locale" content="es_CL">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://theclassproject.org/assets/og-image.jpg">
-  <meta name="twitter:title" content="Transparencia — The Class Project">
+  <meta name="twitter:title" content="Transparencia y rendición de cuentas — The Class Project">
   <meta name="twitter:description" content="Rendición pública de cuentas del FONDECYT de Iniciación N°11240249. Hitos, productos y avances del proyecto.">
   <meta property="og:site_name" content="The Class Project">
   <link rel="canonical" href="https://theclassproject.org/accountability/">
@@ -40,6 +40,10 @@
 
   <style>
     /* ── ACCOUNTABILITY ───────────────────────────────── */
+    html,
+    body {
+      overflow-x: hidden;
+    }
 
     .acc-section {
       padding: var(--space-3xl) 0;
@@ -55,6 +59,129 @@
       margin-bottom: var(--space-lg);
     }
 
+    .acc-lead {
+      font-size: var(--text-md);
+      color: var(--color-text-muted);
+      line-height: 1.75;
+      max-width: 78ch;
+      margin: 0 0 var(--space-xl);
+    }
+
+    .evaluator-summary {
+      border: 1px solid rgba(10,126,122,0.22);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, rgba(10,126,122,0.11), rgba(255,255,255,0.92));
+      padding: var(--space-2xl);
+      margin-bottom: var(--space-xl);
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-md);
+      margin-top: var(--space-lg);
+    }
+
+    @media (max-width: 900px) {
+      .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 560px) {
+      .summary-grid { grid-template-columns: 1fr; }
+    }
+
+    .summary-stat {
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-md);
+      background: #fff;
+      padding: var(--space-md);
+      min-width: 0;
+    }
+
+    .summary-stat strong {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: var(--text-xl);
+      color: var(--color-accent-dark);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .summary-stat span {
+      color: var(--color-text-muted);
+      font-size: var(--text-xs);
+      line-height: 1.45;
+    }
+
+    .evidence-link {
+      color: var(--color-accent-dark);
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(10,126,122,0.35);
+    }
+
+    .evidence-link:hover { border-bottom-color: currentColor; }
+
+    .acc-content .progress-label {
+      color: var(--color-text-muted);
+    }
+
+    .acc-content .progress-label--accent {
+      color: var(--color-accent-dark);
+    }
+
+    .acc-content {
+      min-width: 0;
+    }
+
+    .page-hero .container,
+    .acc-wrap {
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .acc-lead,
+    .funding-item__value,
+    .note-box,
+    .summary-stat span {
+      overflow-wrap: break-word;
+    }
+
+    @media (max-width: 640px) {
+      .page-hero__title {
+        font-size: clamp(2.2rem, 11vw, 3rem);
+        overflow-wrap: anywhere;
+      }
+
+      .acc-content .evaluator-summary,
+      .acc-content .funding-card,
+      .acc-content .note-box {
+        padding: var(--space-lg);
+      }
+
+      .acc-content .funding-card {
+        grid-template-columns: 1fr;
+      }
+
+      .progress-labels {
+        gap: var(--space-sm);
+        align-items: flex-start;
+      }
+
+      .progress-label {
+        max-width: 33%;
+        line-height: 1.35;
+      }
+
+      .acc-section {
+        overflow-x: auto;
+      }
+
+      .hitos-table {
+        min-width: 760px;
+      }
+    }
+
     /* ── TARJETA FINANCIAMIENTO ──────────────────────── */
 
     .funding-card {
@@ -65,6 +192,8 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: var(--space-xl);
+      max-width: 100%;
+      box-sizing: border-box;
     }
 
     .funding-item__label {
@@ -484,10 +613,10 @@
     <section class="page-hero">
       <div class="container">
         <span class="page-hero__eyebrow">Transparencia</span>
-        <h1 class="page-hero__title">Accountability</h1>
+        <h1 class="page-hero__title">Transparencia y rendición de cuentas</h1>
         <p class="page-hero__desc">
           Rendición pública de cuentas del Fondecyt de Iniciación N°11240249.
-          Avances, hitos comprometidos y productos del proyecto.
+          Avances, compromisos, evidencias y productos del proyecto.
         </p>
       </div>
     </section>
@@ -498,24 +627,41 @@
       <nav class="acc-nav" aria-label="Secciones de transparencia">
         <p class="acc-nav__label">En esta sección</p>
         <ul>
-          <li><a href="#acc-financiamiento">Financiamiento</a></li>
+          <li><a href="#acc-resumen">Resumen ejecutivo</a></li>
+          <li><a href="#acc-financiamiento">Información del proyecto</a></li>
           <li>
-            <a href="#acc-hitos">Hitos comprometidos</a>
+            <a href="#acc-hitos">Estado de cumplimiento</a>
             <div class="acc-sub-nav">
               <a href="#acc-hitos-inv">Investigación</a>
               <a href="#acc-hitos-dif">Difusión y formación</a>
             </div>
           </li>
-          <li><a href="#acc-productos">Productos del proyecto</a></li>
-          <li><a href="#acc-seminarios">Seminarios y eventos</a></li>
+          <li><a href="#acc-productos">Evidencias y productos</a></li>
+          <li><a href="#acc-apertura">Apertura de datos</a></li>
         </ul>
       </nav>
 
       <div class="acc-content">
 
+      <!-- 0. RESUMEN EJECUTIVO -->
+      <section class="acc-section" id="acc-resumen" aria-labelledby="acc-resumen-h">
+        <h2 id="acc-resumen-h">Resumen ejecutivo</h2>
+        <div class="evaluator-summary">
+          <p class="acc-lead">
+            El proyecto se encuentra en su tercer año de ejecución. A mayo de 2026, el diseño del estudio, el piloto, el levantamiento principal de la encuesta y la publicación de la plataforma web se encuentran cumplidos. La etapa vigente concentra la validación final de datos, el análisis, la preparación de artículos académicos, la formación de capital humano y la divulgación progresiva de resultados.
+          </p>
+          <div class="summary-grid" aria-label="Indicadores principales del avance">
+            <div class="summary-stat"><strong>Año 3</strong><span>ejecución 2026, con cierre administrativo en marzo de 2027</span></div>
+            <div class="summary-stat"><strong>1.250</strong><span>encuestas presenciales reportadas oficialmente por el equipo</span></div>
+            <div class="summary-stat"><strong>10</strong><span>zonas territoriales de muestreo en la Región Metropolitana</span></div>
+            <div class="summary-stat"><strong>4</strong><span>líneas de cumplimiento: investigación, difusión, publicaciones y formación</span></div>
+          </div>
+        </div>
+      </section>
+
       <!-- 1. FINANCIAMIENTO -->
       <section class="acc-section" aria-labelledby="acc-financiamiento">
-        <h2 id="acc-financiamiento">Financiamiento</h2>
+        <h2 id="acc-financiamiento">Información del proyecto</h2>
 
         <div class="funding-card">
           <div class="funding-item">
@@ -531,8 +677,8 @@
             <p class="funding-item__value">Agencia Nacional de Investigación y Desarrollo (ANID)</p>
           </div>
           <div class="funding-item">
-            <p class="funding-item__label">Período</p>
-            <p class="funding-item__value">2024–2027 (3 años)</p>
+            <p class="funding-item__label">Período de ejecución</p>
+            <p class="funding-item__value">2024–marzo 2027</p>
           </div>
           <div class="funding-item">
             <p class="funding-item__label">Investigador responsable</p>
@@ -544,24 +690,28 @@
           </div>
         </div>
 
-        <!-- Barra de avance temporal del proyecto — año 1 de 4 -->
+        <!-- Barra de avance temporal del proyecto -->
         <div class="summary-span-full">
           <p class="section-eyebrow section-eyebrow--accent">Avance temporal del proyecto</p>
           <div class="iib-progress">
-            <div class="iib-progress__fill is-animated" style="--progress-pct: 25%; background: var(--color-accent);"></div>
+            <div class="iib-progress__fill is-animated" style="--progress-pct: 78%; background: var(--color-accent);"></div>
           </div>
           <div class="progress-labels">
             <span class="progress-label">Inicio 2024</span>
-            <span class="progress-label progress-label--accent">Año 1 de 3</span>
-            <span class="progress-label">Cierre 2027</span>
+            <span class="progress-label progress-label--accent">Año 3 de ejecución · 2026</span>
+            <span class="progress-label">Cierre marzo 2027</span>
           </div>
+          <p class="note-box">
+            El proyecto se organiza como un Fondecyt de tres años: año 1 en 2024, año 2 en 2025 y año 3 en 2026, con cierre administrativo durante marzo de 2027.
+          </p>
         </div>
 
       </section>
 
       <!-- 2. HITOS -->
       <section class="acc-section" id="acc-hitos" aria-labelledby="acc-hitos-h">
-        <h2 id="acc-hitos-h">Hitos comprometidos y avances</h2>
+        <h2 id="acc-hitos-h">Estado de cumplimiento</h2>
+        <p class="acc-lead">Los compromisos se presentan junto con su evidencia pública o estado de avance, para facilitar la revisión por parte de evaluadores y equipos institucionales.</p>
 
         <p class="hitos-group-label" id="acc-hitos-inv">Investigación</p>
         <table class="hitos-table" aria-label="Hitos de investigación">
@@ -571,6 +721,7 @@
               <th scope="col">Hito</th>
               <th scope="col">Año</th>
               <th scope="col">Estado</th>
+              <th scope="col">Evidencia / observación</th>
             </tr>
           </thead>
           <tbody>
@@ -579,60 +730,70 @@
               <td>Revisión de literatura y diseño del cuestionario</td>
               <td>2024</td>
               <td><span class="hito-status hito-status--done">Completado</span></td>
+              <td><a class="evidence-link" href="/encuesta/#cuestionario">Cuestionario publicado</a></td>
             </tr>
             <tr>
               <td>1</td>
               <td>Diseño muestral y operacionalización de variables</td>
               <td>2024</td>
               <td><span class="hito-status hito-status--done">Completado</span></td>
+              <td><a class="evidence-link" href="/encuesta/#mapa">Mapa de muestreo</a> y ficha técnica</td>
             </tr>
             <tr>
               <td>2</td>
               <td>Piloto (50 casos) y ajuste del instrumento</td>
               <td>2025</td>
               <td><span class="hito-status hito-status--done">Completado</span></td>
+              <td>Piloto reportado en ficha técnica del proyecto</td>
             </tr>
             <tr>
               <td>2</td>
               <td>Levantamiento principal (1.250 encuestas)</td>
               <td>2025</td>
               <td><span class="hito-status hito-status--done">Completado</span></td>
+              <td>N oficial vigente: 1.250 encuestas presenciales</td>
             </tr>
             <tr>
               <td>2</td>
               <td>Validación y limpieza de datos</td>
               <td>2025–2026</td>
-              <td><span class="hito-status hito-status--done">Completado</span></td>
+              <td><span class="hito-status hito-status--progress">En curso</span></td>
+              <td>Etapa previa a apertura de base de datos</td>
             </tr>
             <tr>
               <td>2</td>
               <td>Seminario 1</td>
               <td>2025</td>
               <td><span class="hito-status hito-status--done">Completado</span></td>
+              <td>Seminario Observatorio de Desigualdades</td>
             </tr>
             <tr>
               <td>3</td>
               <td>Artículo académico 1</td>
               <td>2025</td>
               <td><span class="hito-status hito-status--done">Publicado</span></td>
+              <td>Publicación académica reportada por el equipo</td>
             </tr>
             <tr>
               <td>3</td>
               <td>Artículo académico 2</td>
               <td>2026</td>
               <td><span class="hito-status hito-status--progress">En curso</span></td>
+              <td>Manuscrito en preparación</td>
             </tr>
             <tr>
               <td>3</td>
               <td>Artículo académico 3</td>
               <td>2027</td>
               <td><span class="hito-status hito-status--progress">En curso</span></td>
+              <td>Manuscrito proyectado</td>
             </tr>
             <tr>
               <td>3</td>
               <td>Seminario 2</td>
               <td>2026</td>
               <td><span class="hito-status hito-status--pending">Próximamente</span></td>
+              <td>Actividad prevista durante año 3</td>
             </tr>
           </tbody>
         </table>
@@ -646,6 +807,7 @@
               <th scope="col">Tipo</th>
               <th scope="col">Año</th>
               <th scope="col">Estado</th>
+              <th scope="col">Evidencia / observación</th>
             </tr>
           </thead>
           <tbody>
@@ -655,6 +817,7 @@
               <td><span class="hito-tipo">Difusión</span></td>
               <td>2024</td>
               <td><span class="hito-status hito-status--done">Completado</span></td>
+              <td>Sitio público operativo</td>
             </tr>
             <tr>
               <td>2</td>
@@ -662,6 +825,7 @@
               <td><span class="hito-tipo">Difusión</span></td>
               <td>2025</td>
               <td><span class="hito-status hito-status--done">Completado</span></td>
+              <td>Secciones de proyecto, encuesta y equipo publicadas</td>
             </tr>
             <tr>
               <td>3</td>
@@ -669,6 +833,7 @@
               <td><span class="hito-tipo">Difusión</span></td>
               <td>2026</td>
               <td><span class="hito-status hito-status--progress">En curso</span></td>
+              <td>Divulgación de resultados y materiales abiertos</td>
             </tr>
             <tr>
               <td>3</td>
@@ -676,6 +841,7 @@
               <td><span class="hito-tipo">Formación</span></td>
               <td>2026</td>
               <td><span class="hito-status hito-status--progress">En curso</span></td>
+              <td>Formación vinculada al proyecto</td>
             </tr>
             <tr>
               <td>3</td>
@@ -683,6 +849,7 @@
               <td><span class="hito-tipo">Formación</span></td>
               <td>2026</td>
               <td><span class="hito-status hito-status--progress">En curso</span></td>
+              <td>Formación vinculada al proyecto</td>
             </tr>
           </tbody>
         </table>
@@ -691,15 +858,22 @@
 
       <!-- 3. PRODUCTOS -->
       <section class="acc-section" id="acc-productos" aria-labelledby="acc-productos-h">
-        <h2 id="acc-productos-h">Productos del proyecto</h2>
+        <h2 id="acc-productos-h">Evidencias y productos</h2>
+        <p class="acc-lead">Esta sección reúne las evidencias públicas del avance del proyecto. Los productos se presentan como respaldo de los compromisos anteriores, no como una segunda lista de hitos.</p>
 
         <p class="productos-group-label">Instrumento de investigación</p>
         <div class="productos-grid">
           <div class="producto-card">
             <span class="producto-card__type">Encuesta</span>
             <p class="producto-card__title">Encuesta de redes personales y actitudes políticas (Gran Santiago)</p>
-            <p class="producto-card__meta">N=1.250 · IPSOS · 2025</p>
+            <p class="producto-card__meta">N=1.250 · CliO Consulting · 2025</p>
             <div class="producto-card__status"><span class="hito-status hito-status--done">Completado</span></div>
+          </div>
+          <div class="producto-card">
+            <span class="producto-card__type">Documentación</span>
+            <p class="producto-card__title">Ficha técnica, cuestionario, mapa de muestreo y listado de variables</p>
+            <p class="producto-card__meta"><a class="evidence-link" href="/encuesta/">Disponible en sección Encuesta</a></p>
+            <div class="producto-card__status"><span class="hito-status hito-status--done">Publicado</span></div>
           </div>
         </div>
 
@@ -794,33 +968,32 @@
       </section>
 
 
-      <!-- SEMINARIOS REALIZADOS -->
-      <section class="acc-section" aria-labelledby="acc-seminarios">
-        <h2 id="acc-seminarios">Seminarios y eventos realizados</h2>
+      <!-- APERTURA DE DATOS -->
+      <section class="acc-section" id="acc-apertura" aria-labelledby="acc-apertura-h">
+        <h2 id="acc-apertura-h">Apertura de datos y próximos pasos</h2>
+        <p class="acc-lead">
+          La base de datos no se encuentra publicada todavía porque el proyecto mantiene en curso el proceso de validación, limpieza, documentación y preparación de archivos para uso académico. La apertura se realizará una vez concluida esta etapa, resguardando la calidad de los datos, la consistencia metodológica y las condiciones éticas de uso.
+        </p>
 
-        <div class="seminarios-list">
-
-          <div class="seminario-item">
-            <div class="seminario-item__meta">
-              <span class="seminario-item__date">Diciembre 2025</span>
-              <span class="hito-status hito-status--done">Completado</span>
-            </div>
-            <p class="seminario-item__title">Seminario Observatorio de Desigualdades</p>
-            <p class="seminario-item__detail">UDP · Santiago · Presentación de avances del proyecto</p>
+        <div class="productos-grid">
+          <div class="producto-card">
+            <span class="producto-card__type">Disponible</span>
+            <p class="producto-card__title">Cuestionario, ficha técnica, mapa de muestreo y listado de variables</p>
+            <p class="producto-card__meta">Documentación pública del levantamiento 2025</p>
+            <div class="producto-card__status"><span class="hito-status hito-status--done">Publicado</span></div>
           </div>
-
-          <!-- Espacio para agregar más seminarios -->
-          <!-- 
-          <div class="seminario-item">
-            <div class="seminario-item__meta">
-              <span class="seminario-item__date">Mes Año</span>
-              <span class="hito-status hito-status--done">Completado</span>
-            </div>
-            <p class="seminario-item__title">Nombre del seminario</p>
-            <p class="seminario-item__detail">Institución · Ciudad · Descripción breve</p>
+          <div class="producto-card">
+            <span class="producto-card__type">En preparación</span>
+            <p class="producto-card__title">Base de datos y documentación de uso</p>
+            <p class="producto-card__meta">Publicación prevista durante 2027</p>
+            <div class="producto-card__status"><span class="hito-status hito-status--progress">En curso</span></div>
           </div>
-          -->
-
+          <div class="producto-card">
+            <span class="producto-card__type">Próximamente</span>
+            <p class="producto-card__title">Resultados, materiales de divulgación y nuevos productos académicos</p>
+            <p class="producto-card__meta">Etapa de análisis y difusión del año 3</p>
+            <div class="producto-card__status"><span class="hito-status hito-status--progress">En curso</span></div>
+          </div>
         </div>
       </section>
 

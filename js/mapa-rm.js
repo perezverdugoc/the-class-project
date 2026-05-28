@@ -2,7 +2,7 @@
   const root = document.getElementById("mapa-rm");
   if (!root || !window.L) return;
 
-  const N_TOTAL = 1251;
+  const N_TOTAL = 1250;
   const fmt = new Intl.NumberFormat("es-CL");
   let map;
   let geoLayer;

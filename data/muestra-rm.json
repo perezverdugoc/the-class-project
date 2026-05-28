@@ -3,7 +3,7 @@
     "titulo": "Distribucion territorial de la muestra",
     "proyecto": "The Social Survey of Class, Networks and Political Attitudes",
     "variables": ["Zona_gs", "Comuna"],
-    "n_total": 1251,
+    "n_total": 1250,
     "zonas": 10,
     "comunas": 41,
     "fuente": "informe_zonas_comunas.docx / informe_zonas_comunas.docx.md"
@@ -18,6 +18,6 @@
     { "id": "cordillera", "nombre": "Zona Cordillera", "n": 103, "color": "#2E8A62" },
     { "id": "maipo", "nombre": "Zona Maipo", "n": 89, "color": "#5369B1" },
     { "id": "melipilla", "nombre": "Zona Melipilla", "n": 35, "color": "#D88753" },
-    { "id": "talagante", "nombre": "Zona Talagante", "n": 57, "color": "#79A857" }
+    { "id": "talagante", "nombre": "Zona Talagante", "n": 56, "color": "#79A857" }
   ]
 }
