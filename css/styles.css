@@ -9,12 +9,10 @@
 
 /* ============================================================
    1. GOOGLE FONTS
-   Carga las tipografías desde Google Fonts.
-   Si el sitio se usa sin internet, agrega las fuentes localmente
-   en /assets/fonts/ y reemplaza este @import.
+   El @import fue movido al <head> de cada HTML como <link rel="preconnect">
+   + <link rel="stylesheet"> para evitar render-blocking.
+   Ver: https://web.dev/defer-non-critical-css/
    ============================================================ */
-
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap');
 
 
 /* ============================================================

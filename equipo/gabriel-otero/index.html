@@ -24,6 +24,16 @@
   <meta property="og:locale" content="es_CL">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://theclassproject.org/assets/equipo/gabriel-otero.jpg">
+  <meta name="twitter:title" content="Gabriel Otero — The Class Project">
+  <meta name="twitter:description" content="Investigador principal. Sociólogo, PhD Utrecht University. Escuela de Sociología, FCSH, Universidad Diego Portales.">
+  <meta property="og:site_name" content="The Class Project">
+  <link rel="canonical" href="https://theclassproject.org/equipo/gabriel-otero/">
+  <!-- Google Fonts: preconnect primero (más rápido que @import en CSS) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap"></noscript>
+
   <link rel="stylesheet" href="../../css/styles.css">
 
   <style>
@@ -118,6 +128,41 @@
     ]
   }
   </script>
+
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://theclassproject.org/" },
+          { "@type": "ListItem", "position": 2, "name": "Equipo", "item": "https://theclassproject.org/equipo/" },
+          { "@type": "ListItem", "position": 3, "name": "Gabriel Otero", "item": "https://theclassproject.org/equipo/gabriel-otero/" }
+        ]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://theclassproject.org/equipo/gabriel-otero/",
+        "name": "Gabriel Otero",
+        "description": "Investigador principal. Sociólogo, PhD Utrecht University. Escuela de Sociología FCSH UDP.",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Universidad Diego Portales"
+        },
+        "memberOf": { "@id": "https://theclassproject.org/#project" },
+          "email": "gabriel.otero@mail.udp.cl",
+          "sameAs": ["https://orcid.org/0000-0001-9768-5699",
+            "https://scholar.google.com/citations?user=sZ7YJIsAAAAJ&hl=es",
+            "https://www.researchgate.net/profile/Gabriel-Otero"]
+      }
+    ]
+  }
+  </script>
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/favicon.svg">
 </head>
 <body>
 
@@ -161,7 +206,7 @@
         </a>
         <div class="profile-hero__inner">
           <div class="profile-hero__photo-wrap">
-            <img src="../../assets/equipo/gabriel-otero.jpg" alt="Gabriel Otero" class="profile-hero__photo">
+            <img loading="lazy" src="../../assets/equipo/gabriel-otero.jpg" alt="Gabriel Otero" class="profile-hero__photo">
           </div>
           <div class="profile-hero__info">
             <span class="profile-hero__eyebrow">Investigador principal</span>
@@ -195,12 +240,12 @@
       <div class="container">
         <p class="logos-label">Financiado y apoyado por</p>
         <div class="logos-bar">
-          <div class="logo-item"><img src="../../assets/logos/LogoUDP_trans.png" alt="Universidad Diego Portales"></div>
-          <div class="logo-item"><img src="../../assets/logos/UDP_FCSH_Logo_NEGRO-ROJO.png" alt="Facultad de Ciencias Sociales y Humanidades, UDP"></div>
-          <div class="logo-item"><img src="../../assets/logos/LogoICSOH.png" alt="ICSO — Instituto de Ciencias Sociales, UDP"></div>
-          <div class="logo-item"><img src="../../assets/logos/LogoOBDE.png" alt="Observatorio de Desigualdades"></div>
-          <div class="logo-item"><img src="../../assets/logos/LogoSociologia.svg" alt="Escuela de Sociología UDP"></div>
-          <div class="logo-item"><img src="../../assets/logos/LogoANID.png" alt="ANID — Agencia Nacional de Investigación y Desarrollo"></div>
+          <div class="logo-item"><img loading="lazy" src="../../assets/logos/LogoUDP_trans.png" alt="Universidad Diego Portales"></div>
+          <div class="logo-item"><img loading="lazy" src="../../assets/logos/UDP_FCSH_Logo_NEGRO-ROJO.png" alt="Facultad de Ciencias Sociales y Humanidades, UDP"></div>
+          <div class="logo-item"><img loading="lazy" src="../../assets/logos/LogoICSOH.png" alt="ICSO — Instituto de Ciencias Sociales, UDP"></div>
+          <div class="logo-item"><img loading="lazy" src="../../assets/logos/LogoOBDE.png" alt="Observatorio de Desigualdades"></div>
+          <div class="logo-item"><img loading="lazy" src="../../assets/logos/LogoSociologia.svg" alt="Escuela de Sociología UDP"></div>
+          <div class="logo-item"><img loading="lazy" src="../../assets/logos/LogoANID.png" alt="ANID — Agencia Nacional de Investigación y Desarrollo"></div>
         </div>
       </div>
     </section>
@@ -244,6 +289,6 @@
     </div>
   </footer>
 
-  <script src="../../js/script.js"></script>
+  <script src="../../js/script.js" defer></script>
 </body>
 </html>

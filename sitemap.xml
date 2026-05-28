@@ -1,47 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+  <!-- PÁGINAS PRINCIPALES -->
   <url>
     <loc>https://theclassproject.org/</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://theclassproject.org/proyecto/</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://theclassproject.org/encuesta/</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://theclassproject.org/equipo/</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://theclassproject.org/divulgacion/</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-05-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- Nota: la carpeta se llama /accountability/ — el texto visible en el sitio es "Transparencia" -->
+  <!-- Nota: carpeta /accountability/ = sección "Transparencia" en el sitio -->
   <url>
     <loc>https://theclassproject.org/accountability/</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+
+  <!-- PERFILES INDIVIDUALES DEL EQUIPO -->
+  <url>
+    <loc>https://theclassproject.org/equipo/gabriel-otero/</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://theclassproject.org/equipo/camila-joustra/</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://theclassproject.org/equipo/vicente-espinoza/</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://theclassproject.org/equipo/guillermo-beck/</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://theclassproject.org/equipo/julio-iturra/</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://theclassproject.org/equipo/andreas-laffert/</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://theclassproject.org/equipo/alejandro-plaza/</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://theclassproject.org/equipo/constanza-perez/</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- NOTAS DE DIVULGACIÓN -->
+  <url>
+    <loc>https://theclassproject.org/divulgacion/notas/nota-fondecyt/</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://theclassproject.org/divulgacion/notas/nota-social-networks/</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
   </url>
 
 </urlset>
