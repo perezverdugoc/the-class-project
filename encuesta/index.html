@@ -38,7 +38,7 @@
 
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-  <link rel="stylesheet" href="../css/mapa-rm.css">
+  <link rel="stylesheet" href="../css/mapa-rm.css?v=20260528-2">
 
   <style>
     /* ── LAYOUT ENCUESTA: nav lateral + contenido + sidebar descarga ── */
@@ -160,6 +160,7 @@
 
     .download-btn {
       display: flex;
+      width: 100%;
       align-items: center;
       gap: var(--space-md);
       padding: var(--space-md) var(--space-lg);
@@ -169,6 +170,8 @@
       color: var(--color-text);
       background-color: var(--color-bg);
       margin-bottom: var(--space-sm);
+      font-family: var(--font-body);
+      text-align: left;
       transition: border-color 0.2s, box-shadow 0.2s, color 0.2s;
     }
 
@@ -177,6 +180,17 @@
       box-shadow: 0 2px 8px rgba(10,126,122,0.12);
       color: var(--color-accent);
       text-decoration: none;
+    }
+
+    .download-btn--disabled {
+      cursor: not-allowed;
+      opacity: 0.72;
+    }
+
+    .download-btn--disabled:hover {
+      border-color: var(--color-border);
+      box-shadow: none;
+      color: var(--color-text);
     }
 
     .download-btn__icon {
@@ -539,7 +553,13 @@
 
     .vars-search-block {
       scroll-margin-top: 96px;
-      margin-bottom: var(--space-md);
+      margin-bottom: var(--space-lg);
+      padding: var(--space-xl);
+      border: 1px solid rgba(10,126,122,0.22);
+      border-radius: var(--radius-md);
+      background:
+        linear-gradient(135deg, rgba(10,126,122,0.12) 0%, rgba(10,126,122,0.04) 48%, rgba(255,255,255,1) 100%);
+      box-shadow: 0 10px 28px rgba(10,30,40,0.06);
     }
 
     .vars-search-block__title {
@@ -557,11 +577,24 @@
       margin: 0;
     }
 
+    .vars-search-shell {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--space-sm);
+      align-items: center;
+      margin-top: var(--space-md);
+    }
+
+    @media (max-width: 640px) {
+      .vars-search-shell {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .vars-search {
       width: 100%;
-      max-width: 420px;
-      padding: 8px 14px;
-      border: 1px solid var(--color-border);
+      padding: 13px 16px;
+      border: 1px solid rgba(10,126,122,0.26);
       border-radius: var(--radius-sm);
       font-size: var(--text-sm);
       font-family: var(--font-body);
@@ -572,6 +605,24 @@
     }
 
     .vars-search:focus {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(10,126,122,0.12);
+    }
+
+    .vars-clear-btn {
+      padding: 12px 14px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 700;
+    }
+
+    .vars-clear-btn:hover {
+      color: var(--color-accent-dark);
       border-color: var(--color-accent);
     }
 
@@ -714,19 +765,6 @@
       padding: 0 1px;
     }
 
-
-    /* ── MAPA SVG GEOGRÁFICO ───────────────────────── */
-    .mapa-svg-col {
-      width: 100%;
-      min-height: 300px;   /* evita colapso en contexto grid */
-    }
-    #mapa-svg .geo-s {
-      cursor: pointer;
-      transition: fill-opacity 0.18s, stroke-width 0.12s;
-    }
-    #mapa-svg .geo-s:hover { fill-opacity: 0.95 !important; }
-    #mapa-svg .geo-s.is-active { stroke-width: 2.5 !important; stroke: #fff !important; fill-opacity: 1 !important; }
-    #mapa-svg .geo-s.is-dim   { fill-opacity: 0.25 !important; }
 
     </style>
 
@@ -1030,11 +1068,14 @@
 
             <div id="buscador-variables" class="vars-search-block">
               <h3 class="vars-search-block__title">Buscador de variables</h3>
-              <p class="vars-search-block__desc">Busca por código o etiqueta, o filtra el listado por concepto general.</p>
+              <p class="vars-search-block__desc">Busca por código, etiqueta, concepto u opciones de respuesta. Puedes combinar palabras y escribir sin tildes.</p>
+              <div class="vars-search-shell">
+                <input type="search" id="vars-search" class="vars-search" placeholder="Ej.: redes ocupacionales, democracia, ingreso, Q57..." aria-label="Buscar variable">
+                <button type="button" class="vars-clear-btn" id="vars-clear">Limpiar</button>
+              </div>
             </div>
 
             <div class="vars-controls">
-              <input type="search" id="vars-search" class="vars-search" placeholder="Buscar c&oacute;digo o etiqueta&hellip;" aria-label="Buscar variable">
               <div class="vars-filters" id="vars-filters" role="group" aria-label="Filtrar por concepto">
                 <button class="vars-filter-btn vars-filter-btn--active" data-filter="">Todos (335)</button>
                 <button class="vars-filter-btn" data-filter="Actitudes políticas">Actitudes políticas (46)</button>
@@ -1132,7 +1173,7 @@
           </div>
         </a>
 
-        <a href="#variables" class="download-btn" aria-label="Ver listado de variables">
+        <button type="button" class="download-btn download-btn--disabled" id="database-unavailable" aria-disabled="true" aria-label="Base de datos no disponible">
           <div class="download-btn__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <ellipse cx="12" cy="5" rx="9" ry="3"/>
@@ -1144,7 +1185,7 @@
             <span class="download-btn__text">Base de datos</span>
             <span class="download-btn__sub">disponible durante 2027</span>
           </div>
-        </a>
+        </button>
 
       </aside>
 
@@ -1260,6 +1301,13 @@
       .replace(/"/g, '&quot;');
   }
 
+  function normalizeText(str) {
+    return String(str || '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase();
+  }
+
   function highlight(str, term) {
     if (!term) return esc(str);
     const re = new RegExp('(' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
@@ -1276,13 +1324,18 @@
     const tbody  = document.getElementById('vars-tbody');
     const empty  = document.getElementById('vars-empty');
     const count  = document.getElementById('vars-count');
-    const term   = searchTerm.toLowerCase();
+    const terms  = normalizeText(searchTerm).split(/\s+/).filter(Boolean);
 
     const filtered = VARS_DATA.filter(v => {
       const matchConcept = !activeFilter || v.concepto_general === activeFilter;
-      const matchSearch  = !term ||
-        v.codigo.toLowerCase().includes(term) ||
-        v.etiqueta.toLowerCase().includes(term);
+      const haystack = normalizeText([
+        v.codigo,
+        v.etiqueta,
+        v.concepto_general,
+        v.concepto_especifico,
+        v.opciones
+      ].join(' '));
+      const matchSearch = terms.length === 0 || terms.every(term => haystack.includes(term));
       return matchConcept && matchSearch;
     });
 
@@ -1331,12 +1384,27 @@
     renderTable();
   });
 
+  document.getElementById('vars-clear').addEventListener('click', function() {
+    const search = document.getElementById('vars-search');
+    search.value = '';
+    searchTerm = '';
+    activeFilter = '';
+    document.querySelectorAll('.vars-filter-btn').forEach(b => b.classList.remove('vars-filter-btn--active'));
+    document.querySelector('.vars-filter-btn[data-filter=""]').classList.add('vars-filter-btn--active');
+    renderTable();
+    search.focus();
+  });
+
+  document.getElementById('database-unavailable').addEventListener('click', function() {
+    window.alert('La base de datos todavía no está disponible. Se publicará durante 2027, una vez finalizado el proceso de validación y limpieza.');
+  });
+
   /* ── Init ───────────────────────────────────────────────────────── */
   renderTable();
   </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-  <script src="../js/mapa-rm.js" defer></script>
+  <script src="../js/mapa-rm.js?v=20260528-2" defer></script>
   <script src="../js/script.js" defer></script>
 </body>
 </html>
