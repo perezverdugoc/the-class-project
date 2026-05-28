@@ -218,6 +218,10 @@
 
     /* ── MÉTODO LIST ─────────────────────────────────── */
 
+    .ficha-section {
+      scroll-margin-top: 96px;
+    }
+
     .method-intro {
       font-size: var(--text-md);
       color: var(--color-text-muted);
@@ -533,6 +537,26 @@
       margin-bottom: var(--space-lg);
     }
 
+    .vars-search-block {
+      scroll-margin-top: 96px;
+      margin-bottom: var(--space-md);
+    }
+
+    .vars-search-block__title {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      font-weight: 700;
+      color: var(--color-primary);
+      margin: 0 0 var(--space-xs);
+    }
+
+    .vars-search-block__desc {
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+      line-height: 1.6;
+      margin: 0;
+    }
+
     .vars-search {
       width: 100%;
       max-width: 420px;
@@ -799,26 +823,31 @@
       <nav class="encuesta-nav" aria-label="Secciones de la encuesta">
         <p class="encuesta-nav__label">En esta sección</p>
         <ul>
-          <li><a href="#fichatecnica">Ficha Técnica</a></li>
+          <li><a href="#fichatecnica">Ficha técnica</a></li>
           <li><a href="#tematicas">Temáticas</a></li>
           <li><a href="#mapa">Mapa de muestreo</a></li>
           <li><a href="#cuestionario">Cuestionario</a></li>
           <li><a href="#variables">Listado de variables</a></li>
-          <li><a href="/encuesta/buscador/">Buscador de variables ↗</a></li>
+          <li><a href="#buscador-variables">Buscador de variables</a></li>
         </ul>
       </nav>
 
       <!-- CONTENIDO PRINCIPAL -->
       <div class="encuesta-content">
 
-        <h2 id="fichatecnica">Diseño metodológico</h2>
+        <section id="fichatecnica" class="ficha-section">
+          <div class="viz-section__header">
+            <span class="viz-section__eyebrow">Ficha técnica</span>
+            <h2 class="viz-section__title">Ficha técnica</h2>
+            <p class="viz-section__desc">Diseño metodológico y condiciones generales del levantamiento de la encuesta.</p>
+          </div>
 
-        <p class="method-intro">
-          Para llevar a cabo las pruebas empíricas, el proyecto adoptó un enfoque
-          cuantitativo con las siguientes características:
-        </p>
+          <p class="method-intro">
+            Para llevar a cabo las pruebas empíricas, el proyecto adoptó un enfoque
+            cuantitativo con las siguientes características:
+          </p>
 
-        <div class="method-list">
+          <div class="method-list">
 
           <div class="method-item">
             <div class="method-item__icon" aria-hidden="true">
@@ -876,7 +905,8 @@
             </div>
           </div>
 
-        </div><!-- /.method-list -->
+          </div><!-- /.method-list -->
+        </section>
 
         <!-- TEMÁTICAS -->
         <div class="tematicas" id="tematicas">
@@ -959,7 +989,7 @@
                       <tbody></tbody>
                     </table>
                   </div>
-                  <div class="panel-footer">Fuente: informe de distribución por zona y comuna. GeoJSON RM con comunas reales.</div>
+                  <div class="panel-footer">Datos de distribución territorial proporcionados por el equipo investigador.</div>
                 </aside>
               </div>
             </div>
@@ -996,6 +1026,11 @@
               <span class="viz-section__eyebrow">Instrumento</span>
               <h2 class="viz-section__title">Listado de variables</h2>
               <p class="viz-section__desc">335 variables del estudio. Filtra por concepto tem&aacute;tico o busca por c&oacute;digo o etiqueta.</p>
+            </div>
+
+            <div id="buscador-variables" class="vars-search-block">
+              <h3 class="vars-search-block__title">Buscador de variables</h3>
+              <p class="vars-search-block__desc">Busca por código o etiqueta, o filtra el listado por concepto general.</p>
             </div>
 
             <div class="vars-controls">
