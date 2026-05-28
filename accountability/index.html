@@ -318,6 +318,112 @@
     }
 
     .note-box p { margin: 0; }
+
+    /* ── LAYOUT SIDEBAR ──────────────────────────────── */
+
+    .acc-wrap {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: var(--space-3xl);
+      align-items: start;
+      max-width: var(--container-max, 1200px);
+      margin: 0 auto;
+      padding: var(--space-3xl) var(--space-lg);
+    }
+
+    @media (max-width: 900px) {
+      .acc-wrap { grid-template-columns: 1fr; gap: var(--space-xl); }
+    }
+
+    .acc-nav {
+      position: sticky;
+      top: calc(64px + var(--space-xl));
+      align-self: start;
+    }
+
+    .acc-nav__label {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-sm);
+    }
+
+    .acc-nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .acc-nav a {
+      display: block;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      padding: var(--space-xs) var(--space-md);
+      border-left: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      line-height: 1.5;
+    }
+
+    .acc-nav a:hover,
+    .acc-nav a.active {
+      color: var(--color-accent);
+      border-left-color: var(--color-accent);
+    }
+
+    .acc-nav .acc-sub-nav {
+      padding-left: var(--space-md);
+      margin-top: 2px;
+    }
+
+    .acc-nav .acc-sub-nav a {
+      font-size: var(--text-xs);
+      padding: 2px var(--space-md);
+      color: var(--color-text-light);
+    }
+
+    .acc-content {
+      min-width: 0;
+    }
+
+    .acc-content .acc-section,
+    .acc-content [id] {
+      scroll-margin-top: calc(64px + var(--space-xl));
+    }
+
+    /* Etiquetas de grupo */
+    .hitos-group-label,
+    .productos-group-label {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-light);
+      margin: var(--space-xl) 0 var(--space-sm);
+      padding-left: var(--space-md);
+      border-left: 2px solid var(--color-border-light);
+    }
+
+    .productos-group-label { padding-left: 0; border-left: none; }
+    .productos-group-label:first-of-type { margin-top: var(--space-lg); }
+
+    /* Badge de tipo en hitos de difusión */
+    .hito-tipo {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 1px 7px;
+      border-radius: var(--radius-pill);
+      background: var(--color-surface);
+      color: var(--color-text-muted);
+      border: 1px solid var(--color-border-light);
+      white-space: nowrap;
+    }
   </style>
 
   <!-- Schema.org structured data -->
@@ -381,7 +487,26 @@
       </div>
     </section>
 
-    <div class="container">
+    <div class="acc-wrap">
+
+      <!-- SUBMENÚ LATERAL -->
+      <nav class="acc-nav" aria-label="Secciones de transparencia">
+        <p class="acc-nav__label">En esta sección</p>
+        <ul>
+          <li><a href="#acc-financiamiento">Financiamiento</a></li>
+          <li>
+            <a href="#acc-hitos">Hitos comprometidos</a>
+            <div class="acc-sub-nav">
+              <a href="#acc-hitos-inv">Investigación</a>
+              <a href="#acc-hitos-dif">Difusión y formación</a>
+            </div>
+          </li>
+          <li><a href="#acc-productos">Productos comprometidos</a></li>
+          <li><a href="#acc-seminarios">Seminarios y eventos</a></li>
+        </ul>
+      </nav>
+
+      <div class="acc-content">
 
       <!-- 1. FINANCIAMIENTO -->
       <section class="acc-section" aria-labelledby="acc-financiamiento">
@@ -430,10 +555,11 @@
       </section>
 
       <!-- 2. HITOS -->
-      <section class="acc-section" aria-labelledby="acc-hitos">
-        <h2 id="acc-hitos">Hitos comprometidos y avances</h2>
+      <section class="acc-section" id="acc-hitos" aria-labelledby="acc-hitos-h">
+        <h2 id="acc-hitos-h">Hitos comprometidos y avances</h2>
 
-        <table class="hitos-table" aria-label="Tabla de hitos del proyecto">
+        <p class="hitos-group-label" id="acc-hitos-inv">Investigación</p>
+        <table class="hitos-table" aria-label="Hitos de investigación">
           <thead>
             <tr>
               <th scope="col">Fase</th>
@@ -475,84 +601,173 @@
             </tr>
             <tr>
               <td>2</td>
-              <td>Seminario de presentación de datos (apertura a la comunidad científica)</td>
-              <td>2026</td>
+              <td>Seminario 1</td>
+              <td>2025</td>
               <td><span class="hito-status hito-status--done">Completado</span></td>
             </tr>
             <tr>
               <td>3</td>
-              <td>Artículo académico 1 (análisis empírico)</td>
+              <td>Artículo académico 1</td>
+              <td>2025</td>
+              <td><span class="hito-status hito-status--done">Publicado</span></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Artículo académico 2</td>
               <td>2026</td>
               <td><span class="hito-status hito-status--progress">En curso</span></td>
             </tr>
             <tr>
               <td>3</td>
-              <td>Artículo académico 2 (análisis empírico)</td>
+              <td>Artículo académico 3</td>
               <td>2027</td>
               <td><span class="hito-status hito-status--progress">En curso</span></td>
             </tr>
             <tr>
               <td>3</td>
-              <td>Seminario final de resultados</td>
-              <td>2027</td>
+              <td>Seminario 2</td>
+              <td>2026</td>
               <td><span class="hito-status hito-status--pending">Próximamente</span></td>
             </tr>
           </tbody>
         </table>
+
+        <p class="hitos-group-label" id="acc-hitos-dif">Difusión y formación de capital humano</p>
+        <table class="hitos-table" aria-label="Hitos de difusión y formación">
+          <thead>
+            <tr>
+              <th scope="col">Fase</th>
+              <th scope="col">Hito</th>
+              <th scope="col">Tipo</th>
+              <th scope="col">Año</th>
+              <th scope="col">Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Sitio web — diseño y desarrollo</td>
+              <td><span class="hito-tipo">Difusión</span></td>
+              <td>2024</td>
+              <td><span class="hito-status hito-status--done">Completado</span></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Sitio web — generación de contenidos</td>
+              <td><span class="hito-tipo">Difusión</span></td>
+              <td>2025</td>
+              <td><span class="hito-status hito-status--done">Completado</span></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Sitio web — divulgación de resultados</td>
+              <td><span class="hito-tipo">Difusión</span></td>
+              <td>2026</td>
+              <td><span class="hito-status hito-status--progress">En curso</span></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>2 tesis de pregrado</td>
+              <td><span class="hito-tipo">Formación</span></td>
+              <td>2026</td>
+              <td><span class="hito-status hito-status--progress">En curso</span></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>2 tesis de magíster</td>
+              <td><span class="hito-tipo">Formación</span></td>
+              <td>2026</td>
+              <td><span class="hito-status hito-status--progress">En curso</span></td>
+            </tr>
+          </tbody>
+        </table>
+
       </section>
 
       <!-- 3. PRODUCTOS -->
-      <section class="acc-section" aria-labelledby="acc-productos">
-        <h2 id="acc-productos">Productos comprometidos</h2>
+      <section class="acc-section" id="acc-productos" aria-labelledby="acc-productos-h">
+        <h2 id="acc-productos-h">Productos comprometidos</h2>
 
+        <p class="productos-group-label">Instrumento de investigación</p>
         <div class="productos-grid">
-
           <div class="producto-card">
-            <span class="producto-card__type">Instrumento</span>
+            <span class="producto-card__type">Encuesta</span>
             <p class="producto-card__title">Encuesta de redes personales y actitudes políticas (Gran Santiago)</p>
-            <p class="producto-card__meta">N=1.250 · IPSOS · Año 2 (2025)</p>
-            <div class="producto-card__status">
-              <span class="hito-status hito-status--done">Completado</span>
-            </div>
+            <p class="producto-card__meta">N=1.250 · IPSOS · 2025</p>
+            <div class="producto-card__status"><span class="hito-status hito-status--done">Completado</span></div>
           </div>
+        </div>
 
+        <p class="productos-group-label">Publicaciones académicas</p>
+        <div class="productos-grid">
           <div class="producto-card">
-            <span class="producto-card__type">Evento académico</span>
-            <p class="producto-card__title">Seminario de apertura de datos (comunidad científica)</p>
+            <span class="producto-card__type">Artículo académico</span>
+            <p class="producto-card__title">Artículo académico 1</p>
+            <p class="producto-card__meta">2025</p>
+            <div class="producto-card__status"><span class="hito-status hito-status--done">Publicado</span></div>
+          </div>
+          <div class="producto-card">
+            <span class="producto-card__type">Artículo académico</span>
+            <p class="producto-card__title">Artículo académico 2</p>
+            <p class="producto-card__meta">2026</p>
+            <div class="producto-card__status"><span class="hito-status hito-status--progress">En curso</span></div>
+          </div>
+          <div class="producto-card">
+            <span class="producto-card__type">Artículo académico</span>
+            <p class="producto-card__title">Artículo académico 3</p>
+            <p class="producto-card__meta">2027</p>
+            <div class="producto-card__status"><span class="hito-status hito-status--progress">En curso</span></div>
+          </div>
+        </div>
+
+        <p class="productos-group-label">Eventos académicos</p>
+        <div class="productos-grid">
+          <div class="producto-card">
+            <span class="producto-card__type">Seminario</span>
+            <p class="producto-card__title">Seminario 1 — Apertura de datos a la comunidad científica</p>
             <p class="producto-card__meta">UDP · 2025</p>
-            <div class="producto-card__status">
-              <span class="hito-status hito-status--done">Completado</span>
-            </div>
+            <div class="producto-card__status"><span class="hito-status hito-status--done">Completado</span></div>
           </div>
-
           <div class="producto-card">
-            <span class="producto-card__type">Evento académico</span>
-            <p class="producto-card__title">Seminario final de presentación de resultados</p>
-            <p class="producto-card__meta">UDP · Año 3 (2027)</p>
-            <div class="producto-card__status">
-              <span class="hito-status hito-status--pending">Próximamente</span>
-            </div>
+            <span class="producto-card__type">Seminario</span>
+            <p class="producto-card__title">Seminario 2 — Presentación de resultados</p>
+            <p class="producto-card__meta">UDP · 2026</p>
+            <div class="producto-card__status"><span class="hito-status hito-status--pending">Próximamente</span></div>
           </div>
+        </div>
 
+        <p class="productos-group-label">Difusión y divulgación</p>
+        <div class="productos-grid">
           <div class="producto-card">
-            <span class="producto-card__type">Divulgación</span>
+            <span class="producto-card__type">Plataforma digital</span>
             <p class="producto-card__title">Sitio web del proyecto con resultados y materiales abiertos</p>
             <p class="producto-card__meta">theclassproject.org · En línea</p>
-            <div class="producto-card__status">
-              <span class="hito-status hito-status--done">Completado</span>
-            </div>
+            <div class="producto-card__status"><span class="hito-status hito-status--done">Completado</span></div>
           </div>
-
           <div class="producto-card">
-            <span class="producto-card__type">Divulgación</span>
-            <p class="producto-card__title">Divulgación científica y comunicación pública de resultados</p>
+            <span class="producto-card__type">Comunicación pública</span>
+            <p class="producto-card__title">Divulgación científica y comunicación de resultados</p>
             <p class="producto-card__meta">Infografías · noticias · redes sociales</p>
-            <div class="producto-card__status">
-              <span class="hito-status hito-status--progress">En curso</span>
-            </div>
+            <div class="producto-card__status"><span class="hito-status hito-status--progress">En curso</span></div>
           </div>
-
         </div>
+
+        <p class="productos-group-label">Formación de capital humano</p>
+        <div class="productos-grid">
+          <div class="producto-card">
+            <span class="producto-card__type">Formación</span>
+            <p class="producto-card__title">Dirección de 2 tesis de pregrado</p>
+            <p class="producto-card__meta">Escuela de Sociología UDP · 2026</p>
+            <div class="producto-card__status"><span class="hito-status hito-status--progress">En curso</span></div>
+          </div>
+          <div class="producto-card">
+            <span class="producto-card__type">Formación</span>
+            <p class="producto-card__title">Dirección de 2 tesis de magíster</p>
+            <p class="producto-card__meta">Escuela de Sociología UDP · 2026</p>
+            <div class="producto-card__status"><span class="hito-status hito-status--progress">En curso</span></div>
+          </div>
+        </div>
+
       </section>
 
 
@@ -594,9 +809,10 @@
         </p>
       </div>
 
-    </div><!-- /.container -->
+      </div><!-- /.acc-content -->
+    </div><!-- /.acc-wrap -->
 
-  
+
     <!-- ============================================================
          LOGOS INSTITUCIONALES
          ============================================================ -->
