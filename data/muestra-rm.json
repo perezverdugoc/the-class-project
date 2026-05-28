@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "titulo": "Distribucion territorial de la muestra",
+    "proyecto": "The Social Survey of Class, Networks and Political Attitudes",
+    "variables": ["Zona_gs", "Comuna"],
+    "n_total": 1251,
+    "zonas": 10,
+    "comunas": 41,
+    "fuente": "informe_zonas_comunas.docx / informe_zonas_comunas.docx.md"
+  },
+  "zonas": [
+    { "id": "centro", "nombre": "Zona Centro", "n": 105, "color": "#2D3142" },
+    { "id": "norte", "nombre": "Zona Norte", "n": 144, "color": "#3B6FA8" },
+    { "id": "oriente", "nombre": "Zona Oriente", "n": 194, "color": "#8F5AA5" },
+    { "id": "poniente", "nombre": "Zona Poniente", "n": 199, "color": "#0A7E7A" },
+    { "id": "sur", "nombre": "Zona Sur", "n": 268, "color": "#C9524F" },
+    { "id": "chacabuco", "nombre": "Zona Chacabuco", "n": 57, "color": "#4C8CC8" },
+    { "id": "cordillera", "nombre": "Zona Cordillera", "n": 103, "color": "#2E8A62" },
+    { "id": "maipo", "nombre": "Zona Maipo", "n": 89, "color": "#5369B1" },
+    { "id": "melipilla", "nombre": "Zona Melipilla", "n": 35, "color": "#D88753" },
+    { "id": "talagante", "nombre": "Zona Talagante", "n": 57, "color": "#79A857" }
+  ]
+}
