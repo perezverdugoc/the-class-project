@@ -28,8 +28,8 @@
   <!-- Google Fonts: preconnect primero (más rápido que @import en CSS) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"></noscript>
 
   <link rel="stylesheet" href="../../css/styles.css">
 
@@ -84,15 +84,15 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--color-accent);
-      background-color: rgba(10,126,122,0.2);
-      border: 1px solid rgba(10,126,122,0.35);
+      background-color: rgba(10, 95, 92,0.2);
+      border: 1px solid rgba(10, 95, 92,0.35);
       padding: 3px 10px;
       border-radius: var(--radius-pill);
       margin-bottom: var(--space-md);
     }
 
     .infog-header__title {
-      font-family: var(--font-heading);
+      font-family: var(--font-heading); font-weight: var(--font-heading-weight);
       font-size: clamp(1.5rem, 3vw, 2.25rem);
       color: var(--color-text-inverse);
       line-height: 1.15;
@@ -113,7 +113,7 @@
     }
 
     .infog-header__brand-name {
-      font-family: var(--font-heading);
+      font-family: var(--font-heading); font-weight: var(--font-heading-weight);
       font-size: var(--text-lg);
       color: var(--color-text-inverse);
       margin: 0 0 4px 0;
@@ -145,7 +145,7 @@
     }
 
     .infog-argument__question {
-      font-family: var(--font-heading);
+      font-family: var(--font-heading); font-weight: var(--font-heading-weight);
       font-size: clamp(1.1rem, 2.5vw, 1.625rem);
       color: var(--color-primary);
       font-style: italic;
@@ -191,12 +191,13 @@
       border-radius: 50%;
       background-color: var(--color-accent);
       color: #fff;
-      font-family: var(--font-heading);
+      font-family: var(--font-heading); font-weight: var(--font-number-weight);
       font-size: var(--text-sm);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      letter-spacing: -0.03em;
     }
 
     .infog-node__label {
@@ -208,7 +209,7 @@
     }
 
     .infog-node__title {
-      font-family: var(--font-heading);
+      font-family: var(--font-heading); font-weight: var(--font-heading-weight);
       font-size: var(--text-lg);
       color: var(--color-primary);
       line-height: 1.2;
@@ -252,7 +253,7 @@
 
     .infog-hypothesis {
       background-color: var(--color-accent-light);
-      border: 1px solid rgba(10,126,122,0.2);
+      border: 1px solid rgba(10, 95, 92,0.2);
       border-radius: var(--radius-lg);
       padding: var(--space-xl);
       display: flex;
@@ -283,7 +284,7 @@
     }
 
     .infog-hypothesis__text {
-      font-family: var(--font-heading);
+      font-family: var(--font-heading); font-weight: var(--font-heading-weight);
       font-size: var(--text-lg);
       font-style: italic;
       color: var(--color-primary);
@@ -373,7 +374,7 @@
   </style>
   <!-- Favicon -->
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/assets/favicon.svg">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 </head>
 <body>
 
@@ -381,7 +382,7 @@
     <nav class="nav" aria-label="Navegación principal">
       <div class="container">
         <div class="nav__inner">
-          <a href="/" class="nav__logo">The <span>Class</span> Project</a>
+          <a href="/" class="nav__logo"><img src="/assets/logos/theclass-horizontal.svg" alt="The Class Project" class="nav__logo-img" width="388" height="161"></a>
           <ul class="nav__links" role="list">
             <li><a href="/" class="nav__link">Inicio</a></li>
             <li><a href="/proyecto/" class="nav__link">Proyecto</a></li>
