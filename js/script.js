@@ -1,7 +1,7 @@
 /* ============================================================
    The Class Project · js/script.js · 2026
    Universidad Diego Portales — Escuela de Sociología
-   FONDECYT de Iniciación N° 11240249, ANID 2024–2027
+   Proyecto FONDECYT de Iniciación N° 11240249, ANID 2024–2027
 
    Módulos:
    1. Año dinámico en el footer
