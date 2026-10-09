@@ -100,8 +100,8 @@
   <!-- Google Fonts: preconnect primero (más rápido que @import en CSS) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"></noscript>
 
   <link rel="stylesheet" href="css/styles.css">
   <style>
@@ -174,7 +174,7 @@
     }
 
     .data-stat__value {
-      font-family: var(--font-heading);
+      font-family: var(--font-display);
       font-size: clamp(2.5rem, 5vw, 3.75rem);
       font-weight: var(--font-number-weight);
       color: var(--color-accent);
@@ -304,16 +304,16 @@
           <!-- Columna izquierda — video YouTube -->
           <div class="hero__media">
             <div class="hero__video-wrap">
-              <!-- Video presentación del proyecto
-                   Para cambiar: reemplaza el ID "GS3TDP1jJ7A" en la URL -->
-              <iframe
-                src="https://www.youtube.com/embed/GS3TDP1jJ7A"
-                title="The Class Project — presentación del proyecto"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
-                loading="lazy"
-                loading="lazy"
-              ></iframe>
+              <!-- Video presentación del proyecto, con portada propia.
+                   Se muestra la imagen assets/video-portada.jpg y, al hacer clic,
+                   se carga el video de YouTube (script al final de esta página).
+                   PARA CAMBIAR EL VIDEO: reemplaza el ID en data-video-id.
+                   PARA CAMBIAR LA PORTADA: reemplaza assets/video-portada.jpg (1280×720). -->
+              <button type="button" class="video-facade" data-video-id="GS3TDP1jJ7A"
+                      aria-label="Reproducir video: presentación de The Class Project">
+                <img src="assets/video-portada.jpg" alt="" width="1280" height="720" loading="eager">
+                <span class="video-facade__play" aria-hidden="true"></span>
+              </button>
             </div>
           </div>
 
@@ -468,7 +468,7 @@
       <div class="footer__grid">
 
         <div>
-          <p class="footer__logo"><img src="/assets/logos/theclass-horizontal-blanco.svg" alt="The Class Project" class="footer__logo-img" width="388" height="161" loading="lazy"></p>
+          <p class="footer__logo">The <span>Class</span> Project</p>
           <p class="footer__desc">
             The Class Project es una plataforma dedicada a compartir los resultados del proyecto FONDECYT de Iniciación N°&nbsp;11240249, &ldquo;Class, personal networks and political attitudes&rdquo; (Relaciones entre clases y posiciones políticas), financiado por la Agencia Nacional de Investigación y Desarrollo (ANID).
           </p>
@@ -534,5 +534,19 @@
 
   <!-- script.js: defer para no bloquear renderizado -->
   <script src="js/script.js" defer></script>
+
+  <!-- Portada del video: al hacer clic, cambia la imagen por el video de YouTube -->
+  <script>
+    document.querySelectorAll('.video-facade').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube-nocookie.com/embed/' + btn.dataset.videoId + '?autoplay=1&rel=0';
+        iframe.title = 'The Class Project — presentación del proyecto';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.allowFullscreen = true;
+        btn.replaceWith(iframe);
+      });
+    });
+  </script>
 </body>
 </html>

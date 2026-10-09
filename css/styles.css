@@ -63,7 +63,9 @@
   --font-heading: 'Work Sans', system-ui, -apple-system, sans-serif;
   --font-body:    'Work Sans', system-ui, -apple-system, sans-serif;
   --font-heading-weight: 500;   /* títulos: 500 = medium (más fino que 600) */
-  --font-number-weight:  300;   /* números grandes: 300 = light (fino, elegante) */
+  /* Números grandes y nombre en el pie: se mantiene la tipografía anterior (serif) */
+  --font-display: 'DM Serif Display', Georgia, 'Times New Roman', serif;
+  --font-number-weight:  400;   /* DM Serif Display solo existe en 400 */
 
   /* --- Escala tipográfica (mobile-first) ---
      En pantallas grandes se ajustan con media queries */
@@ -595,6 +597,48 @@ body {
   height: 100%;
   border: none;
 }
+
+/* Portada del video (se reemplaza por el video al hacer clic) */
+.video-facade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  background: var(--color-primary);
+}
+.video-facade img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Botón de play: círculo blanco con triángulo teal */
+.video-facade__play {
+  position: absolute;
+  right: 6%;
+  bottom: 8%;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition);
+}
+.video-facade__play::after {
+  content: "";
+  position: absolute;
+  left: 26px;
+  top: 20px;
+  border-style: solid;
+  border-width: 12px 0 12px 20px;
+  border-color: transparent transparent transparent var(--color-accent);
+}
+.video-facade:hover .video-facade__play,
+.video-facade:focus-visible .video-facade__play { transform: scale(1.08); }
+.video-facade:focus-visible { outline: 3px solid var(--color-accent-bright); outline-offset: 3px; }
 
 /* Mobile: texto arriba, video abajo; 1 columna */
 @media (max-width: 768px) {
@@ -1897,11 +1941,22 @@ body {
 
 
 /* ============================================================
-   NÚMEROS GRANDES — más finos (marca oct 2026)
-   Para cambiar el grosor, edita --font-number-weight en :root.
+   NÚMEROS GRANDES — tipografía anterior (DM Serif Display)
+   Para cambiarla, edita --font-display en :root.
    ============================================================ */
 .iib-number,
 .stat-callout__value {
+  font-family: var(--font-display);
   font-weight: var(--font-number-weight);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
+}
+
+/* PIE DE PÁGINA — nombre en serif, "Class" en teal claro de marca */
+.footer__logo {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.footer__logo span {
+  color: var(--color-accent-bright);
 }
