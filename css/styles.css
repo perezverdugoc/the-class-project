@@ -915,6 +915,19 @@ body {
   margin-bottom: 0;
 }
 
+/* Segundo párrafo del pie (financiamiento) y sus enlaces institucionales */
+.footer__desc + .footer__desc {
+  margin-top: 0.75rem;
+}
+.footer__desc a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.footer__desc a:hover {
+  color: #fff;
+}
+
 .footer__heading {
   font-family: var(--font-body);
   font-size: var(--text-xs);
