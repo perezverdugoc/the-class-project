@@ -37,9 +37,9 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Nota: carpeta /accountability/ = sección "Transparencia" en el sitio -->
+  <!-- Carpeta /transparencia/ = sección "Transparencia". /accountability/ queda reservada para la versión en inglés -->
   <url>
-    <loc>https://theclassproject.org/accountability/</loc>
+    <loc>https://theclassproject.org/transparencia/</loc>
     <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
