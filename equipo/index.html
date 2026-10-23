@@ -298,7 +298,7 @@
     }
 
     .tesista-card {
-      border: 1px dashed var(--color-border);
+      border: 1px solid var(--color-border-light);   /* 23-10: antes punteado (cupos vacíos) */
       border-radius: var(--radius-xl);
       padding: var(--space-xl) var(--space-md);
       display: flex;
@@ -323,8 +323,21 @@
     .tesista-card__name {
       font-size: var(--text-sm);
       font-weight: 600;
+      color: var(--color-text);   /* 23-10: antes gris e itálica ("Por confirmar") */
+    }
+
+    /* Subtítulos "Tesistas de pregrado" / "Tesistas de magíster" */
+    .tesistas-subheading {
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--color-text);
+      margin-top: var(--space-xl);
+    }
+
+    /* Institución bajo "Tesista de pregrado/posgrado" */
+    .tesista-card__inst {
+      font-size: var(--text-xs);
       color: var(--color-text-muted);
-      font-style: italic;
     }
 
     .tesista-card__label {
@@ -713,7 +726,7 @@
               <div class="profile-card__body">
                 <h3 class="profile-card__name">Gabriel Otero</h3>
                 <p class="profile-card__role">Investigador principal</p>
-                <p class="profile-card__inst">Escuela de Sociología, FCSH, UDP</p>
+                <p class="profile-card__inst">Escuela de Sociología, UDP</p>
                 <button class="profile-card__btn" data-modal="modal-gabriel-otero" aria-haspopup="dialog">
                   Ver perfil
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -743,28 +756,52 @@
           <p class="section-intro">
             Estudiantes de pregrado y posgrado que desarrollan sus tesis en el marco del proyecto.
           </p>
+
+          <!-- TESISTAS DE PREGRADO (sin foto por ahora; correos y perfiles: pendientes) -->
+          <h3 class="tesistas-subheading">Tesistas de pregrado</h3>
           <div class="team-grid-tesistas">
             <div class="tesista-card">
               <div class="tesista-card__avatar"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
-              <p class="tesista-card__name">Por confirmar</p>
-              <p class="tesista-card__label">Tesis de pregrado o magíster</p>
+              <p class="tesista-card__name">Sofía Cortés</p>
+              <p class="tesista-card__label">Tesista de pregrado</p>
+              <p class="tesista-card__inst">Universidad Diego Portales</p>
             </div>
             <div class="tesista-card">
               <div class="tesista-card__avatar"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
-              <p class="tesista-card__name">Por confirmar</p>
-              <p class="tesista-card__label">Tesis de pregrado o magíster</p>
+              <p class="tesista-card__name">Arantza Gálvez</p>
+              <p class="tesista-card__label">Tesista de pregrado</p>
+              <p class="tesista-card__inst">Universidad Diego Portales</p>
             </div>
             <div class="tesista-card">
               <div class="tesista-card__avatar"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
-              <p class="tesista-card__name">Por confirmar</p>
-              <p class="tesista-card__label">Tesis de pregrado o magíster</p>
+              <p class="tesista-card__name">Aracely Rodríguez</p>
+              <p class="tesista-card__label">Tesista de pregrado</p>
+              <p class="tesista-card__inst">Universidad Diego Portales</p>
             </div>
             <div class="tesista-card">
               <div class="tesista-card__avatar"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
-              <p class="tesista-card__name">Por confirmar</p>
-              <p class="tesista-card__label">Tesis de pregrado o magíster</p>
+              <p class="tesista-card__name">Catalina Rojas</p>
+              <p class="tesista-card__label">Tesista de pregrado</p>
+              <p class="tesista-card__inst">Universidad Diego Portales</p>
             </div>
-          </div><!-- /.team-grid-tesistas -->
+          </div><!-- /.team-grid-tesistas pregrado -->
+
+          <!-- TESISTAS DE MAGÍSTER -->
+          <h3 class="tesistas-subheading">Tesistas de magíster</h3>
+          <div class="team-grid-tesistas">
+            <div class="tesista-card">
+              <div class="tesista-card__avatar"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+              <p class="tesista-card__name">Trajan Pirkovic</p>
+              <p class="tesista-card__label">Tesista de posgrado</p>
+              <p class="tesista-card__inst">P. Universidad Católica de Chile</p>
+            </div>
+            <div class="tesista-card">
+              <div class="tesista-card__avatar"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+              <p class="tesista-card__name">Ignacio Zavala</p>
+              <p class="tesista-card__label">Tesista de posgrado</p>
+              <p class="tesista-card__inst">P. Universidad Católica de Chile</p>
+            </div>
+          </div><!-- /.team-grid-tesistas magíster -->
 
         </div><!-- /.team-group #investigadores -->
 
@@ -783,7 +820,7 @@
               <div class="profile-card__body">
                 <h3 class="profile-card__name">Constanza Pérez</h3>
                 <p class="profile-card__role">Comunicaciones</p>
-                <p class="profile-card__inst">ICSO – UDP</p>
+                <p class="profile-card__inst">FCSH, UDP</p>
                 <button class="profile-card__btn" data-modal="modal-constanza-perez" aria-haspopup="dialog">
                   Ver perfil
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -809,7 +846,7 @@
               <div class="profile-card__body">
                 <h3 class="profile-card__name">Vicente Espinoza</h3>
                 <p class="profile-card__role">Asesor senior</p>
-                <p class="profile-card__inst">ICSO, UDP</p>
+                <p class="profile-card__inst">IDEA, USACH</p>
                 <button class="profile-card__btn" data-modal="modal-vicente-espinoza" aria-haspopup="dialog">
                   Ver perfil
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -901,7 +938,7 @@
         <div class="profile-modal__header">
           <h2 id="modal-gabriel-otero-title" class="profile-modal__name">Gabriel Otero</h2>
           <p class="profile-modal__role">Investigador principal</p>
-          <p class="profile-modal__inst">Escuela de Sociología, FCSH, UDP</p>
+          <p class="profile-modal__inst">Escuela de Sociología, UDP</p>
         </div>
         <div class="profile-modal__bio">
               <p><strong>Investigador principal del Proyecto FONDECYT de Iniciación N° 11240249 «Class, Personal Networks and Political Attitudes» (2024–2027).</strong> Se desempeña como investigador asociado en la línea <em>Geografías del Conflicto y la Cohesión</em> del Centro de Estudios de Conflicto y Cohesión Social (COES), director del Observatorio de Desigualdades de la Universidad Diego Portales, y académico del Departamento de Sociología de la misma casa de estudios.</p>
@@ -932,7 +969,7 @@
         <div class="profile-modal__header">
           <h2 id="modal-vicente-espinoza-title" class="profile-modal__name">Vicente Espinoza</h2>
           <p class="profile-modal__role">Asesor senior</p>
-          <p class="profile-modal__inst">ICSO, UDP</p>
+          <p class="profile-modal__inst">IDEA, USACH</p>
         </div>
         <div class="profile-modal__bio">
               <p>Doctor en Sociología por la Universidad de Toronto, Canadá. Fue investigador principal del proyecto Fondecyt Regular N°1171426 «La estructura de la sociabilidad en Chile y sus consecuencias para nuestra convivencia» (2017–2022) y coinvestigador del Fondecyt Regular (2021–2024) «No, esos no se cuentan». Instituciones informales y cohesión social: legitimación, crítica y disputas en el orden normativo en el Chile actual.</p>
@@ -1085,7 +1122,7 @@
         <div class="profile-modal__header">
           <h2 id="modal-constanza-perez-title" class="profile-modal__name">Constanza Pérez</h2>
           <p class="profile-modal__role">Comunicaciones</p>
-          <p class="profile-modal__inst">ICSO – UDP</p>
+          <p class="profile-modal__inst">FCSH, UDP</p>
         </div>
         <div class="profile-modal__bio">
               <p>Periodista y magíster en Políticas Públicas por la Facultad de Economía y Negocios de la Universidad de Chile. Posee un Diploma en Diseño Gráfico Digital y cursa un Diploma en Neuromarketing. Su trayectoria combina comunicación estratégica, campañas políticas y divulgación científica.</p>

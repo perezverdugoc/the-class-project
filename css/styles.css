@@ -2001,7 +2001,7 @@ body {
   max-width: none;            /* antes 160px: achicaba los logos anchos */
 }
 .logo-item--facultad img    { height: calc(var(--logo-base) * 0.66); }
-.logo-item--icsoh img       { height: calc(var(--logo-base) * 0.84); }
+.logo-item--icsoh img       { height: var(--logo-base); }   /* 23-10: antes 0.84; su texto chico no se lee mas bajo */
 .logo-item--sociologia img  { height: calc(var(--logo-base) * 0.88); }
 .logo-item--anid img        { height: calc(var(--logo-base) * 1.45); }
 
@@ -2012,5 +2012,12 @@ body {
 /* Tablet chica y celular: pasan a varias filas (no caben 6 en una línea) */
 @media (max-width: 960px) {
   .logos-bar { --logo-base: 32px; flex-wrap: wrap; justify-content: flex-start; gap: 1.25rem 1.5rem; }
+}
+
+/* Escritorio (961 px o mas): los logos crecen con la pantalla hasta 39 px,
+   siempre en una sola linea y dentro del ancho del contenido.
+   Para cambiar el tope, edita el 39px. */
+@media (min-width: 961px) {
+  .logos-bar { --logo-base: min(39px, calc((100vw - 92px) / 29)); gap: .75rem; }
 }
 
