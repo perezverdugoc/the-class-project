@@ -1973,3 +1973,44 @@ body {
 .footer__logo span {
   color: var(--color-accent-bright);
 }
+
+/* ============================================================
+   AJUSTES DE CONTRASTE (accesibilidad, 22-10-2026)
+   Oscurece textos grises que no cumplían el contraste mínimo
+   recomendado (WCAG AA). Para revertir: borra este bloque.
+   ============================================================ */
+.data-strip span:not(.data-stat__value):not(.data-stat__unit),
+.logos-label { color: var(--color-text-muted); }
+.footer__copy { color: rgba(255, 255, 255, 0.65); }
+
+/* ============================================================
+   LOGOS INSTITUCIONALES 2026 (23-10-2026)
+   - Todos en una sola línea (ANID exige estar en la misma línea).
+   - Cada logo tiene su propia altura para que "pesen" lo mismo
+     a la vista (los logos anchos van más bajos, ANID más alto).
+   - Para agrandar o achicar TODOS: cambia --logo-base.
+   ============================================================ */
+.logos-bar {
+  --logo-base: 38px;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+.logo-item img {
+  height: var(--logo-base);
+  width: auto;
+  max-width: none;            /* antes 160px: achicaba los logos anchos */
+}
+.logo-item--facultad img    { height: calc(var(--logo-base) * 0.66); }
+.logo-item--icsoh img       { height: calc(var(--logo-base) * 0.84); }
+.logo-item--sociologia img  { height: calc(var(--logo-base) * 0.88); }
+.logo-item--anid img        { height: calc(var(--logo-base) * 1.45); }
+
+/* Pantallas medianas: logos un poco más chicos para no salirse */
+@media (max-width: 1240px) {
+  .logos-bar { --logo-base: 30px; gap: 1rem; }
+}
+/* Tablet chica y celular: pasan a varias filas (no caben 6 en una línea) */
+@media (max-width: 960px) {
+  .logos-bar { --logo-base: 32px; flex-wrap: wrap; justify-content: flex-start; gap: 1.25rem 1.5rem; }
+}
+

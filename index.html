@@ -306,13 +306,13 @@
           <div class="hero__media">
             <div class="hero__video-wrap">
               <!-- Video presentación del proyecto, con portada propia.
-                   Se muestra la imagen assets/video-portada.jpg y, al hacer clic,
+                   Se muestra la imagen assets/video-portada.webp y, al hacer clic,
                    se carga el video de YouTube (script al final de esta página).
                    PARA CAMBIAR EL VIDEO: reemplaza el ID en data-video-id.
-                   PARA CAMBIAR LA PORTADA: reemplaza assets/video-portada.jpg (1280×720). -->
+                   PARA CAMBIAR LA PORTADA: reemplaza assets/video-portada.webp (760×428, formato WebP). -->
               <button type="button" class="video-facade" data-video-id="LTJG9Efchfc"
                       aria-label="Reproducir video: presentación de The Class Project">
-                <img src="assets/video-portada.jpg" alt="" width="1280" height="720" loading="eager">
+                <img src="assets/video-portada.webp" alt="" width="760" height="428" loading="eager" fetchpriority="high">
                 <span class="video-facade__play" aria-hidden="true"></span>
               </button>
             </div>
@@ -405,8 +405,8 @@
 
 <!-- ============================================================
          LOGOS INSTITUCIONALES
-         Una sola línea, sin texto. Orden confirmado:
-         UDP · Facultad · ICSO · OBDE · Sociología · ANID
+         Una sola línea (exigencia ANID). Orden confirmado (oct. 2026):
+         UDP · Facultad · ICSOH · Escuela de Sociología · Observatorio · ANID
          ============================================================ -->
 
     <section class="section-logos" aria-label="Instituciones y financiamiento">
@@ -415,39 +415,34 @@
         <p class="logos-label">Financiado y apoyado por</p>
         <!-- Ancho del bloque respeta el mismo container del contenido central -->
 
-        <!-- Fila de logos institucionales — una sola línea, sin texto.
-             Orden: UDP · Facultad · ICSO · OBDE · Sociología · ANID
+        <!-- Fila de logos institucionales — una sola línea.
              .logo-item es animado por IntersectionObserver (script.js) -->
         <div class="logos-bar">
-
+          <!-- Logos institucionales (oct. 2026). Orden: UDP · Facultad · ICSOH · Escuela de Sociología · Observatorio · ANID.
+               Altura de cada logo: css/styles.css → "LOGOS INSTITUCIONALES 2026". -->
           <!-- 1. UDP -->
-          <div class="logo-item">
-            <img loading="lazy" src="assets/logos/LogoUDP_trans.png" alt="Universidad Diego Portales">
+          <div class="logo-item logo-item--udp">
+            <img loading="lazy" src="assets/logos/udp.png" width="177" height="38" alt="Universidad Diego Portales">
           </div>
-
           <!-- 2. Facultad de Ciencias Sociales y Humanidades -->
-          <div class="logo-item">
-            <img loading="lazy" src="assets/logos/UDP_FCSH_Logo_NEGRO-ROJO.png" alt="Facultad de Ciencias Sociales y Humanidades, UDP">
+          <div class="logo-item logo-item--facultad">
+            <img loading="lazy" src="assets/logos/facultad-fcsh-udp.svg" width="190" height="25" alt="Facultad de Ciencias Sociales y Humanidades, UDP">
           </div>
-
-          <!-- 3. ICSO-H — Instituto de Ciencias Sociales y Humanidades -->
-          <div class="logo-item">
-            <img loading="lazy" src="assets/logos/LogoICSOH.png" alt="ICSO — Instituto de Ciencias Sociales, UDP">
+          <!-- 3. ICSOH (Instituto de la Facultad) -->
+          <div class="logo-item logo-item--icsoh">
+            <img loading="lazy" src="assets/logos/icsoh-udp.svg" width="212" height="32" alt="ICSOH — Instituto de Investigación en Ciencias Sociales y Humanidades, UDP">
           </div>
-
-          <!-- 4. OBDE — Observatorio de Desigualdades -->
-          <div class="logo-item">
-            <img loading="lazy" src="assets/logos/LogoOBDE.png" alt="Observatorio de Desigualdades">
+          <!-- 4. Escuela de Sociología (Facultad) -->
+          <div class="logo-item logo-item--sociologia">
+            <img loading="lazy" src="assets/logos/escuela-sociologia-udp.svg" width="181" height="33" alt="Escuela de Sociología UDP">
           </div>
-
-          <!-- 5. Escuela de Sociología UDP -->
-          <div class="logo-item">
-            <img loading="lazy" src="assets/logos/LogoSociologia.svg" alt="Escuela de Sociología UDP">
+          <!-- 5. Observatorio de Desigualdades (Escuela de Sociología) -->
+          <div class="logo-item logo-item--observatorio">
+            <img loading="lazy" src="assets/logos/observatorio-desigualdades.png" width="174" height="38" alt="Observatorio de Desigualdades, Escuela de Sociología UDP">
           </div>
-
-          <!-- 6. ANID -->
-          <div class="logo-item">
-            <img loading="lazy" src="assets/logos/LogoANID.png" alt="ANID — Agencia Nacional de Investigación y Desarrollo">
+          <!-- 6. Minciencia + ANID (formato 2026). ANID exige que vaya en la misma línea que las demás instituciones. -->
+          <div class="logo-item logo-item--anid">
+            <img loading="lazy" src="assets/logos/minciencia-anid-2026.svg" width="100" height="55" alt="Ministerio de Ciencia, Tecnología, Conocimiento e Innovación — ANID, Agencia Nacional de Investigación y Desarrollo">
           </div>
 
         </div><!-- /.logos-bar -->
