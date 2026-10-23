@@ -5,4 +5,4 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://theclassproject.org/sitemap.xml
+Sitemap: https://theclassproject.cl/sitemap.xml
