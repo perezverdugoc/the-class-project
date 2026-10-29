@@ -4,35 +4,35 @@
   <!-- PÁGINAS PRINCIPALES -->
   <url>
     <loc>https://theclassproject.cl/</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://theclassproject.cl/proyecto/</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://theclassproject.cl/encuesta/</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://theclassproject.cl/equipo/</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://theclassproject.cl/divulgacion/</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -40,7 +40,7 @@
   <!-- Carpeta /transparencia/ = sección "Transparencia". /accountability/ queda reservada para la versión en inglés -->
   <url>
     <loc>https://theclassproject.cl/transparencia/</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -48,56 +48,56 @@
   <!-- PERFILES INDIVIDUALES DEL EQUIPO -->
   <url>
     <loc>https://theclassproject.cl/equipo/gabriel-otero/</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://theclassproject.cl/equipo/camila-joustra/</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://theclassproject.cl/equipo/vicente-espinoza/</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://theclassproject.cl/equipo/guillermo-beck/</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://theclassproject.cl/equipo/julio-iturra/</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://theclassproject.cl/equipo/andreas-laffert/</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://theclassproject.cl/equipo/alejandro-plaza/</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://theclassproject.cl/equipo/constanza-perez/</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -105,14 +105,34 @@
   <!-- NOTAS DE DIVULGACIÓN -->
   <url>
     <loc>https://theclassproject.cl/divulgacion/notas/nota-fondecyt/</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://theclassproject.cl/divulgacion/notas/nota-social-networks/</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- ENCUESTA E INFOGRAFÍAS (agregadas 29-10-2026) -->
+  <url>
+    <loc>https://theclassproject.cl/encuesta/buscador/</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://theclassproject.cl/encuesta/cuestionario_scnpa.html</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://theclassproject.cl/divulgacion/infografias/marco-conceptual.html</loc>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
