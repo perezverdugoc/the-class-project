@@ -326,6 +326,13 @@
       color: var(--color-text);   /* 23-10: antes gris e itálica ("Por confirmar") */
     }
 
+    /* Tesistas con foto (29-10): la foto llena el círculo */
+    .tesista-card__avatar--foto { border: none; overflow: hidden; }
+    .tesista-card__avatar--foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .tesista-card .profile-card__btn { margin-top: var(--space-xs); }
+    /* En el modal de tesistas, encuadra el rostro (fotos 800×640) */
+    .profile-modal--tesista .profile-modal__photo { object-position: center 40%; }
+
     /* Subtítulos "Tesistas de pregrado" / "Tesistas de magíster" */
     .tesistas-subheading {
       font-size: var(--text-base);
@@ -757,27 +764,46 @@
             Estudiantes de pregrado y posgrado que desarrollan sus tesis en el marco del proyecto.
           </p>
 
-          <!-- TESISTAS DE PREGRADO (sin foto por ahora; correos y perfiles: pendientes) -->
+          <!-- TESISTAS DE PREGRADO
+               Cada tarjeta abre su modal con el botón "Ver perfil" (data-modal = id del modal).
+               Los modales de tesistas están al final, después de los del resto del equipo.
+               Fotos: assets/equipo/<nombre-apellido>.jpg, 800×640 px, rostro centrado. -->
           <h3 class="tesistas-subheading">Tesistas de pregrado</h3>
           <div class="team-grid-tesistas">
+            <!-- SOFÍA CORTÉS -->
             <div class="tesista-card">
-              <div class="tesista-card__avatar"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+              <div class="tesista-card__avatar tesista-card__avatar--foto"><img loading="lazy" src="../assets/equipo/sofia-cortes.jpg" alt="Sofía Cortés" width="80" height="80"></div>
               <p class="tesista-card__name">Sofía Cortés</p>
               <p class="tesista-card__label">Tesista de pregrado</p>
               <p class="tesista-card__inst">Universidad Diego Portales</p>
+              <button class="profile-card__btn" data-modal="modal-sofia-cortes" aria-haspopup="dialog">
+                Ver perfil
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
             </div>
+            <!-- ARANTZA GÁLVEZ -->
             <div class="tesista-card">
-              <div class="tesista-card__avatar"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+              <div class="tesista-card__avatar tesista-card__avatar--foto"><img loading="lazy" src="../assets/equipo/arantza-galvez.jpg" alt="Arantza Gálvez" width="80" height="80"></div>
               <p class="tesista-card__name">Arantza Gálvez</p>
               <p class="tesista-card__label">Tesista de pregrado</p>
               <p class="tesista-card__inst">Universidad Diego Portales</p>
+              <button class="profile-card__btn" data-modal="modal-arantza-galvez" aria-haspopup="dialog">
+                Ver perfil
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
             </div>
+            <!-- ARACELY RODRÍGUEZ -->
             <div class="tesista-card">
-              <div class="tesista-card__avatar"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+              <div class="tesista-card__avatar tesista-card__avatar--foto"><img loading="lazy" src="../assets/equipo/aracely-rodriguez.jpg" alt="Aracely Rodríguez" width="80" height="80"></div>
               <p class="tesista-card__name">Aracely Rodríguez</p>
               <p class="tesista-card__label">Tesista de pregrado</p>
               <p class="tesista-card__inst">Universidad Diego Portales</p>
+              <button class="profile-card__btn" data-modal="modal-aracely-rodriguez" aria-haspopup="dialog">
+                Ver perfil
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
             </div>
+            <!-- CATALINA ROJAS (falta foto y descripción: queda con ícono y sin botón) -->
             <div class="tesista-card">
               <div class="tesista-card__avatar"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
               <p class="tesista-card__name">Catalina Rojas</p>
@@ -789,17 +815,27 @@
           <!-- TESISTAS DE MAGÍSTER -->
           <h3 class="tesistas-subheading">Tesistas de magíster</h3>
           <div class="team-grid-tesistas">
+            <!-- TRAJAN PIRKOVIC -->
             <div class="tesista-card">
-              <div class="tesista-card__avatar"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+              <div class="tesista-card__avatar tesista-card__avatar--foto"><img loading="lazy" src="../assets/equipo/trajan-pirkovic.jpg" alt="Trajan Pirkovic" width="80" height="80"></div>
               <p class="tesista-card__name">Trajan Pirkovic</p>
-              <p class="tesista-card__label">Tesista de posgrado</p>
+              <p class="tesista-card__label">Tesista de magíster</p>
               <p class="tesista-card__inst">P. Universidad Católica de Chile</p>
+              <button class="profile-card__btn" data-modal="modal-trajan-pirkovic" aria-haspopup="dialog">
+                Ver perfil
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
             </div>
+            <!-- IGNACIO ZAVALA -->
             <div class="tesista-card">
-              <div class="tesista-card__avatar"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+              <div class="tesista-card__avatar tesista-card__avatar--foto"><img loading="lazy" src="../assets/equipo/ignacio-zavala.jpg" alt="Ignacio Zavala" width="80" height="80"></div>
               <p class="tesista-card__name">Ignacio Zavala</p>
-              <p class="tesista-card__label">Tesista de posgrado</p>
+              <p class="tesista-card__label">Tesista de magíster</p>
               <p class="tesista-card__inst">P. Universidad Católica de Chile</p>
+              <button class="profile-card__btn" data-modal="modal-ignacio-zavala" aria-haspopup="dialog">
+                Ver perfil
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
             </div>
           </div><!-- /.team-grid-tesistas magíster -->
 
@@ -1206,6 +1242,122 @@
       </div>
     </section>
 
+  <!-- ═══ MODALES DE TESISTAS ═══ -->
+  <!-- Modal: Sofía Cortés (tesista; sin correo por ahora) -->
+  <div class="profile-modal profile-modal--tesista" id="modal-sofia-cortes" role="dialog" aria-modal="true" aria-labelledby="modal-sofia-cortes-title" hidden>
+    <div class="profile-modal__backdrop"></div>
+    <div class="profile-modal__card">
+      <button class="profile-modal__close" aria-label="Cerrar perfil">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="profile-modal__cover">
+        <img loading="lazy" src="../assets/equipo/sofia-cortes.jpg" alt="Sofía Cortés" class="profile-modal__photo">
+      </div>
+      <div class="profile-modal__body">
+        <div class="profile-modal__header">
+          <h2 id="modal-sofia-cortes-title" class="profile-modal__name">Sofía Cortés</h2>
+          <p class="profile-modal__role">Tesista de pregrado</p>
+          <p class="profile-modal__inst">Universidad Diego Portales</p>
+        </div>
+        <div class="profile-modal__bio">
+              <p>Estudiante de Sociología de la Universidad Diego Portales y tesista del Proyecto FONDECYT de Iniciación N°&nbsp;11240249.</p>
+              <p>Sus intereses de investigación se centran en la desigualdad social y de clase, y en los fenómenos migratorios y el acceso a la educación en relación con las brechas estructurales y la movilidad social.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal: Arantza Gálvez (tesista; sin correo por ahora) -->
+  <div class="profile-modal profile-modal--tesista" id="modal-arantza-galvez" role="dialog" aria-modal="true" aria-labelledby="modal-arantza-galvez-title" hidden>
+    <div class="profile-modal__backdrop"></div>
+    <div class="profile-modal__card">
+      <button class="profile-modal__close" aria-label="Cerrar perfil">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="profile-modal__cover">
+        <img loading="lazy" src="../assets/equipo/arantza-galvez.jpg" alt="Arantza Gálvez" class="profile-modal__photo">
+      </div>
+      <div class="profile-modal__body">
+        <div class="profile-modal__header">
+          <h2 id="modal-arantza-galvez-title" class="profile-modal__name">Arantza Gálvez</h2>
+          <p class="profile-modal__role">Tesista de pregrado</p>
+          <p class="profile-modal__inst">Universidad Diego Portales</p>
+        </div>
+        <div class="profile-modal__bio">
+              <p>Estudiante de Sociología de la Universidad Diego Portales y tesista del Proyecto FONDECYT de Iniciación N°&nbsp;11240249. Actualmente cursa un diploma en Desigualdades Sociales.</p>
+              <p>Sus intereses de investigación son las desigualdades sociales, con énfasis en la estratificación de clase y las desigualdades económicas, y el papel de las relaciones sociales en la configuración de oportunidades y experiencias de vida.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal: Aracely Rodríguez (tesista; sin correo por ahora) -->
+  <div class="profile-modal profile-modal--tesista" id="modal-aracely-rodriguez" role="dialog" aria-modal="true" aria-labelledby="modal-aracely-rodriguez-title" hidden>
+    <div class="profile-modal__backdrop"></div>
+    <div class="profile-modal__card">
+      <button class="profile-modal__close" aria-label="Cerrar perfil">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="profile-modal__cover">
+        <img loading="lazy" src="../assets/equipo/aracely-rodriguez.jpg" alt="Aracely Rodríguez" class="profile-modal__photo">
+      </div>
+      <div class="profile-modal__body">
+        <div class="profile-modal__header">
+          <h2 id="modal-aracely-rodriguez-title" class="profile-modal__name">Aracely Rodríguez</h2>
+          <p class="profile-modal__role">Tesista de pregrado</p>
+          <p class="profile-modal__inst">Universidad Diego Portales</p>
+        </div>
+        <div class="profile-modal__bio">
+              <p>Estudiante de Sociología de la Universidad Diego Portales, Diplomada de Honor en Humanidades de la misma universidad y tesista del Proyecto FONDECYT de Iniciación N°&nbsp;11240249.</p>
+              <p>Sus intereses de investigación abarcan las dinámicas y los comportamientos sociales, los procesos migratorios y la desigualdad social.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal: Trajan Pirkovic (tesista; sin correo por ahora) -->
+  <div class="profile-modal profile-modal--tesista" id="modal-trajan-pirkovic" role="dialog" aria-modal="true" aria-labelledby="modal-trajan-pirkovic-title" hidden>
+    <div class="profile-modal__backdrop"></div>
+    <div class="profile-modal__card">
+      <button class="profile-modal__close" aria-label="Cerrar perfil">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="profile-modal__cover">
+        <img loading="lazy" src="../assets/equipo/trajan-pirkovic.jpg" alt="Trajan Pirkovic" class="profile-modal__photo">
+      </div>
+      <div class="profile-modal__body">
+        <div class="profile-modal__header">
+          <h2 id="modal-trajan-pirkovic-title" class="profile-modal__name">Trajan Pirkovic</h2>
+          <p class="profile-modal__role">Tesista de magíster</p>
+          <p class="profile-modal__inst">P. Universidad Católica de Chile</p>
+        </div>
+        <div class="profile-modal__bio">
+              <p>Sociólogo de la Universidad de La Frontera, estudiante de Magíster en Sociología de la Pontificia Universidad Católica de Chile y tesista del Proyecto FONDECYT de Iniciación N°&nbsp;11240249. Su tesis estudia, desde una perspectiva relacional, cómo las redes personales de quienes trabajan en la Región Metropolitana reproducen la desigualdad de clase, y si compartir habilidades laborales con sus conocidos se asocia con redes más homogéneas en términos de clase.</p>
+              <p>Sus intereses de investigación son la estratificación y las clases sociales, la reproducción de la desigualdad y la estructura de habilidades del mercado laboral, desde métodos cuantitativos y prácticas de investigación reproducible.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal: Ignacio Zavala (tesista; sin correo por ahora) -->
+  <div class="profile-modal profile-modal--tesista" id="modal-ignacio-zavala" role="dialog" aria-modal="true" aria-labelledby="modal-ignacio-zavala-title" hidden>
+    <div class="profile-modal__backdrop"></div>
+    <div class="profile-modal__card">
+      <button class="profile-modal__close" aria-label="Cerrar perfil">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="profile-modal__cover">
+        <img loading="lazy" src="../assets/equipo/ignacio-zavala.jpg" alt="Ignacio Zavala" class="profile-modal__photo">
+      </div>
+      <div class="profile-modal__body">
+        <div class="profile-modal__header">
+          <h2 id="modal-ignacio-zavala-title" class="profile-modal__name">Ignacio Zavala</h2>
+          <p class="profile-modal__role">Tesista de magíster</p>
+          <p class="profile-modal__inst">P. Universidad Católica de Chile</p>
+        </div>
+        <div class="profile-modal__bio">
+              <p>Licenciado en Sociología, estudiante de Magíster en Sociología de la Pontificia Universidad Católica de Chile y tesista del Proyecto FONDECYT de Iniciación N°&nbsp;11240249. Su tesis aborda las fuentes intergeneracionales de la segregación y la homogeneidad ocupacional en las redes de contacto en Santiago de Chile.</p>
+              <p>Sus intereses de investigación son la movilidad y la estratificación social, la sociología de la cultura y el capital social, principalmente a través de métodos cuantitativos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
 
   <footer class="footer">
