@@ -286,51 +286,21 @@
       border-top: 1px solid var(--color-border-light);
     }
 
-    .team-grid-tesistas {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-lg);
-      margin-top: var(--space-xl);
-    }
+    /* Tesistas (29-10): usan la misma tarjeta .profile-card que el resto del equipo.
+       Solo cambia el espacio sobre la grilla y el ícono de quien aún no tiene foto. */
+    .team-grid--tesistas { margin-top: var(--space-lg); }
 
-    @media (min-width: 600px) {
-      .team-grid-tesistas { grid-template-columns: repeat(4, 1fr); }
-    }
-
-    .tesista-card {
-      border: 1px solid var(--color-border-light);   /* 23-10: antes punteado (cupos vacíos) */
-      border-radius: var(--radius-xl);
-      padding: var(--space-xl) var(--space-md);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: var(--space-sm);
-    }
-
-    .tesista-card__avatar {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: var(--color-surface);
-      border: 2px dashed var(--color-border);
+    .profile-card__cover--vacia {
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--color-text-light);
     }
 
-    .tesista-card__name {
-      font-size: var(--text-sm);
-      font-weight: 600;
-      color: var(--color-text);   /* 23-10: antes gris e itálica ("Por confirmar") */
-    }
+    /* Tesistas: las fotos son 800×640 con el rostro centrado → encuadre al centro */
+    .team-grid--tesistas .profile-card__photo { object-position: center; }
 
-    /* Tesistas con foto (29-10): la foto llena el círculo */
-    .tesista-card__avatar--foto { border: none; overflow: hidden; }
-    .tesista-card__avatar--foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .tesista-card .profile-card__btn { margin-top: var(--space-xs); }
-    /* En el modal de tesistas, encuadra el rostro (fotos 800×640) */
+    /* En el modal de tesistas, encuadra el rostro */
     .profile-modal--tesista .profile-modal__photo { object-position: center 40%; }
 
     /* Subtítulos "Tesistas de pregrado" / "Tesistas de magíster" */
@@ -339,17 +309,6 @@
       font-weight: 600;
       color: var(--color-text);
       margin-top: var(--space-xl);
-    }
-
-    /* Institución bajo "Tesista de pregrado/posgrado" */
-    .tesista-card__inst {
-      font-size: var(--text-xs);
-      color: var(--color-text-muted);
-    }
-
-    .tesista-card__label {
-      font-size: var(--text-xs);
-      color: var(--color-text-light);
     }
 
     .profile-link {
@@ -769,74 +728,98 @@
                Los modales de tesistas están al final, después de los del resto del equipo.
                Fotos: assets/equipo/<nombre-apellido>.jpg, 800×640 px, rostro centrado. -->
           <h3 class="tesistas-subheading">Tesistas de pregrado</h3>
-          <div class="team-grid-tesistas">
+          <div class="team-grid team-grid--tesistas">
             <!-- SOFÍA CORTÉS -->
-            <div class="tesista-card">
-              <div class="tesista-card__avatar tesista-card__avatar--foto"><img loading="lazy" src="../assets/equipo/sofia-cortes.jpg" alt="Sofía Cortés" width="80" height="80"></div>
-              <p class="tesista-card__name">Sofía Cortés</p>
-              <p class="tesista-card__label">Tesista de pregrado</p>
-              <p class="tesista-card__inst">Universidad Diego Portales</p>
-              <button class="profile-card__btn" data-modal="modal-sofia-cortes" aria-haspopup="dialog">
-                Ver perfil
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </button>
-            </div>
+            <article class="profile-card">
+              <div class="profile-card__cover">
+                <img loading="lazy" src="../assets/equipo/sofia-cortes.jpg" alt="Sofía Cortés" class="profile-card__photo">
+              </div>
+              <div class="profile-card__body">
+                <h3 class="profile-card__name">Sofía Cortés</h3>
+                <p class="profile-card__role">Tesista de pregrado</p>
+                <p class="profile-card__inst">Universidad Diego Portales</p>
+                <button class="profile-card__btn" data-modal="modal-sofia-cortes" aria-haspopup="dialog">
+                  Ver perfil
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </article>
             <!-- ARANTZA GÁLVEZ -->
-            <div class="tesista-card">
-              <div class="tesista-card__avatar tesista-card__avatar--foto"><img loading="lazy" src="../assets/equipo/arantza-galvez.jpg" alt="Arantza Gálvez" width="80" height="80"></div>
-              <p class="tesista-card__name">Arantza Gálvez</p>
-              <p class="tesista-card__label">Tesista de pregrado</p>
-              <p class="tesista-card__inst">Universidad Diego Portales</p>
-              <button class="profile-card__btn" data-modal="modal-arantza-galvez" aria-haspopup="dialog">
-                Ver perfil
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </button>
-            </div>
+            <article class="profile-card">
+              <div class="profile-card__cover">
+                <img loading="lazy" src="../assets/equipo/arantza-galvez.jpg" alt="Arantza Gálvez" class="profile-card__photo">
+              </div>
+              <div class="profile-card__body">
+                <h3 class="profile-card__name">Arantza Gálvez</h3>
+                <p class="profile-card__role">Tesista de pregrado</p>
+                <p class="profile-card__inst">Universidad Diego Portales</p>
+                <button class="profile-card__btn" data-modal="modal-arantza-galvez" aria-haspopup="dialog">
+                  Ver perfil
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </article>
             <!-- ARACELY RODRÍGUEZ -->
-            <div class="tesista-card">
-              <div class="tesista-card__avatar tesista-card__avatar--foto"><img loading="lazy" src="../assets/equipo/aracely-rodriguez.jpg" alt="Aracely Rodríguez" width="80" height="80"></div>
-              <p class="tesista-card__name">Aracely Rodríguez</p>
-              <p class="tesista-card__label">Tesista de pregrado</p>
-              <p class="tesista-card__inst">Universidad Diego Portales</p>
-              <button class="profile-card__btn" data-modal="modal-aracely-rodriguez" aria-haspopup="dialog">
-                Ver perfil
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </button>
-            </div>
+            <article class="profile-card">
+              <div class="profile-card__cover">
+                <img loading="lazy" src="../assets/equipo/aracely-rodriguez.jpg" alt="Aracely Rodríguez" class="profile-card__photo">
+              </div>
+              <div class="profile-card__body">
+                <h3 class="profile-card__name">Aracely Rodríguez</h3>
+                <p class="profile-card__role">Tesista de pregrado</p>
+                <p class="profile-card__inst">Universidad Diego Portales</p>
+                <button class="profile-card__btn" data-modal="modal-aracely-rodriguez" aria-haspopup="dialog">
+                  Ver perfil
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </article>
             <!-- CATALINA ROJAS (falta foto y descripción: queda con ícono y sin botón) -->
-            <div class="tesista-card">
-              <div class="tesista-card__avatar"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
-              <p class="tesista-card__name">Catalina Rojas</p>
-              <p class="tesista-card__label">Tesista de pregrado</p>
-              <p class="tesista-card__inst">Universidad Diego Portales</p>
-            </div>
+            <article class="profile-card">
+              <div class="profile-card__cover profile-card__cover--vacia">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              </div>
+              <div class="profile-card__body">
+                <h3 class="profile-card__name">Catalina Rojas</h3>
+                <p class="profile-card__role">Tesista de pregrado</p>
+                <p class="profile-card__inst">Universidad Diego Portales</p>
+              </div>
+            </article>
           </div><!-- /.team-grid-tesistas pregrado -->
 
           <!-- TESISTAS DE MAGÍSTER -->
           <h3 class="tesistas-subheading">Tesistas de magíster</h3>
-          <div class="team-grid-tesistas">
+          <div class="team-grid team-grid--tesistas">
             <!-- TRAJAN PIRKOVIC -->
-            <div class="tesista-card">
-              <div class="tesista-card__avatar tesista-card__avatar--foto"><img loading="lazy" src="../assets/equipo/trajan-pirkovic.jpg" alt="Trajan Pirkovic" width="80" height="80"></div>
-              <p class="tesista-card__name">Trajan Pirkovic</p>
-              <p class="tesista-card__label">Tesista de magíster</p>
-              <p class="tesista-card__inst">P. Universidad Católica de Chile</p>
-              <button class="profile-card__btn" data-modal="modal-trajan-pirkovic" aria-haspopup="dialog">
-                Ver perfil
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </button>
-            </div>
+            <article class="profile-card">
+              <div class="profile-card__cover">
+                <img loading="lazy" src="../assets/equipo/trajan-pirkovic.jpg" alt="Trajan Pirkovic" class="profile-card__photo">
+              </div>
+              <div class="profile-card__body">
+                <h3 class="profile-card__name">Trajan Pirkovic</h3>
+                <p class="profile-card__role">Tesista de magíster</p>
+                <p class="profile-card__inst">Pontificia Universidad Católica de Chile</p>
+                <button class="profile-card__btn" data-modal="modal-trajan-pirkovic" aria-haspopup="dialog">
+                  Ver perfil
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </article>
             <!-- IGNACIO ZAVALA -->
-            <div class="tesista-card">
-              <div class="tesista-card__avatar tesista-card__avatar--foto"><img loading="lazy" src="../assets/equipo/ignacio-zavala.jpg" alt="Ignacio Zavala" width="80" height="80"></div>
-              <p class="tesista-card__name">Ignacio Zavala</p>
-              <p class="tesista-card__label">Tesista de magíster</p>
-              <p class="tesista-card__inst">P. Universidad Católica de Chile</p>
-              <button class="profile-card__btn" data-modal="modal-ignacio-zavala" aria-haspopup="dialog">
-                Ver perfil
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </button>
-            </div>
+            <article class="profile-card">
+              <div class="profile-card__cover">
+                <img loading="lazy" src="../assets/equipo/ignacio-zavala.jpg" alt="Ignacio Zavala" class="profile-card__photo">
+              </div>
+              <div class="profile-card__body">
+                <h3 class="profile-card__name">Ignacio Zavala</h3>
+                <p class="profile-card__role">Tesista de magíster</p>
+                <p class="profile-card__inst">Pontificia Universidad Católica de Chile</p>
+                <button class="profile-card__btn" data-modal="modal-ignacio-zavala" aria-haspopup="dialog">
+                  Ver perfil
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </article>
           </div><!-- /.team-grid-tesistas magíster -->
 
         </div><!-- /.team-group #investigadores -->
