@@ -774,15 +774,19 @@
                 </button>
               </div>
             </article>
-            <!-- CATALINA ROJAS (falta foto y descripción: queda con ícono y sin botón) -->
+            <!-- CATALINA ROJAS -->
             <article class="profile-card">
-              <div class="profile-card__cover profile-card__cover--vacia">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              <div class="profile-card__cover">
+                <img loading="lazy" src="../assets/equipo/catalina-rojas.jpg" alt="Catalina Rojas" class="profile-card__photo">
               </div>
               <div class="profile-card__body">
                 <h3 class="profile-card__name">Catalina Rojas</h3>
                 <p class="profile-card__role">Tesista de pregrado</p>
                 <p class="profile-card__inst">Universidad Diego Portales</p>
+                <button class="profile-card__btn" data-modal="modal-catalina-rojas" aria-haspopup="dialog">
+                  Ver perfil
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
               </div>
             </article>
           </div><!-- /.team-grid-tesistas pregrado -->
@@ -1291,6 +1295,29 @@
         <div class="profile-modal__bio">
               <p>Estudiante de Sociología de la Universidad Diego Portales, Diplomada de Honor en Humanidades de la misma universidad y tesista del Proyecto FONDECYT de Iniciación N°&nbsp;11240249.</p>
               <p>Sus intereses de investigación abarcan las dinámicas y los comportamientos sociales, los procesos migratorios y la desigualdad social.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal: Catalina Rojas (tesista; sin correo por ahora) -->
+  <div class="profile-modal profile-modal--tesista" id="modal-catalina-rojas" role="dialog" aria-modal="true" aria-labelledby="modal-catalina-rojas-title" hidden>
+    <div class="profile-modal__backdrop"></div>
+    <div class="profile-modal__card">
+      <button class="profile-modal__close" aria-label="Cerrar perfil">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="profile-modal__cover">
+        <img loading="lazy" src="../assets/equipo/catalina-rojas.jpg" alt="Catalina Rojas" class="profile-modal__photo">
+      </div>
+      <div class="profile-modal__body">
+        <div class="profile-modal__header">
+          <h2 id="modal-catalina-rojas-title" class="profile-modal__name">Catalina Rojas</h2>
+          <p class="profile-modal__role">Tesista de pregrado</p>
+          <p class="profile-modal__inst">Universidad Diego Portales</p>
+        </div>
+        <div class="profile-modal__bio">
+              <p>Estudiante de Sociología de la Universidad Diego Portales y tesista del Proyecto FONDECYT de Iniciación N°&nbsp;11240249. Actualmente cursa el Diplomado en Producción de Datos e Investigación Cuantitativa.</p>
+              <p>Sus intereses de investigación se centran en la estratificación social y en cómo la inteligencia artificial y las tecnologías emergentes reconfiguran las dinámicas de la sociedad contemporánea. Aborda la intersección entre tecnología y transformaciones sociales mediante la ciencia de datos sociales y el análisis estadístico.</p>
         </div>
       </div>
     </div>
