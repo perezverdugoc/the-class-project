@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y9DYSQMWKG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y9DYSQMWKG');
+  </script>
+
+  <title>Metodología de la encuesta — The Class Project</title>
+  <meta name="description" content="Ficha técnica, diseño muestral multietápico y estratificado, y mapa de las 10 zonas de muestreo de la encuesta aplicada a 1.251 personas en la Región Metropolitana.">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Metodología de la encuesta — The Class Project">
+  <meta property="og:description" content="Ficha técnica, diseño muestral y mapa interactivo de las zonas de muestreo de la encuesta.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://theclassproject.cl/encuesta/metodologia/">
+  <meta property="og:image" content="https://theclassproject.cl/assets/og-compartir.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="es_CL">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://theclassproject.cl/assets/og-compartir.jpg">
+  <meta name="twitter:title" content="Metodología de la encuesta — The Class Project">
+  <meta name="twitter:description" content="Ficha técnica, diseño muestral y mapa interactivo de las zonas de muestreo de la encuesta.">
+  <meta property="og:site_name" content="The Class Project">
+  <link rel="canonical" href="https://theclassproject.cl/encuesta/metodologia/">
+  <!-- Google Fonts: preconnect primero (más rápido que @import en CSS) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"></noscript>
+
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="/css/mapa-rm.css?v=20260528-2">
+  <!-- Estilos de la sección Encuesta (compartidos por sus 4 páginas) -->
+  <link rel="stylesheet" href="/css/encuesta.css?v=20261110">
+
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://theclassproject.cl/" },
+          { "@type": "ListItem", "position": 2, "name": "Encuesta", "item": "https://theclassproject.cl/encuesta/" },
+          { "@type": "ListItem", "position": 3, "name": "Metodología", "item": "https://theclassproject.cl/encuesta/metodologia/" }
+        ]
+      }
+    ]
+  }
+  </script>
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=2">
+</head>
+<body>
+
+  <header>
+    <nav class="nav" aria-label="Navegación principal">
+      <div class="container">
+        <div class="nav__inner">
+          <a href="/" class="nav__logo"><img src="/assets/logos/theclass-horizontal.svg" alt="The Class Project" class="nav__logo-img" width="388" height="161"></a>
+          <ul class="nav__links" role="list">
+            <li><a href="/" class="nav__link">Inicio</a></li>
+            <li><a href="/proyecto/" class="nav__link">Proyecto</a></li>
+            <li><a href="/encuesta/" class="nav__link nav__link--active" aria-current="page">Encuesta</a></li>
+            <li><a href="/equipo/" class="nav__link">Equipo</a></li>
+            <li><a href="/divulgacion/" class="nav__link">Divulgación</a></li>
+            <li><a href="/transparencia/" class="nav__link">Transparencia</a></li>
+          </ul>
+          <button class="nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-mobile" aria-label="Abrir menú de navegación">
+            <span class="nav__toggle-bar"></span>
+            <span class="nav__toggle-bar"></span>
+            <span class="nav__toggle-bar"></span>
+          </button>
+        </div>
+      </div>
+      <div class="nav__mobile" id="nav-mobile" role="dialog" aria-label="Menú de navegación">
+        <a href="/" class="nav__mobile-link">Inicio</a>
+        <a href="/proyecto/" class="nav__mobile-link">Proyecto</a>
+        <a href="/encuesta/" class="nav__mobile-link" aria-current="page">Encuesta</a>
+        <a href="/equipo/" class="nav__mobile-link">Equipo</a>
+        <a href="/divulgacion/" class="nav__mobile-link">Divulgación</a>
+        <a href="/transparencia/" class="nav__mobile-link">Transparencia</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <section class="page-hero">
+      <div class="container">
+        <p class="enc-crumb"><a href="/encuesta/">Encuesta</a> <span aria-hidden="true">›</span> Metodología</p>
+        <span class="page-hero__eyebrow">Diseño metodológico</span>
+        <h1 class="page-hero__title">Metodología</h1>
+        <p class="page-hero__desc">
+          Cómo se diseñó y aplicó la encuesta: unidad de análisis, selección de la muestra, modalidad y distribución territorial de los 1.251 casos.
+        </p>
+      </div>
+    </section>
+
+    <!-- PESTAÑAS DE LA SECCIÓN ENCUESTA: son las mismas en las 4 páginas.
+         Para agregar una página nueva (ej. Definiciones), suma un <li> aquí en las 4. -->
+    <nav class="enc-tabs" aria-label="Páginas de la encuesta">
+      <div class="container">
+        <ul class="enc-tabs__list" role="list">
+          <li><a href="/encuesta/" class="enc-tabs__link">Resumen</a></li>
+          <li><a href="/encuesta/metodologia/" class="enc-tabs__link enc-tabs__link--active" aria-current="page">Metodología</a></li>
+          <li><a href="/encuesta/cuestionario/" class="enc-tabs__link">Cuestionario</a></li>
+          <li><a href="/encuesta/variables/" class="enc-tabs__link">Variables</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="enc-page encuesta-content">
+
+      <section id="fichatecnica" class="ficha-section">
+        <div class="viz-section__header">
+          <span class="viz-section__eyebrow">Ficha técnica</span>
+          <h2 class="viz-section__title">Ficha técnica</h2>
+          <p class="viz-section__desc">Diseño metodológico y condiciones generales del levantamiento de la encuesta.</p>
+        </div>
+
+        <p class="method-intro">
+          Para llevar a cabo las pruebas empíricas, el proyecto adoptó un enfoque
+          cuantitativo con las siguientes características:
+        </p>
+
+        <div class="method-list">
+
+        <div class="method-item">
+          <div class="method-item__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="method-item__title">Unidad de análisis</h3>
+            <p class="method-item__body">
+              Personas adultas residentes en áreas urbanas y rurales de la Región Metropolitana de Santiago de Chile.
+            </p>
+          </div>
+        </div>
+
+        <div class="method-item">
+          <div class="method-item__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="method-item__title">Tamaño muestral</h3>
+            <p class="method-item__body">
+              La encuesta se aplicó a una muestra de <strong>1.251 personas</strong>, seleccionadas mediante un diseño muestral multietápico y estratificado. En una primera etapa, la Región Metropolitana fue dividida en 10 estratos territoriales, desde los cuales se seleccionaron aleatoriamente zonas censales. Luego, se seleccionaron viviendas al interior de dichas zonas y, en cada hogar, se entrevistó a la persona adulta que hubiera cumplido años más recientemente.
+            </p>
+          </div>
+        </div>
+
+        <div class="method-item">
+          <div class="method-item__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="method-item__title">Modalidad</h3>
+            <p class="method-item__body">
+              Se realizaron encuestas presenciales cara a cara, administradas mediante tablets.
+            </p>
+          </div>
+        </div>
+
+        <div class="method-item">
+          <div class="method-item__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="method-item__title">Trabajo de campo</h3>
+            <p class="method-item__body">
+              El trabajo de campo fue realizado por <strong>CliO Consulting</strong>.
+            </p>
+          </div>
+        </div>
+
+        </div><!-- /.method-list -->
+      </section>
+
+      <!-- PASO A PASO: resume el párrafo "Tamaño muestral" de la ficha técnica.
+           Si cambia ese texto, actualiza también estos 4 pasos. -->
+      <section class="enc-block" aria-labelledby="pasos-title">
+        <h2 id="pasos-title" class="enc-block__title">Selección de la muestra, paso a paso</h2>
+        <ol class="enc-steps">
+          <li class="enc-step"><span class="enc-step__title">10 estratos territoriales</span><span class="enc-step__desc">La Región Metropolitana fue dividida en 10 estratos territoriales.</span></li>
+          <li class="enc-step"><span class="enc-step__title">Zonas censales</span><span class="enc-step__desc">Desde cada estrato se seleccionaron aleatoriamente zonas censales.</span></li>
+          <li class="enc-step"><span class="enc-step__title">Viviendas</span><span class="enc-step__desc">Se seleccionaron viviendas al interior de dichas zonas.</span></li>
+          <li class="enc-step"><span class="enc-step__title">Persona entrevistada</span><span class="enc-step__desc">En cada hogar se entrevistó a la persona adulta que hubiera cumplido años más recientemente.</span></li>
+        </ol>
+      </section>
+
+      <div id="mapa">
+        <section class="viz-section mapa-rm-v2">
+          <div class="viz-section__header">
+            <span class="viz-section__eyebrow">Diseño muestral</span>
+            <h2 class="viz-section__title">Mapa de muestreo</h2>
+            <p class="viz-section__desc">La muestra oficial de 1.251 personas se distribuyó en 10 zonas de la Región Metropolitana de Santiago, según la información reportada por el equipo investigador.</p>
+          </div>
+
+          <div class="mapa-module" role="region" aria-label="Mapa interactivo de zonas de muestreo">
+            <div class="mapa-toolbar">
+              <div class="mapa-summary" id="mapa-summary">
+                <span class="summary-pill"><strong>1.251</strong> casos</span>
+                <span class="summary-pill"><strong>10</strong> zonas</span>
+                <span class="summary-pill"><strong>42</strong> comunas</span>
+              </div>
+              <div class="view-toggle" aria-label="Modo de visualización">
+                <button type="button" class="is-active" data-view="comuna">Comunas</button>
+                <button type="button" data-view="zona">Zonas</button>
+              </div>
+            </div>
+
+            <div class="mapa-content">
+              <div class="mapa-canvas">
+                <div id="mapa-rm"></div>
+                <div class="map-control" aria-label="Controles de vista del mapa">
+                  <button type="button" id="fit-urban">Vista cercana</button>
+                  <button type="button" id="fit-all">Ver RM completa</button>
+                </div>
+              </div>
+              <aside class="mapa-panel" aria-live="polite">
+                <div class="panel-main">
+                  <span class="panel-label" id="panel-label">Resumen territorial</span>
+                  <h3 class="panel-title" id="panel-title">Región Metropolitana</h3>
+                  <p class="panel-meta" id="panel-meta">Selecciona una zona o comuna para ver el detalle de la muestra.</p>
+                  <div class="stat-grid">
+                    <div class="stat"><strong id="stat-n">1.251</strong><span>casos totales</span></div>
+                    <div class="stat"><strong id="stat-pct">10</strong><span>zonas de muestreo</span></div>
+                  </div>
+                  <ul class="zone-list" id="zone-list"></ul>
+                  <table class="commune-table" id="commune-table" hidden>
+                    <thead><tr><th>Comuna</th><th>n</th></tr></thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+                <div class="panel-footer">Datos de distribución territorial proporcionados por el equipo investigador.</div>
+              </aside>
+            </div>
+          </div>
+        </section>
+      </div><!-- /#mapa -->
+
+      <p class="enc-next"><a href="/encuesta/cuestionario/">Siguiente: Cuestionario <span aria-hidden="true">→</span></a></p>
+
+    </div><!-- /.enc-page -->
+
+    <!-- LOGOS INSTITUCIONALES -->
+    <section class="section-logos" aria-label="Instituciones y financiamiento">
+      <div class="container">
+        <p class="logos-label">Financiado y apoyado por</p>
+        <div class="logos-bar">
+          <!-- Logos institucionales (oct. 2026). Orden: UDP · Facultad · ICSOH · Escuela de Sociología · Observatorio · ANID.
+               Altura de cada logo: css/styles.css → "LOGOS INSTITUCIONALES 2026". -->
+          <!-- 1. UDP -->
+          <div class="logo-item logo-item--udp">
+            <img loading="lazy" src="/assets/logos/udp.png" width="177" height="38" alt="Universidad Diego Portales">
+          </div>
+          <!-- 2. Facultad de Ciencias Sociales y Humanidades -->
+          <div class="logo-item logo-item--facultad">
+            <img loading="lazy" src="/assets/logos/facultad-fcsh-udp.svg" width="190" height="25" alt="Facultad de Ciencias Sociales y Humanidades, UDP">
+          </div>
+          <!-- 3. ICSOH (Instituto de la Facultad) -->
+          <div class="logo-item logo-item--icsoh">
+            <img loading="lazy" src="/assets/logos/icsoh-udp.svg" width="212" height="32" alt="ICSOH — Instituto de Investigación en Ciencias Sociales y Humanidades, UDP">
+          </div>
+          <!-- 4. Escuela de Sociología (Facultad) -->
+          <div class="logo-item logo-item--sociologia">
+            <img loading="lazy" src="/assets/logos/escuela-sociologia-udp.svg" width="181" height="33" alt="Escuela de Sociología UDP">
+          </div>
+          <!-- 5. Observatorio de Desigualdades (Escuela de Sociología) -->
+          <div class="logo-item logo-item--observatorio">
+            <img loading="lazy" src="/assets/logos/observatorio-desigualdades.png" width="174" height="38" alt="Observatorio de Desigualdades, Escuela de Sociología UDP">
+          </div>
+          <!-- 6. Minciencia + ANID (formato 2026). ANID exige que vaya en la misma línea que las demás instituciones. -->
+          <div class="logo-item logo-item--anid">
+            <img loading="lazy" src="/assets/logos/minciencia-anid-2026.svg" width="100" height="55" alt="Ministerio de Ciencia, Tecnología, Conocimiento e Innovación — ANID, Agencia Nacional de Investigación y Desarrollo">
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+
+        <div>
+          <p class="footer__logo">The <span>Class</span> Project</p>
+          <p class="footer__desc">The Class Project estudia cómo la composición de clase de las redes personales influye en las actitudes políticas en Chile, en particular aquellas referidas a desigualdad, redistribución y cambio social.</p>
+          <p class="footer__desc">Proyecto <a href="https://anid.cl/proyectos-de-investigacion/" target="_blank" rel="noopener">FONDECYT</a> de Iniciación N°&nbsp;11240249 &ldquo;Class, personal networks and political attitudes&rdquo; (2024–2027), con financiamiento del <a href="https://www.minciencia.gob.cl/" target="_blank" rel="noopener">Ministerio de Ciencia</a>, a través de la <a href="https://anid.cl/" target="_blank" rel="noopener">Agencia Nacional de Investigación y Desarrollo, ANID</a>.</p>
+        </div>
+
+        <div>
+          <p class="footer__heading">Secciones</p>
+          <ul class="footer__links" role="list">
+            <li><a href="/" class="footer__link">Inicio</a></li>
+            <li><a href="/proyecto/" class="footer__link">El proyecto</a></li>
+            <li><a href="/encuesta/" class="footer__link">Encuesta</a></li>
+            <li><a href="/equipo/" class="footer__link">Equipo</a></li>
+            <li><a href="/divulgacion/" class="footer__link">Divulgaci&oacute;n</a></li>
+            <li><a href="/transparencia/" class="footer__link">Transparencia</a></li>
+            <li><a href="/encuesta/cuestionario/" class="footer__link">Cuestionario</a></li>
+            <li><a href="/encuesta/metodologia/#mapa" class="footer__link">Mapa interactivo</a></li>
+            <li><a href="/encuesta/variables/" class="footer__link">Listado de variables</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer__heading">Instituci&oacute;n</p>
+          <ul class="footer__links" role="list">
+            <li><span class="footer__link footer__link--static">Escuela de Sociolog&iacute;a</span></li>
+            <li><span class="footer__link footer__link--static">Facultad de Ciencias Sociales y Humanidades</span></li>
+            <li><a href="https://www.udp.cl" class="footer__link" target="_blank" rel="noopener">Universidad Diego Portales</a></li>
+          </ul>
+          <p class="footer__heading footer__heading--mt">Contacto</p>
+          <ul class="footer__links" role="list">
+            <li><a href="mailto:gabriel.otero@mail.udp.cl" class="footer__link">gabriel.otero@mail.udp.cl</a></li>
+          </ul>
+          <p class="footer__heading footer__heading--mt">Redes</p>
+          <div class="social-icons">
+            <a href="https://www.instagram.com/theclassprojectcl" class="social-icon" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-width="3"></line>
+              </svg>
+            </a>
+            <a href="https://www.linkedin.com/company/theclassprojectcl" class="social-icon" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+            <a href="https://www.youtube.com/@TheClassProjectcl" class="social-icon" target="_blank" rel="noopener" aria-label="YouTube">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29.94 29.94 0 0 0 1 12a29.94 29.94 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29.94 29.94 0 0 0 23 12a29.94 29.94 0 0 0-.46-5.58z"/>
+                <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div><!-- /.footer__grid -->
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; <span id="footer-year">2026</span> The Class Project. Todos los derechos reservados.</p>
+        <div class="footer__funders"><span>Proyecto FONDECYT de Iniciación N° 11240249</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="/js/mapa-rm.js?v=20261110" defer></script>
+  <script src="/js/script.js" defer></script>
+</body>
+</html>

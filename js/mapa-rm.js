@@ -261,8 +261,8 @@
   }
 
   Promise.all([
-    fetch("../data/comunas-rm.geojson").then((response) => response.json()),
-    fetch("../data/muestra-rm.json").then((response) => response.json())
+    fetch("/data/comunas-rm.geojson").then((response) => response.json()),
+    fetch("/data/muestra-rm.json").then((response) => response.json())
   ])
     .then(([geojson, muestra]) => initMap(geojson, muestra))
     .catch((error) => {

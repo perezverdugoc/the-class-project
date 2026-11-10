@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y9DYSQMWKG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y9DYSQMWKG');
+  </script>
+
+  <title>Variables de la encuesta — The Class Project</title>
+  <meta name="description" content="Buscador de las 335 variables de la encuesta: código, etiqueta, concepto y opciones de respuesta. Filtra por redes personales, actitudes políticas, cohesión social y más.">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Variables de la encuesta — The Class Project">
+  <meta property="og:description" content="Busca entre las 335 variables de la encuesta por código, etiqueta, concepto u opciones de respuesta.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://theclassproject.cl/encuesta/variables/">
+  <meta property="og:image" content="https://theclassproject.cl/assets/og-compartir.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="es_CL">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://theclassproject.cl/assets/og-compartir.jpg">
+  <meta name="twitter:title" content="Variables de la encuesta — The Class Project">
+  <meta name="twitter:description" content="Busca entre las 335 variables de la encuesta por código, etiqueta, concepto u opciones de respuesta.">
+  <meta property="og:site_name" content="The Class Project">
+  <link rel="canonical" href="https://theclassproject.cl/encuesta/variables/">
+  <!-- Google Fonts: preconnect primero (más rápido que @import en CSS) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"></noscript>
+
+  <link rel="stylesheet" href="/css/styles.css">
+  <!-- Estilos de la sección Encuesta (compartidos por sus 4 páginas) -->
+  <link rel="stylesheet" href="/css/encuesta.css?v=20261110">
+
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://theclassproject.cl/" },
+          { "@type": "ListItem", "position": 2, "name": "Encuesta", "item": "https://theclassproject.cl/encuesta/" },
+          { "@type": "ListItem", "position": 3, "name": "Variables", "item": "https://theclassproject.cl/encuesta/variables/" }
+        ]
+      }
+    ]
+  }
+  </script>
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=2">
+</head>
+<body>
+
+  <header>
+    <nav class="nav" aria-label="Navegación principal">
+      <div class="container">
+        <div class="nav__inner">
+          <a href="/" class="nav__logo"><img src="/assets/logos/theclass-horizontal.svg" alt="The Class Project" class="nav__logo-img" width="388" height="161"></a>
+          <ul class="nav__links" role="list">
+            <li><a href="/" class="nav__link">Inicio</a></li>
+            <li><a href="/proyecto/" class="nav__link">Proyecto</a></li>
+            <li><a href="/encuesta/" class="nav__link nav__link--active" aria-current="page">Encuesta</a></li>
+            <li><a href="/equipo/" class="nav__link">Equipo</a></li>
+            <li><a href="/divulgacion/" class="nav__link">Divulgación</a></li>
+            <li><a href="/transparencia/" class="nav__link">Transparencia</a></li>
+          </ul>
+          <button class="nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-mobile" aria-label="Abrir menú de navegación">
+            <span class="nav__toggle-bar"></span>
+            <span class="nav__toggle-bar"></span>
+            <span class="nav__toggle-bar"></span>
+          </button>
+        </div>
+      </div>
+      <div class="nav__mobile" id="nav-mobile" role="dialog" aria-label="Menú de navegación">
+        <a href="/" class="nav__mobile-link">Inicio</a>
+        <a href="/proyecto/" class="nav__mobile-link">Proyecto</a>
+        <a href="/encuesta/" class="nav__mobile-link" aria-current="page">Encuesta</a>
+        <a href="/equipo/" class="nav__mobile-link">Equipo</a>
+        <a href="/divulgacion/" class="nav__mobile-link">Divulgación</a>
+        <a href="/transparencia/" class="nav__mobile-link">Transparencia</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <section class="page-hero">
+      <div class="container">
+        <p class="enc-crumb"><a href="/encuesta/">Encuesta</a> <span aria-hidden="true">›</span> Variables</p>
+        <span class="page-hero__eyebrow">Instrumento</span>
+        <h1 class="page-hero__title">Variables</h1>
+        <p class="page-hero__desc">
+          335 variables del estudio. Filtra por concepto temático o busca por código o etiqueta.
+        </p>
+      </div>
+    </section>
+
+    <!-- PESTAÑAS DE LA SECCIÓN ENCUESTA: son las mismas en las 4 páginas.
+         Para agregar una página nueva (ej. Definiciones), suma un <li> aquí en las 4. -->
+    <nav class="enc-tabs" aria-label="Páginas de la encuesta">
+      <div class="container">
+        <ul class="enc-tabs__list" role="list">
+          <li><a href="/encuesta/" class="enc-tabs__link">Resumen</a></li>
+          <li><a href="/encuesta/metodologia/" class="enc-tabs__link">Metodología</a></li>
+          <li><a href="/encuesta/cuestionario/" class="enc-tabs__link">Cuestionario</a></li>
+          <li><a href="/encuesta/variables/" class="enc-tabs__link enc-tabs__link--active" aria-current="page">Variables</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="enc-page encuesta-content">
+
+      <div id="buscador-variables" class="vars-search-block">
+        <h2 class="vars-search-block__title">Buscador de variables</h2>
+        <p class="vars-search-block__desc">Busca por código, etiqueta, concepto u opciones de respuesta. Puedes combinar palabras y escribir sin tildes.</p>
+        <div class="vars-search-shell">
+          <input type="search" id="vars-search" class="vars-search" placeholder="Ej.: redes ocupacionales, democracia, ingreso, Q57..." aria-label="Buscar variable" autocomplete="off">
+          <button type="button" class="vars-clear-btn" id="vars-clear">Limpiar</button>
+        </div>
+      </div>
+
+      <details class="vars-controls enc-filtros" id="vars-filtros" open>
+        <summary class="enc-filtros__summary">Filtrar por concepto <span id="vars-filtro-activo" class="enc-filtros__activo"></span></summary>
+        <div class="vars-filters" id="vars-filters" role="group" aria-label="Filtrar por concepto">
+          <button class="vars-filter-btn vars-filter-btn--active" data-filter="">Todos (335)</button>
+          <button class="vars-filter-btn" data-filter="Actitudes políticas">Actitudes políticas (46)</button>
+          <button class="vars-filter-btn" data-filter="Alienación en el trabajo">Alienación en el trabajo (4)</button>
+          <button class="vars-filter-btn" data-filter="Alienación percibida">Alienación percibida (6)</button>
+          <button class="vars-filter-btn" data-filter="Apoyo familiar">Apoyo familiar (6)</button>
+          <button class="vars-filter-btn" data-filter="Caracterización sociodemográfica">Caracterización sociodemográfica (14)</button>
+          <button class="vars-filter-btn" data-filter="Caracterización socioeconómica">Caracterización socioeconómica (54)</button>
+          <button class="vars-filter-btn" data-filter="Cohesión social">Cohesión social (37)</button>
+          <button class="vars-filter-btn" data-filter="Diseño Muestral del Estudio">Diseño Muestral del Estudio (4)</button>
+          <button class="vars-filter-btn" data-filter="Estatus subjetivo">Estatus subjetivo (2)</button>
+          <button class="vars-filter-btn" data-filter="Factor de expansión">Factor de expansión (1)</button>
+          <button class="vars-filter-btn" data-filter="Identidad Clase">Identidad Clase (3)</button>
+          <button class="vars-filter-btn" data-filter="Identificación de Casos y Datos">Identificación de Casos y Datos (1)</button>
+          <button class="vars-filter-btn" data-filter="Identificación política">Identificación política (3)</button>
+          <button class="vars-filter-btn" data-filter="Orígenes sociales">Orígenes sociales (5)</button>
+          <button class="vars-filter-btn" data-filter="Percepción de anomia">Percepción de anomia (5)</button>
+          <button class="vars-filter-btn" data-filter="Percepción de de riqueza y pobreza">Percepción de de riqueza y pobreza (2)</button>
+          <button class="vars-filter-btn" data-filter="Percepción de exclusión">Percepción de exclusión (3)</button>
+          <button class="vars-filter-btn" data-filter="Ponderador">Ponderador (1)</button>
+          <button class="vars-filter-btn" data-filter="Preferencia por la democracia">Preferencia por la democracia (1)</button>
+          <button class="vars-filter-btn" data-filter="Provisión de bienes públicos">Provisión de bienes públicos (5)</button>
+          <button class="vars-filter-btn" data-filter="Redes cercanas">Redes cercanas (61)</button>
+          <button class="vars-filter-btn" data-filter="Redes de conocidos en grupos sociales y partidos políticos">Redes de conocidos en grupos sociales y partidos políticos (9)</button>
+          <button class="vars-filter-btn" data-filter="Redes ocupacionales">Redes ocupacionales (54)</button>
+          <button class="vars-filter-btn" data-filter="Salud y Bienestar">Salud y Bienestar (4)</button>
+          <button class="vars-filter-btn" data-filter="Soledad">Soledad (4)</button>
+        </div>
+      </details>
+
+      <div class="vars-table-wrap">
+        <table class="vars-table" id="vars-table">
+          <thead>
+            <tr>
+              <th class="vars-th vars-th--n">N&deg;</th>
+              <th class="vars-th vars-th--code">C&oacute;digo</th>
+              <th class="vars-th vars-th--label">Etiqueta</th>
+              <th class="vars-th vars-th--concept">Concepto general</th>
+              <th class="vars-th vars-th--opts">Opciones de respuesta</th>
+            </tr>
+          </thead>
+          <tbody id="vars-tbody">
+            <!-- Filas generadas por JS -->
+          </tbody>
+        </table>
+        <p class="vars-empty" id="vars-empty" hidden>No se encontraron variables para este criterio.</p>
+      </div>
+      <div class="enc-more">
+        <button type="button" class="enc-btn" id="vars-more" hidden>Mostrar 25 más</button>
+        <button type="button" class="enc-btn enc-btn--ghost" id="vars-all" hidden>Mostrar todas</button>
+      </div>
+      <p class="vars-count" id="vars-count" aria-live="polite">Mostrando 25 de 335 variables</p>
+
+      <noscript><p class="enc-note enc-note--left">El buscador necesita JavaScript. Puedes revisar las preguntas en el <a href="/encuesta/cuestionario/">cuestionario</a>.</p></noscript>
+
+    </div><!-- /.enc-page -->
+
+    <!-- LOGOS INSTITUCIONALES -->
+    <section class="section-logos" aria-label="Instituciones y financiamiento">
+      <div class="container">
+        <p class="logos-label">Financiado y apoyado por</p>
+        <div class="logos-bar">
+          <!-- Logos institucionales (oct. 2026). Orden: UDP · Facultad · ICSOH · Escuela de Sociología · Observatorio · ANID.
+               Altura de cada logo: css/styles.css → "LOGOS INSTITUCIONALES 2026". -->
+          <!-- 1. UDP -->
+          <div class="logo-item logo-item--udp">
+            <img loading="lazy" src="/assets/logos/udp.png" width="177" height="38" alt="Universidad Diego Portales">
+          </div>
+          <!-- 2. Facultad de Ciencias Sociales y Humanidades -->
+          <div class="logo-item logo-item--facultad">
+            <img loading="lazy" src="/assets/logos/facultad-fcsh-udp.svg" width="190" height="25" alt="Facultad de Ciencias Sociales y Humanidades, UDP">
+          </div>
+          <!-- 3. ICSOH (Instituto de la Facultad) -->
+          <div class="logo-item logo-item--icsoh">
+            <img loading="lazy" src="/assets/logos/icsoh-udp.svg" width="212" height="32" alt="ICSOH — Instituto de Investigación en Ciencias Sociales y Humanidades, UDP">
+          </div>
+          <!-- 4. Escuela de Sociología (Facultad) -->
+          <div class="logo-item logo-item--sociologia">
+            <img loading="lazy" src="/assets/logos/escuela-sociologia-udp.svg" width="181" height="33" alt="Escuela de Sociología UDP">
+          </div>
+          <!-- 5. Observatorio de Desigualdades (Escuela de Sociología) -->
+          <div class="logo-item logo-item--observatorio">
+            <img loading="lazy" src="/assets/logos/observatorio-desigualdades.png" width="174" height="38" alt="Observatorio de Desigualdades, Escuela de Sociología UDP">
+          </div>
+          <!-- 6. Minciencia + ANID (formato 2026). ANID exige que vaya en la misma línea que las demás instituciones. -->
+          <div class="logo-item logo-item--anid">
+            <img loading="lazy" src="/assets/logos/minciencia-anid-2026.svg" width="100" height="55" alt="Ministerio de Ciencia, Tecnología, Conocimiento e Innovación — ANID, Agencia Nacional de Investigación y Desarrollo">
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+
+        <div>
+          <p class="footer__logo">The <span>Class</span> Project</p>
+          <p class="footer__desc">The Class Project estudia cómo la composición de clase de las redes personales influye en las actitudes políticas en Chile, en particular aquellas referidas a desigualdad, redistribución y cambio social.</p>
+          <p class="footer__desc">Proyecto <a href="https://anid.cl/proyectos-de-investigacion/" target="_blank" rel="noopener">FONDECYT</a> de Iniciación N°&nbsp;11240249 &ldquo;Class, personal networks and political attitudes&rdquo; (2024–2027), con financiamiento del <a href="https://www.minciencia.gob.cl/" target="_blank" rel="noopener">Ministerio de Ciencia</a>, a través de la <a href="https://anid.cl/" target="_blank" rel="noopener">Agencia Nacional de Investigación y Desarrollo, ANID</a>.</p>
+        </div>
+
+        <div>
+          <p class="footer__heading">Secciones</p>
+          <ul class="footer__links" role="list">
+            <li><a href="/" class="footer__link">Inicio</a></li>
+            <li><a href="/proyecto/" class="footer__link">El proyecto</a></li>
+            <li><a href="/encuesta/" class="footer__link">Encuesta</a></li>
+            <li><a href="/equipo/" class="footer__link">Equipo</a></li>
+            <li><a href="/divulgacion/" class="footer__link">Divulgaci&oacute;n</a></li>
+            <li><a href="/transparencia/" class="footer__link">Transparencia</a></li>
+            <li><a href="/encuesta/cuestionario/" class="footer__link">Cuestionario</a></li>
+            <li><a href="/encuesta/metodologia/#mapa" class="footer__link">Mapa interactivo</a></li>
+            <li><a href="/encuesta/variables/" class="footer__link">Listado de variables</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer__heading">Instituci&oacute;n</p>
+          <ul class="footer__links" role="list">
+            <li><span class="footer__link footer__link--static">Escuela de Sociolog&iacute;a</span></li>
+            <li><span class="footer__link footer__link--static">Facultad de Ciencias Sociales y Humanidades</span></li>
+            <li><a href="https://www.udp.cl" class="footer__link" target="_blank" rel="noopener">Universidad Diego Portales</a></li>
+          </ul>
+          <p class="footer__heading footer__heading--mt">Contacto</p>
+          <ul class="footer__links" role="list">
+            <li><a href="mailto:gabriel.otero@mail.udp.cl" class="footer__link">gabriel.otero@mail.udp.cl</a></li>
+          </ul>
+          <p class="footer__heading footer__heading--mt">Redes</p>
+          <div class="social-icons">
+            <a href="https://www.instagram.com/theclassprojectcl" class="social-icon" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-width="3"></line>
+              </svg>
+            </a>
+            <a href="https://www.linkedin.com/company/theclassprojectcl" class="social-icon" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+            <a href="https://www.youtube.com/@TheClassProjectcl" class="social-icon" target="_blank" rel="noopener" aria-label="YouTube">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29.94 29.94 0 0 0 1 12a29.94 29.94 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29.94 29.94 0 0 0 23 12a29.94 29.94 0 0 0-.46-5.58z"/>
+                <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div><!-- /.footer__grid -->
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; <span id="footer-year">2026</span> The Class Project. Todos los derechos reservados.</p>
+        <div class="footer__funders"><span>Proyecto FONDECYT de Iniciación N° 11240249</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/encuesta-variables.js?v=20261110" defer></script>
+  <script src="/js/script.js" defer></script>
+</body>
+</html>
