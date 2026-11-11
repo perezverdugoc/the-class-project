@@ -821,7 +821,7 @@ mark.vars-mark {
 }
 .enc-stat__num {
   display: block;
-  font-family: var(--font-display);        /* números grandes: DM Serif Display */
+  font-family: var(--font-display);        /* números grandes: DM Serif Text */
   font-weight: var(--font-number-weight);
   font-size: clamp(2.25rem, 6vw, 3.25rem);
   line-height: 1;
@@ -1054,3 +1054,111 @@ mark.vars-mark {
 @media (max-width: 640px) { .enc-next a { width: 100%; } }
 
 .enc-next a > span:first-child { text-align: left; }
+
+/* ============================================================
+   AJUSTES 11-11-2026 (tarde) — Resumen: temáticas en 3 tarjetas
+   y banner "Base de datos" más compacto. Colores = diagrama de
+   /proyecto/ (crema = clase social, verde = redes, coral = actitudes).
+   Para revertir: borra este bloque completo.
+   ============================================================ */
+.enc-page .tematicas { margin: 0; padding: 0; border-top: 0; }
+.enc-page .tematica-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  padding: 0;
+}
+.enc-page .tematica-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-lg) var(--space-lg) var(--space-xl);
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: inset 0 4px 0 #DDD8C8;
+}
+.enc-page .tematica-item:nth-child(2) { box-shadow: inset 0 4px 0 #128F8A; }
+.enc-page .tematica-item:nth-child(3) { box-shadow: inset 0 4px 0 #FF5158; }
+.enc-page .tematica-item__key.temas-chip {
+  background: none;
+  padding: 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--color-primary);
+}
+.enc-page .tematica-item__val { font-size: var(--text-sm); line-height: 1.65; color: #5A5A5F; }
+@media (max-width: 860px) {
+  .enc-page .tematica-list { grid-template-columns: 1fr; }
+}
+
+.enc-page .data-banner {
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) 2fr;
+  gap: var(--space-sm) var(--space-2xl);
+  align-items: center;
+  margin-top: 0;
+  padding: var(--space-xl) var(--space-2xl);
+  border: 0;
+}
+.enc-page .data-banner__eyebrow { grid-column: 1; margin: 0; align-self: end; }
+.enc-page h2.data-banner__title { grid-column: 1; margin: 0; align-self: start; color: var(--color-accent); }
+.enc-page .data-banner__desc { grid-column: 2; grid-row: 1 / span 2; margin: 0; max-width: 60ch; }
+@media (max-width: 760px) {
+  .enc-page .data-banner { grid-template-columns: 1fr; padding: var(--space-xl); }
+  .enc-page .data-banner__desc { grid-column: 1; grid-row: auto; }
+}
+
+
+/* ============================================================
+   MENÚ LATERAL ENCUESTA (11-11-2026, tarde)
+   Mismo patrón que Proyecto: columna izquierda "En esta sección"
+   con las 4 páginas; la página actual muestra sus apartados.
+   ≤900 px: se oculta el menú y vuelven las pestañas de arriba.
+   Para revertir: borra este bloque y el <nav class="enc-sidebar">
+   + <div class="enc-layout"> de las 4 páginas.
+   ============================================================ */
+.enc-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  align-items: start;
+  max-width: var(--container-max, 1200px);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+.enc-layout .enc-sidebar {
+  position: sticky;
+  top: calc(64px + var(--space-xl));
+  padding: var(--space-2xl) var(--space-lg) var(--space-2xl) 0;
+  border-right: 1px solid var(--color-border-light);
+}
+.enc-layout .enc-sidebar .encuesta-nav__label { color: #6E6E73; }
+.enc-layout .enc-page {
+  max-width: none;
+  margin: 0;
+  padding: var(--space-2xl) 0 var(--space-3xl) var(--space-2xl);
+}
+.enc-side__sub { padding-left: var(--space-md); margin: 2px 0 var(--space-sm); }
+.enc-layout .enc-side__sub a {
+  font-size: var(--text-xs);
+  padding: 4px var(--space-md);
+  color: #6E6E73;
+}
+.enc-layout .enc-side__sub a:hover,
+.enc-layout .enc-side__sub a.active {
+  color: var(--color-accent);
+  border-left-color: var(--color-accent);
+  background-color: var(--color-accent-light);
+}
+@media (min-width: 901px) {
+  .enc-tabs { display: none; }
+}
+@media (max-width: 900px) {
+  .enc-layout { display: block; padding: 0; }
+  .enc-layout .enc-sidebar { display: none; }
+  .enc-layout .enc-page { padding: var(--space-xl) var(--space-lg) var(--space-3xl); }
+}
+[id="cifras-title"], [id="explora-title"], [id="tematicas"], [id="datos-title"],
+[id="fichatecnica"], [id="pasos-title"], [id="mapa"], [id="mods-title"], [id="frame-title"],
+[id="buscador-variables"], [id="vars-filtros"], [id="vars-table"] { scroll-margin-top: 96px; }
+

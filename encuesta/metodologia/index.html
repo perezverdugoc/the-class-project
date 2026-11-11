@@ -36,11 +36,11 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"></noscript>
 
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/styles.css?v=20261111c">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <link rel="stylesheet" href="/css/mapa-rm.css?v=20261111">
   <!-- Estilos de la sección Encuesta (compartidos por sus 4 páginas) -->
-  <link rel="stylesheet" href="/css/encuesta.css?v=20261111">
+  <link rel="stylesheet" href="/css/encuesta.css?v=20261111c">
 
   <!-- Schema.org structured data -->
   <script type="application/ld+json">
@@ -68,7 +68,7 @@
     <nav class="nav" aria-label="Navegación principal">
       <div class="container">
         <div class="nav__inner">
-          <a href="/" class="nav__logo"><img src="/assets/logos/theclass-isotipo.svg" alt="" class="nav__logo-iso" width="110" height="110"><span class="nav__logo-text">The <span>Class</span><br>Project</span></a>
+          <a href="/" class="nav__logo"><img src="/assets/logos/theclass-isotipo.svg" alt="" class="nav__logo-iso" width="42" height="42"><span class="nav__logo-text">The <span>Class</span><br>Project</span></a>
           <ul class="nav__links" role="list">
             <li><a href="/" class="nav__link">Inicio</a></li>
             <li><a href="/proyecto/" class="nav__link">Proyecto</a></li>
@@ -119,6 +119,27 @@
           <li><a href="/encuesta/variables/" class="enc-tabs__link">Variables</a></li>
         </ul>
       </div>
+    </nav>
+
+    <!-- 11-11-2026: menú lateral "En esta sección" (como Proyecto y Divulgación).
+         En escritorio reemplaza a las pestañas; en celular (≤900 px) se ocultan
+         este menú y se muestran las pestañas. Estilos: css/encuesta.css → "MENÚ LATERAL ENCUESTA". -->
+    <div class="enc-layout">
+    <nav class="encuesta-nav enc-sidebar" aria-label="En esta sección">
+      <p class="encuesta-nav__label">En esta sección</p>
+      <ul>
+        <li><a href="/encuesta/" class="enc-side__page">Resumen</a></li>
+        <li>
+          <a href="/encuesta/metodologia/" class="enc-side__page active" aria-current="page">Metodología</a>
+          <div class="enc-side__sub">
+            <a href="#fichatecnica">Ficha técnica</a>
+            <a href="#pasos-title">Selección de la muestra</a>
+            <a href="#mapa">Mapa de muestreo</a>
+          </div>
+        </li>
+        <li><a href="/encuesta/cuestionario/" class="enc-side__page">Cuestionario</a></li>
+        <li><a href="/encuesta/variables/" class="enc-side__page">Variables</a></li>
+      </ul>
     </nav>
 
     <div class="enc-page encuesta-content">
@@ -262,6 +283,7 @@
       <p class="enc-next"><a href="/encuesta/cuestionario/"><span><span class="enc-next__label">Siguiente</span>Cuestionario</span><span class="enc-next__arrow" aria-hidden="true">→</span></a></p>
 
     </div><!-- /.enc-page -->
+    </div><!-- /.enc-layout -->
 
     <!-- LOGOS INSTITUCIONALES -->
     <section class="section-logos" aria-label="Instituciones y financiamiento">
@@ -360,6 +382,6 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <script src="/js/mapa-rm.js?v=20261111" defer></script>
-  <script src="/js/script.js" defer></script>
+  <script src="/js/script.js?v=20261111c" defer></script>
 </body>
 </html>

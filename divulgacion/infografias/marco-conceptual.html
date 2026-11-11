@@ -31,7 +31,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"></noscript>
 
-  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/styles.css?v=20261111c">
 
   <style>
     /* ============================================================
@@ -377,6 +377,14 @@
     .infog-header__subtitle { color: rgba(255,255,255,0.88); }
     .infog-header__brand-name span { color: #9FEBD7; }
     .infog-header__brand-sub { color: rgba(255,255,255,0.8); }
+    /* AJUSTE 11-11-2026 (noche) — nodo central en verde de marca (antes negro con verde,
+       poco contraste) y dos dimensiones con un ejemplo cada una. Para revertir: borra este bloque. */
+    .infog-node--accent { background-color: #0A5F5C; }
+    .infog-node--accent .infog-node__number { background-color: #FFFFFF; color: #0A5F5C; }
+    .infog-node--accent .infog-node__label { color: #9FEBD7; }
+    .infog-dimensions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @media (max-width: 560px) { .infog-dimensions { grid-template-columns: 1fr; } }
+    .infog-dim__cat { color: #5F5F64; }
   </style>
   <!-- Favicon -->
   <link rel="icon" href="/assets/favicon.svg?v=2" type="image/svg+xml">
@@ -388,13 +396,14 @@
     <nav class="nav" aria-label="Navegación principal">
       <div class="container">
         <div class="nav__inner">
-          <a href="/" class="nav__logo"><img src="/assets/logos/theclass-isotipo.svg" alt="" class="nav__logo-iso" width="110" height="110"><span class="nav__logo-text">The <span>Class</span><br>Project</span></a>
+          <a href="/" class="nav__logo"><img src="/assets/logos/theclass-isotipo.svg" alt="" class="nav__logo-iso" width="42" height="42"><span class="nav__logo-text">The <span>Class</span><br>Project</span></a>
           <ul class="nav__links" role="list">
             <li><a href="/" class="nav__link">Inicio</a></li>
             <li><a href="/proyecto/" class="nav__link">Proyecto</a></li>
             <li><a href="/encuesta/" class="nav__link">Encuesta</a></li>
             <li><a href="/equipo/" class="nav__link">Equipo</a></li>
             <li><a href="/divulgacion/" class="nav__link nav__link--active">Divulgación</a></li>
+            <li><a href="/transparencia/" class="nav__link">Transparencia</a></li>
           </ul>
           <button class="nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-mobile" aria-label="Abrir menú">
             <span class="nav__toggle-bar"></span>
@@ -409,6 +418,7 @@
         <a href="/encuesta/" class="nav__mobile-link">Encuesta</a>
         <a href="/equipo/" class="nav__mobile-link">Equipo</a>
         <a href="/divulgacion/" class="nav__mobile-link">Divulgación</a>
+        <a href="/transparencia/" class="nav__mobile-link">Transparencia</a>
       </div>
     </nav>
   </header>
@@ -440,7 +450,7 @@
           </div>
           <div class="infog-header__brand" aria-hidden="true">
             <p class="infog-header__brand-name">The <span>Class</span> Project</p>
-            <p class="infog-header__brand-sub">Proyecto FONDECYT de Iniciación N° 11240249 · ANID</p>
+            <p class="infog-header__brand-sub">Proyecto FONDECYT de Iniciación N° 11240249 · Ministerio de Ciencia – ANID</p>
           </div>
         </header>
 
@@ -516,20 +526,17 @@
           <!-- Dimensiones de actitudes -->
           <div>
             <p style="font-size: var(--text-xs); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-light); margin-bottom: var(--space-md);">
-              Actitudes políticas analizadas
+              Actitudes políticas: dos dimensiones
             </p>
+            <!-- 11-11-2026: dos dimensiones, un ejemplo de cada una (como el carrusel ACTITUDES 5/9 y 7/9) -->
             <div class="infog-dimensions">
               <div class="infog-dim">
-                <p class="infog-dim__cat">Socioeconómico</p>
-                <p class="infog-dim__title">Desigualdad</p>
+                <p class="infog-dim__cat">Dimensión socioeconómica</p>
+                <p class="infog-dim__title">Por ejemplo: redistribución</p>
               </div>
               <div class="infog-dim">
-                <p class="infog-dim__cat">Socioeconómico</p>
-                <p class="infog-dim__title">Redistribución</p>
-              </div>
-              <div class="infog-dim">
-                <p class="infog-dim__cat">Sociocultural</p>
-                <p class="infog-dim__title">Cambio social</p>
+                <p class="infog-dim__cat">Dimensión sociocultural</p>
+                <p class="infog-dim__title">Por ejemplo: autoridad</p>
               </div>
             </div>
           </div>
@@ -540,7 +547,7 @@
         <footer class="infog-footer">
           <p class="infog-footer__credit">
             <strong>The Class Project</strong> · Proyecto FONDECYT de Iniciación N° 11240249 ·
-            Financiado por la Agencia Nacional de Investigación y Desarrollo (ANID)
+            Con financiamiento del Ministerio de Ciencia, a través de la Agencia Nacional de Investigación y Desarrollo, ANID
           </p>
           <a href="https://theclassproject.cl" class="infog-footer__url">theclassproject.cl</a>
         </footer>
@@ -549,6 +556,6 @@
     </div><!-- /.infografia-page -->
   </main>
 
-  <script src="../../js/script.js" defer></script>
+  <script src="../../js/script.js?v=20261111c" defer></script>
 </body>
 </html>

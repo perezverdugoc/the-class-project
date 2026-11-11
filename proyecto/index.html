@@ -15,11 +15,11 @@
   </script>
 
   <title>El Proyecto — The Class Project</title>
-  <meta name="description" content="Relaciones entre clases y posiciones políticas. Proyecto FONDECYT de Iniciación N° 11240249, ANID 2024–2027.">
+  <meta name="description" content="Relaciones entre clases y posiciones políticas. Proyecto FONDECYT de Iniciación N° 11240249, Ministerio de Ciencia – ANID, 2024–2027.">
   <meta name="author" content="Gabriel Otero, Escuela de Sociología FCSH UDP">
   <!-- Open Graph -->
   <meta property="og:title" content="El Proyecto — The Class Project">
-  <meta property="og:description" content="Relaciones entre clases y posiciones políticas en Chile. Proyecto FONDECYT de Iniciación N° 11240249, ANID 2024–2027.">
+  <meta property="og:description" content="Relaciones entre clases y posiciones políticas en Chile. Proyecto FONDECYT de Iniciación N° 11240249, Ministerio de Ciencia – ANID, 2024–2027.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://theclassproject.cl/proyecto/">
   <meta property="og:image" content="https://theclassproject.cl/assets/og-compartir.jpg">
@@ -29,7 +29,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://theclassproject.cl/assets/og-compartir.jpg">
   <meta name="twitter:title" content="El Proyecto — The Class Project">
-  <meta name="twitter:description" content="Relaciones entre clases y posiciones políticas en Chile. Proyecto FONDECYT de Iniciación N° 11240249, ANID 2024–2027. Escuela de Sociología UDP.">
+  <meta name="twitter:description" content="Relaciones entre clases y posiciones políticas en Chile. Proyecto FONDECYT de Iniciación N° 11240249, Ministerio de Ciencia – ANID, 2024–2027. Escuela de Sociología UDP.">
   <meta property="og:site_name" content="The Class Project">
   <link rel="canonical" href="https://theclassproject.cl/proyecto/">
   <!-- Google Fonts: preconnect primero (más rápido que @import en CSS) -->
@@ -38,7 +38,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"></noscript>
 
-  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/styles.css?v=20261111c">
 
   <style>
 
@@ -437,7 +437,7 @@
     }
 
     .hypothesis-card__quote {
-      font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+      font-family: var(--font-display); font-weight: 400; /* cita en DM Serif Text */
       font-size: var(--text-lg);
       font-style: italic;
       color: var(--color-primary);
@@ -645,6 +645,9 @@
       color: var(--color-accent);
     }
 
+    /* Párrafos de la caja: separación entre ellos (11-11-2026) */
+    .brand-section-intro__text p + p { margin-top: var(--space-sm); }
+
     @media (max-width: 640px) {
       .brand-section-intro { flex-direction: column; }
     }
@@ -732,6 +735,66 @@
               mask-image: linear-gradient(to right, transparent 0%, #000 18%);
     }
     @media (min-width: 900px) { .ph__red { display: block; } }
+
+    /* ============================================================
+       AJUSTES 11-11-2026 (tarde) — tarjetas del diagrama y línea de tiempo.
+       Para revertir: borra este bloque completo.
+       ============================================================ */
+    /* Diagrama: franja superior de color "dentro" de la tarjeta (antes era un
+       borde que se curvaba fuera de las esquinas) */
+    .model-node { border-top: 0; }
+    .model-node--start  { box-shadow: inset 0 4px 0 #DDD8C8; }
+    .model-node--center { box-shadow: inset 0 4px 0 #128F8A; }
+    .model-node--end    { box-shadow: inset 0 4px 0 #FF5158; }
+    /* Etiqueta, título y texto quedan alineados entre las 3 tarjetas aunque
+       "Variable dependiente" ocupe dos líneas (subgrid). */
+    @media (min-width: 641px) {
+      .model-diagram { grid-template-rows: auto auto 1fr; row-gap: 0; }
+      .model-node, .model-arrow-wrap { grid-row: span 3; }
+      .model-node { display: grid; grid-template-rows: subgrid; row-gap: var(--space-sm); }
+      .model-node__label { align-self: end; }
+      .model-node__desc { padding-top: var(--space-sm); }
+    }
+
+    /* Línea de tiempo: panel gris propio para separarla del texto corrido */
+    .timeline-horizon {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl) var(--space-xl) var(--space-lg);
+      margin-bottom: var(--space-2xl);
+    }
+    .timeline-horizon__phases::before { top: 28px; }
+    /* Números en Work Sans, mismo peso que los títulos */
+    .thp__num, .thp--done .thp__num, .thp--active .thp__num {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 1.375rem;
+      letter-spacing: 0;
+      border-color: var(--color-surface);
+    }
+    /* Título, texto y años alineados en filas comunes (subgrid) */
+    @media (min-width: 681px) {
+      .timeline-horizon__phases { grid-template-rows: auto auto 1fr auto; row-gap: 0; }
+      .thp { display: grid; grid-row: span 4; grid-template-rows: subgrid; gap: 0; }
+      .thp__body { display: contents; }
+      .thp__marker-row { margin-bottom: var(--space-md); }
+      .thp__title, .thp__desc, .thp__period { padding-left: calc(56px + var(--space-sm)); }
+      .thp__period { padding-top: var(--space-sm); }
+    }
+    .thp__desc { color: #5A5A5F; line-height: 1.6; }
+    .thp__period { color: #6E6E73; }
+
+    /* Cifras del hero alineadas con el texto y el menú lateral (11-11 noche) */
+    .ph__stats {
+      padding-left: max(var(--container-pad), calc((100% - var(--container-max)) / 2 + var(--container-pad)));
+      padding-right: max(var(--container-pad), calc((100% - var(--container-max)) / 2 + var(--container-pad)));
+    }
+    .ph__stat:first-child { padding-left: 0; }
+    /* Puntos de las píldoras: coral claro (el coral fuerte no se leía sobre el verde) */
+    .ph .tema-chip__dot,
+    .ph__eje--desg::before, .ph__eje--redis::before, .ph__eje--cambio::before { background: #FFB3B6; }
+    /* Hipótesis: gris más oscuro para el contraste */
+    .hypothesis-card .hypothesis-card__quote, p.hypothesis-card__quote { color: #4A4A4F; }
   </style>
 
   <!-- Schema.org structured data -->
@@ -751,7 +814,7 @@
         "@id": "https://theclassproject.cl/proyecto/",
         "url": "https://theclassproject.cl/proyecto/",
         "name": "El Proyecto — The Class Project",
-        "description": "Relaciones entre clases y posiciones políticas en Chile. Proyecto FONDECYT de Iniciación N° 11240249, ANID 2024–2027.",
+        "description": "Relaciones entre clases y posiciones políticas en Chile. Proyecto FONDECYT de Iniciación N° 11240249, Ministerio de Ciencia – ANID, 2024–2027.",
         "isPartOf": { "@id": "https://theclassproject.cl/#website" },
         "about": { "@id": "https://theclassproject.cl/#project" },
         "inLanguage": "es"
@@ -770,7 +833,7 @@
     <nav class="nav" aria-label="Navegación principal">
       <div class="container">
         <div class="nav__inner">
-          <a href="../" class="nav__logo"><img src="/assets/logos/theclass-isotipo.svg" alt="" class="nav__logo-iso" width="110" height="110"><span class="nav__logo-text">The <span>Class</span><br>Project</span></a>
+          <a href="../" class="nav__logo"><img src="/assets/logos/theclass-isotipo.svg" alt="" class="nav__logo-iso" width="42" height="42"><span class="nav__logo-text">The <span>Class</span><br>Project</span></a>
           <ul class="nav__links" role="list">
             <li><a href="../" class="nav__link">Inicio</a></li>
             <li><a href="../proyecto/" class="nav__link nav__link--active" aria-current="page">Proyecto</a></li>
@@ -813,7 +876,7 @@
             <circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.5"/>
             <path d="M6 3.5V6.5L7.5 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
-          Proyecto FONDECYT de Iniciación N° 11240249 · ANID 2024–2027
+          Proyecto FONDECYT de Iniciación N° 11240249 · Ministerio de Ciencia – ANID · 2024–2027
         </span>
 
         <h1 class="ph__title" id="ph-title">
@@ -900,8 +963,8 @@
           <h2 id="sec-proyecto">El proyecto</h2>
           <p>
             <em>Class, personal networks and political attitudes</em> es un proyecto de investigación
-            financiado por el Proyecto FONDECYT de Iniciación N° 11240249 de la Agencia Nacional de Investigación
-            y Desarrollo (ANID), ejecutado en la Escuela de Sociología de la Facultad de Ciencias Sociales
+            financiado por el Ministerio de Ciencia, a través de la Agencia Nacional de Investigación
+            y Desarrollo, ANID (Proyecto FONDECYT de Iniciación N° 11240249), ejecutado en la Escuela de Sociología de la Facultad de Ciencias Sociales
             y Humanidades de la Universidad Diego Portales (2024–2027).
           </p>
           <p>
@@ -1064,11 +1127,11 @@
                 </div>
               </div>
 
-              <!-- Fase 2 — Completada -->
+              <!-- Fase 2 — Completada (fase: femenino, igual que la 1) -->
               <div class="thp thp--done">
                 <div class="thp__marker-row">
                   <div class="thp__num">2</div>
-                  <span class="thp__badge thp__badge--done">Completado</span>
+                  <span class="thp__badge thp__badge--done">Completada</span>
                 </div>
                 <div class="thp__body">
                   <h3 class="thp__title">Trabajo de campo</h3>
@@ -1129,12 +1192,23 @@
             <div class="brand-section-intro__logo">
               The <span>Class</span><br>Project
             </div>
-            <p class="text-sm-muted">
-              Plataforma de comunicación pública del Proyecto FONDECYT de Iniciación N° 11240249.
-              Reúne los productos y avances de la investigación bajo una identidad editorial
-              unificada, orientada a distintos públicos: comunidad académica, estudiantes,
-              tomadores de decisiones y ciudadanía informada.
-            </p>
+            <!-- Texto aprobado por Tanzi el 11-11-2026 (también en TCP_BRIEF) -->
+            <div class="brand-section-intro__text">
+              <p class="text-sm-muted">
+                The Class Project es un espacio de divulgación científica del proyecto Fondecyt de
+                Iniciación N.º 11240249 (2024–2027), que estudia cómo la composición de clase de las
+                redes personales influye en las actitudes políticas.
+              </p>
+              <p class="text-sm-muted">
+                El trabajo empírico se desarrolla a partir del diseño y la implementación de una
+                encuesta presencial aplicada a 1.251 personas en la Región Metropolitana de Santiago,
+                Chile, y del análisis de sus resultados.
+              </p>
+              <p class="text-sm-muted">
+                Esta investigación es financiada por el Ministerio de Ciencia, Tecnología, Conocimiento
+                e Innovación, a través de la Agencia Nacional de Investigación y Desarrollo (ANID).
+              </p>
+            </div>
           </div>
 
 
@@ -1151,7 +1225,7 @@
           </div>
         </section>
 
-      </div><!-- /.proyecto-content -->      </div><!-- /.proyecto-content -->
+      </div><!-- /.proyecto-content -->
 
     </div><!-- /.proyecto-wrap -->
 
@@ -1252,6 +1326,6 @@
       </div>
     </div>
   </footer>
-  <script src="../js/script.js" defer></script>
+  <script src="../js/script.js?v=20261111c" defer></script>
 </body>
 </html>

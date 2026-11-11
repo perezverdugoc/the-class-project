@@ -1,7 +1,7 @@
 /* ============================================================
    THE CLASS PROJECT — styles.css
    Paleta: Red Plural (Opción C)
-   Tipografías: DM Serif Display (títulos) + DM Sans (cuerpo)
+   Tipografías: Work Sans (títulos y texto) + DM Serif Text (números, citas y pie)
    Estrategia: Mobile-first, CSS custom properties, sin frameworks
    Compatibilidad: GitHub Pages, Vercel, Netlify
    ============================================================ */
@@ -21,6 +21,22 @@
    Para cambiar la identidad visual del sitio, edita solo
    esta sección — el resto del CSS se actualiza automáticamente.
    ============================================================ */
+
+/* ============================================================
+   FUENTE ALOJADA EN EL SITIO — DM Serif Text (11-11-2026)
+   Se usa solo en números grandes, citas y nombre del pie.
+   Los textos siguen en Work Sans (Google Fonts).
+   ============================================================ */
+@font-face {
+  font-family: 'DM Serif Text';
+  src: url('../assets/fonts/DMSerifText-Regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'DM Serif Text';
+  src: url('../assets/fonts/DMSerifText-Italic.woff2') format('woff2');
+  font-weight: 400; font-style: italic; font-display: swap;
+}
 
 :root {
 
@@ -63,9 +79,12 @@
   --font-heading: 'Work Sans', system-ui, -apple-system, sans-serif;
   --font-body:    'Work Sans', system-ui, -apple-system, sans-serif;
   --font-heading-weight: 500;   /* títulos: 500 = medium (más fino que 600) */
-  /* Números grandes y nombre en el pie: se mantiene la tipografía anterior (serif) */
-  --font-display: 'Work Sans', system-ui, -apple-system, sans-serif; /* 11-11-2026: antes DM Serif Display. Una sola familia en todo el sitio */
-  --font-number-weight:  600;   /* cifras grandes en Work Sans semibold */
+  /* Números grandes, citas y nombre en el pie: DM Serif Text (opción A, 11-11-2026).
+     Archivos alojados en /assets/fonts/ (ver @font-face al inicio).
+     Para volver a Work Sans: cambia esta línea por 'Work Sans', system-ui, sans-serif
+     y --font-number-weight por 600. */
+  --font-display: 'DM Serif Text', Georgia, 'Times New Roman', serif;
+  --font-number-weight:  400;   /* DM Serif Text solo tiene grosor 400: no subir (se vería borroso) */
 
   /* --- Escala tipográfica (mobile-first) ---
      En pantallas grandes se ajustan con media queries */
@@ -243,8 +262,8 @@ blockquote {
 }
 
 blockquote p {
-  font-family: var(--font-heading);
-  font-weight: var(--font-heading-weight);
+  font-family: var(--font-display);   /* citas en DM Serif Text (11-11-2026) */
+  font-weight: 400;
   font-size: var(--text-lg);
   color: var(--color-primary);
   font-style: italic;
@@ -1954,7 +1973,7 @@ body {
 
 
 /* ============================================================
-   NÚMEROS GRANDES — tipografía anterior (DM Serif Display)
+   NÚMEROS GRANDES — DM Serif Text (opción A, 11-11-2026)
    Para cambiarla, edita --font-display en :root.
    ============================================================ */
 .iib-number,
@@ -2047,7 +2066,7 @@ body {
    - Cifras con ancho fijo (tabular) para que se alineen.
    - Logo del pie en semibold. */
 .iib-number, .stat-callout__value { font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
-.footer__logo { font-weight: 600; letter-spacing: -0.01em; }
+.footer__logo { font-weight: 400; letter-spacing: -0.01em; } /* 400: DM Serif Text no tiene semibold */
 
 /* ============================================================
    11-11-2026 — LOGO DEL MENÚ Y REGLA "SIN NEGRITA"
@@ -2078,3 +2097,60 @@ strong, b, th { font-weight: 600; }   /* nunca negrita (700) en el sitio */
 .nav__logo .nav__logo-text span { color: var(--color-accent); }
 .nav__logo { gap: 2px; }
 @media (min-width: 768px) { .nav__logo { gap: 4px; } }
+
+/* ============================================================
+   REVISIÓN GLOBAL 11-11-2026 (noche) — coherencia entre páginas
+   Para revertir: borra este bloque completo.
+   ============================================================ */
+
+/* 1. Menú superior: el contenido usa todo el alto de la barra, así el
+      logo queda centrado (antes quedaba pegado arriba, sin aire). */
+.nav > .container { height: 100%; }
+
+/* 2. Gris claro de textos secundarios: #AEAEB2 no se leía sobre blanco
+      (contraste 2,2:1). Nuevo tono: 4,6:1, mínimo recomendado. */
+:root { --color-text-light: #737378; }
+
+/* 2b. Etiqueta del inicio: cabe en una línea en escritorio; si se corta, se ve ordenada. */
+.hero__label { letter-spacing: 0.04em; border-radius: 12px; line-height: 1.5; }
+
+/* 3. Verde sobre negro/verde oscuro: se usa un verde claro legible. */
+.footer__logo span { color: #9FEBD7; }
+
+/* 4. Menús laterales "En esta sección" (Proyecto, Encuesta, Equipo,
+      Divulgación, Transparencia): mismo ancho, misma línea vertical y
+      el texto del menú alineado con el logo y con el título de la página. */
+@media (min-width: 901px) {
+  html body .proyecto-wrap, html body .enc-layout, html body .equipo-wrap,
+  html body .divulgacion-wrap, html body .acc-wrap {
+    display: grid;
+    grid-template-columns: 236px minmax(0, 1fr);
+    gap: 0;
+    align-items: start;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-pad);
+  }
+  html body .proyecto-sidebar, html body .enc-layout .enc-sidebar, html body .equipo-nav,
+  html body .divulgacion-nav, html body .acc-nav {
+    position: sticky;
+    top: calc(var(--nav-height) + var(--space-lg));
+    align-self: start;
+    margin-left: calc(-1 * var(--space-md));   /* el texto queda en la línea del logo */
+    padding: var(--space-2xl) var(--space-lg) var(--space-2xl) 0;
+    border-right: 1px solid var(--color-border-light);
+  }
+  html body .proyecto-content, html body .enc-layout .enc-page, html body .equipo-content,
+  html body .divulgacion-content, html body .acc-content {
+    padding: var(--space-2xl) 0 var(--space-3xl) var(--space-2xl);
+    min-width: 0;
+  }
+  html body .sidebar-nav__label, html body .encuesta-nav__label, html body .equipo-nav__label,
+  html body .divulgacion-nav__label, html body .acc-nav__label {
+    padding-left: var(--space-md);
+    margin: 0 0 var(--space-md);
+    color: #6E6E73;
+    letter-spacing: 0.1em;
+  }
+  html body .divulgacion-content .container { padding-left: 0; padding-right: 0; }
+}
