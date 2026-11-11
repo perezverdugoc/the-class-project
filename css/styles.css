@@ -64,8 +64,8 @@
   --font-body:    'Work Sans', system-ui, -apple-system, sans-serif;
   --font-heading-weight: 500;   /* títulos: 500 = medium (más fino que 600) */
   /* Números grandes y nombre en el pie: se mantiene la tipografía anterior (serif) */
-  --font-display: 'DM Serif Display', Georgia, 'Times New Roman', serif;
-  --font-number-weight:  400;   /* DM Serif Display solo existe en 400 */
+  --font-display: 'Work Sans', system-ui, -apple-system, sans-serif; /* 11-11-2026: antes DM Serif Display. Una sola familia en todo el sitio */
+  --font-number-weight:  600;   /* cifras grandes en Work Sans semibold */
 
   /* --- Escala tipográfica (mobile-first) ---
      En pantallas grandes se ajustan con media queries */
@@ -931,7 +931,7 @@ body {
 .footer__heading {
   font-family: var(--font-body);
   font-size: var(--text-xs);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.5);
@@ -1293,7 +1293,7 @@ body {
   border-radius: var(--radius-sm, 4px);
   padding: 4px 10px;
   font-size: var(--text-sm);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.4;
   align-self: flex-start;
 }
@@ -1608,7 +1608,7 @@ body {
 /* Uso: <span class="iib-label">Clase social</span> */
 .iib-label {
   font-size: var(--text-xs);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.10em;
   text-transform: uppercase;
   color: var(--color-text-muted);
@@ -1715,7 +1715,7 @@ body {
 
 .iib-table thead th {
   font-size: var(--text-xs);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-text-muted);
@@ -1743,7 +1743,7 @@ body {
   align-items: center;
   gap: 5px;
   font-size: var(--text-xs);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   padding: 3px 10px 3px 7px;
@@ -1781,7 +1781,7 @@ body {
   align-items: center;
   gap: 4px;
   font-size: var(--text-xs);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.08em;
   color: var(--color-text-muted);
 }
@@ -1811,7 +1811,7 @@ body {
 /* ── Breadcrumb / eyebrow de sección ── */
 .section-eyebrow {
   font-size: var(--text-xs);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-text-light);
@@ -1853,7 +1853,7 @@ body {
   align-items: center;
   gap: 5px;
   font-size: 0.72rem;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   padding: 3px 8px;
@@ -1882,7 +1882,7 @@ body {
 .pub-destacadas__label  {
   display: block;
   font-size: var(--text-xs);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-accent);
@@ -1923,7 +1923,7 @@ body {
   margin-top: var(--space-xs);
 }
 .progress-label          { font-size: var(--text-xs); color: rgba(255, 255, 255, 0.5); }
-.progress-label--accent  { font-size: var(--text-xs); color: var(--color-accent); font-weight: 700; }
+.progress-label--accent  { font-size: var(--text-xs); color: var(--color-accent); font-weight: 600; }
 .note-box--spaced        { margin: var(--space-2xl) 0; }
 .link-accent             { color: var(--color-accent); }
 
@@ -2021,3 +2021,60 @@ body {
   .logos-bar { --logo-base: min(39px, calc((100vw - 92px) / 29)); gap: .75rem; }
 }
 
+
+
+/* ============================================================
+   AJUSTES 11-11-2026
+   1) Redes sociales: logos oficiales a color (el color viene
+      dentro del SVG, por eso el fondo del botón es transparente).
+   2) Pie: línea de derechos reservados más pequeña.
+   Para revertir: borra este bloque completo.
+   ============================================================ */
+.social-icon,
+.social-icon:hover {
+  background: transparent;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+}
+.social-icon:hover { opacity: 0.85; transform: translateY(-1px); }
+.social-icon:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+.footer__copy,
+.footer__funders { font-size: 0.6875rem; } /* 11px */
+
+/* 11-11-2026 — Tipografía única Work Sans
+   - Cifras con ancho fijo (tabular) para que se alineen.
+   - Logo del pie en semibold. */
+.iib-number, .stat-callout__value { font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+.footer__logo { font-weight: 600; letter-spacing: -0.01em; }
+
+/* ============================================================
+   11-11-2026 — LOGO DEL MENÚ Y REGLA "SIN NEGRITA"
+   Logo: isotipo + "The Class Project" en Work Sans SemiBold,
+   gris carbón (no negro puro) y "Class" en verde de marca.
+   Para cambiar el tamaño: --logo-iso (isotipo) y --logo-text.
+   ============================================================ */
+strong, b, th { font-weight: 600; }   /* nunca negrita (700) en el sitio */
+
+.nav__logo { gap: 4px; --logo-iso: 34px; --logo-text: 15px; }
+.nav__logo-iso { display: block; width: var(--logo-iso); height: var(--logo-iso); }
+.nav__logo-text {
+  font-family: var(--font-heading);
+  font-weight: 500;          /* Medium (aprobado 11-11-2026) */
+  font-size: var(--logo-text);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: #2A3332;            /* carbón verdoso: más suave que el negro */
+}
+.nav__logo-text span { color: var(--color-accent); }
+.nav__logo:hover .nav__logo-text { color: #2A3332; }
+.nav__logo:hover .nav__logo-iso { opacity: 0.85; }
+@media (min-width: 768px) {
+  .nav__logo { --logo-iso: 42px; --logo-text: 18px; gap: 6px; }
+}
+/* 11-11-2026 — corrección: "The" y "Project" en carbón, "Class" en verde */
+.nav__logo .nav__logo-text { color: #2A3332; }
+.nav__logo .nav__logo-text span { color: var(--color-accent); }
+.nav__logo { gap: 2px; }
+@media (min-width: 768px) { .nav__logo { gap: 4px; } }

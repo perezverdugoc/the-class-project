@@ -144,7 +144,7 @@
     setStat(percent(p.n), "de la muestra");
     renderZoneList();
     renderCommuneTable(features.filter((feature) => feature.properties.zona === p.zona));
-    layer.setStyle({ weight: 2.6, color: "#1C1C1E", fillOpacity: 0.92 });
+    layer.setStyle({ weight: 2.6, color: "#FF5158", fillOpacity: 0.92 }); // borde coral = selección (color de foco de la marca)
     layer.bringToFront();
     updateLabels();
   }
@@ -233,7 +233,7 @@
         layer.bindTooltip(communeTooltip(feature), { sticky: true });
         layer.on({
           mouseover() {
-            if (layer !== activeLayer) layer.setStyle({ weight: 2, color: "#1C1C1E" });
+            if (layer !== activeLayer) layer.setStyle({ weight: 2, color: "#FF5158" });
           },
           mouseout() {
             if (layer !== activeLayer) geoLayer.resetStyle(layer);
@@ -266,6 +266,6 @@
   ])
     .then(([geojson, muestra]) => initMap(geojson, muestra))
     .catch((error) => {
-      root.innerHTML = `<p style="padding:24px;color:#C9524F">No se pudo cargar el mapa: ${error.message}</p>`;
+      root.innerHTML = `<p style="padding:24px;color:#B3262D">No se pudo cargar el mapa: ${error.message}</p>`;
     });
 })();

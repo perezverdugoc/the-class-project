@@ -9,15 +9,15 @@
     "fuente": "informe_zonas_comunas.docx / informe_zonas_comunas.docx.md"
   },
   "zonas": [
-    { "id": "centro", "nombre": "Zona Centro", "n": 105, "color": "#2D3142" },
-    { "id": "norte", "nombre": "Zona Norte", "n": 144, "color": "#3B6FA8" },
-    { "id": "oriente", "nombre": "Zona Oriente", "n": 194, "color": "#8F5AA5" },
-    { "id": "poniente", "nombre": "Zona Poniente", "n": 199, "color": "#0A7E7A" },
-    { "id": "sur", "nombre": "Zona Sur", "n": 268, "color": "#C9524F" },
-    { "id": "chacabuco", "nombre": "Zona Chacabuco", "n": 57, "color": "#4C8CC8" },
-    { "id": "cordillera", "nombre": "Zona Cordillera", "n": 103, "color": "#2E8A62" },
-    { "id": "maipo", "nombre": "Zona Maipo", "n": 89, "color": "#5369B1" },
-    { "id": "melipilla", "nombre": "Zona Melipilla", "n": 35, "color": "#D88753" },
-    { "id": "talagante", "nombre": "Zona Talagante", "n": 57, "color": "#79A857" }
+    { "id": "centro", "nombre": "Zona Centro", "n": 105, "color": "#36968F" },
+    { "id": "norte", "nombre": "Zona Norte", "n": 144, "color": "#22837E" },
+    { "id": "oriente", "nombre": "Zona Oriente", "n": 194, "color": "#13716D" },
+    { "id": "poniente", "nombre": "Zona Poniente", "n": 199, "color": "#0A5F5C" },
+    { "id": "sur", "nombre": "Zona Sur", "n": 268, "color": "#074744" },
+    { "id": "chacabuco", "nombre": "Zona Chacabuco", "n": 57, "color": "#8BCAC2" },
+    { "id": "cordillera", "nombre": "Zona Cordillera", "n": 103, "color": "#4FA8A0" },
+    { "id": "maipo", "nombre": "Zona Maipo", "n": 89, "color": "#6BB9B1" },
+    { "id": "melipilla", "nombre": "Zona Melipilla", "n": 35, "color": "#C8E7E2" },
+    { "id": "talagante", "nombre": "Zona Talagante", "n": 57, "color": "#A9D9D2" }
   ]
 }

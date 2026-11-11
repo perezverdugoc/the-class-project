@@ -38,7 +38,7 @@
 
 .summary-pill strong {
   color: var(--color-primary);
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .view-toggle {
@@ -61,7 +61,7 @@
   padding: 8px 10px;
   border-radius: 3px;
   cursor: pointer;
-  font-weight: 700;
+  font-weight: 600;
   font-size: var(--text-xs);
 }
 
@@ -105,7 +105,7 @@
   box-shadow: 0 1px 3px rgba(0,0,0,0.08);
   cursor: pointer;
   font-size: var(--text-xs);
-  font-weight: 800;
+  font-weight: 600;
   padding: 8px 10px;
 }
 
@@ -131,7 +131,7 @@
 .panel-label {
   color: var(--color-text-muted);
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -219,7 +219,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: var(--text-xs);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .zone-n {
@@ -378,3 +378,6 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* 11-11-2026: nombres de zonas en medium (500), no semibold */
+.zone-name, .zone-map-label__inner strong { font-weight: 500; }

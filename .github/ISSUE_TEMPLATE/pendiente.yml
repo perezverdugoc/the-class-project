@@ -1,0 +1,31 @@
+# Plantilla para anotar un pendiente o pedir un cambio en el sitio.
+# Se usa en github.com → pestaña "Issues" → "New issue".
+name: Pendiente o cambio en el sitio
+description: Anota algo que hay que corregir, actualizar o agregar en theclassproject.cl
+labels: ["pendiente"]
+body:
+  - type: input
+    id: pagina
+    attributes:
+      label: ¿En qué página?
+      description: Pega el link o escribe la sección (ej. Transparencia, Equipo)
+      placeholder: https://theclassproject.cl/transparencia/
+    validations:
+      required: true
+  - type: textarea
+    id: cambio
+    attributes:
+      label: ¿Qué hay que cambiar?
+      description: Escribe el texto actual y cómo debería quedar. Puedes pegar capturas.
+    validations:
+      required: true
+  - type: dropdown
+    id: urgencia
+    attributes:
+      label: Urgencia
+      options:
+        - Puede esperar
+        - Esta semana
+        - Urgente (error visible o dato incorrecto)
+    validations:
+      required: true

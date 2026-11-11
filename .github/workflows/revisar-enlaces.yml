@@ -1,0 +1,45 @@
+# ============================================================
+# Revisión automática de enlaces internos — The Class Project
+# ------------------------------------------------------------
+# Qué hace: cada vez que haces Push (y cada lunes), GitHub revisa
+# que todos los enlaces internos del sitio lleven a una página
+# que existe. Si encuentra un enlace roto, el chequeo sale en
+# rojo (❌) en la pestaña "Actions" y GitHub te avisa por correo.
+# No modifica nada del sitio. Es gratis en repositorios públicos.
+#
+# Cómo ver el resultado: github.com/perezverdugoc/the-class-project
+# → pestaña "Actions" → "Revisar enlaces" → abrir la última ejecución.
+#
+# Para desactivarlo: borra este archivo (o en Actions → "..." →
+# "Disable workflow").
+# ============================================================
+name: Revisar enlaces
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 12 * * 1"   # lunes 12:00 UTC (9:00 en Chile, horario de verano)
+  workflow_dispatch:        # botón "Run workflow" para revisarlo a mano
+
+jobs:
+  enlaces:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Revisar enlaces internos
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # --offline: solo enlaces internos (los externos fallan a veces sin motivo real)
+          # --root-dir: permite revisar enlaces que empiezan con "/" (ej. /encuesta/)
+          args: >-
+            --offline
+            --no-progress
+            --root-dir "${{ github.workspace }}"
+            --index-files index.html
+            --exclude-path .github
+            './**/*.html'
+          fail: true
+          # Versión de lychee probada el 11-11-2026 (1.148 enlaces, 0 errores)
+          lycheeVersion: v0.24.2
