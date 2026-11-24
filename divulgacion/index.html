@@ -248,6 +248,12 @@
 
 
 
+    /* 24-11-2026: ítem de agenda clicable (enlaza a la página del evento) */
+    .agenda-item--link { display: block; text-decoration: none; transition: background-color 0.2s; }
+    .agenda-item--link:hover { background-color: var(--color-accent-light); }
+    .agenda-item--link:hover .agenda-item__title { color: var(--color-accent); }
+    .agenda-item__more { display: inline-block; margin-top: 6px; font-size: var(--text-xs); font-weight: 600; color: var(--color-accent); }
+
     /* IIB: year badge in publications */
     .pub-year-badge {
       display: inline-block;
@@ -918,10 +924,12 @@
           <div id="agenda">
             <h2>Agenda</h2>
             <div class="divider divider--section"></div>
-            <div class="agenda-item">
-              <p class="agenda-item__title">Seminario de presentación de resultados — The Class Project</p>
-              <p class="agenda-item__meta">Viernes 11 de diciembre de 2026 · Facultad de Ciencias Sociales y Humanidades, UDP · Horario y programa por confirmar</p>
-            </div>
+            <!-- 24-11-2026: agenda enlazada a la página del seminario -->
+            <a href="/divulgacion/notas/seminario-cierre/" class="agenda-item agenda-item--link">
+              <p class="agenda-item__title">Seminario de cierre: Estratificación social y redes personales</p>
+              <p class="agenda-item__meta">Viernes 11 de diciembre de 2026 · 09:00 a 13:00 hrs. · Sala B43, piso 4, Biblioteca Nicanor Parra, Vergara 324, Santiago</p>
+              <span class="agenda-item__more">Programa e inscripción →</span>
+            </a>
           </div>
 
         </div>
