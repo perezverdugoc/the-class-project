@@ -2154,3 +2154,82 @@ strong, b, th { font-weight: 600; }   /* nunca negrita (700) en el sitio */
   }
   html body .divulgacion-content .container { padding-left: 0; padding-right: 0; }
 }
+
+
+/* ============================================================
+   AGENDA EN EL HERO (25-11-2026)
+   Tarjeta chica debajo de los botones de la presentación del proyecto.
+   ============================================================ */
+.hero-agenda {
+  display: block;
+  max-width: 420px;
+  margin-top: var(--space-xl);
+  padding: var(--space-sm) var(--space-md);
+  background-color: #fff;
+  border-left: 4px solid var(--color-accent);
+  border-radius: var(--radius-md, 8px);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.hero-agenda:hover,
+.hero-agenda:focus-visible { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.hero-agenda:focus-visible { outline: 3px solid var(--color-accent-bright); outline-offset: 3px; }
+
+.hero-agenda__label {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background-color: var(--color-accent-light);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 6px;
+}
+.hero-agenda__date  { display: block; font-size: var(--text-sm, 0.875rem); font-weight: 600; color: var(--color-text); }
+.hero-agenda__title { display: block; font-size: var(--text-sm, 0.875rem); font-weight: 500; color: var(--color-primary); line-height: 1.35; margin-top: 2px; }
+.hero-agenda__more  { display: block; font-size: var(--text-xs); font-weight: 600; color: var(--color-accent); margin-top: 6px; }
+
+
+/* ============================================================
+   EN REDES (25-11-2026) — portada
+   Dos tarjetas: Instagram (widget Behold) y YouTube (último video).
+   ============================================================ */
+.section-redes { padding: var(--space-3xl) 0; background-color: var(--color-surface); }
+.redes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  margin-top: var(--space-md);
+}
+@media (max-width: 768px) { .redes-grid { grid-template-columns: 1fr; } }
+
+.redes-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-md);
+}
+.redes-card__head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: var(--space-sm); margin-bottom: var(--space-sm);
+}
+.redes-card__net {
+  font-size: var(--text-xs); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--color-accent);
+}
+.redes-card__head a { font-size: var(--text-sm, 0.875rem); font-weight: 500; color: var(--color-primary); text-decoration: none; }
+.redes-card__head a:hover { text-decoration: underline; }
+
+/* Video 16:9 */
+.redes-video { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--radius-md, 8px); }
+.redes-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* Mientras no hay ID pegado: la tarjeta queda chica, solo con el enlace */
+.redes-card--vacia .redes-card__body { display: none; }
+.redes-card--vacia .redes-card__head { margin-bottom: 0; }
+
+.redes-linkedin { margin-top: var(--space-md); font-size: var(--text-sm, 0.875rem); color: var(--color-text-muted); }
+.redes-linkedin a { color: var(--color-primary); font-weight: 500; }

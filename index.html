@@ -104,7 +104,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"></noscript>
 
-  <link rel="stylesheet" href="css/styles.css?v=20261111c">
+  <link rel="stylesheet" href="css/styles.css?v=20261125c">
   <style>
     /* ── DATA STRIP — Estilo Information is Beautiful ──────── */
 
@@ -298,6 +298,7 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="container">
 
+
         <!-- Grid 2 columnas: video izquierda / texto derecha
              En mobile: texto arriba, video abajo -->
         <div class="hero__grid">
@@ -336,6 +337,15 @@
               <a href="/proyecto/" class="btn btn--primary">Más sobre la investigación</a>
               <a href="/divulgacion/" class="btn btn--outline">Ver divulgación</a>
             </div>
+
+            <!-- AGENDA (25-11-2026): aviso del próximo evento, debajo de los botones de la presentación del proyecto. Para quitarlo cuando pase el evento: borra este <a>.
+                 Para cambiar el evento: edita el enlace, la fecha y el título. -->
+            <a href="/divulgacion/notas/seminario-cierre/" class="hero-agenda" aria-label="Agenda: Seminario de cierre, viernes 11 de diciembre">
+              <span class="hero-agenda__label">Agenda</span>
+              <span class="hero-agenda__date">Viernes 11 de diciembre · 09:00 h</span>
+              <span class="hero-agenda__title">Seminario de cierre: Estratificación social y redes personales</span>
+              <span class="hero-agenda__more">Ver programa e inscripción →</span>
+            </a>
           </div><!-- /.hero__content -->
 
         </div><!-- /.hero__grid -->
@@ -402,6 +412,50 @@
 
     </div><!-- /.container -->
   </section><!-- /.data-strip -->
+
+  <!-- ============================================================
+       EN REDES (25-11-2026)
+       Lo último de Instagram (widget Behold) y YouTube (último video del canal).
+       LinkedIn no tiene feed gratuito: queda como botón.
+
+       PARA ACTIVAR (una sola vez):
+       1. Instagram: crea una cuenta gratis en behold.so, conecta @theclassprojectcl,
+          crea un feed tipo "Widget" y copia su feed-id. Pégalo abajo en
+          data-behold-feed="PEGAR_FEED_ID".
+       2. YouTube: en YouTube Studio → Configuración → Canal → Configuración avanzada,
+          copia el "ID del canal" (empieza con UC...). Pégalo abajo en
+          data-youtube-channel="PEGAR_ID_CANAL".
+       Mientras no pegues los IDs, cada tarjeta muestra solo el botón a la red.
+       ============================================================ -->
+  <section class="section-redes" aria-labelledby="redes-title">
+    <div class="container">
+      <p class="data-strip__label" id="redes-title">En redes</p>
+
+      <div class="redes-grid">
+        <!-- Instagram -->
+        <div class="redes-card redes-card--ig" data-behold-feed="PEGAR_FEED_ID">
+          <div class="redes-card__head">
+            <span class="redes-card__net">Instagram</span>
+            <a href="https://www.instagram.com/theclassprojectcl" target="_blank" rel="noopener">@theclassprojectcl ↗</a>
+          </div>
+          <div class="redes-card__body"></div>
+        </div>
+
+        <!-- YouTube -->
+        <div class="redes-card redes-card--yt" data-youtube-channel="PEGAR_ID_CANAL">
+          <div class="redes-card__head">
+            <span class="redes-card__net">YouTube</span>
+            <a href="https://www.youtube.com/@TheClassProjectcl" target="_blank" rel="noopener">@TheClassProjectcl ↗</a>
+          </div>
+          <div class="redes-card__body"></div>
+        </div>
+      </div>
+
+      <p class="redes-linkedin">
+        También en <a href="https://www.linkedin.com/company/theclassprojectcl" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </p>
+    </div>
+  </section><!-- /.section-redes -->
 
 <!-- ============================================================
          LOGOS INSTITUCIONALES
@@ -519,6 +573,37 @@
 
   <!-- script.js: defer para no bloquear renderizado -->
   <script src="js/script.js?v=20261111c" defer></script>
+
+  <!-- EN REDES: carga los widgets solo si los IDs ya fueron pegados (ver sección "EN REDES") -->
+  <script>
+    (function () {
+      // Instagram (Behold)
+      var ig = document.querySelector('.redes-card--ig');
+      var feed = ig && ig.getAttribute('data-behold-feed');
+      if (feed && feed.indexOf('PEGAR') !== 0) {
+        var w = document.createElement('behold-widget');
+        w.setAttribute('feed-id', feed);
+        ig.querySelector('.redes-card__body').appendChild(w);
+        var sc = document.createElement('script');
+        sc.type = 'module'; sc.src = 'https://w.behold.so/widget.js';
+        document.head.appendChild(sc);
+      } else if (ig) { ig.classList.add('redes-card--vacia'); }
+
+      // YouTube: lista de subidas del canal (UC... → UU...), muestra el video más reciente
+      var yt = document.querySelector('.redes-card--yt');
+      var ch = yt && yt.getAttribute('data-youtube-channel');
+      if (ch && ch.indexOf('UC') === 0) {
+        var f = document.createElement('iframe');
+        f.src = 'https://www.youtube-nocookie.com/embed/videoseries?list=UU' + ch.slice(2);
+        f.title = 'Último video de The Class Project en YouTube';
+        f.loading = 'lazy';
+        f.allow = 'accelerometer; encrypted-media; gyroscope; picture-in-picture';
+        f.allowFullscreen = true;
+        var wrap = document.createElement('div'); wrap.className = 'redes-video'; wrap.appendChild(f);
+        yt.querySelector('.redes-card__body').appendChild(wrap);
+      } else if (yt) { yt.classList.add('redes-card--vacia'); }
+    })();
+  </script>
 
   <!-- Portada del video: al hacer clic, cambia la imagen por el video de YouTube -->
   <script>
