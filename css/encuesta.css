@@ -1162,3 +1162,8 @@ mark.vars-mark {
 [id="fichatecnica"], [id="pasos-title"], [id="mapa"], [id="mods-title"], [id="frame-title"],
 [id="buscador-variables"], [id="vars-filtros"], [id="vars-table"] { scroll-margin-top: 96px; }
 
+
+/* 26-11-2026: botón "Pedir aviso de publicación" del banner Base de datos.
+   Va en la misma columna que el texto. Para quitarlo, borra este bloque y el <p> en encuesta/index.html. */
+.data-banner__cta { margin: var(--space-sm) 0 0; }
+.enc-page .data-banner__cta { grid-column: 2; margin: 0; }
