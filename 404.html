@@ -3,6 +3,19 @@
 
 <head>
   <meta charset="UTF-8">
+
+  <!-- REENVÍO DE URLs ANTIGUAS
+       GitHub Pages no permite redirecciones de servidor. Si alguien llega a una
+       URL que ya no existe, este script lo manda a la nueva antes de mostrar el 404.
+       Google ve el 404 (y descarta la URL vieja), pero las personas llegan bien.
+       Para agregar otra: "/ruta-vieja/": "/ruta-nueva/" -->
+  <script>
+    (function () {
+      var mapa = { "/accountability/": "/transparencia/" };
+      var ruta = location.pathname.replace(/\/?(index\.html)?$/, "/");
+      if (mapa[ruta]) location.replace(mapa[ruta] + location.search + location.hash);
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Google Analytics 4 -->
